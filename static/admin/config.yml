@@ -5,9 +5,21 @@ publish_mode: editorial_workflow
 media_folder: "/static/images/uploads"
 public_folder: "/images/uploads"
 collections:
-  - name: 'projects'
-    label: 'Projects'
-    folder: 'content/projects'
+  - name: 'project'
+    label: 'Project'
+    folder: 'content/project'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Description', name: 'description', widget: 'string' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'custom_page'
+    label: 'Custom Page'
+    folder: 'content/custom_page'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     editor:
