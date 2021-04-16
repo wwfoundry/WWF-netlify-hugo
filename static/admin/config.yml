@@ -5,9 +5,36 @@ publish_mode: editorial_workflow
 media_folder: "/static/images/uploads"
 public_folder: "/images/uploads"
 collections:
-  - name: 'project'
-    label: 'Project'
-    folder: 'content/project'
+  - label: "Pages"
+    name: "pages"
+    files:
+      - label: "Home"
+        name: "home"
+        file: "/content/home.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+      - label: "Projects"
+        name: "projects"
+        file: "/content/projects.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+      - label: "About"
+        name: "about"
+        file: "/content/about.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+      - label: "Contact"
+        name: "contact"
+        file: "/content/contact.yml"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+  - name: 'custom_page'
+    label: 'Custom Page'
+    folder: 'content/custom_page'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     editor:
@@ -17,9 +44,9 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Description', name: 'description', widget: 'string' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: 'custom_page'
-    label: 'Custom Page'
-    folder: 'content/custom_page'
+  - name: 'project'
+    label: 'Project'
+    folder: 'content/project'
     create: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     editor:
