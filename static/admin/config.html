@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Walla Walla Foundry Content Manager</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style type="text/css">
+
+   body{
+   	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: normal;
+    background-color: rgb(239, 240, 244);
+    color: rgb(121, 130, 145);
+    margin: 0px;
+   }
+
+    .css-y7r3-AppHeader {
+    box-shadow: rgb(68 74 87 / 5%) 0px 2px 6px 0px, rgb(68 74 87 / 10%) 0px 1px 3px 0px;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    background-color: rgb(255, 255, 255);
+    z-index: 300;
+    height: 56px;
+}
+    .css-12b66la-AppHeaderContent {
+	    display: flex;
+	    -webkit-box-pack: justify;
+	    justify-content: space-between;
+	    min-width: 800px;
+	    max-width: 1440px;
+	    padding: 0px 12px;
+	    margin: 0px auto;
+        height:100%;
+	}
+
+	.css-12zz42a-AppHeaderNavList {
+    align-self:center;
+    margin: 0px;
+    list-style: none;
+}
+
+.e16dayda4:before {
+    content: '';
+    background-image: url(/images/resources/WWF_Square.jpg);
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+nav{
+    display:flex;
+    box-sizing: border-box;
+}
+
+nav>h2{
+    display:inline-block;
+    margin:0;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding:15px 50px;
+    font-size:1.2em;
+}
+
+.css-v758ki-AppMainContainer{
+    min-width: 800px;
+    max-width: 1440px;
+    margin: 0px auto;
+}
+
+.css-pyxbz6-CollectionContainer {
+    margin: 28px 18px;
+}
+
+.css-1hvrgvd-CollectionTopContainer-card-cardTop {
+    box-shadow: rgb(68 74 87 / 5%) 0px 2px 6px 0px, rgb(68 74 87 / 10%) 0px 1px 3px 0px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 20px;
+    margin-bottom: 22px;
+    position: relative;
+}
+
+h3{
+    font-size:1.2em;
+    color:black;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    letter-spacing: 0.4px;
+}
+
+a{
+    font-size:1em;
+    color:black;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    transition: opacity ease-in-out .25s;
+    text-decoration:none;
+    display:flex;
+    flex-direction:row;
+
+}
+
+a>img{
+    width:20px;
+    height:20px;
+    align-self: center;
+    padding-right:10px;
+}
+
+a>span{
+    align-self: center;
+    cursor:pointer;
+}
+
+a:hover{
+    opacity:.5;
+}
+
+.dropdown{
+    transform:rotate(-90deg);
+    background:unset;
+    border:unset;
+    position:absolute;
+    right:0;
+    margin:20px;
+    cursor:pointer;
+}
+
+.dropdown>img{
+    width:20px;
+    height:20px;
+}
+
+.inner{
+    height:0px;
+}
+
+.inner>p{
+    opacity:0;
+}
+
+.expand{
+    height:fit-content;
+}
+
+.visible{
+    opacity:1!important;
+}
+
+    </style>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div id="nc-root">
+    <div class="notif__container "><span></span></div>
+    <header class="css-y7r3-AppHeader">
+        <div class="css-12b66la-AppHeaderContent e16dayda0">
+            <nav>
+                <ul class="css-12zz42a-AppHeaderNavList e16dayda4">
+              
+                </ul>
+                <h2>Site Settings & Help</h2>
+            </nav>
+        </div>
+    </header>
+    <div class="css-v758ki-AppMainContainer e1ghgnen0">
+        <div class="css-pyxbz6-CollectionContainer e1yhfkro0">
+            <main class="css-1f7nhiq-CollectionMain e1yhfkro1">
+                <div class="css-1hvrgvd-CollectionTopContainer-card-cardTop">
+                    <button class="dropdown" href="/admin/#"><img src="/images/resources/arrow_left.png"></button>
+                    <h3>Hosting Provider</h3>
+                    <div class="inner">
+                        <p>
+                            Integer tincidunt nec augue eget convallis. Sed auctor leo sed varius aliquam. Maecenas eleifend erat quis mi lobortis, ac aliquam ligula viverra. Nam non pulvinar arcu. Quisque sagittis posuere odio eget varius. Phasellus vitae felis ut nulla molestie posuere eget quis magna. Morbi vulputate sapien nisl, sed mollis dui vulputate eget. Nullam tincidunt tempus lacus, eget pellentesque eros euismod id. Nunc ultricies mattis metus et blandit. Vestibulum ipsum dolor, egestas sit amet tincidunt at, feugiat vel eros. Vivamus elementum tellus sem, ut tincidunt nunc ornare eget. Sed lacinia sit amet nisl at congue. Vestibulum tincidunt lorem ac magna consectetur finibus. Phasellus sit amet leo dictum eros euismod ullamcorper ut bibendum odio. Vestibulum sit amet odio urna.
+                        </p>
+                    </div>
+                </div>
+                <div class="css-1hvrgvd-CollectionTopContainer-card-cardTop">
+                    <button class="dropdown" href="/admin/#"><img src="/images/resources/arrow_left.png"></button>
+                    <h3>Services & Structure</h3>
+                    <div class="inner">
+                        <p>
+                            Integer tincidunt nec augue eget convallis. Sed auctor leo sed varius aliquam. Maecenas eleifend erat quis mi lobortis, ac aliquam ligula viverra. Nam non pulvinar arcu. Quisque sagittis posuere odio eget varius. Phasellus vitae felis ut nulla molestie posuere eget quis magna. Morbi vulputate sapien nisl, sed mollis dui vulputate eget. Nullam tincidunt tempus lacus, eget pellentesque eros euismod id. Nunc ultricies mattis metus et blandit. Vestibulum ipsum dolor, egestas sit amet tincidunt at, feugiat vel eros. Vivamus elementum tellus sem, ut tincidunt nunc ornare eget. Sed lacinia sit amet nisl at congue. Vestibulum tincidunt lorem ac magna consectetur finibus. Phasellus sit amet leo dictum eros euismod ullamcorper ut bibendum odio. Vestibulum sit amet odio urna.
+                        </p>
+                    </div>
+                </div>
+                <div class="css-1hvrgvd-CollectionTopContainer-card-cardTop">
+                    <button class="dropdown" href="/admin/#"><img src="/images/resources/arrow_left.png"></button>
+                    <h3>Resources</h3>
+                    <div class="inner">
+                        <p>
+                            Integer tincidunt nec augue eget convallis. Sed auctor leo sed varius aliquam. Maecenas eleifend erat quis mi lobortis, ac aliquam ligula viverra. Nam non pulvinar arcu. Quisque sagittis posuere odio eget varius. Phasellus vitae felis ut nulla molestie posuere eget quis magna. Morbi vulputate sapien nisl, sed mollis dui vulputate eget. Nullam tincidunt tempus lacus, eget pellentesque eros euismod id. Nunc ultricies mattis metus et blandit. Vestibulum ipsum dolor, egestas sit amet tincidunt at, feugiat vel eros. Vivamus elementum tellus sem, ut tincidunt nunc ornare eget. Sed lacinia sit amet nisl at congue. Vestibulum tincidunt lorem ac magna consectetur finibus. Phasellus sit amet leo dictum eros euismod ullamcorper ut bibendum odio. Vestibulum sit amet odio urna.
+                        </p>
+                    </div>
+                </div>
+            </main>
+            <a href="/admin/#"><img src="/images/resources/arrow_left.png"><span>Back</span></a>
+        </div>
+    </div>
+</div>
+<script>
+var btn = $('.dropdown');
+
+    btn.on("click", function(){
+        $(this).siblings(".inner").toggleClass('expand');
+        $(this).siblings(".inner").children('p').toggleClass('visible');
+    });
+
+</script>
+  </body>
+</html>
