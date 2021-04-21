@@ -1,5 +1,3 @@
-baseURL = "/"
+baseURL = "dev.paeberle.com"
 languageCode = "en-us"
 title = "Walla Walla Foundry"
-description = ""
-language = ""
