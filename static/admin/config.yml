@@ -11,25 +11,25 @@ collections:
     files:
       - label: "Home"
         name: "home"
-        file: "/content/home.yml"
+        file: "/content/_index.md"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Projects"
         name: "projects"
-        file: "/content/projects.yml"
+        file: "/content/_index.md"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "About"
         name: "about"
-        file: "/content/about.yml"
+        file: "/content/about/_index.md"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Contact"
         name: "contact"
-        file: "/content/contact.yml"
+        file: "/content/contact/_index.md"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
@@ -49,7 +49,7 @@ collections:
     label: 'Project'
     folder: 'content/project'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     editor:
       preview: true
     fields:
