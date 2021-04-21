@@ -15,9 +15,15 @@ collections:
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
-      - label: "Projects"
-        name: "projects"
-        file: "/content/_index.md"
+      - label: "Project Index"
+        name: "project_index"
+        file: "/content/project_index/_index.md"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+      - label: "Project Gallery"
+        name: "project_gallery"
+        file: "/content/project_gallery/_index.md"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
@@ -37,7 +43,7 @@ collections:
     label: 'Custom Page'
     folder: 'content/custom_page'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{slug}}'
     editor:
       preview: true
     fields:
