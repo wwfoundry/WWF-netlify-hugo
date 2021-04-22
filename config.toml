@@ -1,3 +1,32 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Walla Walla Foundry"
+
+[menu]
+	
+	[[menu.main]]
+	    identifier = "project_index"
+	    name = "Project Index"
+	    pre = "<i class='fa fa-heart'></i>"
+	    url = "/archive/"
+	    weight = 1
+	    [menu.main.params]
+	      class = "menu-item"
+
+	[[menu.main]]
+	    identifier = "about"
+	    name = "about"
+	    pre = "<i class='fa fa-heart'></i>"
+	    url = "/about/"
+	    weight = 2
+	    [menu.main.params]
+	      class = "menu-item"
+
+	[[menu.main]]
+	    identifier = "Contact"
+	    name = "contact"
+	    pre = "<i class='fa fa-heart'></i>"
+	    url = "/contact/"
+	    weight = 3
+	    [menu.main.params]
+	      class = "menu-item"
