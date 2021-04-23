@@ -20,27 +20,49 @@
       #site_configuration{
         position:fixed;
         bottom:0;
-        left:0;
+        width:100%;
         padding:20px 10px;
         background-color:white;
         box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
+        overflow-x:scroll;
       }
 
-      #site_configuration>a{
+      #configuration_inner{
+        display:flex;
+        flex-direction: row;
+        min-width: 800px;
+        max-width: 1440px;
+        margin:0 auto;
+        justify-content: space-between;
+
+      }
+
+      .settings_item{
+        padding-right:50px;
+        align-self:center;
+      }
+
+      #right_justified{
+        display:flex;
+        flex-direction: row;
+      }
+
+
+      #right_justified>a{
         display:flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
       }
 
-      #site_configuration>a>img{
+      #right_justified>a>img{
         align-self: center;
         width:25px;
         height:auto;
         padding-right:8px;
       }
 
-      #site_configuration>a>span{
+      #right_justified>a>span{
         align-self: center;
       }
     </style>
@@ -51,10 +73,23 @@
     <!-- Netlify CMS Injector -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <div id="site_configuration">
-        <a href="/admin/config.html">
-            <img src="/images/resources/gear_icon.png" alt="Settings">
-            <span>Site Settings</span>
-        </a>
+      <div id="configuration_inner">
+        <span class="settings_item"><strong>Walla Walla Foundry</strong> | Netlify CMS</span>
+          <div id="right_justified">
+              <a href="/admin/config.html" class="settings_item">
+                  <img src="/images/resources/gear_icon.png" alt="Settings">
+                  <span>Site Settings & Help</span>
+              </a>
+              <a href="https://app.netlify.com/" class="settings_item">
+                  <img src="/images/resources/netlify.png" alt="Netlify">
+                  <span>Hosting Provider</span>
+              </a>
+               <a href="https://github.com/wwfoundry" class="settings_item">
+                 <img src="/images/resources/github.png" alt="Github">
+                 <span>WWF Github</span>
+              </a>
+          </div>
+      </div>
     </div>
   </body>
 </html>
