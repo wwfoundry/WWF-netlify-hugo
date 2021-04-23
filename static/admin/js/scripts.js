@@ -1,11 +1,51 @@
-$(document).ready(function(){
-	
-	var parentBlock = document.getElementsByClassName('.css-1gj57a0-SidebarContainer-card');
+var cms = document.createElement('script');
 
-	var newCard = document.createElement('div');
+var identity = document.createElement('script');
 
-	newCard.innerHTML = "<h2 class='css-npvq26-SidebarHeading el9l68m1'>Site Configuration Options</h2><a href='https://app.netlify.com/?_ga=2.61205551.280866909.1618593718-98093853.1618593718'>Netlify Hosting</a>"
+var head = document.head;
 
-	parentBlock.appendChild(newCard);
+cms.setAttribute('async', 'false');
 
- });
+cms.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
+
+identity.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
+
+head.insertBefore(cms, head.firstElementChild);
+
+head.insertBefore(identity, head.cms);
+
+cms.onload = function () {
+
+
+	setTimeout(function(){
+
+		$('.e4hp3ji0').load(
+
+		function(){
+
+			console.log('works');
+
+		}
+
+		)
+
+	}, 4000);
+
+
+	// var test = $('#nc-root');
+
+	// console.log(test);
+
+
+	// $('#nc-root').children('div.notif__container ').attr('id', 'trigger');
+
+	// var trigger = $('#trigger');
+
+	// console.log( trigger.length );
+
+	// 	if( trigger.length = '0' ){
+		
+	// 		$('#right_justified').html("<a href='/admin/config.html' class='settings_item'><img src='/images/resources/gear_icon.png' alt='Settings'><span>Site Settings & Help</span></a><a href='https://app.netlify.com/' class='settings_item'><img src='/images/resources/netlify.png' alt='Netlify'><span>Hosting Provider</span></a><a href='https://github.com/wwfoundry' class='settings_item'><img src='/images/resources/github.png' alt='Github'><span>WWF Github</span></a>");
+	// 	}
+
+};
