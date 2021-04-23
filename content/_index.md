@@ -1,4 +1,4 @@
 ---
-title: test
+title: test2
 intro: test
 ---
