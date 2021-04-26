@@ -28,7 +28,7 @@ collections:
                 collection: "pages"
                 search_fields: ["title"]
                 value_field: "title"
-                display_fields: ["label"]
+                display_fields: ["title"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
                 required: true
