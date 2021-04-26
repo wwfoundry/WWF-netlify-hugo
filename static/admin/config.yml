@@ -12,33 +12,77 @@ collections:
     files:
       - label: "Main Menu"
         name: "nav"
-        file: "_data/nav.yml"
+        file: "/data/nav.yml"
         fields:
           - label: "Menu Items"
             label_singular: "Menu Item"
             name: "topLevelItems"
             widget: "list"
+            hint: "Change default menu items."
             fields:
-              - {label: Display Text, name: displayText, widget: string}
+              - {label: Display Text, name: displayText, widget: string, hint: 'Enter the name of the page that will be linked in the menu.', required: true}
               - label: "Select Page"
+                required: true
                 name: "selectPage"
                 widget: "relation"
                 collection: "pages"
                 search_fields: ["title"]
                 value_field: "title"
                 display_fields: ["title"]
+                hint: "Select the page from the main pages collection."
               - label: "Item Type"
+                required: true
                 name: "itemType"
                 widget: "select"
                 options: ["Link", "Button"]
+                hint: "Choose the display option for menu link."
+          - label: "Custom Page Menu Items"
+            label_singular: "Custom Page Menu Item"
+            name: "customItems"
+            widget: "list"
+            hint: "Add custom pages to the menu."
+            fields:
+              - {label: Display Text, name: displayText, widget: string, hint: 'Enter the name of the page that will be linked in the menu.', required: true}
+              - label: "Select Page"
+                required: true
+                name: "selectPage"
+                widget: "relation"
+                collection: "custom_page"
+                search_fields: ["title"]
+                value_field: "title"
+                display_fields: ["title"]
+                hint: "Select the page from the custom pages collection."
+              - label: "Item Type"
+                required: true
+                name: "itemType"
+                widget: "select"
+                options: ["Link", "Button"]
+                hint: "Choose the display option for menu link."
+          - label: "Social Media Menu Items"
+            label_singular: "Social Media Menu Item"
+            name: "socialItems"
+            widget: "list"
+            hint: "Add social media links to the menu."
+            fields:
+              - label: "Social Media Account URL"
+                required: true
+                name: "socialURL"
+                widget: "string"
+                hint: "Paste a link to the WWF social media account"
+              - label: "Social Media Icon"
+                required: true
+                name: "socialIcon"
+                widget: "image"
+                hint: "Theme-styled icons are available in the media gallery or can be uploaded here."
+
       - label: "Site Logo"
         name: "logo"
         editor:
           preview: true
-        file: "_data/logo.yml"
+        file: "/data/logo.yml"
         widget: "image"
         fields:
-          - {label: Logo, name: logo, widget: image}
+          - {label: Logo, name: logo, widget: image, hint: WARNING - Adding an image here will override the default dynamically filled SVG. See 'Logo' section in 'Site Help' for more information.}
   - label: "Pages"
     name: "pages"
     editor:
