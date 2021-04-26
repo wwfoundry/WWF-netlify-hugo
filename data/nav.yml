@@ -1,5 +1,5 @@
 topLevelItems:
-  - selectPage: Home
+  - selectPage: Contact
     displayText: Projects
     itemType: Link
   - selectPage: Project Index
