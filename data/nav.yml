@@ -1,8 +1,8 @@
 topLevelItems:
-  - selectPage: Project Index
+  - selectPage: Home
     displayText: Projects
     itemType: Link
-  - selectPage: About
+  - selectPage: Project Index
     displayText: About
     itemType: Link
   - displayText: Contact
