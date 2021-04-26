@@ -1,8 +1,8 @@
 topLevelItems:
-  - displayText: TEST...
-    selectPage: test3
-    itemType: Link
   - displayText: TEST2
     selectPage: test2
+    itemType: Link
+  - displayText: TEST...
+    selectPage: test3
     itemType: Link
 customItems: []
