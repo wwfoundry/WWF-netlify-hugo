@@ -27,7 +27,7 @@ collections:
                 widget: "relation"
                 collection: "pages"
                 search_fields: ["title"]
-                value_field: "title"
+                value_field: "name"
                 display_fields: ["title"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
@@ -49,7 +49,7 @@ collections:
                 widget: "relation"
                 collection: "custom_page"
                 search_fields: ["title"]
-                value_field: "title"
+                value_field: "name"
                 display_fields: ["title"]
                 hint: "Select the page from the custom pages collection."
               - label: "Item Type"
