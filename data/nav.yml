@@ -1,8 +1,11 @@
 topLevelItems:
-  - displayText: TEST2
-    selectPage: test2
+  - selectPage: Project Index
+    displayText: Projects
     itemType: Link
-  - displayText: TEST...
-    selectPage: test3
+  - selectPage: About
+    displayText: About
+    itemType: Link
+  - displayText: Contact
+    selectPage: Contact
     itemType: Link
 customItems: []
