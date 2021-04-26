@@ -26,9 +26,9 @@ collections:
                 name: "selectPage"
                 widget: "relation"
                 collection: "pages"
-                search_fields: ["title"]
-                value_field: "title"
-                display_fields: ["title"]
+                search_fields: ["name"]
+                value_field: "name"
+                display_fields: ["name"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
                 required: true
