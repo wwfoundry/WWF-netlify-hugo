@@ -16,36 +16,25 @@ head.insertBefore(identity, head.cms);
 
 cms.onload = function () {
 
+	var trigger = document.querySelector('#nc-root');
 
-	setTimeout(function(){
+	var config = { childList: true, subtree: true };
 
-		$('.e4hp3ji0').load(
+	var callback = function(mutationsList, observer){
 
-		function(){
+		for( var mutation of mutationsList){
 
-			console.log('works');
+			if (mutation.type === 'childList' && trigger.children.length > 2 ){
 
+				$('#right_justified').html("<a href='/admin/config.html' class='settings_item'><img src='/images/resources/gear_icon.png' alt='Settings'><span>Site Settings & Help</span></a><a href='https://app.netlify.com/' class='settings_item'><img src='/images/resources/netlify.png' alt='Netlify'><span>Hosting Provider</span></a><a href='https://github.com/wwfoundry' class='settings_item'><img src='/images/resources/github.png' alt='Github'><span>WWF Github</span></a>");
+
+			}
 		}
 
-		)
+	}
 
-	}, 4000);
+	var observer = new MutationObserver(callback);
 
-
-	// var test = $('#nc-root');
-
-	// console.log(test);
-
-
-	// $('#nc-root').children('div.notif__container ').attr('id', 'trigger');
-
-	// var trigger = $('#trigger');
-
-	// console.log( trigger.length );
-
-	// 	if( trigger.length = '0' ){
-		
-	// 		$('#right_justified').html("<a href='/admin/config.html' class='settings_item'><img src='/images/resources/gear_icon.png' alt='Settings'><span>Site Settings & Help</span></a><a href='https://app.netlify.com/' class='settings_item'><img src='/images/resources/netlify.png' alt='Netlify'><span>Hosting Provider</span></a><a href='https://github.com/wwfoundry' class='settings_item'><img src='/images/resources/github.png' alt='Github'><span>WWF Github</span></a>");
-	// 	}
+	observer.observe(trigger, config);
 
 };

@@ -20,16 +20,25 @@ collections:
             widget: "list"
             fields:
               - {label: Display Text, name: displayText, widget: string}
-              - {label: URL, name: url, widget: string}
+              - label: "Select Page"
+                name: "selectPage"
+                widget: "relation"
+                collection: "pages"
+                search_fields: ["title"]
+                value_field: "title"
+                display_fields: ["title"]
               - label: "Item Type"
                 name: "itemType"
                 widget: "select"
                 options: ["Link", "Button"]
-          - label: "Header"
-            name: "header"
-            fields:
-              - {label: Logo, name: logo, widget: image}
-              - {label: URL, name: url, widget: string}
+      - label: "Site Logo"
+        name: "logo"
+        editor:
+          preview: true
+        file: "_data/logo.yml"
+        widget: "image"
+        fields:
+          - {label: Logo, name: logo, widget: image}
   - label: "Pages"
     name: "pages"
     editor:
@@ -65,6 +74,7 @@ collections:
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
+          - {label: "Location", name: "location", widget: "map" }
   - name: 'custom_page'
     label: 'Custom Page'
     folder: 'content/custom_page'
