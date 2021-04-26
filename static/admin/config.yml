@@ -25,6 +25,11 @@ collections:
                 name: "itemType"
                 widget: "select"
                 options: ["Link", "Button"]
+          - label: "Header"
+            name: "header"
+            fields:
+              - {label: Logo, name: logo, widget: image}
+              - {label: URL, name: url, widget: string}
   - label: "Pages"
     name: "pages"
     editor:
