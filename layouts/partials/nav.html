@@ -1,6 +1,8 @@
 <nav>
 		<!--LOGO SVG -->
-
+		<div id="wwf_logo">
+			{{ .Site.Data.logo.svgEditor.code | safeHTML}}
+		</div>
 		<div id="menu">
 			<div id="controls">
 				<button id="hamburger" class="menu_item last">

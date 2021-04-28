@@ -37,4 +37,12 @@ cms.onload = function () {
 
 	observer.observe(trigger, config);
 
+
+	var btn = $('.dropdown');
+
+    btn.on("click", function(){
+        $(this).parent("#site_configuration").toggleClass('compress');
+        $(this).toggleClass('flip');     
+    });
+
 };

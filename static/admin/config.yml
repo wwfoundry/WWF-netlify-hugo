@@ -84,8 +84,25 @@ collections:
             required: true
             name: "svgEditor"
             widget: "code"
+            allow_language_selection: false
             default_language: "html"
             hint: "WARNING - SVG snippets entered here will ovewrite the current logo. Please only insert valid SVG logo snippets. Learn more about SVG in the site help section."
+      - label: "Site Footer"
+        name: "footer"
+        editor:
+          preview: false
+        file: "/layout/partials/footer.html"
+        fields:
+          - label: "Site Footer"
+            label_singular: "Site Footer Item"
+            required: true
+            name: "footer"
+            widget: "list"
+            hint: "Change site-wide footer."
+            fields:
+                - label: "Placeholder"
+                  name: "placeholder"
+                  widget: "string"
   - label: "Pages"
     name: "pages"
     editor:
@@ -94,9 +111,11 @@ collections:
       - label: "Home"
         name: "home"
         file: "/content/_index.md"
+        widget: "list"
         fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Intro, name: intro, widget: markdown}
+            - label: "Showcase Reel"
+              name: "reel"
+              widget: "file"
       - label: "Project Index"
         name: "project_index"
         file: "/content/project_index/_index.md"

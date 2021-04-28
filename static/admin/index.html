@@ -25,6 +25,8 @@
         background-color:white;
         box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.2);
         overflow-x:scroll;
+        overflow:visible;
+        z-index:100;
       }
 
       #configuration_inner{
@@ -81,6 +83,31 @@
         height:24px;
       }
 
+      .dropdown{
+        transform:rotate(-90deg);
+        background:unset;
+        border:unset;
+        position:absolute;
+        right:0;
+        margin-right:20px;
+        cursor:pointer;
+      }
+
+      .dropdown>img{
+          width:20px;
+          height:20px;
+      }
+
+      .compress{
+        height:0px;
+        padding:0px!important;
+      }
+
+      .flip{
+        transform:rotate(90deg);
+        top:-40px;
+      }
+
     </style>
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -89,6 +116,7 @@
   </head>
   <body>
     <div id="site_configuration">
+      <button class="dropdown" href="/admin/#"><img src="/images/resources/arrow_left.png"></button>
       <div id="configuration_inner">
         <span class="settings_item"><strong>Walla Walla Foundry</strong> | Netlify CMS</span>
         <div id="right_justified">
