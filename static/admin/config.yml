@@ -80,9 +80,9 @@ collections:
         editor:
           preview: true
         file: "/data/logo.yml"
-        widget: "image"
-        fields:
-          - {label: Logo, name: logo, widget: image, hint: WARNING - Adding an image here will override the default dynamically filled SVG. See 'Logo' section in 'Site Help' for more information.}
+        widget: "code"
+        hint: "WARNING - SVG code placed here will override the current site logo. Do not replace unless you have a valide SVG snippet. More information about SVG snippets can be found in the site docs."
+        default_language: "HTML"
   - label: "Pages"
     name: "pages"
     editor:
