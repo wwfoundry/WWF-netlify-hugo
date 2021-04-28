@@ -74,15 +74,18 @@ collections:
                 name: "socialIcon"
                 widget: "image"
                 hint: "Theme-styled icons are available in the media gallery or can be uploaded here."
-
       - label: "Site Logo"
         name: "logo"
         editor:
-          preview: true
-        file: "/data/logo.yml"
-        widget: "code"
-        hint: "WARNING - SVG code placed here will override the current site logo. Do not replace unless you have a valide SVG snippet. More information about SVG snippets can be found in the site docs."
-        default_language: "HTML"
+          preview: false
+        file: "/layouts/partials/logo.html"
+        fields:
+          - label: "SVG Logo Editor"
+            required: true
+            name: "svgEditor"
+            widget: "code"
+            default_language: "html"
+            hint: "WARNING - SVG snippets entered here will ovewrite the current logo. Please only insert valid SVG logo snippets. Learn more about SVG in the site help section."
   - label: "Pages"
     name: "pages"
     editor:

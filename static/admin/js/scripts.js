@@ -26,7 +26,7 @@ cms.onload = function () {
 
 			if (mutation.type === 'childList' && trigger.children.length > 2 ){
 
-				$('#right_justified').html("<a href='/admin/config.html' class='settings_item'><img src='/images/resources/gear_icon.png' alt='Settings'><span>Site Settings & Help</span></a><a href='https://app.netlify.com/' class='settings_item'><img src='/images/resources/netlify.png' alt='Netlify'><span>Hosting Provider</span></a><a href='https://github.com/wwfoundry' class='settings_item'><img src='/images/resources/github.png' alt='Github'><span>WWF Github</span></a>");
+				$('#right_justified').html("<a href='/admin/config.html' class='settings_item'><img src='/images/resources/gear_icon.png' alt='Settings'><span>Site Docs & Help</span></a><a href='https://app.netlify.com/' class='settings_item'><img src='/images/resources/netlify.png' alt='Netlify'><span>Hosting Provider</span></a><a href='https://github.com/wwfoundry' class='settings_item'><img src='/images/resources/github.png' alt='Github'><span>WWF Github</span></a>");
 
 			}
 		}
