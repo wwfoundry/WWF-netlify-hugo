@@ -78,7 +78,7 @@ collections:
         name: "logo"
         editor:
           preview: false
-        file: "/layouts/partials/logo.html"
+        file: "/data/logo.yml"
         fields:
           - label: "SVG Logo Editor"
             required: true
