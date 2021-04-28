@@ -1,4 +1,4 @@
 ---
 title: Project Index
-intro: Test
+intro: Test...
 ---
