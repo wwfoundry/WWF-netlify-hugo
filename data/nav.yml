@@ -1,5 +1,8 @@
 topLevelItems:
-  - selectPage: Project Gallery
-    displayText: test
+  - selectPage: index
+    displayText: Index
+    itemType: Link
+  - selectPage: gallery
+    displayText: Gallery
     itemType: Link
 customItems: []
