@@ -1,8 +1,11 @@
 topLevelItems:
   - selectPage: index
-    displayText: Index
+    displayText: Projects
     itemType: Link
-  - selectPage: gallery
-    displayText: Gallery
+  - displayText: About
+    selectPage: about
+    itemType: Link
+  - displayText: Contact
+    selectPage: contact
     itemType: Link
 customItems: []
