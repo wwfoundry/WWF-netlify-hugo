@@ -1,5 +1,5 @@
 ---
-slug: null
+slug: gallery
 title: Gallery
 intro: test......
 ---
