@@ -144,28 +144,28 @@ collections:
         name: "project_index"
         file: "/content/index/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: string}
+          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Project Gallery"
         name: "project_gallery"
         file: "/content/gallery/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: string}
+          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: string}
+          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: string}
+          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
           - {label: "Location", name: "location", widget: "map" }

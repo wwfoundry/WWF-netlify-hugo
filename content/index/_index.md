@@ -1,5 +1,5 @@
 ---
-slug: index
+slug: 
 title: Project Index
 intro: Test...
 ---

@@ -381,6 +381,11 @@ a{
 	color:inherit;
 }
 
+ul{
+  list-style: none;
+  text-decoration: none;
+}
+
 /*3) Typography */
 /*---------------*/
 .title{

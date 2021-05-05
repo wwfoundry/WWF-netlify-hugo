@@ -1,15 +1,23 @@
 	<div id="side_menu_wrapper">
 		<div id="menu_side">
-			<ul id="menu_inner">
+			<div id="menu_inner">
 				<button id="xit">
 					<img src="xit.svg">
 				</button>
 				<ul id="menu_links">
-					
+					{{range $.Site.Data.nav.topLevelItems}}
+						<li>
+							<a href="/{{.selectPage}}">{{ .displayText }}</a>
+						</li>
+					{{end}}
 				</ul>
-					<li id="social_links">
-
-					</li>
-			</ul>
+				<ul id="social_links">
+					{{range $.Site.Data.nav.socialItems}}
+						<li>
+							<a href="/{{.socialURL}}"><img class="icon" src="{{ .socialIcon }}" alt="social"></a>
+						</li>
+					{{end}}
+				</ul>
+			</div>
 		</div>
 	</div>

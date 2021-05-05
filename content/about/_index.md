@@ -1,5 +1,5 @@
 ---
-slug: about
+slug: 
 title: About
 intro: test
 ---

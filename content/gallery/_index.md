@@ -1,5 +1,5 @@
 ---
-slug: gallery
+slug: 
 title: Project Gallery
 intro: Test
 ---
