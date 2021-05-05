@@ -26,9 +26,9 @@ collections:
                 name: "selectPage"
                 widget: "relation"
                 collection: "pages"
-                search_fields: ["name"]
-                value_field: "name"
-                display_fields: ["name"]
+                search_fields: ["title"]
+                value_field: "slug"
+                display_fields: ["title"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
                 required: true
@@ -87,6 +87,17 @@ collections:
             allow_language_selection: false
             default_language: "html"
             hint: "WARNING - SVG snippets entered here will ovewrite the current logo. Please only insert valid SVG logo snippets. Learn more about SVG in the site help section."
+      - label: "Site Description"
+        name: "meta"
+        editor:
+          preview: false
+        file: "/data/meta.yml"
+        fields:
+          - label: "Site Description"
+            name: "description"
+            required: true
+            widget: "text"
+            hint: "The site 'meta' description is available on every page. Search engines often use the description in search results to preview the site's content briefly."
       - label: "Site Footer"
         name: "footer"
         editor:
@@ -113,31 +124,34 @@ collections:
         file: "/content/_index.md"
         widget: "list"
         fields:
-            - label: "Showcase Reel"
-              name: "reel"
-              widget: "file"
+            - {label: URL Slug, name: slug, widget: string}
+            - {label: Showcase Reel, name: reel, widget: file}
       - label: "Project Index"
         name: "project_index"
         file: "/content/project_index/_index.md"
         fields:
+          - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Project Gallery"
         name: "project_gallery"
         file: "/content/project_gallery/_index.md"
         fields:
+          - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
         fields:
+          - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
         fields:
+          - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
           - {label: "Location", name: "location", widget: "map" }

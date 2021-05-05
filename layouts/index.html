@@ -1,9 +1,5 @@
 {{define "main"}}
 	
-	<div id="main_slide">
-		<video id="reel" plasysinline autoplay muted loop preload="none">
-				<source src="{}" type="video/mp4">
-		</video>
-	</div>
+	{{partial "mainSlide" (dict "reel" .Params.reel) }}
 
 {{end}}

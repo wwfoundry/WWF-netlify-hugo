@@ -7,7 +7,9 @@ Contents:
 /*------------------------------------
 1) Normalize 
 2) General
-3) Header
+3) Typography
+4) Header
+5) Homepage
 */
 
 /*1) Normalize*/
@@ -386,7 +388,7 @@ a{
 	text-transform: uppercase;
 }
 
-/*3) Header*/
+/*4) Header*/
 /*---------------*/
 
 nav{
@@ -479,4 +481,16 @@ button{
 	width:35px;
 	height:35px;
 	padding-right:10px;
+}
+
+/*5) Homepage */
+/*---------------*/
+
+#reel{
+	position:absolute;
+	top:0;
+	bottom:0;
+	object-fit:cover;
+	width:100vw;
+	height:100vh;
 }
