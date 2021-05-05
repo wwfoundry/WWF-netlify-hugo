@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "Walla Walla Foundry"
-[params]
+title = "Walla Walla Foundry | TEST"
 
-	author = "Walla Walla Foundry"
+[params]
+author = "Walla Walla Foundry"
