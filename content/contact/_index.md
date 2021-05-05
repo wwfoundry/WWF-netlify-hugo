@@ -1,6 +1,6 @@
 ---
-slug:
+slug: null
 title: Contact
-intro: test....
+intro: test.....
 location: '{"type":"Point","coordinates":[-94.2264804,38.5425966]}'
 ---
