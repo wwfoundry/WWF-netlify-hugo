@@ -22,7 +22,6 @@ collections:
             fields:
               - {label: Display Text, name: displayText, widget: string, hint: 'Enter the name of the page that will be linked in the menu.', required: true}
               - label: "Select Page"
-                required: true
                 name: "selectPage"
                 widget: "relation"
                 collection: "pages"
@@ -31,7 +30,6 @@ collections:
                 display_fields: ["title"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
-                required: true
                 name: "itemType"
                 widget: "select"
                 options: ["Link", "Button"]
@@ -44,7 +42,6 @@ collections:
             fields:
               - {label: Display Text, name: displayText, widget: string, hint: 'Enter the name of the page that will be linked in the menu.', required: true}
               - label: "Select Page"
-                required: true
                 name: "selectPage"
                 widget: "relation"
                 collection: "custom_page"
@@ -53,7 +50,6 @@ collections:
                 display_fields: ["name"]
                 hint: "Select the page from the custom pages collection."
               - label: "Item Type"
-                required: true
                 name: "itemType"
                 widget: "select"
                 options: ["Link", "Button"]
@@ -65,12 +61,10 @@ collections:
             hint: "Add social media links to the menu."
             fields:
               - label: "Social Media Account URL"
-                required: true
                 name: "socialURL"
                 widget: "string"
                 hint: "Paste a link to the WWF social media account"
               - label: "Social Media Icon"
-                required: true
                 name: "socialIcon"
                 widget: "image"
                 hint: "Theme-styled icons are available in the media gallery or can be uploaded here."
@@ -144,28 +138,28 @@ collections:
         name: "project_index"
         file: "/content/index/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
+          - {label: URL Slug, name: slug, widget: string, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Project Gallery"
         name: "project_gallery"
         file: "/content/gallery/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
+          - {label: URL Slug, name: slug, widget: string, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
+          - {label: URL Slug, name: slug, widget: string, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
         fields:
-          - {label: URL Slug, name: slug, widget: hidden, default: {{dirname}} }
+          - {label: URL Slug, name: slug, widget: string, default: {{dirname}} }
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
           - {label: "Location", name: "location", widget: "map" }
