@@ -1,5 +1,5 @@
 ---
-slug:
+slug: null
 title: Gallery
-intro: test....
+intro: test.....
 ---
