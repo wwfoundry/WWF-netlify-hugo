@@ -9,3 +9,8 @@ topLevelItems:
     selectPage: contact
     itemType: Link
 customItems: []
+socialItems:
+  - socialIcon: /images/uploads/instagram.png
+    socialURL: https://www.instagram.com/wallawallafoundry/
+  - socialURL: https://www.linkedin.com/company/walla-walla-foundry
+    socialIcon: /images/uploads/linkedin.png
