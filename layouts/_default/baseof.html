@@ -2,7 +2,8 @@
 <html lang="en">
   {{partial "head" .}}
   <body>
-    {{block "header" . }}{{partial "nav" . }}{{end}}
+    {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
+    {{ block "header" . }}{{partial "nav" . }}{{end}}
     {{ block "main" . }}{{ end }}
     {{ block "footer" . }}{{ end }}
   </body>
