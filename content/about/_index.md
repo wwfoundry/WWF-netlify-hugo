@@ -1,5 +1,5 @@
 ---
-slug:
+slug: null
 title: About
-intro: test...
+intro: test....
 ---
