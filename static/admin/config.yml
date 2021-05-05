@@ -142,14 +142,14 @@ collections:
           - {label: Showcase Reel, name: reel, widget: file}
       - label: "Project Index"
         name: "project_index"
-        file: "/content/project_index/_index.md"
+        file: "/content/index/_index.md"
         fields:
           - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
       - label: "Project Gallery"
         name: "project_gallery"
-        file: "/content/project_gallery/_index.md"
+        file: "/content/gallery/_index.md"
         fields:
           - {label: URL Slug, name: slug, widget: string}
           - {label: Title, name: title, widget: string}
