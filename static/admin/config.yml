@@ -98,6 +98,21 @@ collections:
             required: true
             widget: "text"
             hint: "The site 'meta' description is available on every page. Search engines often use the description in search results to preview the site's content briefly."
+      - label: "Config"
+        name: "config"
+        editor:
+          preview: false
+        file: "/config.toml"
+        fields:
+          - label: "Site Base URL"
+            name: "baseURL"
+            required: true
+            widget: "hidden"
+            default: "/"
+          - label: "Title"
+            name: "title"
+            required: true
+            widget: "string"
       - label: "Site Footer"
         name: "footer"
         editor:
