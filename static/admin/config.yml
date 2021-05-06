@@ -131,14 +131,13 @@ collections:
       - label: "Home"
         name: "home"
         file: "/content/_index.md"
-        widget: "list"
         fields:
-          - label: 'Showcase Reel'
-            name: 'reel'
-            widget: 'object'
+          - label: 'Video Reel'
+            name: 'reelVideo'
+            widget: 'list'
             fields:
               - label: 'Video'
-                name: 'reelVideo'
+                name: 'video'
                 widget: 'file'
       - label: "Project Index"
         name: "project_index"
