@@ -133,7 +133,13 @@ collections:
         file: "/content/_index.md"
         widget: "list"
         fields:
-          - {label: Showcase Reel, name: reel, widget: file}
+          - label: 'Showcase Reel'
+            name: 'reel'
+            widget: 'object'
+            fields:
+              - label: 'Video'
+                name: 'reelVideo'
+                widget: 'file'
       - label: "Project Index"
         name: "project_index"
         file: "/content/index/_index.md"
@@ -171,12 +177,77 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-      - { label: 'Description', name: 'description', widget: 'string' }
-      - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: 'project'
-    label: 'Project'
+      - label: "Sections"
+        label_singular: "Section"
+        name: "sections"
+        widget: "list"
+        required: false
+        types:
+          - label: "Header"
+            name: "header"
+            widget: "object"
+            fields:
+              - label: "Select Header Justfication"
+                name: "sectionLayout"
+                widget: "select"
+                options:
+                  - { label: "Left Justified", value: "Left" }
+                  - { label: "Center Justified", value: "Center" }
+                  - { label: "Right Justified", value: "Right" }
+              - label: "Header Text"
+                name: "headerText"
+                widget: "markdown"
+          - label: "Image"
+            name: "imageBlock"
+            widget: "object"
+            fields:
+              - label: "Select Image Justfication"
+                name: "imageLayout"
+                widget: "select"
+                options:
+                  - { label: "Left Justified", value: "Left" }
+                  - { label: "Center Justified", value: "Center" }
+                  - { label: "Right Justified", value: "Right" }
+              - label: "Image"
+                name: "image"
+                widget: "image"
+          - label: "Text Block"
+            label_singular: "text"
+            name: "textBlock"
+            widget: "object"
+            fields:
+              - label: "Select Text Block Justfication"
+                name: "textJustification"
+                widget: "select"
+                options:
+                  - { label: "Left Justified", value: "Left" }
+                  - { label: "Center Justified", value: "Center" }
+                  - { label: "Right Justified", value: "Right" }
+              - label: "Text"
+                name: "text"
+                widget: "markdown"
+          - label: "Tile Gallery"
+            name: "tileGallery"
+            widget: "object"
+            fields:
+              - label: "Custom Tile Gallery"
+                label_singular: "Image"
+                name: "tileGalleryCustom"
+                widget: "list"
+                summary: '{{fields.image}}'
+                field: {label: Image, name: image, widget: image}
+          - label: "Carousel Gallery"
+            label_singular: "Image"
+            name: "carouselGallery"
+            widget: "object"
+            fields:
+              - label: "Custom Carousel Gallery"
+                name: "carouseleGalleryCustom"
+                widget: "list"
+                summary: '{{fields.image}}'
+                field: {label: Image, name: image, widget: image}
+  - label: 'Project'
+    name: 'project'
     folder: 'content/project'
     create: true
     slug: '{{slug}}'
