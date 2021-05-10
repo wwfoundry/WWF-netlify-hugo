@@ -1,5 +1,5 @@
 topLevelItems:
-  - selectPage: /Taco
+  - selectPage: project_index
     displayText: Projects
     itemType: Link
   - selectPage: about

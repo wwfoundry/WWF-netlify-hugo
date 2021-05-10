@@ -141,9 +141,9 @@ collections:
                 widget: 'file'
       - label: "Project Index"
         name: "project_index"
-        file: "/content/index/_index.md"
+        file: "/content/project_index/_index.md"
         fields:
-          - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'index'}
+          - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'project_index'}
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
       - label: "Project Gallery"
