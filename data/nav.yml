@@ -1,4 +1,13 @@
-topLevelItems: []
+topLevelItems:
+  - selectPage: /Taco
+    displayText: Projects
+    itemType: Link
+  - selectPage: about
+    displayText: About
+    itemType: Link
+  - displayText: Contact
+    selectPage: contact
+    itemType: Link
 customItems:
   - selectPage: tacos
     displayText: Test
