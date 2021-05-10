@@ -1,6 +1,6 @@
 topLevelItems:
-  - selectPage: Taco
-    displayText: Test
+  - selectPage: /Taco/
+    displayText: Projects
     itemType: Link
 customItems:
   - displayText: Test
