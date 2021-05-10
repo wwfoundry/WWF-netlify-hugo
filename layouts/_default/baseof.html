@@ -5,6 +5,6 @@
     {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
     {{ block "header" . }}{{partial "nav" . }}{{end}}
     {{ block "main" . }}{{ end }}
-    {{ block "footer" . }}{{ end }}
+    {{ block "footer" . }} {{partial "footer" . }} {{ end }}
   </body>
 </html>

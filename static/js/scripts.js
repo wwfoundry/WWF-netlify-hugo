@@ -1,7 +1,5 @@
 $(document).ready(function(){
 	
-	$('#wwf_logo>svg').addClass('fill_change')
-
 		$("#hamburger").on("click", function(){
 
 		$('#side_menu_wrapper').animate({marginRight: '100vw'}, 500);

@@ -371,7 +371,7 @@ body{
 	height:100vh;
 	font-family:'Century Gothic', sans-serif;
 	font-size:.9em;
-	overflow: hidden;
+	overflow-x: hidden;
   position:relative;
 }
 
@@ -564,11 +564,27 @@ button{
   padding-bottom:25px;
 }
 
-/*5) Homepage */
+/*5) Footer*/
+/*---------------*/
+
+footer{
+  padding:25px;
+  width:calc(100% - 50px);
+  background-color:#131313;
+  color:white;
+  font-size: .75em;
+  display:flex;
+  flex-direction:row;
+}
+
+.footer_section{
+  width:30%;
+}
+
+/*6) Homepage */
 /*---------------*/
 
 #main_slide{
-	position:absolute;
 	top:0;
 	bottom:0;
 	object-fit:cover;
