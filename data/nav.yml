@@ -1,5 +1,6 @@
 topLevelItems:
   - selectPage: projects
+  - selectPage: Taco
     displayText: Projects
     itemType: Link
   - displayText: About
