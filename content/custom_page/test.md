@@ -1,6 +1,6 @@
 ---
 title: taco
-url: /tacos/
+url: tacos
 sections:
   - type: imageBlock
     imageLayout: Left

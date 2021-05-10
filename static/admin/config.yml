@@ -47,7 +47,7 @@ collections:
                 collection: "custom_page"
                 search_fields: ["title"]
                 value_field: "url"
-                display_fields: ["name"]
+                display_fields: ["title"]
                 hint: "Select the page from the custom pages collection."
               - label: "Item Type"
                 name: "itemType"
