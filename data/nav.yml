@@ -1,5 +1,8 @@
 topLevelItems: []
-customItems: []
+customItems:
+  - selectPage: tacos
+    displayText: Test
+    itemType: Link
 socialItems:
   - socialIcon: /images/uploads/instagram.png
     socialURL: https://www.instagram.com/wallawallafoundry/
