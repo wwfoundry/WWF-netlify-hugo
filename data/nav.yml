@@ -12,6 +12,9 @@ customItems:
   - selectPage: tacos
     displayText: Test
     itemType: Link
+  - selectPage: test2
+    displayText: Test2
+    itemType: Link
 socialItems:
   - socialIcon: /images/uploads/instagram.png
     socialURL: https://www.instagram.com/wallawallafoundry/
