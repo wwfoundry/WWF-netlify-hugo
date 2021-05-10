@@ -1,5 +1,5 @@
 ---
-url: /gallery/
+url: gallery
 title: Gallery
 intro: Test...
 ---
