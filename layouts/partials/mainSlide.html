@@ -1,5 +1,18 @@
 <div id="main_slide">
-		<video id="reel" plasysinline autoplay muted loop preload="none">
-				<source src="{{ .video }}" type="video/mp4">
-		</video>
+		
+	<ul class= "gallery_container">
+
+		{{range .video}}
+
+		<li class="video_slide">
+
+				<video id="reel" plasysinline autoplay muted loop preload="none">
+						<source src="{{ .video }}" type="video/mp4">
+				</video>
+
+		</li>
+
+		{{end}}
+
+	</ul>
 </div>
