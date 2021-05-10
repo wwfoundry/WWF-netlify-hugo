@@ -368,8 +368,7 @@ template {
 /*---------------*/
 body{
 	width:100vw;
-	height:calc(100vh - 50px);
-	margin:25px 0 25px 0;
+	height:100vh;
 	font-family:'Century Gothic', sans-serif;
 	font-size:.9em;
 	overflow: hidden;
@@ -394,6 +393,20 @@ ul{
 
 /*3) Typography */
 /*---------------*/
+
+h1{
+
+}
+
+
+h2{
+
+}
+
+h3{
+
+}
+
 .title{
 	font-size:1.2em;
 	text-transform: uppercase;
@@ -418,7 +431,7 @@ nav{
 	flex-grow:0;
 	position:absolute;
 	z-index:101;
-	top:25px;
+  top:25px;
 }
 
 button{
@@ -528,9 +541,15 @@ button{
   justify-content: space-between;
   list-style: none;
   margin:0;
-  padding:0;
-  height:100%;
+  padding:25px 0;
+  height:calc(100% - 50px);
   width:calc(100% - 25px);
+}
+
+#menu_links>li{
+
+  padding-bottom:25px;
+
 }
 
 #xit{
@@ -548,11 +567,27 @@ button{
 /*5) Homepage */
 /*---------------*/
 
-#reel{
+#main_slide{
 	position:absolute;
 	top:0;
 	bottom:0;
 	object-fit:cover;
 	width:100vw;
 	height:100vh;
+}
+
+#main_slide>ul{
+  width:100%;
+  height:100%;
+}
+
+#main_slide>ul>li{
+  width:100%;
+  height:100%;
+}
+
+.reel{
+  width:100%;
+  height:100%;
+  object-fit: cover;
 }

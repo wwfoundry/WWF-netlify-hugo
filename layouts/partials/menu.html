@@ -2,19 +2,19 @@
 		<div id="menu_side">
 			<div id="menu_inner">
 				<button id="xit">
-					<img src="/images/resources/xit.svg">
+					<img class="icon" src="/images/resources/xit.svg">
 				</button>
 				<ul id="menu_links">
 					{{range $.Site.Data.nav.topLevelItems}}
 						<li>
-							<a href="/{{.selectPage}}">{{ .displayText }}</a>
+							<a href="/{{.selectPage}}"><h2>{{ .displayText }}</h2></a>
 						</li>
 					{{end}}
 				</ul>
 				<ul id="social_links">
 					{{range $.Site.Data.nav.socialItems}}
 						<li>
-							<a href="/{{.socialURL}}"><img class="icon" src="{{ .socialIcon }}" alt="social"></a>
+							<a href="{{.socialURL}}"><img class="icon" src="{{ .socialIcon }}" alt="social"></a>
 						</li>
 					{{end}}
 				</ul>
