@@ -132,13 +132,9 @@ collections:
         name: "home"
         file: "/content/_index.md"
         fields:
-          - label: 'Video Reel'
-            name: 'reelVideo'
-            widget: 'list'
-            fields:
-              - label: 'Video'
-                name: 'video'
-                widget: 'file'
+          - label: 'Video'
+            name: 'video'
+            widget: 'file'
       - label: "Project Index"
         name: "project_index"
         file: "/content/index/_index.md"
