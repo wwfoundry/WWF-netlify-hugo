@@ -1,5 +1,5 @@
 ---
-url: /projects/
+url: projects
 title: Projects
 intro: Test...
 ---
