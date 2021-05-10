@@ -7,12 +7,12 @@
 				<ul id="menu_links">
 					{{range $.Site.Data.nav.topLevelItems}}
 						<li>
-							<a href="{{.selectPage}}"><h2>{{ .displayText }}</h2></a>
+							<a href="/{{.selectPage}}"><h2>{{ .displayText }}</h2></a>
 						</li>
 					{{end}}
 					{{range $.Site.Data.nav.customItems}}
 						<li>
-							<a href="{{.selectPage}}"><h2>{{ .displayText }}</h2></a>
+							<a href="/{{.selectPage}}/"><h2>{{ .displayText }}</h2></a>
 						</li>
 					{{end}}
 				</ul>
