@@ -176,6 +176,14 @@ collections:
     editor:
       preview: true
     fields:
+      - label: "Page Title"
+        name: "title"
+        required: true
+        widget: "string"
+      - label: "URL Slug"
+        name: "slug"
+        required: true
+        widget: "string"
       - label: "Sections"
         label_singular: "Section"
         name: "sections"
