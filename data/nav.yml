@@ -1,13 +1,4 @@
-topLevelItems:
-  - selectPage: projects
-    displayText: Projects
-    itemType: Link
-  - displayText: About
-    selectPage: about
-    itemType: Link
-  - displayText: Contact
-    selectPage: contact
-    itemType: Link
+topLevelItems: []
 customItems: []
 socialItems:
   - socialIcon: /images/uploads/instagram.png
