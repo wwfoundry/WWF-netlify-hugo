@@ -46,7 +46,7 @@ collections:
                 widget: "relation"
                 collection: "custom_page"
                 search_fields: ["title"]
-                value_field: "title"
+                value_field: "url"
                 display_fields: ["name"]
                 hint: "Select the page from the custom pages collection."
               - label: "Item Type"
