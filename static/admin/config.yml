@@ -26,7 +26,7 @@ collections:
                 widget: "relation"
                 collection: "pages"
                 search_fields: ["title"]
-                value_field: "slug"
+                value_field: "url"
                 display_fields: ["title"]
                 hint: "Select the page from the main pages collection."
               - label: "Item Type"
@@ -143,28 +143,28 @@ collections:
         name: "project_index"
         file: "/content/index/_index.md"
         fields:
-          - {label: 'URL Slug', name: 'slug', widget: 'hidden', default: 'index' }
+          - {label: 'URL', name: 'url', widget: 'string', default: 'projects' }
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
       - label: "Project Gallery"
         name: "project_gallery"
         file: "/content/gallery/_index.md"
         fields:
-          - {label: 'URL Slug', name: 'slug', widget: 'hidden', default: 'gallery' }
+          - {label: 'URL', name: 'url', widget: 'string', default: 'gallery' }
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
         fields:
-          - {label: 'URL Slug', name: 'slug', widget: 'hidden', default: 'about' }
+          - {label: 'URL', name: 'url', widget: 'string', default: 'about' }
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
         fields:
-          - {label: 'URL Slug', name: 'slug', widget: 'hidden', default: 'contact' }
+          - {label: 'URL', name: 'url', widget: 'string', default: 'contact' }
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
           - {label: "Location", name: "location", widget: "map" }
@@ -181,7 +181,7 @@ collections:
         required: true
         widget: "string"
       - label: "URL Slug"
-        name: "slug"
+        name: "url"
         required: true
         widget: "string"
       - label: "Sections"
