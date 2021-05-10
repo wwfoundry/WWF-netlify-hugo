@@ -1,4 +1,7 @@
-topLevelItems: []
+topLevelItems:
+  - selectPage: Taco
+    displayText: Test
+    itemType: Link
 customItems:
   - displayText: Test
     selectPage: tacos
