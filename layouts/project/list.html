@@ -1,13 +1,9 @@
-{{define "main"}}
 
-{{ $paginator := .Paginate (where .Pages "Type" "posts") }}
 
-{{template template "_internal/pagination.html"}}
+{{ $paginator := .Paginate (.Pages) }}
 
-{{range $paginator.project}}
+{{range $paginator.Pages}}
 
 	<h1>{{.Title}}</h1>
-
-{{end}}
 
 {{end}}
