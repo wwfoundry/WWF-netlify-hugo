@@ -369,10 +369,11 @@ template {
 body{
 	width:100vw;
 	height:100vh;
-	font-family:'Century Gothic', sans-serif;
+	font-family:'Niveau Grotesk', sans-serif;
 	font-size:.9em;
 	overflow-x: hidden;
   position:relative;
+  font-weight:normal;
 }
 
 a{
@@ -389,6 +390,18 @@ ul{
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 0px;
+}
+
+h2{
+  font-weight:normal;
+}
+
+label{
+  padding-bottom:20px;
+  font-family:'Supria Sans', sans-serif;
+  font-size:1em;
+  font-weight:normal;
+  text-transform: uppercase;
 }
 
 /*3) Typography */
@@ -572,7 +585,7 @@ footer{
   width:calc(100% - 50px);
   background-color:#131313;
   color:white;
-  font-size: .75em;
+  font-size: 1.25em;
   display:flex;
   flex-direction:row;
 }

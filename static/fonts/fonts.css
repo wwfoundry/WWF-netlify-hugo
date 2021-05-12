@@ -1,0 +1,24 @@
+@font-face{
+	font-family: "Nivea Grotesk";
+	src: url('NiveauGroteskRegular.otf') format('opentype');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face{
+	font-family: "Nivea Grotesk";
+	src: url('NiveauGroteskMedium.otf') format('opentype');
+	font-weight:400;
+	font-style:normal;
+}
+@font-face{
+	font-family: "Nivea Grotesk";
+	src: url('NiveauGroteskBlack.otf') format('opentype');
+	font-weight:Bold;
+	font-style:normal;
+}
+@font-face{
+	font-family: "Supria Sans";
+	src: url('SupriaSans_Regular.ttf') format('truetype');
+	font-weight:normal;
+	font-style:normal;
+}

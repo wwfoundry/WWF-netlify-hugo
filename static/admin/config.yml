@@ -92,7 +92,7 @@ collections:
             required: true
             widget: "text"
             hint: "The site 'meta' description is available on every page. Search engines often use the description in search results to preview the site's content briefly."
-      - label: "Config"
+      - label: "Site Title"
         name: "config"
         editor:
           preview: false
@@ -103,7 +103,7 @@ collections:
             required: true
             widget: "hidden"
             default: "/"
-          - label: "Title"
+          - label: "Site Name"
             name: "title"
             required: true
             widget: "string"
@@ -113,8 +113,11 @@ collections:
           preview: false
         file: "/data/contact.yml"
         fields:
-          - label: "Address"
-            name: "address"
+          - label: "Address Line One"
+            name: "addressOne"
+            widget: "text"
+          - label: "Address Line Two"
+            name: "addressTwo"
             widget: "text"
           - label: "Phone Number"
             name: "phone"
@@ -252,7 +255,8 @@ collections:
                 widget: "list"
                 summary: '{{fields.image}}'
                 field: {label: Image, name: image, widget: image}
-  - label: 'Project'
+  - label: 'Projects'
+    label_singular: 'Project'
     name: 'project'
     folder: 'content/project'
     create: true
