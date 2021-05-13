@@ -1,6 +1,6 @@
 {{define "main"}}
 
-	{{ $paginator := .Paginate (.Pages) }}
+	{{ $paginator := .Paginate .Pages }}
 
 	{{range $paginator.Pages}}
 
@@ -8,18 +8,7 @@
 			<div class="main_slide" style="background-image:url({{ .Params.featured }})">
 				{{ if gt $paginator.TotalPages 1 }}
 					<div id="directional_arrows">
-						{{ if ne $paginator.PageNumber 1 }}
-							<a id="arrow_right" href="{{ $paginator.First.URL }}" class="menu_item icon arrow">
-								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-								<style type="text/css">
-									.st0{fill:none;}
-								</style>
-								<line class="st0" x1="73.02" y1="4.01" x2="26.98" y2="50.04"/>
-								<line class="st0" x1="73.02" y1="95.99" x2="26.98" y2="49.96"/>
-								</svg>
-							</a>
-						{{end}}
+
 					    {{ if $paginator.HasPrev }}
 							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow menu_item icon">
 								<svg version="1.1" class=" menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -44,18 +33,7 @@
 								</svg>
 							</a>
 						{{end}}
-						{{ if ne $paginator.PageNumber $paginator.TotalPages }}
-							<a id="arrow_left" href="{{ $paginator.Last.URL }}" class="menu_item icon arrow">
-								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
-								<style type="text/css">
-									.st0{fill:none;}
-								</style>
-								<line class="st0" x1="73.02" y1="4.01" x2="26.98" y2="50.04"/>
-								<line class="st0" x1="73.02" y1="95.99" x2="26.98" y2="49.96"/>
-								</svg>
-							</a>
-						{{end}}
+			
 					</div>
 				{{end}}
 			</div>

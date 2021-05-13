@@ -1,0 +1,26 @@
+{{define "main"}}
+
+		<div id="{{ .Title }}" class="project_slide">
+			<div class="main_slide" style="background-image:url({{ .Params.featured }})">
+					</div>
+			</div>
+			<div class="project_information">
+				<div class="thumbnails">
+					{{range .Params.Thumbnailimages}}
+
+						<btn class="thumbnail" style="background-image:url('{{.image}}')"></btn>
+
+					{{end}}
+				</div>
+				<ul class="attribution">
+					<li>{{ .Title }}</li>
+					<li>{{ .Params.artist }}</li>
+					<li>{{ .Params.year }}</li>
+					<li>{{ .Params.material }}</li>
+					<li>{{ .Params.attribution }}</li>
+				</ul>
+			</div>
+
+		</div>
+
+{{end}}
