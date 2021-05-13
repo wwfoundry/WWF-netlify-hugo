@@ -148,13 +148,6 @@ collections:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'project_index'}
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
-      - label: "Project Gallery"
-        name: "project_gallery"
-        file: "/content/gallery/_index.md"
-        fields:
-          - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'gallery'}
-          - {label: 'Title', name: 'title', widget: 'string'}
-          - {label: 'Intro', name: 'intro', widget: 'markdown'}
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
@@ -257,8 +250,8 @@ collections:
                 field: {label: Image, name: image, widget: image}
   - label: 'Projects'
     label_singular: 'Project'
-    name: 'project'
-    folder: 'content/project'
+    name: 'gallery'
+    folder: 'content/gallery'
     create: true
     slug: '{{slug}}'
     editor:
