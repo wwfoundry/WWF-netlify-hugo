@@ -8,7 +8,10 @@ topLevelItems:
   - displayText: Contact
     selectPage: contact
     itemType: Link
-customItems: []
+customItems:
+  - displayText: Test
+    selectPage: why
+    itemType: Link
 socialItems:
   - socialIcon: /images/uploads/instagram.png
     socialURL: https://www.instagram.com/wallawallafoundry/
