@@ -274,4 +274,9 @@ collections:
         name: "thumbnailImages"
         widget: "list"
         summary: '{{fields.image}}'
-        field: {label: Image, name: image, widget: image}
+        fields:
+          - label: 'Thumbnail Images'
+            label_singular: 'Thumbnail Image'
+            name: 'image'
+            widget: 'file'
+
