@@ -1,6 +1,8 @@
 {{define "main"}}
+	
+	{{ $projects := .Site.GetPage "projects"}}
 
-	{{ $paginator := .Paginate .Pages }}
+	{{ $paginator := .Paginate $projects.Pages }}
 
 	{{range $paginator.Pages}}
 
@@ -21,6 +23,7 @@
 								</svg>
 							</a>
 						{{end}}
+						
 						{{ if $paginator.HasNext }}
 							<a id="arrow_right" href="{{ $paginator.Next.URL }}" class="menu_item icon arrow">
 								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
