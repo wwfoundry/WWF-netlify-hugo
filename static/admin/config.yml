@@ -262,7 +262,7 @@ collections:
       - { label: 'Year', name: 'year', widget: 'string' }
       - { label: 'Material', name: 'material', widget: 'string' }
       - { label: 'Attribution', name: 'attribution', widget: 'string' }
-      - { label: 'Featured Image', name: '1_image', widget: 'image' }
+      - { label: 'Featured Image', name: 'featured', widget: 'image' }
       - label: "Thumbnails"
         name: "thumbnailImages"
         widget: "list"

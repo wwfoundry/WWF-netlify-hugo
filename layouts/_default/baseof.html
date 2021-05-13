@@ -4,7 +4,9 @@
   <body>
     {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
     {{ block "header" . }}{{partial "nav" . }}{{end}}
+    <div class="main_content" {{if .IsHome}}id="fullHeight"{{end}}>
     {{ block "main" . }}{{ end }}
+    </div>
     {{ block "footer" . }} {{partial "footer" . }} {{ end }}
   </body>
 </html>
