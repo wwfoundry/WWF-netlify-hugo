@@ -1,7 +1,7 @@
 ---
 title: Test4
 artist: Test
-year: test
+year: 2020
 material: test
 attribution: test
 featured: /images/uploads/5127.1_mithra_process_42.jpg

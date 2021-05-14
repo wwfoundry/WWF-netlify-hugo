@@ -404,6 +404,11 @@ label{
   text-transform: uppercase;
 }
 
+.last{
+  padding:0px !important;
+  margin:0px !important;
+}
+
 /*3) Typography */
 /*---------------*/
 
@@ -645,7 +650,7 @@ footer{
 .main_slide{
   width:85%;
   display:flex;
-  height:calc(100vh - 100px);
+  height:calc(100vh - 110px);
   justify-content: center;
   background-position:center;
   background-repeat:no-repeat;

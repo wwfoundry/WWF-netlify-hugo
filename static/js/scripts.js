@@ -40,37 +40,149 @@ $(document).ready(function(){
 
 	//Infinite Pagination
 
-	$('body').off('click').on('click', '#arrow_right', function(e) {
-		e.preventDefault(); 
+	var totalPages = $('.project_slide').attr('data-total');
 
-		var nextPageUrl = $(this).prop('href');
+	$('body').off('click').on('click', '.arrow', function(e) {
+		e.preventDefault(); 
+		e.stopPropagation();
+		
+		var slideDirection;
+
+		if ( $(this).attr('id') == 'arrow_left' ) {
+
+			slideDirection = -1
+
+		} else {
+
+			slideDirection = 1
+		}
+
+		var nextPageURL = $(this).prop('href');
+
+		var pageURL = new URL(nextPageURL);
+
+		var pageNumber;
+
+		if ( pageURL.pathname.split('page/')[1] == undefined )
+		{
+
+			pageNumber = '1';
+
+		} else {
+
+			pageNumber = pageURL.pathname.split('page/')[1].replace('/', '');
+
+		}
+
+		var intNumber = parseInt(pageNumber, 10)
+
+		var prevPage,
+			nextPage;
+
+		if ( slideDirection = -1 ){
+
+			prevPage = intNumber - 1;
+			nextPage = intNumber + 1;
+
+		} else {
+
+			prevPage = intNumber + 1;
+			nextPage = intNumber - 1;
+
+		}
+
+		if ( slideDirection == -1 && prevPage == 0 ){
+			prevPage = totalPages;
+		}
+
+		var prevPath = '/gallery/page/' + prevPage + '/'
+
+		var nextPath;
+
+		if ( nextPage > totalPages ){
+
+			nextPath = '/gallery/'
+
+		} else {
+
+			nextPath = '/gallery/page/' + nextPage + '/'
+
+		}
+
+		console.log(prevPath);
+		console.log(intNumber);
+		console.log(nextPath);
+
 		$.ajax({
-			url: nextPageUrl,
+
+			url: prevPath,
+			dataType: 'text',
+			success: function(prev){
+			
+				var prevDiv = $('<div>').appendTo(document.body).css('display', 'none');
+				prevDiv[0].innerHTML = prev;
+
+				var prevSlide = prevDiv.find('.main_slide').attr('data-url');
+
+				console.log(prevSlide);
+
+				prevDiv.remove();
+
+			}
+
+		});
+
+		$.ajax({
+
+			url: nextPath,
+			dataType: 'text',
+			success: function(next){
+
+				var nextDiv = $('<div>').appendTo(document.body).css('display', 'none');
+				nextDiv[0].innerHTML = next;
+
+				var nextSlide = nextDiv.find('.main_slide').attr('data-url');
+
+				console.log(nextSlide);
+
+				nextDiv.remove();
+				
+			}
+
+		});
+
+		$.ajax({
+			url: nextPageURL,
 			dataType: 'text', 
 			success: function(html) {
-				var currentContainer = $('.project_slide');
+				var attribution = $('.project_information');
+
+				var arrowStates = $('#directional_arrows');
 
 				var tempDiv = $('<div>').appendTo(document.body).css('display', 'none');
 				tempDiv[0].innerHTML = html;
 	
-				var newContainer = tempDiv.find('.project_slide');
+				var newAttribution = tempDiv.find('.project_information');
 
-				currentContainer.replaceWith(newContainer);
+				var newArrowStates = tempDiv.find('#directional_arrows');
+
+				attribution.replaceWith(newAttribution);
+				arrowStates.replaceWith(newArrowStates);
 
 				tempDiv.remove();
 
 				if (window.history.pushState)
 				{
-					window.history.pushState(null, null, nextPageUrl);
+					window.history.pushState(null, null, nextPageURL);
 				}
-				console.log("Successfully changed page to " + nextPageUrl);
+
 			},
 			error: function(xhr, status, error) {
 				console.error(xhr, status, error);
 
-				window.location.href = nextPageUrl;
+				window.location.href = nextPageURL;
 			}
-		})
+		});
 	});
 
 });

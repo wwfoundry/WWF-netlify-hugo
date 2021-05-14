@@ -1,16 +1,15 @@
 {{define "main"}}
-	
+
 	{{ $projects := .Site.GetPage "projects"}}
 
 	{{ $paginator := .Paginate $projects.Pages }}
 
 	{{range $paginator.Pages}}
 
-		<div id="{{ .Title }}" class="project_slide">
-			<div class="main_slide" style="background-image:url({{ .Params.featured }})">
+		<div id="{{ .Title }}" class="project_slide" data-total="{{$paginator.TotalPages}}">
+			<div class="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}">
 				{{ if gt $paginator.TotalPages 1 }}
 					<div id="directional_arrows">
-
 					    {{ if $paginator.HasPrev }}
 							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow menu_item icon">
 								<svg version="1.1" class=" menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -36,7 +35,6 @@
 								</svg>
 							</a>
 						{{end}}
-			
 					</div>
 				{{end}}
 			</div>
@@ -53,7 +51,7 @@
 					<li>{{ .Params.artist }}</li>
 					<li>{{ .Params.year }}</li>
 					<li>{{ .Params.material }}</li>
-					<li>{{ .Params.attribution }}</li>
+					<li class="last" >{{ .Params.attribution }}</li>
 				</ul>
 			</div>
 
