@@ -647,20 +647,30 @@ footer{
   height:100%;
 }
 
-.main_slide{
+#slide_wrapper{
+  display:flex;
+  flex-direction: row;
   width:85%;
+  height:calc(100vh - 110px);
+  position:relative;
+}
+
+.main_slide{
+  width:100%;
   display:flex;
   height:calc(100vh - 110px);
   justify-content: center;
   background-position:center;
   background-repeat:no-repeat;
   background-size:contain;
-  position:relative;
 }
 
 .slide{
-  width:85%;
+  width:100%;
   height:calc(100vh - 110px);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
 }
 
 .project_information{
