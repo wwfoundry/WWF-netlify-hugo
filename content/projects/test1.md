@@ -1,5 +1,5 @@
 ---
-title: Test1
+title: Test 1
 artist: TestArtist
 year: 2017
 material: TestMaterial

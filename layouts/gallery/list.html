@@ -8,15 +8,16 @@
 
 		<div id="{{ .Title }}" class="project_slide" data-total="{{$paginator.TotalPages}}">
 			<div id="slide_wrapper">
-				<div class="slide" id="prev_slide"></div>
-				<div class="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
-				<div class="slide" id="next_slide"></div>
+				<div id="slide_container">
+					<div class="slide" id="prev_slide"></div>
+					<div class="slide" id="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
+					<div class="slide" id="next_slide"></div>
+				</div>
 				{{ if gt $paginator.TotalPages 1 }}
 					<div id="directional_arrows">
 					    {{ if $paginator.HasPrev }}
-							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow menu_item icon">
-								<svg version="1.1" class=" menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow left menu_item icon">
+								<svg version="1.1" class=" menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 								<style type="text/css">
 									.st0{fill:none;}
 								</style>
@@ -25,11 +26,9 @@
 								</svg>
 							</a>
 						{{end}}
-						
 						{{ if $paginator.HasNext }}
-							<a id="arrow_right" href="{{ $paginator.Next.URL }}" class="menu_item icon arrow">
-								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+							<a id="arrow_right" href="{{ $paginator.Next.URL }}" class="menu_item icon right arrow">
+								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 								<style type="text/css">
 									.st0{fill:none;}
 								</style>

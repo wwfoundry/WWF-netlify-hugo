@@ -38,191 +38,157 @@ $(document).ready(function(){
 
 	});
 
-	// Set Page State on Load
+//On load, get prev, current, next
 
-let loadState = false;
+var parent = document.querySelector('#slide_container'),
+	current = document.querySelector('#main_slide'),
+	currentUrl = document.querySelector('#main_slide').getAttribute('data-url'),
+	arrowPrev = document.querySelector('#arrow_left'),
+	arrowNext = document.querySelector('#arrow_right'),
+	p,
+	n,
+	trigger,
+	currentPage = window.location.pathname,
+	loadState = false;
 
-var prevTempelem = $('<div class="slide" id="prev_slide">');
-	nextTempelem = $('<div class="slide" id="next_slide">');
+//Liquid Slides
 
-window.onload = function(){
+var a = document.createElement('div'),
+	b = document.createElement('div'),
+	c = document.createElement('div');
 
-	//Get current page
-	var totalPages = $('.project_slide').attr('data-total');
-	var currentPage = window.location.pathname,
-		pageNumber;
+function createChildren(){
 
-	console.log(currentPage);
+	parent.appendChild(a).classList.add('slide');
+	parent.appendChild(b).classList.add('slide');
+	parent.appendChild(c).classList.add('slide');
 
-	if ( currentPage.split('page/')[1] == undefined )
-		{
+}
 
-			pageNumber = totalPages;
+loadNeighbor();
 
-		} else {
+//Check for prev or next slides
 
-			pageNumber = currentPage.split('page/')[1].replace('/', '');
+	function verifyNeighbors() {
 
-		}
+		if ( arrowPrev && arrowNext ){
+	
+			p = arrowPrev.getAttribute('href');
 
-	var prevPage = $('#arrow_left').attr('href'),
-		nextPage = $('#arrow_right').attr('href');
+			n = arrowPrev.getAttribute('href');
+	
+		} else if ( arrowPrev !== 'undefined' && arrowNext == 'undefined' ) {
 
-	$.ajax({
-		url: prevPage,
-		dataType: 'text',
-		success: function(prevHTML){
+			p = arrowPrev.getAttribute('href');
 
-		var prevSlide = $('#prev_slide.slide');
+			n = '';
 
-		var prevTemp = $('<div>').appendTo(document.body).css('display', 'none');
-				prevTemp[0].innerHTML = prevHTML;
+		} else if ( arrowPrev == 'undefined' && arrowNext !== 'undefined' ){
 
-		var prevURL = prevTemp.find('.main_slide').attr('data-url');
+			p = '';
 
-		prevSlide.css('background-image', 'url(' + prevURL + ')');
-
-		prevTemp.remove();
-
-		}
-
-	});
-
-	$.ajax({
-		url: nextPage,
-		dataType: 'text',
-		success: function(nextHTML){
-
-		var nextSlide = $('#next_slide.slide');
-
-		console.log(nextSlide);
-
-		var nextTemp = $('<div>').appendTo(document.body).css('display', 'none');
-				nextTemp[0].innerHTML = nextHTML;
-
-		var nextURL = nextTemp.find('.main_slide').attr('data-url');
-
-		nextSlide.css('background-image', 'url(' + nextURL + ')');
-
-		nextTemp.remove();
-
+			n = arrowPrev.getAttribute('href');
 
 		}
 
-	});
+	}
+
+//Set onload state
+
+function loadNeighbor(){
+
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+
+    createChildren()
+
+	b.style.backgroundImage = 'url("' + currentUrl + '")'
+
+	animateSlides();
 
 	loadState = true;
 
 }
 
-	//Infinite Pagination
 
-	$('.arrow').on('click', function(e) {
-		e.preventDefault(); 
-		e.stopPropagation();
-		
-		var slideDirection;
+//Trigger Slide Change
 
-		if ( $(this).attr('id') == 'arrow_left' ) {
+$('body').on('click', '.arrow', function(e){
 
-			slideDirection = -1
+	e.preventDefault();
+	e.stopPropagation();
 
-		} else {
+	if ( $(this).attr('id') == 'arrow_left' ) {
 
-			slideDirection = 1
-		}
+		d = -1;
 
-		var nextPageURL = $(this).prop('href');
+	} else {
 
-		$.ajax({
-			url: nextPageURL,
-			dataType: 'text', 
-			success: function(html) {
-				var attribution = $('.project_information');
+		d = 1;
+	}
 
-				var arrowStates = $('#directional_arrows');
-
-				var tempDiv = $('<div>').appendTo(document.body).css('display', 'none');
-				tempDiv[0].innerHTML = html;
-	
-				var newAttribution = tempDiv.find('.project_information');
-
-				var newArrowStates = tempDiv.find('#directional_arrows');
-
-				attribution.replaceWith(newAttribution);
-				arrowStates.replaceWith(newArrowStates);
-
-				var prevSlide = newArrowStates.find('#arrow_left').prop('href');
-
-				tempDiv.remove();
-
-				if (window.history.pushState)
-				{
-					window.history.pushState(null, null, nextPageURL);
-				}
-
-			},
-			error: function(xhr, status, error) {
-				console.error(xhr, status, error);
-
-				window.location.href = nextPageURL;
-			}
-		});
-
-	});
+	loadState = false;
 
 });
 
-		// var pageURL = new URL(nextPageURL);
+function animateSlides( ){
 
-		// var pageNumber;
+	verifyNeighbors();
 
-		// if ( pageURL.pathname.split('page/')[1] == undefined )
-		// {
+	if (loadState = false){
 
-		// 	pageNumber = '1';
+	} else {
 
-		// } else {
+			$.ajax({
+		
+				url: p,
+				dataType: 'text',
+				success: function (stored){
 
-		// 	pageNumber = pageURL.pathname.split('page/')[1].replace('/', '');
+					var temp = document.createElement('div');
 
-		// }
+					document.querySelector('body').appendChild(temp).style.display = 'none';
 
-		// var intNumber = parseInt(pageNumber, 10)
+					temp.innerHTML = stored;
 
-		// var prevPage,
-		// 	nextPage;
+					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
-		// if ( slideDirection = -1 ){
+					a.style.backgroundImage = 'url("' + storedFeatured + '")'
 
-		// 	prevPage = intNumber - 1;
-		// 	nextPage = intNumber + 1;
+					temp.remove();
+				}
 
-		// } else {
+			}); 
 
-		// 	prevPage = intNumber + 1;
-		// 	nextPage = intNumber - 1;
+			$.ajax({
+		
+				url: n,
+				dataType: 'text',
+				success: function (stored){
 
-		// }
+					var temp = document.createElement('div');
 
-		// if ( slideDirection == -1 && prevPage == 0 ){
-		// 	prevPage = totalPages;
-		// }
+					document.querySelector('body').appendChild(temp).style.display = 'none';
 
-		// var prevPath = '/gallery/page/' + prevPage + '/'
+					temp.innerHTML = stored;
 
-		// var nextPath;
+					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
-		// if ( nextPage > totalPages ){
+					c.style.backgroundImage = 'url("' + storedFeatured + '")'
 
-		// 	nextPath = '/gallery/'
+					temp.remove();
 
-		// } else {
+				}
 
-		// 	nextPath = '/gallery/page/' + nextPage + '/'
+			}); 
 
-		// }
+		}
 
-		// console.log(prevPath);
-		// console.log(intNumber);
-		// console.log(nextPath);
+}
+
+
+//On arrow click, shift all, remove prev or next and load prev or next
+
+
+});

@@ -1,5 +1,5 @@
 ---
-title: Test6
+title: Test 6
 artist: test
 year: test
 material: test
