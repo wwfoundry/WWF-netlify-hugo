@@ -184,7 +184,6 @@ function arrange(){
 				var prevSlide = newArrowStates.find('#arrow_left').prop('href');
 				var prevSlide = newArrowStates.find('#arrow_right').prop('href');
 
-
 				tempDiv.remove();
 
 				if (window.history.pushState)
@@ -205,3 +204,57 @@ function arrange(){
 	});
 
 });
+
+	var pageURL = new URL(nextPageURL);
+
+		var pageNumber;
+
+		if ( pageURL.pathname.split('page/')[1] == undefined )
+		{
+
+			pageNumber = '1';
+
+		} else {
+
+			pageNumber = pageURL.pathname.split('page/')[1].replace('/', '');
+
+		}
+
+		var intNumber = parseInt(pageNumber, 10)
+
+		var prevPage,
+			nextPage;
+
+		if ( slideDirection = -1 ){
+
+			prevPage = intNumber - 1;
+			nextPage = intNumber + 1;
+
+		} else {
+
+			prevPage = intNumber + 1;
+			nextPage = intNumber - 1;
+
+		}
+
+		if ( slideDirection == -1 && prevPage == 0 ){
+			prevPage = totalPages;
+		}
+
+		var prevPath = '/gallery/page/' + prevPage + '/'
+
+		var nextPath;
+
+		if ( nextPage > totalPages ){
+
+			nextPath = '/gallery/'
+
+		} else {
+
+			nextPath = '/gallery/page/' + nextPage + '/'
+
+		}
+
+		console.log(prevPath);
+		console.log(intNumber);
+		console.log(nextPath);

@@ -41,21 +41,135 @@ $(document).ready(function(){
 //On load, get prev, current, next
 
 var parent = document.querySelector('#slide_container'),
+	info = document.querySelector('.project_information'),
 	current = document.querySelector('#main_slide'),
 	currentUrl = document.querySelector('#main_slide').getAttribute('data-url'),
 	arrowPrev = document.querySelector('#arrow_left'),
 	arrowNext = document.querySelector('#arrow_right'),
+	totalPages = document.querySelector('.project_slide').getAttribute('data-total'),
 	p,
 	n,
+	d,
 	trigger,
 	currentPage = window.location.pathname,
-	loadState = false;
+	loadUrl,
+	loadState = false,
+	pjax = function () {$.ajax({
+							
+			url: p,
+			dataType: 'text',
+			success: function (stored){
+
+				var temp = document.createElement('div');
+
+				document.querySelector('body').appendChild(temp).style.display = 'none';
+
+				temp.innerHTML = stored;
+
+				var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
+
+				a.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+				temp.remove();
+			}
+
+			})},
+	njax = function () {$.ajax({
+			
+					url: n,
+					dataType: 'text',
+					success: function (stored){
+
+						var temp = document.createElement('div');
+
+						document.querySelector('body').appendChild(temp).style.display = 'none';
+
+						temp.innerHTML = stored;
+
+						var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
+
+						c.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+						temp.remove();
+
+					}
+
+				})},
+	infojax = function () {$.ajax({
+			
+					url: loadUrl,
+					dataType: 'text',
+					success: function (stored){
+
+						var temp = document.createElement('div');
+
+						document.querySelector('body').appendChild(temp).style.display = 'none';
+
+						temp.innerHTML = stored;
+
+						var	arrowLeftTemp = temp.querySelector('#arrow_left'),
+							arrowRightTemp = temp.querySelector('#arrow_right'),
+							arrowLeftState,
+							arrowRightState,
+							storedInfo = temp.querySelector('.project_information').innerHTML;
+
+						if ( arrowLeftTemp && arrowRightTemp ){
+
+							arrowLeftState = arrowLeftTemp.getAttribute('href');
+							arrowRightState = arrowRightTemp.getAttribute('href');
+
+							console.log(arrowLeftState)
+
+							arrowPrev.setAttribute( 'href', arrowLeftState );
+							arrowNext.setAttribute( 'href', arrowRightState );
+
+						} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
+
+							arrowRightState = arrowRightTemp.getAttribute('href');
+
+							arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
+							arrowNext.setAttribute( 'href', arrowRightState );
+
+						} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
+
+							arrowLeftState = arrowLeftTemp.getAttribute('href');
+
+							arrowNext.setAttribute( 'href', '/gallery/' );
+							arrowPrev.setAttribute( 'href', arrowLeftState );
+
+						}
+
+						info.innerHTML = storedInfo;
+
+						temp.remove();
+
+						if (window.history.pushState)
+							{
+								window.history.pushState(null, null, loadUrl);
+							}
+
+					}
+
+				})},
+	leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
+	rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>"
 
 //Liquid Slides
 
 var a = document.createElement('div'),
 	b = document.createElement('div'),
 	c = document.createElement('div');
+
+//Position Rules
+
+var positionB = b.offsetLeft,
+	field = window.innerWidth,
+	positionA = (field/(positionB - field)*100).toString() + '%',
+	positionC = (field/(positionB + field)*100).toString() + '%';
+
+a.style.left = positionA;
+c.style.left = positionC;
+
 
 function createChildren(){
 
@@ -65,33 +179,56 @@ function createChildren(){
 
 }
 
+//Check for nav with valid links
+
 loadNeighbor();
 
 //Check for prev or next slides
 
-	function verifyNeighbors() {
+function verifyNeighbors() {
 
-		if ( arrowPrev && arrowNext ){
-	
-			p = arrowPrev.getAttribute('href');
+	if ( arrowPrev && arrowNext ){
 
-			n = arrowPrev.getAttribute('href');
-	
-		} else if ( arrowPrev !== 'undefined' && arrowNext == 'undefined' ) {
+		p = arrowPrev.getAttribute('href');
 
-			p = arrowPrev.getAttribute('href');
+		n = arrowNext.getAttribute('href');
 
-			n = '';
+	} else if ( arrowPrev !== undefined && arrowNext == undefined ) {
 
-		} else if ( arrowPrev == 'undefined' && arrowNext !== 'undefined' ){
+		var replaceNext =  document.createElement('a');
 
-			p = '';
+		document.querySelector('#directional_arrows').appendChild(replaceNext)
 
-			n = arrowPrev.getAttribute('href');
+		replaceNext.outerHTML = rightArrowHtml;
 
-		}
+		arrowNext = replaceNext;
+
+		p = arrowPrev.getAttribute('href');
+
+		n = '/gallery/';
+
+	} else if ( arrowPrev == undefined && arrowNext !== undefined ){
+
+		var replacePrev = document.createElement('a');
+
+		document.querySelector('#directional_arrows').appendChild(replacePrev)
+
+		replacePrev.outerHTML = leftArrowHtml;
+
+		arrowPrev = replacePrev;
+
+		p = '/gallery/page/' + totalPages + '/';
+
+		n = arrowNext.getAttribute('href');
 
 	}
+
+	if ( arrowPrev && arrowNext ){
+
+		console.log('works');
+	}
+
+}
 
 //Set onload state
 
@@ -101,7 +238,9 @@ function loadNeighbor(){
         parent.removeChild(parent.firstChild);
     }
 
-    createChildren()
+    createChildren();
+
+    //Featured Image
 
 	b.style.backgroundImage = 'url("' + currentUrl + '")'
 
@@ -117,74 +256,59 @@ function loadNeighbor(){
 $('body').on('click', '.arrow', function(e){
 
 	e.preventDefault();
-	e.stopPropagation();
 
-	if ( $(this).attr('id') == 'arrow_left' ) {
+	if ( $(this).hasClass('left') ) {
 
-		d = -1;
+		d = 'prev';
+
+		console.log( $(this) )
 
 	} else {
 
-		d = 1;
+		d = 'next';
+
+		console.log( $(this) )
 	}
 
 	loadState = false;
 
+	loadUrl = $(this).prop('href');
+
+	animateSlides(d, loadUrl);
+
 });
 
-function animateSlides( ){
+function animateSlides(d, loadUrl){
 
 	verifyNeighbors();
 
-	if (loadState = false){
+	if ( loadState == false && d && loadUrl ){
 
-	} else {
+		infojax(loadUrl);
 
-			$.ajax({
-		
-				url: p,
-				dataType: 'text',
-				success: function (stored){
+		if ( d == 'prev'){
 
-					var temp = document.createElement('div');
+			
+			
+		} else {
 
-					document.querySelector('body').appendChild(temp).style.display = 'none';
-
-					temp.innerHTML = stored;
-
-					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
-
-					a.style.backgroundImage = 'url("' + storedFeatured + '")'
-
-					temp.remove();
-				}
-
-			}); 
-
-			$.ajax({
-		
-				url: n,
-				dataType: 'text',
-				success: function (stored){
-
-					var temp = document.createElement('div');
-
-					document.querySelector('body').appendChild(temp).style.display = 'none';
-
-					temp.innerHTML = stored;
-
-					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
-
-					c.style.backgroundImage = 'url("' + storedFeatured + '")'
-
-					temp.remove();
-
-				}
-
-			}); 
 
 		}
 
+	} else {
+
+		if (p){
+
+			pjax();
+		}
+
+		if (n){
+
+			njax();
+
+		}
+
+	}
 }
 
 
