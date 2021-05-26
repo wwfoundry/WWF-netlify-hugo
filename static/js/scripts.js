@@ -460,7 +460,48 @@ function getNextN(){
 }
 
 
-//On arrow click, shift all, remove prev or next and load prev or next
+//On directional key click, move slide
+
+$(document).keydown(function(e) {
+
+	// clearInterval(slideshow);
+	// goSlide();
+
+    switch (e.which) {
+        case 37:
+            e.preventDefault(), trans_slide('prev');
+            break;
+        case 39:
+            e.preventDefault(), trans_slide('next');
+            break;
+    }
+});
+
+function trans_slide(d){
+
+
+	if ( !parent.classList.contains('animating') ) {
+
+			loadState = false;
+
+			if ( d == 'prev'){
+
+				loadUrl = $('#arrow_left').prop('href');
+
+			} else {
+
+				loadUrl = $('#arrow_right').prop('href');
+
+			}
+
+			animateSlides(d, loadUrl);
+
+			arrowPrev = document.querySelector('#arrow_left');
+			arrowNext = document.querySelector('#arrow_right');
+
+		}
+
+}
 
 
 });
