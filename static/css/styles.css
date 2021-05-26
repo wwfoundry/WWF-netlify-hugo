@@ -754,6 +754,17 @@ footer{
 /*7) Media Queries */
 /*---------------*/
 
+/*Content Sections*/
+
+@media screen and (max-width:800px){
+
+  .main_content{
+    padding: 85px 10px 50px 10px;
+  }
+
+}
+
+
 /*Gallery*/
 
 @media screen and (max-width:800px){
