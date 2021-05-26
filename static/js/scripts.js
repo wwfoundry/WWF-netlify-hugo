@@ -43,10 +43,11 @@ $(document).ready(function(){
 var parent = document.querySelector('#slide_container'),
 	info = document.querySelector('.project_information'),
 	current = document.querySelector('#main_slide'),
-	currentUrl = document.querySelector('#main_slide').getAttribute('data-url'),
+	currentUrl = current.getAttribute('data-url'),
 	arrowPrev = document.querySelector('#arrow_left'),
 	arrowNext = document.querySelector('#arrow_right'),
-	totalPages = document.querySelector('.project_slide').getAttribute('data-total'),
+	slideAreaContainer = document.querySelector('.project_slide'),
+	totalPages = slideAreaContainer.getAttribute('data-total'),
 	p,
 	n,
 	d,
@@ -275,6 +276,9 @@ $('body').on('click', '.arrow', function(e){
 	loadUrl = $(this).prop('href');
 
 	animateSlides(d, loadUrl);
+
+	arrowPrev = document.querySelector('#arrow_left');
+	arrowNext = document.querySelector('#arrow_right');
 
 });
 
