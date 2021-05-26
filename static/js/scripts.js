@@ -119,8 +119,6 @@ var parent = document.querySelector('#slide_container'),
 							arrowLeftState = arrowLeftTemp.getAttribute('href');
 							arrowRightState = arrowRightTemp.getAttribute('href');
 
-							console.log(arrowLeftState)
-
 							arrowPrev.setAttribute( 'href', arrowLeftState );
 							arrowNext.setAttribute( 'href', arrowRightState );
 
@@ -180,6 +178,26 @@ function createChildren(){
 
 }
 
+//Set onload state
+
+function loadNeighbor(){
+
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+
+    createChildren();
+
+    //Featured Image
+
+	b.style.backgroundImage = 'url("' + currentUrl + '")'
+
+	animateSlides();
+
+	loadState = true;
+
+}
+
 //Check for nav with valid links
 
 loadNeighbor();
@@ -224,33 +242,7 @@ function verifyNeighbors() {
 
 	}
 
-	if ( arrowPrev && arrowNext ){
-
-		console.log('works');
-	}
-
 }
-
-//Set onload state
-
-function loadNeighbor(){
-
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-
-    createChildren();
-
-    //Featured Image
-
-	b.style.backgroundImage = 'url("' + currentUrl + '")'
-
-	animateSlides();
-
-	loadState = true;
-
-}
-
 
 //Trigger Slide Change
 
@@ -262,13 +254,10 @@ $('body').on('click', '.arrow', function(e){
 
 		d = 'prev';
 
-		console.log( $(this) )
-
 	} else {
 
 		d = 'next';
 
-		console.log( $(this) )
 	}
 
 	loadState = false;
@@ -292,11 +281,53 @@ function animateSlides(d, loadUrl){
 
 		if ( d == 'prev'){
 
-			
-			
+			gsap.to(b, {duration: 1, left: '100%'});
+
+			gsap.to(a, {duration: 1, left: '0%', onComplete: replacePrev});
+
+			function replacePrev () {
+				c.remove();
+
+				c = b;
+
+				b = a;
+
+				a = document.createElement('div');
+
+				a.style.left = "-100%"
+
+				parent.insertBefore(a, b).classList.add('slide');
+
+				console.log(p);
+
+				pjax();
+			}
+
 		} else {
 
+			gsap.to(b, {duration: 1, left: '-100%'});
 
+			gsap.to(c, {duration: 1, left: '0%', onComplete: replaceNext});
+
+			function replaceNext(){
+
+				a.remove();
+
+				a = b;
+
+				b = c;
+
+				c = document.createElement('div');
+
+				c.style.left = "100%";
+
+				b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
+
+				console.log(n);
+
+				njax();
+
+			}
 		}
 
 	} else {
