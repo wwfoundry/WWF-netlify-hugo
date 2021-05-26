@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 		$("#hamburger").on("click", function(){
 
-			gsap.to('#side_menu_wrapper', {duration: 1, marginRight: '100vw'});
+			gsap.to('#side_menu_wrapper', {duration: .5, marginRight: '100vw'});
 
 			$('#side_menu_wrapper').addClass("active");
 
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 		if ( $('#side_menu_wrapper').hasClass('active') ){
 
-			gsap.to('#side_menu_wrapper', {duration: 1.5, marginRight: '0'});
+			gsap.to('#side_menu_wrapper', {duration: 1, marginRight: '0'});
 
 			$('#content').css('filter', 'blur(0px)');
 
