@@ -750,3 +750,24 @@ footer{
   right:0;
   bottom:45%;
 }
+
+/*7) Media Queries */
+/*---------------*/
+
+/*Gallery*/
+
+@media screen and (max-width:800px){
+
+  .project_slide{
+  flex-direction:column;
+  }
+
+  #slide_wrapper{
+    width:100%;
+  }
+
+  .project_information{
+    width:100%;
+  }
+
+}

@@ -116,8 +116,6 @@ var parent = document.querySelector('#slide_container'),
 			dataType: 'text',
 			success: function (stored){
 
-				console.log(p);
-
 				var temp = document.createElement('div');
 
 				document.querySelector('body').appendChild(temp).style.display = 'none';
@@ -126,7 +124,6 @@ var parent = document.querySelector('#slide_container'),
 
 				var test = temp.querySelector('#main_slide');
 
-				console.log(test);
 
 				var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
@@ -142,8 +139,6 @@ var parent = document.querySelector('#slide_container'),
 					dataType: 'text',
 					success: function (stored){
 
-						console.log(n);
-
 						var temp = document.createElement('div');
 
 						document.querySelector('body').appendChild(temp).style.display = 'none';
@@ -153,8 +148,6 @@ var parent = document.querySelector('#slide_container'),
 						var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
 						var test = temp.querySelector('#main_slide');
-
-						console.log(test);
 
 						c.style.backgroundImage = 'url("' + storedFeatured + '")'
 
@@ -411,8 +404,6 @@ function getNextP(){
 
 		}
 
-	console.log(prevPath)
-
 	p = prevPath;
 	
 	pjax(p);
@@ -421,13 +412,16 @@ function getNextP(){
 
 function getNextN(){
 
-
 	var pageN,
 		intN,
 		newN,
 		nextPath;
 
-	 if ( n.match(/\d+/) == null ){
+		if (n == null) {
+
+			nextPath = '/gallery/page/2/'
+
+		} else if ( n.match(/\d+/) == null ){
 
 			nextPath = '/gallery/page/2/'
 
@@ -451,8 +445,6 @@ function getNextN(){
 
 		}
 
-	console.log(nextPath)
-
 	n = nextPath;
 	
 	njax(n);
@@ -464,9 +456,6 @@ function getNextN(){
 
 $(document).keydown(function(e) {
 
-	// clearInterval(slideshow);
-	// goSlide();
-
     switch (e.which) {
         case 37:
             e.preventDefault(), trans_slide('prev');
@@ -475,6 +464,26 @@ $(document).keydown(function(e) {
             e.preventDefault(), trans_slide('next');
             break;
     }
+});
+
+// On swipe left or right, move slide
+
+var detectSwipe = new Hammer(parent);
+
+detectSwipe.on("swipeleft", function(e) {
+
+	e.preventDefault;
+
+	trans_slide('next');
+
+});
+
+detectSwipe.on("swiperight", function(e) {
+
+	e.preventDefault;
+
+	trans_slide('prev');
+
 });
 
 function trans_slide(d){
