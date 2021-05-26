@@ -52,20 +52,81 @@ var parent = document.querySelector('#slide_container'),
 	n,
 	d,
 	trigger,
+	anim,
 	currentPage = window.location.pathname,
 	loadUrl,
 	loadState = false,
+	infojax = function () {$.ajax({
+		
+				url: loadUrl,
+				dataType: 'text',
+				success: function (stored){
+
+					var temp = document.createElement('div');
+
+					document.querySelector('body').appendChild(temp).style.display = 'none';
+
+					temp.innerHTML = stored;
+
+					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
+						arrowRightTemp = temp.querySelector('#arrow_right'),
+						arrowLeftState,
+						arrowRightState,
+						storedInfo = temp.querySelector('.project_information').innerHTML;
+
+					if ( arrowLeftTemp && arrowRightTemp ){
+
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+						arrowRightState = arrowRightTemp.getAttribute('href');
+
+						arrowPrev.setAttribute( 'href', arrowLeftState );
+						arrowNext.setAttribute( 'href', arrowRightState );
+
+					} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
+
+						arrowRightState = arrowRightTemp.getAttribute('href');
+
+						arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
+						arrowNext.setAttribute( 'href', arrowRightState );
+
+					} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
+
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+
+						arrowNext.setAttribute( 'href', '/gallery/' );
+						arrowPrev.setAttribute( 'href', arrowLeftState );
+
+					}
+
+					info.innerHTML = storedInfo;
+
+					temp.remove();
+
+					if (window.history.pushState)
+						{
+							window.history.pushState(null, null, loadUrl);
+						}
+
+				}
+
+			})},
 	pjax = function () {$.ajax({
 							
 			url: p,
 			dataType: 'text',
 			success: function (stored){
 
+				console.log(p);
+
 				var temp = document.createElement('div');
 
 				document.querySelector('body').appendChild(temp).style.display = 'none';
 
 				temp.innerHTML = stored;
+
+				var test = temp.querySelector('#main_slide');
+
+				console.log(test);
 
 				var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
@@ -81,6 +142,8 @@ var parent = document.querySelector('#slide_container'),
 					dataType: 'text',
 					success: function (stored){
 
+						console.log(n);
+
 						var temp = document.createElement('div');
 
 						document.querySelector('body').appendChild(temp).style.display = 'none';
@@ -89,63 +152,13 @@ var parent = document.querySelector('#slide_container'),
 
 						var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
+						var test = temp.querySelector('#main_slide');
+
+						console.log(test);
+
 						c.style.backgroundImage = 'url("' + storedFeatured + '")'
 
 						temp.remove();
-
-					}
-
-				})},
-	infojax = function () {$.ajax({
-			
-					url: loadUrl,
-					dataType: 'text',
-					success: function (stored){
-
-						var temp = document.createElement('div');
-
-						document.querySelector('body').appendChild(temp).style.display = 'none';
-
-						temp.innerHTML = stored;
-
-						var	arrowLeftTemp = temp.querySelector('#arrow_left'),
-							arrowRightTemp = temp.querySelector('#arrow_right'),
-							arrowLeftState,
-							arrowRightState,
-							storedInfo = temp.querySelector('.project_information').innerHTML;
-
-						if ( arrowLeftTemp && arrowRightTemp ){
-
-							arrowLeftState = arrowLeftTemp.getAttribute('href');
-							arrowRightState = arrowRightTemp.getAttribute('href');
-
-							arrowPrev.setAttribute( 'href', arrowLeftState );
-							arrowNext.setAttribute( 'href', arrowRightState );
-
-						} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
-
-							arrowRightState = arrowRightTemp.getAttribute('href');
-
-							arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
-							arrowNext.setAttribute( 'href', arrowRightState );
-
-						} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
-
-							arrowLeftState = arrowLeftTemp.getAttribute('href');
-
-							arrowNext.setAttribute( 'href', '/gallery/' );
-							arrowPrev.setAttribute( 'href', arrowLeftState );
-
-						}
-
-						info.innerHTML = storedInfo;
-
-						temp.remove();
-
-						if (window.history.pushState)
-							{
-								window.history.pushState(null, null, loadUrl);
-							}
 
 					}
 
@@ -216,7 +229,7 @@ function verifyNeighbors() {
 
 		var replaceNext =  document.createElement('a');
 
-		document.querySelector('#directional_arrows').appendChild(replaceNext)
+		document.querySelector('#directional_arrows').appendChild(replaceNext);
 
 		replaceNext.outerHTML = rightArrowHtml;
 
@@ -249,25 +262,30 @@ function verifyNeighbors() {
 $('body').on('click', '.arrow', function(e){
 
 	e.preventDefault();
+	e.stopPropagation();
 
-	if ( $(this).hasClass('left') ) {
+	if ( !parent.classList.contains('animating') ) {
 
-		d = 'prev';
+		if ( $(this).hasClass('left') ) {
 
-	} else {
+			d = 'prev';
 
-		d = 'next';
+		} else {
+
+			d = 'next';
+
+		}
+
+		loadState = false;
+
+		loadUrl = $(this).prop('href');
+
+		animateSlides(d, loadUrl);
+
+		arrowPrev = document.querySelector('#arrow_left');
+		arrowNext = document.querySelector('#arrow_right');
 
 	}
-
-	loadState = false;
-
-	loadUrl = $(this).prop('href');
-
-	animateSlides(d, loadUrl);
-
-	arrowPrev = document.querySelector('#arrow_left');
-	arrowNext = document.querySelector('#arrow_right');
 
 });
 
@@ -281,11 +299,17 @@ function animateSlides(d, loadUrl){
 
 		if ( d == 'prev'){
 
-			gsap.to(b, {duration: 1, left: '100%'});
+			var animBprev = gsap.to(b, {duration: 1, left: '100%'}),
+			 	animAprev  = gsap.to(a, {duration: 1, left: '0%', onComplete: replacePrev});
 
-			gsap.to(a, {duration: 1, left: '0%', onComplete: replacePrev});
+			if (!animAprev.isActive()){
+
+				parent.classList.add('animating');
+
+			}
 
 			function replacePrev () {
+
 				c.remove();
 
 				c = b;
@@ -298,16 +322,22 @@ function animateSlides(d, loadUrl){
 
 				parent.insertBefore(a, b).classList.add('slide');
 
-				console.log(p);
+				parent.classList.remove('animating');
 
-				pjax();
+				getNextP();
+				
 			}
 
 		} else {
 
-			gsap.to(b, {duration: 1, left: '-100%'});
+			var animBnext = gsap.to(b, {duration: 1, left: '-100%'}),
+				animAnext = gsap.to(c, {duration: 1, left: '0%', onComplete: replaceNext});
 
-			gsap.to(c, {duration: 1, left: '0%', onComplete: replaceNext});
+			if (!animAnext.isActive()){
+
+				parent.classList.add('animating');
+
+			}
 
 			function replaceNext(){
 
@@ -323,9 +353,9 @@ function animateSlides(d, loadUrl){
 
 				b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
 
-				console.log(n);
+				parent.classList.remove('animating');
 
-				njax();
+				getNextN();
 
 			}
 		}
@@ -344,6 +374,89 @@ function animateSlides(d, loadUrl){
 		}
 
 	}
+}
+
+function getNextP(){
+
+	var pageP,
+		intP,
+		newP,
+		prevPath,
+		nextLast = totalPages - 1;
+
+	 	if ( p == null) {
+
+	 		prevPath = '/gallery/page/' + nextLast + '/';
+
+	 	} else if ( p.match(/\d+/) == undefined ){
+
+			prevPath = '/gallery/page/' + totalPages + '/';
+
+		} else {
+
+			pageP = p.match(/\d+/);
+
+			intP = parseInt(pageP, 10)
+
+			newP = intP - 1;
+
+			if (newP <= 1 ){
+
+				prevPath = '/gallery/'
+			} else {
+
+				prevPath = '/gallery/page/' + newP + '/'
+
+			}
+
+		}
+
+	console.log(prevPath)
+
+	p = prevPath;
+	
+	pjax(p);
+
+}
+
+function getNextN(){
+
+
+	var pageN,
+		intN,
+		newN,
+		nextPath;
+
+	 if ( n.match(/\d+/) == null ){
+
+			nextPath = '/gallery/page/2/'
+
+		} else {
+
+			pageN = n.match(/\d+/);
+
+			intN = parseInt(pageN, 10)
+
+			newN = intN + 1;
+
+			if ( newN > totalPages ) {
+
+				nextPath = '/gallery/'
+
+			} else {
+
+				nextPath = '/gallery/page/' + newN + '/'
+
+			}
+
+		}
+
+	console.log(nextPath)
+
+	n = nextPath;
+	
+	njax(n);
+
 }
 
 
