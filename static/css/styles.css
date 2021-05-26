@@ -545,7 +545,7 @@ button{
   right:0;
   top:0;
   padding:0 0 0 25px;
-  width:calc(15% - 30px);
+  width:15%;
   height:100vh;
   background:white;
   border-left:solid .012px #000000;
@@ -768,6 +768,17 @@ footer{
 
   .project_information{
     width:100%;
+  }
+
+}
+
+/*Menu*/
+
+@media screen and (max-width:800px){
+
+  #menu_side{
+    width:calc(100% - 25px);
+    border-left:unset;
   }
 
 }
