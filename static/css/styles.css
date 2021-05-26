@@ -786,6 +786,26 @@ footer{
     width:100%;
   }
 
+ /*Navigation*/
+
+  #arrow_left{
+    position:absolute;
+    left:0;
+    bottom:0;
+  }
+
+  #arrow_right{
+    position:absolute;
+    transform:rotate(180deg);
+    right:0;
+    bottom:0;
+  }
+
+  .arrow{
+    width:10px;
+  }
+
+
 }
 
 /*Menu*/
