@@ -505,5 +505,18 @@ function trans_slide(d){
 
 }
 
+//Thumbnail Gallery
+
+$('body').on('click', '.thumbnail', function(){
+
+	var thumbUrl = $(this).attr('data-url');
+
+	console.log(thumbUrl)
+
+	b.style.backgroundImage = 'url(' + thumbUrl + ')';
+
+
+});
+
 
 });
