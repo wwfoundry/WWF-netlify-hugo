@@ -1,4 +1,4 @@
-<nav>
+<nav {{if .IsHome }} class="home" {{end}}>
 		<!--LOGO SVG -->
 		<a id="wwf_logo" {{if .IsHome }} class="fill_change" {{end}} href="/">
 			{{ .Site.Data.logo.svgEditor.code | safeHTML}}

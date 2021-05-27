@@ -1,5 +1,7 @@
+{{define "pageID"}}
+	<div id="gallery" class="hide"></div>
+{{end}}
 {{define "main"}}
-
 	{{ $projects := .Site.GetPage "projects"}}
 
 	{{ $paginator := .Paginate $projects.Pages }}
@@ -42,6 +44,7 @@
 			</div>
 			<div class="project_information">
 				<div class="thumbnails">
+					<h2>Production Stage</h2>
 					{{range .Params.Thumbnailimages}}
 
 						<btn class="thumbnail" style="background-image:url('{{.image}}')" data-url="{{.image}}"></btn>
@@ -60,5 +63,4 @@
 		</div>
 
 	{{end}}
-
 {{end}}

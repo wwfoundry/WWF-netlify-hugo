@@ -414,6 +414,10 @@ label{
   margin:0px !important;
 }
 
+.hide{
+  display:none!important;
+}
+
 /*3) Typography */
 /*---------------*/
 
@@ -445,6 +449,7 @@ h3{
 
 nav{
 	display:flex;
+  flex: 0 1 auto;
 	padding:0 25px 0 25px;
 	width:calc(100% - 50px);
 	flex-direction:row;
@@ -455,6 +460,14 @@ nav{
 	position:absolute;
 	z-index:101;
   top:25px;
+  align-items:center;
+}
+
+nav.home{
+  padding: 0 10px 0 10px;
+  width: calc(100% - 20px);
+  top: 0;
+  height: 55px;
 }
 
 button{
@@ -485,8 +498,13 @@ button{
 #wwf_logo{
 	width:400px;
 	height:auto;
-	display:flex;
+	display:table;
   align-items: center;
+  padding-right:10px;
+}
+
+#wwf_logo>svg{
+  display:table-cell;
 }
 
 .last{
@@ -570,6 +588,10 @@ button{
   width:calc(100% - 25px);
 }
 
+#menu_links
+{
+  margin-top:25px;
+}
 #menu_links>li{
 
   padding-bottom:25px;
@@ -663,7 +685,8 @@ footer{
     display:flex;
     flex-direction: row;
     position:relative;
-    width:100%;
+    margin-right:25px;
+    width:calc(100% - 25px);
     height:100%;
     overflow:hidden;
 }
@@ -704,8 +727,15 @@ footer{
   transition:height, opacity ease-in-out .25s;
 }
 
+.thumbnails>h2{
+  text-transform: uppercase;
+  width:100%;
+}
+
 .thumbnail{
-  width:calc(50% - 10px);
+  width:calc(30% - 10px);
+  max-width: 120px;
+  min-width:100px;
   height:100px;
   margin:5px;
   background-size:cover;
@@ -757,7 +787,35 @@ footer{
   bottom:45%;
 }
 
-/*7) Media Queries */
+/*8) Index */
+/*---------------*/
+
+#index_container{
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
+  justify-content: flex-start;
+}
+
+.project{
+  width:18%;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+}
+
+.index_thumbnail{
+  width:100%;
+  height:250px;
+  background-position:center center;
+  background-size:cover;
+  background-repat:none;
+}
+
+
+
+/*9) Media Queries */
 /*---------------*/
 
 /*Content Sections*/
@@ -765,16 +823,26 @@ footer{
 @media screen and (max-width:800px){
 
   nav{
-    padding: 0 10px 0 10px;
-    width:calc(100% - 30px);
+  padding: 0 10px 0 10px;
+  width: calc(100% - 20px);
+  top: 0;
+  height: 55px;
+  }
+
+  nav.home{
+  background-color: rgba(0, 0, 0, .5);
   }
 
   #wwf_logo{
-    width:300px;
+    width:270px;
   }
 
   .main_content{
     padding: 85px 10px 50px 10px;
+  }
+
+  #xit{
+    right:0px;
   }
 
 }
@@ -790,10 +858,40 @@ footer{
 
   #slide_wrapper{
     width:100%;
+    height:calc(70vh - 110px);
+  }
+
+  #slide_container{
+    margin:0;
+    width:100%;
+  }
+
+  .slide{
+    background-position: center top;
+    height:calc(60vh - 110px);
   }
 
   .project_information{
+    flex-direction: column-reverse;
     width:100%;
+  }
+
+  .attribution{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+  }
+
+  .attribution>li:first-child{
+    width:100%;
+    text-transform: uppercase;
+  }
+
+  .attribution>li{
+    margin-bottom:0;
+    border-bottom:unset ;
+    text-transform: unset;
+    margin-right:20px;
   }
 
  /*Navigation*/
@@ -814,7 +912,6 @@ footer{
   .arrow{
     width:10px;
   }
-
 
 }
 

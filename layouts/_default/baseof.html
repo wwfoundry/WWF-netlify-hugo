@@ -2,6 +2,7 @@
 <html lang="en">
   {{partial "head" .}}
   <body>
+  	{{block "pageID" . }}{{end}}
     {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
     {{ block "header" . }}{{partial "nav" . }}{{end}}
     <div class="main_content" {{if .IsHome}}id="fullHeight"{{end}}>

@@ -1,6 +1,21 @@
+{{define "pageID"}}
+	<div id="index" class="hide"></div>
+{{end}}
 {{ define "main" }}
 
 <div id="index_container">
+
+		{{ $projects := .Site.GetPage "projects"}}
+
+		{{range $projects.Pages }}
+
+			<a class="project" href="" data-url="">
+				<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
+				<h2>{{.Title}}</h2>
+			</a>
+
+		{{end}}
+
 
 </div>
 
