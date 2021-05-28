@@ -1,5 +1,6 @@
 material_tag:
   - material_string: materialTest
+  - material_string: materialTest2
 process_tag:
   - process_string: processTest
 miscellaneous_tag:
