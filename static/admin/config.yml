@@ -125,6 +125,30 @@ collections:
           - label: "Info Email"
             name: "email"
             widget: "string"
+      - label: "Project Filter Tags"
+        name: "filter_tags"
+        editor:
+          preview: false
+        file: "/data/tags.yml"
+        fields:
+          - label: "Material Tags"
+            label_singular: "Material Tag"
+            name: "material_tag"
+            widget: "list"
+            fields:
+              - {label: 'Tag', name: 'material_string', widget: 'string'}
+          - label: "Process Tags"
+            label_singular: "Process Tag"
+            name: "process_tag"
+            widget: "list"
+            fields:
+              - {label: 'Tag', name: 'process_string', widget: 'string'}
+          - label: "Miscellaneous Tags"
+            label_singular: "Miscellaneous Tag"
+            name: "miscellaneous_tag"
+            widget: "list"
+            fields:
+              - {label: 'Tag', name: 'miscellaneous_string', widget: 'string'}
   - label: "Pages"
     name: "pages"
     editor:
@@ -272,4 +296,34 @@ collections:
             label_singular: 'Thumbnail Image'
             name: 'image'
             widget: 'file'
+      - label: "Material Tags"
+        label_singular: "Material Tag"
+        name: "material_tag"
+        widget: "relation"
+        collection: "options"
+        file: "filter_tags"
+        multiple: true
+        search_fields: ["material_tag.*.material_string"]
+        display_fields: ["material_tag.*.material_string"]
+        value_field: "material_tag.*.material_string"
+      - label: "Process Tags"
+        label_singular: "Process Tag"
+        name: "process_tag"
+        widget: "relation"
+        collection: "options"
+        file: "filter_tags"
+        multiple: true
+        search_fields: ["process_tag.*.process_string"]
+        display_fields: ["process_tag.*.process_string"]
+        value_field: "process_tag.*.process_string"
+      - label: "Miscellaneous Tags"
+        label_singular: "Miscellaneous Tag"
+        name: "misc_tag"
+        widget: "relation"
+        collection: "options"
+        file: "filter_tags"
+        multiple: true
+        search_fields: ["miscellaneous_tag.*.miscellaneous_string"]
+        display_fields: ["miscellaneous_tag.*.miscellaneous_string"]
+        value_field: "miscellaneous_tag.*.miscellaneous_string"
 

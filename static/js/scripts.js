@@ -93,6 +93,27 @@ index : {
 			
 		}
 
+	// 	$(function () {
+	//     var menu = $('#login_wrapper');
+
+	//     function isInViewport($this) {
+	//         var elementTop = $this.offset().top;
+	//         var elementBottom = elementTop + $this.outerHeight();
+	//         var viewportTop = $(window).scrollTop();
+	//         var viewportBottom = viewportTop + $(window).height();
+ //        if (elementTop < viewportBottom == true) {
+ //            menu.addClass('fixedPosition');
+ //        } else {
+ //            menu.removeClass('fixedPosition');
+ //        }
+ //    }
+
+ //    $(window).scroll(function () {
+ //        isInViewport($('#call_footer_wrapper'))
+ //    });
+	// });
+
+
 	}
 
 },
@@ -102,7 +123,7 @@ init : function(){
 
  //On load, get prev, current, next
 
-	var info = document.querySelector('.project_information'),
+	var info = document.querySelector('.right_justified_partial'),
 		field = window.innerWidth;
 
 	var parent = document.querySelector('#slide_container'),
@@ -137,7 +158,7 @@ init : function(){
 							arrowRightTemp = temp.querySelector('#arrow_right'),
 							arrowLeftState,
 							arrowRightState,
-							storedInfo = temp.querySelector('.project_information').innerHTML,
+							storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
 							storedID = temp.querySelector('.project_slide').id,
 							transID = storedID.replace(" ", "-").toLowerCase();
 

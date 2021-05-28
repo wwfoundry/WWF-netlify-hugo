@@ -5,18 +5,26 @@
 
 <div id="index_container">
 
+	<div class="index left_justified_full">
+
 		{{ $projects := .Site.GetPage "projects"}}
 
 		{{range $projects.Pages }}
 
 			<a class="project" href="" data-url="">
 				<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
-				<h2>{{.Title}}</h2>
+				<h1>{{.Title}}</h1>
+				<h2>{{ .Params.artist }}</h2>
 			</a>
 
 		{{end}}
 
+	</div>
 
+	<div class="filter right_justified_partial">
+		<!-- <div id="filter_inner">hi
+		</div> -->
+	</div>
 </div>
 
 {{ end }}
