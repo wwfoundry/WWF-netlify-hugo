@@ -3,28 +3,40 @@
 {{end}}
 {{ define "main" }}
 
+<div id="filter_menu">
+	{{ $projects := .Site.GetPage "projects"}}
+	<label>Filter Projects</label>
+	<div id="filter_menu_inner">
+		<button class="filter_option"><h3>Material</h3></button>
+		<button class="filter_option"><h3>Process</h3></button>
+		<button class="filter_option"><h3>Type of Project</h3></button>
+	</div>
+</div>
+	<div class="filter overlay">
+		<div id="filter_inner">
+			{{ range $projects.Pages }}
+				{{range .Params.material_tag}}
+				<button class="material_tag" class="{{.}}">
+					<h2>{{.}}</h2>
+				</button>
+				{{end}}
+			{{end}}
+		</div>
+	</div>
+
 <div id="index_container">
-
-	<div class="index left_justified_full">
-
-		{{ $projects := .Site.GetPage "projects"}}
+	<div class="index">
 
 		{{range $projects.Pages }}
 
-			<a class="project" href="" data-url="">
+			<a class="project" data-filter="{{range .Params.material_tag}}{{.}} {{end}}{{range .Params.process_tag}}{{.}} {{end}}{{range .Params.process_tag}}{{.}}{{end}}" href="">
 				<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
-				<h1>{{.Title}}</h1>
-				<h2>{{ .Params.artist }}</h2>
+				<h3>{{.Title}}</h3>
+				<label>{{ .Params.artist }}</label>
 			</a>
 
 		{{end}}
 
 	</div>
-
-	<div class="filter right_justified_partial">
-		<!-- <div id="filter_inner">hi
-		</div> -->
-	</div>
-</div>
 
 {{ end }}

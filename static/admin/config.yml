@@ -135,18 +135,21 @@ collections:
             label_singular: "Material Tag"
             name: "material_tag"
             widget: "list"
+            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'material_string', widget: 'string'}
           - label: "Process Tags"
             label_singular: "Process Tag"
             name: "process_tag"
             widget: "list"
+            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'process_string', widget: 'string'}
           - label: "Miscellaneous Tags"
             label_singular: "Miscellaneous Tag"
             name: "miscellaneous_tag"
             widget: "list"
+            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'miscellaneous_string', widget: 'string'}
   - label: "Pages"

@@ -93,27 +93,6 @@ index : {
 			
 		}
 
-	// 	$(function () {
-	//     var menu = $('#login_wrapper');
-
-	//     function isInViewport($this) {
-	//         var elementTop = $this.offset().top;
-	//         var elementBottom = elementTop + $this.outerHeight();
-	//         var viewportTop = $(window).scrollTop();
-	//         var viewportBottom = viewportTop + $(window).height();
- //        if (elementTop < viewportBottom == true) {
- //            menu.addClass('fixedPosition');
- //        } else {
- //            menu.removeClass('fixedPosition');
- //        }
- //    }
-
- //    $(window).scroll(function () {
- //        isInViewport($('#call_footer_wrapper'))
- //    });
-	// });
-
-
 	}
 
 },
