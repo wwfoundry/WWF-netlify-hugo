@@ -4,8 +4,6 @@ process_tag:
   - process_string: 3D Print
   - process_string: Cast
   - process_string: CNC
-miscellaneous_tag:
-  - miscellaneous_string: miscTest
 year_tag:
   - year_string: "2021"
   - year_string: "2020"

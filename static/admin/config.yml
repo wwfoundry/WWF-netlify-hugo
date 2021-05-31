@@ -287,12 +287,12 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Artist', name: 'artist', widget: 'string' }
       - label: "Year"
-        label_singular: "Year Tag"
+        label_singular: "Year"
         name: "year_tag"
         widget: "relation"
         collection: "options"
         file: "filter_tags"
-        multiple: true
+        multiple: false
         search_fields: ["year_tag.*.year_string"]
         display_fields: ["year_tag.*.year_string"]
         value_field: "year_tag.*.year_string"

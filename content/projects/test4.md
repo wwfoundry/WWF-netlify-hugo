@@ -1,7 +1,8 @@
 ---
 title: Test 4
 artist: Test
-year: 2020
+year_tag:
+  - "2020"
 material: test
 attribution: test
 featured: /images/uploads/4.jpg

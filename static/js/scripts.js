@@ -95,10 +95,10 @@ index : {
 
 		var o = $('.overlay'),
 			xit = $('.filter_xit'),
-			container = $('.filter_container'),
-			material_container = $('#material_tag'),
-			process_container = $('#process_tag'),
-			year_container = $('#year_tag'),
+			container = $('.tag'),
+			material_container = $('.material_tag'),
+			process_container = $('.process_tag'),
+			year_container = $('.year_tag'),
 			m = $('#filter_menu');
 
 		$('.filter_option').on('click', function(){

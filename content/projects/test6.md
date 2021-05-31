@@ -1,7 +1,8 @@
 ---
 title: Test 6
 artist: test
-year: test
+year_tag:
+  - "2019"
 material: test
 attribution: test
 featured: /images/uploads/6.jpg

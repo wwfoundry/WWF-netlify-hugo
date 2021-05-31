@@ -1,7 +1,8 @@
 ---
 title: Test 5
 artist: TestArtist
-year: "2021"
+year_tag:
+  - "2021"
 material: TestMaterial
 attribution: TestAttribution
 featured: /images/uploads/5.jpg
