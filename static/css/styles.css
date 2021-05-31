@@ -375,7 +375,7 @@ html, body {
 body{
 	width:100vw;
 	height:100vh;
-	font-family:'Niveau Grotesk', sans-serif;
+	font-family:'Century Gothic Pro', sans-serif;
 	font-size:.9em;
   position:relative;
   font-weight:normal;
@@ -448,6 +448,9 @@ label{
 
 h1{
 
+  font-size:2.1em;
+  font-weight:normal;
+
 }
 
 
@@ -456,7 +459,8 @@ h2{
 }
 
 h3{
-
+  font-size:1.2em;
+  font-weight:bolder;
 }
 
 .title{
@@ -613,7 +617,11 @@ nav.home{
 /*5) Page Content Sections*/
 
 .main_content{
-  padding: 85px 25px 50px 25px;
+    display: block;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 85px 0px 50px 0px;
 }
 
 .project_slide{
@@ -627,8 +635,19 @@ nav.home{
 
 }
 
+.left_justified{
+
+}
+
+.right_justified{
+
+}
+
 #fullHeight{
   padding: unset;
+  margin:unset;
+  max-wdith:unset;
+
 }
 
 /*6) Footer*/
@@ -821,16 +840,27 @@ footer{
 #filter_inner>button{
   cursor: pointer;
   margin-right:5px;
-  padding: 1px 7px;
+  padding: 1px 4px;
+}
+
+.filter_container{
+  display:none;
 }
 
 .overlay{
   display:none;
-  opacity:0;
+}
+
+.filter_xit{
+  right:0px!important;
 }
 
 #filter_menu{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top:50px;
+  border-bottom:1px solid black;
 }
 
 #filter_menu_inner{
@@ -963,9 +993,13 @@ footer{
 
 }
 
-/*Gallery*/
+/*Index*/
 
 @media screen and (max-width:800px){
+
+  #filter_menu{
+    flex-wrap:wrap-reverse;
+  }
 
   #index_container{
     flex-direction:column-reverse;

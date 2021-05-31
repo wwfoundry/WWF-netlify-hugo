@@ -145,13 +145,13 @@ collections:
             hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'process_string', widget: 'string'}
-          - label: "Miscellaneous Tags"
-            label_singular: "Miscellaneous Tag"
-            name: "miscellaneous_tag"
+          - label: "Year Tags"
+            label_singular: "Year Tag"
+            name: "year_tag"
             widget: "list"
             hint: "WARNING - Tags should be one word only."
             fields:
-              - {label: 'Tag', name: 'miscellaneous_string', widget: 'string'}
+              - {label: 'Tag', name: 'year_string', widget: 'string'}
   - label: "Pages"
     name: "pages"
     editor:
@@ -286,7 +286,16 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Artist', name: 'artist', widget: 'string' }
-      - { label: 'Year', name: 'year', widget: 'string' }
+      - label: "Year"
+        label_singular: "Year Tag"
+        name: "year_tag"
+        widget: "relation"
+        collection: "options"
+        file: "filter_tags"
+        multiple: true
+        search_fields: ["year_tag.*.year_string"]
+        display_fields: ["year_tag.*.year_string"]
+        value_field: "year_tag.*.year_string"
       - { label: 'Material', name: 'material', widget: 'string' }
       - { label: 'Attribution', name: 'attribution', widget: 'string' }
       - { label: 'Featured Image', name: 'featured', widget: 'image' }
@@ -319,14 +328,4 @@ collections:
         search_fields: ["process_tag.*.process_string"]
         display_fields: ["process_tag.*.process_string"]
         value_field: "process_tag.*.process_string"
-      - label: "Miscellaneous Tags"
-        label_singular: "Miscellaneous Tag"
-        name: "misc_tag"
-        widget: "relation"
-        collection: "options"
-        file: "filter_tags"
-        multiple: true
-        search_fields: ["miscellaneous_tag.*.miscellaneous_string"]
-        display_fields: ["miscellaneous_tag.*.miscellaneous_string"]
-        value_field: "miscellaneous_tag.*.miscellaneous_string"
 
