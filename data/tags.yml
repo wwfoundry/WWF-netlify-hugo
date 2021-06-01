@@ -1,6 +1,7 @@
 material_tag:
   - material_string: Bronze
   - material_string: Stainless Steel
+  - material_string: Aluminum
   - material_string: Resin
   - material_string: Wood
 process_tag:
@@ -13,6 +14,7 @@ process_tag:
   - process_string: Electropolish
   - process_string: Patina
   - process_string: Paint
+  - process_string: Gilded
 year_tag:
   - year_string: "2021"
   - year_string: "2020"
