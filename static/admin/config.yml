@@ -292,12 +292,15 @@ collections:
         widget: "relation"
         collection: "options"
         file: "filter_tags"
-        multiple: false
+        multiple: true
         search_fields: ["year_tag.*.year_string"]
         display_fields: ["year_tag.*.year_string"]
         value_field: "year_tag.*.year_string"
       - { label: 'Material', name: 'material', widget: 'string' }
-      - { label: 'Attribution', name: 'attribution', widget: 'string', required: false }
+      - label: 'Attribution'
+        name: 'attribution'
+        widget: 'string'
+        required: false
       - { label: 'Featured Image', name: 'featured', widget: 'image' }
       - label: "Thumbnails"
         name: "thumbnailImages"

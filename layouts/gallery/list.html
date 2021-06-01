@@ -2,7 +2,7 @@
 	<div id="gallery" class="hide"></div>
 {{end}}
 {{define "main"}}
-	
+
 	{{ $projects := .Site.GetPage "projects"}}
 
 	{{ $paginator := .Paginate $projects.Pages }}
@@ -59,7 +59,7 @@
 					 <li class="black_under">{{.}}</li>
 					{{end}}
 					<li class="black_under">{{ .Params.material }}</li>
-					<li class="black_under last" >{{ if isset .Params.attribution }}{{ .Params.attribution }}{{end}}</li>
+					<li class="black_under last" >{{ .Params.attribution }}</li>
 				</ul>
 			</div>
 
