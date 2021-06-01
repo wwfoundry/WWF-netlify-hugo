@@ -1,8 +1,7 @@
 ---
 title: Mithra
 artist: Mark Bradford
-year_tag:
-  - "2019"
+year_tag: "2019"
 material: Plywood, Mild Steel
 featured: /images/uploads/5127.1_final_photos_01.jpg
 thumbnailImages:
