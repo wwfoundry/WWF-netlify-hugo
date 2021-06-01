@@ -1,10 +1,20 @@
 material_tag:
   - material_string: Bronze
+  - material_string: Stainless Steel
+  - material_string: Resin
+  - material_string: Wood
 process_tag:
   - process_string: 3D Print
   - process_string: Cast
   - process_string: CNC
+  - process_string: Water Jet
+  - process_string: Mirror Polish
+  - process_string: Electropolish
+  - process_string: Patina
+  - process_string: Paint
 year_tag:
   - year_string: "2021"
   - year_string: "2020"
   - year_string: "2019"
+  - year_string: "2018"
+  - year_string: "2017"
