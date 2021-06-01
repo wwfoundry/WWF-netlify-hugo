@@ -16,16 +16,11 @@
 			</div>
 		</div>
 		<div class="footer_row last">
-			<div id="contact" class="footer_item">
-				<ul>
-					<li>{{ .Site.Data.contact.addressOne }}</li>
-					<li>{{ .Site.Data.contact.addressTwo }}</li>
-					<li>{{ .Site.Data.contact.phone }}</li>
-					<li>{{ .Site.Data.contact.email }}</li>
-				</ul>
-			</div>
 			<div class="footer_item">
 				<label>© 2021 Walla Walla Foundry.</label>
+			</div>
+			<div class="footer_item fill_change">
+					{{partial "social_base" .}}
 			</div>
 		</div>
 	</div>

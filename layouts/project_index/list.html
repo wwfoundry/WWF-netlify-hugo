@@ -4,7 +4,11 @@
 {{ define "main" }}
 <div class="inner_content">
 	<div id="filter_menu">
-		{{ $sortedProjects := (.Site.RegularPages.ByParam "year_tag").Reverse}}
+
+		{{ $projects := .Site.GetPage "projects"}}
+
+		{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
+
 		<div class="left_justified">
 			<label>Filter Projects</label>
 			<div id="filter_menu_inner">

@@ -1,7 +1,7 @@
 <ul id="social_links">
-					{{range $.Site.Data.nav.socialItems}}
-						<li>
-							<a href="{{.socialURL}}"><img class="icon" src="{{ .socialIcon }}" alt="social"></a>
-						</li>
-					{{end}}
-				</ul>
+	{{range $.Site.Data.nav.socialItems}}
+		<li class="margin">
+			<a href="{{.socialURL}}"><img class="icon" src="{{ .socialIcon }}" alt="social"></a>
+		</li>
+	{{end}}
+</ul>

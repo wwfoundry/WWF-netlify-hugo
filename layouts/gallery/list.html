@@ -3,7 +3,9 @@
 {{end}}
 {{define "main"}}
 
-	{{ $sortedProjects := (.Site.RegularPages.ByParam "year_tag").Reverse}}
+	{{ $projects := .Site.GetPage "projects"}}
+
+	{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
 	{{ $paginator := .Paginate $sortedProjects }}
  

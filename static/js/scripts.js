@@ -120,8 +120,6 @@ index : {
 
 			o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
 
-			all.fadeIn(300).addClass('active');
-
 			if ( $(this).hasClass('material') ){
 
 				container.not(material_container).css('display', 'none');
@@ -142,13 +140,7 @@ index : {
 
 			} else {
 
-				o.fadeOut(300).removeClass('active');
-
-				o.css({'borderBottom' : 'unset', 'borderTop' : 'unset'});
-
 				all.fadeOut(300).removeClass('active');
-
-				container.fadeOut(300);
 
 				$('.project').addClass('filtered');
 
@@ -170,11 +162,17 @@ index : {
 
 				container.fadeOut(300);
 
+				$('.project').addClass('filtered');
+
+				all.fadeOut(300).removeClass('active');
+
 			}
 
 		});
 
 		filterTag.on('click', function(e){
+
+			all.fadeIn(300).addClass('active');
 
 			var filterAttr = $(this).attr('data-filter');
 
