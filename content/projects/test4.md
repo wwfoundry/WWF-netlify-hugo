@@ -2,7 +2,7 @@
 title: Test 4
 artist: Test
 year_tag:
-  - "2020"
+  - 2020
 material: test
 attribution: test
 featured: /images/uploads/4.jpg

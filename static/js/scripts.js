@@ -1,4 +1,4 @@
-// //Page Specific Function Namespaces
+//Page Specific Functions
 
 LOADJS = { 
   fire : function(func,funcname, args){
@@ -46,6 +46,8 @@ callPageJS = {
 
 			$('#contact_content').css('filter', 'blur(1px)');
 
+			$('body').addClass('locked');
+
 		});
 
 		$("#xit").on("click", function(){
@@ -60,9 +62,21 @@ callPageJS = {
 
 				$('#side_menu_wrapper').removeClass("active");
 
+				$('body').removeClass('locked');
+
 			}
 
 		});
+
+		$('button').on('click', function(e){
+			e.stopPropagation;
+			$(this).addClass('btnActive');
+
+		$('button').not($(this)).removeClass('btnActive');
+
+		});
+
+		$('.menu_links li:last-child').addClass('last');
 
 		}
 
@@ -73,8 +87,6 @@ index : {
 
 		var projectElem = document.getElementsByClassName('project'),
 		length = projectElem.length;
-
-		console.log(length)
 
 		for (var i = 0; i < length; i++){
 
@@ -99,33 +111,54 @@ index : {
 			material_container = $('.material_tag'),
 			process_container = $('.process_tag'),
 			year_container = $('.year_tag'),
-			m = $('#filter_menu');
+			m = $('#filter_menu'),
+			all = $('.all');
 
 		$('.filter_option').on('click', function(){
 
 			o.fadeIn(300).addClass('active');
 
+			o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+
+			all.fadeIn(300).addClass('active');
+
 			if ( $(this).hasClass('material') ){
+
+				container.not(material_container).css('display', 'none');
 
 				material_container.fadeIn(300);
 
-				container.not(material_container).fadeOut(300);
-
 			} else if( $(this).hasClass('process') ){
+
+				container.not(process_container).css('display', 'none');
 
 				process_container.fadeIn(300);
 
-				container.not(process_container).fadeOut(300);
+			} else if ( $(this).hasClass('year') ) {
 
-			} else {
+				container.not(year_container).css('display', 'none');
 
 				year_container.fadeIn(300);
 
-				container.not(year_container).fadeOut(300);
+			} else {
+
+				o.fadeOut(300).removeClass('active');
+
+				o.css({'borderBottom' : 'unset', 'borderTop' : 'unset'});
+
+				all.fadeOut(300).removeClass('active');
+
+				container.fadeOut(300);
+
+				$('.project').addClass('filtered');
 
 			}
 
 		});
+
+		var filterTag = $('.tag'),
+			filterProjects = document.getElementsByClassName('project'),
+			filterLength = filterProjects.length;
 
 		xit.on('click', function(){
 
@@ -133,7 +166,33 @@ index : {
 
 				o.fadeOut(300).removeClass('active');
 
+				o.css({'borderBottom' : 'unset', 'borderTop' : 'unset'});
+
 				container.fadeOut(300);
+
+			}
+
+		});
+
+		filterTag.on('click', function(e){
+
+			var filterAttr = $(this).attr('data-filter');
+
+			for (var i = 0; i < filterProjects.length; i ++ ){
+
+				var projectAttr = filterProjects[i].getAttribute('data-filter');
+
+				console.log(projectAttr);
+
+				if( projectAttr.includes(filterAttr) ){
+
+					filterProjects[i].classList.add('filtered');
+
+				} else {
+
+					filterProjects[i].classList.remove('filtered');
+
+				}
 
 			}
 
@@ -639,8 +698,6 @@ init : function(){
 		if (!parent.classList.contains('animating')){
 
 			var thumbUrl = $(this).attr('data-url');
-
-			console.log(thumbUrl)
 
 			b.style.backgroundImage = 'url(' + thumbUrl + ')';
 

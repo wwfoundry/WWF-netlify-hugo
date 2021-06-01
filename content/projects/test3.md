@@ -2,7 +2,7 @@
 title: Test 3
 artist: TestArtist
 year_tag: 
-  - "2021"
+  - 2021
 material: TestMaterial
 attribution: TestAttribution
 featured: /images/uploads/3.jpg

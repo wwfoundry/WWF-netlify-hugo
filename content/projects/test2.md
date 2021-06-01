@@ -2,7 +2,7 @@
 title: Test 2
 artist: TestArtist
 year_tag:
-  - "2019"
+  - 2019
 material: TestMaterial
 attribution: TestAttribution
 featured: /images/uploads/2.jpg

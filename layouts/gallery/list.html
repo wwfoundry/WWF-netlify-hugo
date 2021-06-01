@@ -2,6 +2,7 @@
 	<div id="gallery" class="hide"></div>
 {{end}}
 {{define "main"}}
+	
 	{{ $projects := .Site.GetPage "projects"}}
 
 	{{ $paginator := .Paginate $projects.Pages }}
@@ -47,16 +48,18 @@
 					<h2>Production Stage</h2>
 					{{range .Params.Thumbnailimages}}
 
-						<btn class="thumbnail" style="background-image:url('{{.image}}')" data-url="{{.image}}"></btn>
+						<button class="thumbnail" style="background-image:url('{{.image}}')" data-url="{{.image}}"></button>
 
 					{{end}}
 				</div>
 				<ul class="attribution">
-					<li>{{ .Title }}</li>
-					<li>{{ .Params.artist }}</li>
-					<li>{{ .Params.year_tag }}</li>
-					<li>{{ .Params.material }}</li>
-					<li class="last" >{{ .Params.attribution }}</li>
+					<li class="black_under">{{ .Title }}</li>
+					<li class="black_under">{{ .Params.artist }}</li>
+					{{ range .Params.year_tag }}
+					 <li class="black_under">{{.}}</li>
+					{{end}}
+					<li class="black_under">{{ .Params.material }}</li>
+					<li class="black_under last" >{{ .Params.attribution }}</li>
 				</ul>
 			</div>
 

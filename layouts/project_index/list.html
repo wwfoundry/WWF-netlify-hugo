@@ -10,7 +10,8 @@
 			<div id="filter_menu_inner">
 				<button class="filter_option material"><h3>Material</h3></button>
 				<button class="filter_option process"><h3>Process</h3></button>
-				<button class="filter_option Year"><h3>Year</h3></button>
+				<button class="filter_option year"><h3>Year</h3></button>
+				<button class="filter_option all"><h3>All</h3></button>
 			</div>
 		</div>
 		<div class="right_justified">
@@ -24,21 +25,27 @@
 			<div id="filter_inner">
 
 				{{ range sort .Site.Data.tags.material_tag }}
-					<button class="material_tag tag" class="{{.}}">
-						<h2>{{ .material_string }}</h2>
-					</button>
+					{{with .material_string}}
+						<button class="material_tag tag" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+							<h2>{{.}}</h2>
+						</button>
+					{{end}}
 				{{end}}
 
 				{{range sort .Site.Data.tags.process_tag }}
-					<button class="process_tag tag" class="{{.}}">
-						<h2>{{ .process_string }}</h2>
-					</button>
+					{{with .process_string }}
+						<button class="process_tag tag" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+							<h2>{{.}}</h2>
+						</button>
+					{{end}}
 				{{end}}
 
 				{{range sort .Site.Data.tags.year_tag }}
-					<button class="year_tag tag" class="{{.}}">
-						<h2>{{ .year_string }}</h2>
-					</button>
+					{{with .year_string }}
+						<button class="year_tag tag" data-filter="{{ replaceRE "(\\s)" "" . | lower}}">
+							<h2>{{.}}</h2>
+						</button>
+					{{end}}
 				{{end}}
 
 			</div>
@@ -46,10 +53,12 @@
 	<div id="index_container">
 		<div class="index">
 			{{range $projects.Pages }}
-				<a class="project" data-filter="{{range .Params.material_tag}}{{.}} {{end}}{{range .Params.process_tag}}{{.}} {{end}}{{range .Params.year_tag}}{{.}}{{end}}" href="">
-					<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
-					<h3>{{.Title}}</h3>
-					<label>{{ .Params.artist }}</label>
+				<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.year_tag}}{{replaceRE "(\\s)" "" . | lower}}{{end}}" href="">
+					<div class="margin project_inner">
+						<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
+						<h3>{{.Title}}</h3>
+						<label>{{ .Params.artist }}</label>
+					</div>
 				</a>
 			{{end}}
 		</div>
