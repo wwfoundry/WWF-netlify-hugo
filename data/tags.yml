@@ -5,6 +5,7 @@ material_tag:
   - material_string: Wood
 process_tag:
   - process_string: 3D Print
+  - process_string: Silicone Mold
   - process_string: Cast
   - process_string: CNC
   - process_string: Water Jet
