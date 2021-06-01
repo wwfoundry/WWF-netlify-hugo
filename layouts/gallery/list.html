@@ -59,7 +59,7 @@
 					 <li class="black_under">{{.}}</li>
 					{{end}}
 					<li class="black_under">{{ .Params.material }}</li>
-					<li class="black_under last" >{{ .Params.attribution }}</li>
+					<li class="black_under last" >{{ if isset .Params.attribution }}{{ .Params.attribution }}{{end}}</li>
 				</ul>
 			</div>
 
