@@ -292,7 +292,7 @@ collections:
         widget: "relation"
         collection: "options"
         file: "filter_tags"
-        multiple: true
+        multiple: false
         search_fields: ["year_tag.*.year_string"]
         display_fields: ["year_tag.*.year_string"]
         value_field: "year_tag.*.year_string"

@@ -4,6 +4,7 @@ material_tag:
   - material_string: Aluminum
   - material_string: Resin
   - material_string: Wood
+  - material_string: Glass
 process_tag:
   - process_string: 3D Print
   - process_string: Silicone Mold
