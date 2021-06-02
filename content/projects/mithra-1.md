@@ -8,9 +8,7 @@ thumbnailImages:
   - image: /images/uploads/5127.1_mithra_process_42.jpg
   - image: /images/uploads/5127.1_mithra_process_085.jpg
 material_tag:
-  - Bronze
+  - Wood
 process_tag:
-  - Cast
-  - 3D Print
-  - Gilded
+  - Paint
 ---
