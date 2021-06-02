@@ -8,9 +8,8 @@ thumbnailImages:
   - image: /images/uploads/graham_3.jpg
   - image: /images/uploads/graham_2.jpg
 material_tag:
-  - Bronze
+  - Stainless Steel
+  - Resin
 process_tag:
-  - Cast
-  - 3D Print
-  - Gilded
+  - Water Jet
 ---
