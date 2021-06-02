@@ -1,7 +1,7 @@
 ---
 title: Torqued Chandelier
 artist: Rodney Graham
-year_tag: "2020"
+year_tag: "2019"
 material: Steel, Resin
 featured: /images/uploads/graham_1.jpg
 thumbnailImages:
