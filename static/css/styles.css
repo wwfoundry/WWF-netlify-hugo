@@ -677,6 +677,10 @@ nav.home{
   height:25px;
 }
 
+.fill_change>#social_links{
+  filter: invert(1);
+}
+
 #menu_inner>#social_links{
   filter: invert(1);
 }
