@@ -389,6 +389,11 @@ a{
 	cursor:pointer;
 	text-decoration: none;
 	color:inherit;
+  transition:opacity ease-in-out .25s;
+}
+
+a:hover{
+  opacity: 60%;
 }
 
 button{
@@ -892,7 +897,8 @@ footer.innner_content{
     overflow-y: scroll;
     background-color: unset;
     width: 100%;
-    margin-top: 25px;
+    margin-top: 50px;
+
 }
 
 .gallery_tag{

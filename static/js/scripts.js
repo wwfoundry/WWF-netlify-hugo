@@ -122,9 +122,13 @@ index : {
 
 			function openFilterMenu(){
 
-				o.fadeIn(300).addClass('active');
+				if( !o.hasClass('active') ){
 
-				o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+					o.fadeIn(300).addClass('active');
+
+					o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+
+				}
 
 			}
 
