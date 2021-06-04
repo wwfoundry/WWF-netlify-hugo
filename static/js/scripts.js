@@ -38,13 +38,7 @@ callPageJS = {
 
 		$("#hamburger").on("click", function(){
 
-			gsap.to('#side_menu_wrapper', {duration: .5, marginRight: '100vw'});
-
-			$('#side_menu_wrapper').addClass("active");
-
-			$('#content').css('filter', 'blur(1px)');
-
-			$('#contact_content').css('filter', 'blur(1px)');
+			$('#side_menu_wrapper').fadeIn(300).addClass("active");
 
 			$('body').addClass('locked');
 
@@ -54,18 +48,16 @@ callPageJS = {
 
 			if ( $('#side_menu_wrapper').hasClass('active') ){
 
-				gsap.to('#side_menu_wrapper', {duration: .5, marginRight: '0'});
-
-				$('#content').css('filter', 'blur(0px)');
-
-				$('#contact_content').css('filter', 'blur(0px)');
-
-				$('#side_menu_wrapper').removeClass("active");
+				$('#side_menu_wrapper').fadeOut(300).removeClass("active");
 
 				$('body').removeClass('locked');
 
 			}
 
+		});
+
+		$(window).resize( function(){
+				$("#xit").trigger("click");
 		});
 
 		$('button').on('click', function(e){
@@ -526,8 +518,8 @@ init : function(){
 
 			if ( d == 'prev'){
 
-				var animBprev = gsap.to(b, {duration: 1, left: '100%'}),
-				 	animAprev  = gsap.to(a, {duration: 1, left: '0%', onComplete: replacePrev});
+				var animBprev = gsap.to(b, {duration: .5, left: '100%'}),
+				 	animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
 
 				if (!animAprev.isActive()){
 
@@ -557,8 +549,8 @@ init : function(){
 
 			} else {
 
-				var animBnext = gsap.to(b, {duration: 1, left: '-100%'}),
-					animAnext = gsap.to(c, {duration: 1, left: '0%', onComplete: replaceNext});
+				var animBnext = gsap.to(b, {duration: .5, left: '-100%'}),
+					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});
 
 				if (!animAnext.isActive()){
 
@@ -754,8 +746,16 @@ init : function(){
 
 			var thumbUrl = $(this).attr('data-url');
 
-			b.style.backgroundImage = 'url(' + thumbUrl + ')';
+			gsap.to(b, {duration: .25, autoAlpha: '0', onComplete: addBackground});
 
+			function addBackground(){
+
+				b.style.backgroundImage = 'url(' + thumbUrl + ')';
+
+				gsap.to(b, {duration: .25, autoAlpha: '1'});
+
+			}
+		
 		}
 
 	});

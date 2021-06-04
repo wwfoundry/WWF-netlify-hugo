@@ -59,7 +59,7 @@
 			{{range $sortedProjects }}
 				<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="">
 					<div class="margin project_inner">
-						<div class="index_thumbnail" style="background-image:url('{{.Params.featured}}')"></div>
+						<img class="index_thumbnail lazyload" src=""data-src="{{.Params.featured}}" alt="{{.Title}}">
 						<h3>{{.Title}}</h3>
 						<label>{{ .Params.artist }}</label>
 					</div>

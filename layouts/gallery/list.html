@@ -47,11 +47,11 @@
 			</div>
 			<div class="right_justified_partial">
 				<div class="thumbnails">
-					<h2>Production Stage</h2>
-					<button class="thumbnail" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
+					<h2 class="upperHeader">Production Stage</h2>
+					<button class="thumbnail margin" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
 					{{range .Params.Thumbnailimages}}
 
-						<button class="thumbnail" style="background-image:url('')" data-url="{{.image}}"></button>
+						<button class="thumbnail margin" style="background-image:url('')" data-url="{{.image}}"></button>
 
 					{{end}}
 					<div id="tag_wrapper">
@@ -69,13 +69,13 @@
 				</div>
 				<div class="bottom_justified">
 					<ul class="attribution">
-						<li class="black_under">{{ .Title }}</li>
-						<li class="black_under">{{ .Params.artist }}</li>
-						 <li class="black_under">{{.Params.year_tag}}</li>
-						<li class="black_under">{{ .Params.material }}</li>
+						<li class="black_under upperHeader">{{ .Title }}</li>
+						<li class="black_under upperHeader">{{ .Params.artist }}</li>
+						 <li class="black_under upperHeader">{{.Params.year_tag}}</li>
+						<li class="black_under upperHeader">{{ .Params.material }}</li>
 						{{ if (not (isset .Params "attribution")) | or (eq .Params.attribution "") }}<li class="last"></li>
 						{{else}}
-						<li class="black_under last" >{{.Params.attribution}}</li>
+						<li class="black_under upperHeader last" >{{.Params.attribution}}</li>
 						{{end}}
 					</ul>
 				</div>
