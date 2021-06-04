@@ -5,8 +5,8 @@ year_tag: "2020"
 material: Gilded Bronze
 featured: /images/uploads/Flower_Parent_and_Child_01.jpg
 thumbnailImages:
-  - image: /images/uploads/5158.1_10M_FP&C_ProcessPhoto_008.JPG
-  - image: /images/uploads/5158.1_Process_030.jpg
+  - image: /images/uploads/5158.1_10M_FP&C_ProcessPhoto_008.jpeg
+  - image: /images/uploads/5158.1_Process_030.jpeg
   - image: /images/uploads/WWF_Armature_002.jpeg
 material_tag:
   - Bronze

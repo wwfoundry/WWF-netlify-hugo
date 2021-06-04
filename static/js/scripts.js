@@ -112,13 +112,21 @@ index : {
 			process_container = $('.process_tag'),
 			year_container = $('.year_tag'),
 			m = $('#filter_menu'),
-			all = $('.all');
+			all = $('.all'),
+			tagBtn = $('.filter_option'),
+			filterTag = $('.tag'),
+			filterProjects = document.getElementsByClassName('project'),
+			filterLength = filterProjects.length;
 
-		$('.filter_option').on('click', function(){
+		tagBtn.on('click', function(){
 
-			o.fadeIn(300).addClass('active');
+			function openFilterMenu(){
 
-			o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+				o.fadeIn(300).addClass('active');
+
+				o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+
+			}
 
 			if ( $(this).hasClass('material') ){
 
@@ -126,17 +134,23 @@ index : {
 
 				material_container.fadeIn(300);
 
+				openFilterMenu()
+
 			} else if( $(this).hasClass('process') ){
 
 				container.not(process_container).css('display', 'none');
 
 				process_container.fadeIn(300);
 
+				openFilterMenu()
+
 			} else if ( $(this).hasClass('year') ) {
 
 				container.not(year_container).css('display', 'none');
 
 				year_container.fadeIn(300);
+
+				openFilterMenu()
 
 			} else {
 
@@ -147,10 +161,6 @@ index : {
 			}
 
 		});
-
-		var filterTag = $('.tag'),
-			filterProjects = document.getElementsByClassName('project'),
-			filterLength = filterProjects.length;
 
 		xit.on('click', function(){
 
@@ -170,7 +180,7 @@ index : {
 
 		});
 
-		filterTag.on('click', function(e){
+		filterTag.on('click', function (e){
 
 			all.fadeIn(300).addClass('active');
 
@@ -196,6 +206,28 @@ index : {
 
 		});
 
+		if(window.location.hash){
+
+	  var getHash = window.location.hash,
+	 			removeHash = getHash.replace('#', ''),
+	 			hashSelect;
+
+	 			filterTag.each(function(){
+
+	 				if ( $(this).hasClass(removeHash) ){
+
+	 					console.log($(this));
+
+	 					$(this).trigger('click');
+
+	 				}
+
+	 			history.replaceState(null, null, ' ');
+
+	 			});
+
+		}
+
 	}
 
 },
@@ -214,7 +246,7 @@ init : function(){
 		arrowPrev = document.querySelector('#arrow_left'),
 		arrowNext = document.querySelector('#arrow_right'),
 		slideAreaContainer = document.querySelector('.project_slide'),
-		slideID = slideAreaContainer.id.replace(" ", "-").toLowerCase(),
+		slideID = slideAreaContainer.id.replace( / +/g, '-' ).toLowerCase(),
 		totalPages = slideAreaContainer.getAttribute('data-total'),
 		p,
 		n,
@@ -224,6 +256,22 @@ init : function(){
 		currentPage = window.location.pathname,
 		loadUrl,
 		loadState = false,
+		lazyLoad = function (info){
+
+			var thumbs = info.getElementsByClassName('thumbnail'),
+				i;
+
+				console.log(thumbs.length);
+
+			for (i = 0; i < thumbs.length; i++){
+
+				var thumbBGattr = thumbs[i].getAttribute('data-url');
+
+				thumbs[i].style.backgroundImage = "url(" + thumbBGattr + ")"
+
+			}
+
+		},
 		infojax = function () {$.ajax({
 			
 					url: loadUrl,
@@ -242,7 +290,7 @@ init : function(){
 							arrowRightState,
 							storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
 							storedID = temp.querySelector('.project_slide').id,
-							transID = storedID.replace(" ", "-").toLowerCase();
+							transID = storedID.replace( / +/g, '-' ).toLowerCase();
 
 						if ( arrowLeftTemp && arrowRightTemp ){
 
@@ -271,6 +319,8 @@ init : function(){
 						info.innerHTML = storedInfo;
 						slideAreaContainer.id = transID;
 
+						lazyLoad(info);
+
 						temp.remove();
 
 						if (window.history.pushState)
@@ -294,7 +344,6 @@ init : function(){
 					temp.innerHTML = stored;
 
 					var test = temp.querySelector('#main_slide');
-
 
 					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
@@ -365,6 +414,10 @@ init : function(){
 	    }
 
 	    createChildren();
+
+	    var info = document.querySelector('.right_justified_partial');
+
+	    lazyLoad(info);
 
 	    //Featured Image
 

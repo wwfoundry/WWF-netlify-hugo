@@ -16,6 +16,7 @@ process_tag:
   - process_string: Patina
   - process_string: Paint
   - process_string: Gilded
+  - process_string: On Site Installation
 year_tag:
   - year_string: "2021"
   - year_string: "2020"

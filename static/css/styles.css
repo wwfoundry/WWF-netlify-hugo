@@ -111,7 +111,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 /**
@@ -375,7 +375,7 @@ html, body {
 body{
 	width:100vw;
 	height:100vh;
-	font-family:'Century Gothic Pro', sans-serif;
+	font-family:'Century Gothic', sans-serif;
 	font-size:.9em;
   position:relative;
   font-weight:normal;
@@ -456,6 +456,10 @@ label{
   cursor:inherit;
 }
 
+.page_title{
+  margin-right:10px;
+}
+
 .last{
   padding:0px !important;
   margin:0px !important;
@@ -486,7 +490,7 @@ h2{
 
 h3{
   font-size:1.2em;
-  font-weight:bolder;
+  font-weight:bold;
 }
 
 .title{
@@ -843,6 +847,10 @@ footer.innner_content{
   justify-content: space-between;
 }
 
+.bottom_justified{
+
+}
+
 .thumbnails{
   display:flex;
   flex-wrap:wrap;
@@ -875,6 +883,21 @@ footer.innner_content{
   font-size: 1.2em;
   text-transform: uppercase;
   margin-bottom:10px;
+}
+
+#tag_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    background-color: unset;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.gallery_tag{
+  border: 1px solid black;
+  padding: 4px 6px;
 }
 
 #directional_arrows{
