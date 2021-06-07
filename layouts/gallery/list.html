@@ -55,6 +55,7 @@
 
 					{{end}}
 					<div id="tag_wrapper">
+						<h2 class="upperHeader">Tags</h2>
 						{{range .Params.material_tag}}
 							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
@@ -69,13 +70,29 @@
 				</div>
 				<div class="bottom_justified">
 					<ul class="attribution">
-						<li class="black_under upperHeader">{{ .Title }}</li>
-						<li class="black_under upperHeader">{{ .Params.artist }}</li>
-						 <li class="black_under upperHeader">{{.Params.year_tag}}</li>
-						<li class="black_under upperHeader">{{ .Params.material }}</li>
-						{{ if (not (isset .Params "attribution")) | or (eq .Params.attribution "") }}<li class="last"></li>
+						<li class="black_under upperHeader">
+						<label>Title</label>
+						{{ .Title }}
+						</li>
+						<li class="black_under upperHeader">
+						<label>Artist</label>
+						{{ .Params.artist }}
+						</li>
+						 <li class="black_under upperHeader">
+						 <label>Year</label>
+						 {{.Params.year_tag}}
+						</li>
+						<li class="black_under upperHeader">
+						<label>Material</label>
+						{{ .Params.material }}
+						</li>
+						{{ if (not (isset .Params "attribution")) | or (eq .Params.attribution "") }}
+						<li class="last"></li>
 						{{else}}
-						<li class="black_under upperHeader last" >{{.Params.attribution}}</li>
+						<li class="black_under upperHeader last" >
+						<label>Photo Credit & Copyright</label>
+						{{.Params.attribution}}
+						</li>
 						{{end}}
 					</ul>
 				</div>

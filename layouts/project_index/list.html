@@ -31,7 +31,7 @@
 				{{ range sort .Site.Data.tags.material_tag }}
 					{{with .material_string}}
 						<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-							<h2>{{.}}</h2>
+							<h3>{{.}}</h3>
 						</button>
 					{{end}}
 				{{end}}
@@ -39,7 +39,7 @@
 				{{range sort .Site.Data.tags.process_tag }}
 					{{with .process_string }}
 						<button class="process_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-							<h2>{{.}}</h2>
+							<h3>{{.}}</h3>
 						</button>
 					{{end}}
 				{{end}}
@@ -47,7 +47,7 @@
 				{{range sort .Site.Data.tags.year_tag }}
 					{{with .year_string }}
 						<button class="year_tag tag margin " data-filter="{{ replaceRE "(\\s)" "" . | lower}}">
-							<h2>{{.}}</h2>
+							<h3>{{.}}</h3>
 						</button>
 					{{end}}
 				{{end}}

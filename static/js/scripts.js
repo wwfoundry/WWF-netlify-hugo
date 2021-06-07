@@ -36,28 +36,64 @@ callPageJS = {
 
 		//Menu Behavior
 
-		$("#hamburger").on("click", function(){
+		var multiBurger = $("#hamburger");
+
+		multiBurger.on("click", function(e){
+
+			$('nav').addClass('active');
+
+			$('.bar').addClass('active');
 
 			$('#side_menu_wrapper').fadeIn(300).addClass("active");
 
 			$('body').addClass('locked');
 
-		});
+			e.stopPropagation();
 
-		$("#xit").on("click", function(){
+			if ( multiBurger.hasClass('active') ){
 
-			if ( $('#side_menu_wrapper').hasClass('active') ){
+				$('nav').removeClass('active');
+
+				multiBurger.removeClass('active');
+
+				$('.bar').removeClass('active');
 
 				$('#side_menu_wrapper').fadeOut(300).removeClass("active");
 
 				$('body').removeClass('locked');
 
+			} else {
+				multiBurger.addClass('active');
 			}
 
 		});
 
 		$(window).resize( function(){
-				$("#xit").trigger("click");
+
+		if ( multiBurger.hasClass('active') ){
+
+				multiBurger.trigger("click");
+
+			}
+
+		});
+
+		$(window).on('scroll', function(){
+
+			var navParent = $('nav'),
+					field = window.innerWidth;
+
+			if(!navParent.hasClass('home') && field < 800){
+
+			if (document.body.scrollTop > 100 | document.documentElement.scrollTop > 100) {
+						   navParent.addClass('scroll');
+				       gsap.to(navParent, .5, {backgroundColor: "#ffffff", boxShadow: "0px 0px 8px 0px rgba(0,0,0,0.2)"});
+			} else { 
+				        navParent.removeClass('scroll');
+				        gsap.to(navParent, .5, {backgroundColor: "transparent", boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)"});
+			}
+			}
+
 		});
 
 		$('button').on('click', function(e){
@@ -69,6 +105,20 @@ callPageJS = {
 		});
 
 		$('.menu_links li:last-child').addClass('last');
+
+		var viewportCached = document.getElementsByClassName('viewportFixed');
+
+		for (var i = 0; i < viewportCached.length; i++){
+
+			var storedHeight = getComputedStyle(viewportCached[i]),
+					marPad = parseInt(storedHeight.paddingTop) + parseInt(storedHeight.paddingBottom) + parseInt(storedHeight.marginTop) + parseInt(storedHeight.marginBottom),
+					innerHeight = storedHeight - marPad;
+
+			console.log(storedHeight);
+
+			viewportCached[i].style.height = innerHeight;
+
+		}
 
 		}
 
@@ -186,8 +236,6 @@ index : {
 
 				var projectAttr = filterProjects[i].getAttribute('data-filter');
 
-				console.log(projectAttr);
-
 				if( projectAttr.includes(filterAttr) ){
 
 					filterProjects[i].classList.add('filtered');
@@ -211,8 +259,6 @@ index : {
 	 			filterTag.each(function(){
 
 	 				if ( $(this).hasClass(removeHash) ){
-
-	 					console.log($(this));
 
 	 					$(this).trigger('click');
 
@@ -256,8 +302,6 @@ init : function(){
 
 			var thumbs = info.getElementsByClassName('thumbnail'),
 				i;
-
-				console.log(thumbs.length);
 
 			for (i = 0; i < thumbs.length; i++){
 
@@ -378,14 +422,14 @@ init : function(){
 	//Liquid Slides
 
 	var a = document.createElement('div'),
-		b = document.createElement('div'),
-		c = document.createElement('div');
+			b = document.createElement('div'),
+			c = document.createElement('div');
 
 	//Position Rules
 
 	var positionB = b.offsetLeft,
-		positionA = (field/(positionB - field)*100).toString() + '%',
-		positionC = (field/(positionB + field)*100).toString() + '%';
+			positionA = ((field/(positionB - field)*100)-10).toString() + '%',
+			positionC = ((field/(positionB + field)*100)+10).toString() + '%';
 
 	a.style.left = positionA;
 	c.style.left = positionC;
@@ -393,9 +437,9 @@ init : function(){
 
 	function createChildren(){
 
-		parent.appendChild(a).classList.add('slide');
-		parent.appendChild(b).classList.add('slide');
-		parent.appendChild(c).classList.add('slide');
+		parent.appendChild(a).classList.add('slide', 'viewportFixed');
+		parent.appendChild(b).classList.add('slide', 'viewportFixed');
+		parent.appendChild(c).classList.add('slide', 'viewportFixed');
 
 	}
 
@@ -518,7 +562,7 @@ init : function(){
 
 			if ( d == 'prev'){
 
-				var animBprev = gsap.to(b, {duration: .5, left: '100%'}),
+				var animBprev = gsap.to(b, {duration: .5, left: '110%'}),
 				 	animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
 
 				if (!animAprev.isActive()){
@@ -537,9 +581,9 @@ init : function(){
 
 					a = document.createElement('div');
 
-					a.style.left = "-100%"
+					a.style.left = "-110%"
 
-					parent.insertBefore(a, b).classList.add('slide');
+					parent.insertBefore(a, b).classList.add('slide', 'viewportFixed');
 
 					parent.classList.remove('animating');
 
@@ -549,7 +593,7 @@ init : function(){
 
 			} else {
 
-				var animBnext = gsap.to(b, {duration: .5, left: '-100%'}),
+				var animBnext = gsap.to(b, {duration: .5, left: '-110%'}),
 					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});
 
 				if (!animAnext.isActive()){
@@ -568,9 +612,9 @@ init : function(){
 
 					c = document.createElement('div');
 
-					c.style.left = "100%";
+					c.style.left = "110%";
 
-					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
+					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'viewportFixed');
 
 					parent.classList.remove('animating');
 
