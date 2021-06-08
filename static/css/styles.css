@@ -373,7 +373,6 @@ html, body {
 
 body{
 	width:100vw;
-	height:100vh;
 	font-family:'Century Gothic', sans-serif;
 	font-size:.9em;
   position:relative;
@@ -475,6 +474,8 @@ label{
 .margin{
   margin:10px;
 }
+
+
 
 /*3) Typography */
 /*---------------*/
@@ -744,7 +745,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 .main_content{
     display: block;
-    min-height:calc(100vh - 125px);
+    min-height: calc(100vh - 125px);
     padding: 50px 25px 25px 25px;
 }
 
@@ -778,7 +779,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 #fullHeight{
   padding: unset;
   margin:unset;
-  max-wdith:unset;
+  max-width:unset;
 
 }
 
@@ -793,7 +794,8 @@ border-bottom:solid 1px white;
 }
 
 .margin_negative{
-
+  margin-right: -10px;
+  margin-left: -10px;
 }
 
 /*6) Footer*/
@@ -902,8 +904,8 @@ footer.innner_content{
 
 .slide{
   width:100%;
-  height:calc(100vh - 110px);
-  background-position:center;
+  height:100%;
+  background-position:center center;
   background-repeat:no-repeat;
   background-size:contain;
   position:absolute;
@@ -932,8 +934,7 @@ footer.innner_content{
 }
 
 .thumbnail{
-  width:calc(30% - 10px);
-  max-width: 120px;
+  width:calc(46% - 10px);
   min-width:100px;
   height:100px;
   background-size:cover;
@@ -955,6 +956,18 @@ footer.innner_content{
     font-size: .75em;
   }
 
+.attribution>.last{
+  display: none;
+}
+
+.attribution>.black_under.upperHeader.last{
+  display: block;
+}
+
+.attribution.margin{
+  margin-bottom: 0;
+}
+
 #tag_wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -962,8 +975,6 @@ footer.innner_content{
     background-color: unset;
     width: 100%;
     padding-top: 25px;
-    margin-top: 25px;
-    border-top: solid black 1px;
 }
 
 .gallery_tag{
@@ -1169,6 +1180,31 @@ footer.innner_content{
 
 /*Gallery*/
 
+@media screen and (max-width:1600px){
+
+
+  .right_justified_partial{
+
+    width: 20%;
+
+  }
+
+  .left_justified_full{
+
+    width: 80%;
+
+  }
+
+
+  .thumbnail{
+    width: calc(29% - 20px);
+    max-width: 100px;
+    min-width: 65px;
+    height: 65px;
+  }
+
+}
+
 @media screen and (max-width:1800px){
 
 
@@ -1186,7 +1222,7 @@ footer.innner_content{
 
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width:1100px){
 
   .project_slide{
   flex-direction:column;
@@ -1205,7 +1241,7 @@ footer.innner_content{
 
   .slide{
     background-position: center center;
-    height:calc(55vh - 100px);
+    height:100%;
     min-height: 250px;
   }
 
@@ -1248,6 +1284,8 @@ footer.innner_content{
 
   #tag_wrapper{
     padding-top: 0px;
+    border-top: solid black 1px;
+    border-bottom: solid black 1px;
   }
 
   #tag_wrapper>.upperHeader{

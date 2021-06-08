@@ -68,30 +68,26 @@ callPageJS = {
 
 		});
 
-		$(window).resize( function(){
-
-		if ( multiBurger.hasClass('active') ){
-
-				multiBurger.trigger("click");
-
-			}
-
-		});
+		var navParent = $('nav'),
+					field = window.innerWidth,
+					navHeight = navParent.height(),
+					filledElem = document.createElement('div');
 
 		$(window).on('scroll', function(){
 
-			var navParent = $('nav'),
-					field = window.innerWidth;
-
 			if(!navParent.hasClass('home') && field < 800){
 
-			if (document.body.scrollTop > 100 | document.documentElement.scrollTop > 100) {
-						   navParent.addClass('scroll');
-				       gsap.to(navParent, .5, {backgroundColor: "#ffffff", boxShadow: "0px 0px 8px 0px rgba(0,0,0,0.2)"});
-			} else { 
-				        navParent.removeClass('scroll');
-				        gsap.to(navParent, .5, {backgroundColor: "transparent", boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)"});
-			}
+				if (document.body.scrollTop > 100 | document.documentElement.scrollTop > 100) {
+					filledElem.style.height = '55px';
+					$('body').prepend(filledElem);
+					navParent.addClass('scroll');
+					gsap.to(navParent, .5, {backgroundColor: "#ffffff"});
+				} else { 
+					filledElem.remove();
+					navParent.removeClass('scroll');
+					gsap.to(navParent, .5, {backgroundColor: "transparent"});
+				}
+
 			}
 
 		});
@@ -106,19 +102,85 @@ callPageJS = {
 
 		$('.menu_links li:last-child').addClass('last');
 
-		var viewportCached = document.getElementsByClassName('viewportFixed');
+		//Get Element Height (vanilla)
 
-		for (var i = 0; i < viewportCached.length; i++){
+		var innerHeight,
+				calculatedHeight,
+				windowHeight = window.innerHeight,
+				field = window.innerWidth;
 
-			var storedHeight = getComputedStyle(viewportCached[i]),
-					marPad = parseInt(storedHeight.paddingTop) + parseInt(storedHeight.paddingBottom) + parseInt(storedHeight.marginTop) + parseInt(storedHeight.marginBottom),
-					innerHeight = storedHeight - marPad;
+			function getElemHeight(elem){
 
-			console.log(storedHeight);
+				elem.removeAttribute('style');
 
-			viewportCached[i].style.height = innerHeight;
+				var storedStyle = getComputedStyle(elem),
+						storedHeight = parseInt(storedStyle.height),
+						marPad = parseInt(storedStyle.paddingTop) + parseInt(storedStyle.paddingBottom) + parseInt(storedStyle.marginTop) + parseInt(storedStyle.marginBottom);
+				
+				innerHeight = storedHeight - marPad;
 
-		}
+				return innerHeight;
+
+			}
+
+			//Onload, set VH elements to viewport height
+
+			storeVHeight();
+
+			function storeVHeight(){
+
+				var viewportCached = document.getElementsByClassName('viewportFixed');
+		
+				for (var i = 0; i < viewportCached.length; i++){
+
+					getElemHeight( viewportCached[i] );
+
+					calculatedHeight = windowHeight - innerHeight;
+
+					calculatedWindowHeight = windowHeight - calculatedHeight;
+
+					viewportCached[i].removeAttribute('style');
+		
+					viewportCached[i].style.height = calculatedWindowHeight + 'px';
+		
+				}
+			}
+
+		//Detect if device supports orientation change
+
+		var supportsOrientationChange = "onorientationchange" in window,
+    		orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+    window.addEventListener(orientationEvent, function(){
+
+    		windowHeight = window.innerHeight;
+			
+				storeVHeight();
+
+    }, false);
+
+    //On vertical resize (if window width has changed, too), adjust element height
+
+		$(window).resize( function(){
+
+		var newField = window.innerWidth;
+
+			if( newField != field ){
+
+				windowHeight = window.innerHeight;
+			
+				storeVHeight();
+
+				if ( multiBurger.hasClass('active') ){
+
+					multiBurger.trigger("click");
+
+				}
+
+			}
+
+		});
+
 
 		}
 
@@ -280,7 +342,7 @@ init : function(){
  //On load, get prev, current, next
 
 	var info = document.querySelector('.right_justified_partial'),
-		field = window.innerWidth;
+			field = window.innerWidth;
 
 	var parent = document.querySelector('#slide_container'),
 		current = document.querySelector('#main_slide'),
@@ -437,9 +499,9 @@ init : function(){
 
 	function createChildren(){
 
-		parent.appendChild(a).classList.add('slide', 'viewportFixed');
-		parent.appendChild(b).classList.add('slide', 'viewportFixed');
-		parent.appendChild(c).classList.add('slide', 'viewportFixed');
+		parent.appendChild(a).classList.add('slide');
+		parent.appendChild(b).classList.add('slide');
+		parent.appendChild(c).classList.add('slide');
 
 	}
 
@@ -583,7 +645,7 @@ init : function(){
 
 					a.style.left = "-110%"
 
-					parent.insertBefore(a, b).classList.add('slide', 'viewportFixed');
+					parent.insertBefore(a, b).classList.add('slide');
 
 					parent.classList.remove('animating');
 
@@ -614,7 +676,7 @@ init : function(){
 
 					c.style.left = "110%";
 
-					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'viewportFixed');
+					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
 
 					parent.classList.remove('animating');
 
