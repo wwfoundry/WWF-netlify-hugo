@@ -410,15 +410,21 @@ init : function(){
 					dataType: 'text',
 					success: function (stored){
 
-						var cleanedStored = $.parseHTML(stored)
+						var cleanedStored = $.parseHTML(stored),
+							tempStored = $('<div>').append(cleanedStored),
+							tempHTML;
 
-						$(cleanedStored).find('head').remove();
+						tempStored.find('link').remove();
+
+						tempHtml = tempStored.html();
+
+						console.log(tempHtml)
 
 						var temp = document.createElement('div');
 
 						document.querySelector('body').appendChild(temp).style.display = 'none';
 
-						temp.innerHTML = stored;
+						temp.innerHTML = tempHtml;
 
 						var	arrowLeftTemp = temp.querySelector('#arrow_left'),
 							arrowRightTemp = temp.querySelector('#arrow_right'),
@@ -470,18 +476,22 @@ init : function(){
 		pjax = function () {$.ajax({
 								
 				url: p,
-				dataType: 'html',
+				dataType: 'text',
 				success: function (stored){
 
-					var cleanedStored = $.parseHTML(stored)
+					var cleanedStored = $.parseHTML(stored),
+						tempStored = $('<div>').append(cleanedStored),
+						tempHTML;
 
-					$(cleanedStored).find('head').remove();
+					tempStored.find('link').remove();
+
+					tempHtml = tempStored.html();
 
 					var temp = document.createElement('div');
 
 					document.querySelector('body').appendChild(temp).style.display = 'none';
 
-					temp.innerHTML = stored;
+					temp.innerHTML = tempHtml;
 
 					var test = temp.querySelector('#main_slide');
 
@@ -496,18 +506,22 @@ init : function(){
 		njax = function () {$.ajax({
 				
 				url: n,
-				dataType: 'html',
+				dataType: 'text',
 				success: function (stored){
 
-					var cleanedStored = $.parseHTML(stored)
+					var cleanedStored = $.parseHTML(stored),
+						tempStored = $('<div>').append(cleanedStored),
+						tempHTML;
 
-					$(cleanedStored).find('head').remove();
+					tempStored.find('link').remove();
+
+					tempHtml = tempStored.html();
 
 					var temp = document.createElement('div');
 
 					document.querySelector('body').appendChild(temp).style.display = 'none';
 
-					temp.innerHTML = stored;
+					temp.innerHTML = tempHtml;
 
 					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
