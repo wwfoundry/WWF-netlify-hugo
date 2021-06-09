@@ -70,6 +70,7 @@ callPageJS = {
 
 		var navParent = $('nav'),
 					field = window.innerWidth,
+					fieldY = window.innerHeight,
 					navHeight = navParent.height(),
 					filledElem = document.createElement('div');
 
@@ -163,21 +164,24 @@ callPageJS = {
 
 		$(window).resize( function(){
 
-		var newField = window.innerWidth;
+			var newField = window.innerWidth,
+					newFieldY = window.innerHeight;
 
-			if( newField != field ){
+			if( newField != field && newFieldY != fieldY ){
+
+				console.log('resized')
 
 				windowHeight = window.innerHeight;
 			
 				storeVHeight();
 
-				if ( multiBurger.hasClass('active') ){
+			}
+
+			if ( multiBurger.hasClass('active') && newFieldY != fieldY ){
 
 					multiBurger.trigger("click");
 
 				}
-
-			}
 
 		});
 
@@ -342,11 +346,13 @@ init : function(){
  //On load, get prev, current, next
 
 	var info = document.querySelector('.right_justified_partial'),
-			field = window.innerWidth;
+			field = window.innerWidth,
+			fieldY = window.innerHeight;
 
 	var parent = document.querySelector('#slide_container'),
 		current = document.querySelector('#main_slide'),
 		currentUrl = current.getAttribute('data-url'),
+		currentInner = current.innerHTML,
 		arrowPrev = document.querySelector('#arrow_left'),
 		arrowNext = document.querySelector('#arrow_right'),
 		slideAreaContainer = document.querySelector('.project_slide'),
@@ -360,6 +366,7 @@ init : function(){
 		currentPage = window.location.pathname,
 		loadUrl,
 		loadState = false,
+		isVideo = false,
 		lazyLoad = function (info){
 
 			var thumbs = info.getElementsByClassName('thumbnail'),
@@ -369,35 +376,61 @@ init : function(){
 
 			for (i = 0; i < thumbs.length; i++){
 
-				var thumbBGattr = thumbs[i].getAttribute('data-url');
-
-				var cachedImg = document.createElement('img');
+				var t = thumbs[i],
+						thumbBGattr = t.getAttribute('data-url'),
+						cachedImg = document.createElement('img');
 
 				cachedImg.classList.add('hide', 'temp');
 
 				document.querySelector('.thumbnails').appendChild(cachedImg).style.display = 'none';
 
-				cachedImg.src = thumbBGattr;
+				if( !t.classList.contains('video') ){
 
-				t = thumbs[i];
+						cachedImg.src = thumbBGattr;
 
-				replaceWithCache(t, cachedImg)
+						replaceWithCache(t, cachedImg)
 
-				function replaceWithCache(t, cachedImg){
+						function replaceWithCache(t, cachedImg){
 
-					cachedImg.onload = function(){
+							cachedImg.onload = function(){
 
-						var cachedSrc = cachedImg.src;
+								var cachedSrc = cachedImg.src;
 
-						cachedImg.remove();
+								cachedImg.remove();
 
-						t.style.backgroundImage = "url(" + cachedSrc + ")"
+								t.style.backgroundImage = "url(" + cachedSrc + ")"
 
-						t.classList.remove('loadingImg');
+								t.classList.remove('loadingImg');
+
+							}
+
+						}
+
+					} else {
+
+						var thumbVid = t.querySelector('video'),
+								thumbVidSrc = thumbVid.querySelector('source'),
+								thumbVidattr = thumbVidSrc.getAttribute('data-url');
+
+						thumbVidSrc.setAttribute('src', thumbVidattr);
+
+						videoLoaded(t, thumbVid);
+
+						function videoLoaded(t, thumbVid){
+
+								thumbVid.load();
+
+								thumbVid.oncanplay = function(){
+
+									thumbVid.play();
+
+									t.classList.remove('loadingImg');
+
+							}
+
+						}
 
 					}
-
-				}
 
 			}
 
@@ -489,11 +522,25 @@ init : function(){
 
 					temp.innerHTML = tempHtml;
 
-					var test = temp.querySelector('#main_slide');
+					var mainslideObj = temp.querySelector('#main_slide');
 
-					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
+					if ( !mainslideObj.classList.contains('video') ){
 
-					a.style.backgroundImage = 'url("' + storedFeatured + '")'
+						var	storedFeatured = mainslideObj.getAttribute('data-url');
+
+						a.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+					} else {
+
+						var storedFeaturedVideo = mainslideObj.innerHTML;
+
+						a.innerHTML = storedFeaturedVideo;
+
+						a.classList.add('video');
+
+						a.querySelector('video').pause();
+
+					}
 
 					temp.remove();
 				}
@@ -519,11 +566,25 @@ init : function(){
 
 					temp.innerHTML = tempHtml;
 
-					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
+					var mainslideObj = temp.querySelector('#main_slide');
 
-					var test = temp.querySelector('#main_slide');
+					if ( !mainslideObj.classList.contains('video') ){
 
-					c.style.backgroundImage = 'url("' + storedFeatured + '")'
+						var	storedFeatured = mainslideObj.getAttribute('data-url');
+
+						c.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+					} else {
+
+						var storedFeaturedVideo = mainslideObj.innerHTML;
+
+						c.innerHTML = storedFeaturedVideo;
+
+						c.classList.add('video');
+
+						c.querySelector('video').pause();
+
+					}
 
 					temp.remove();
 
@@ -536,8 +597,8 @@ init : function(){
 	//Liquid Slides
 
 	var a = document.createElement('div'),
-		b = document.createElement('div'),
-		c = document.createElement('div');
+			b = document.createElement('div'),
+			c = document.createElement('div');
 
 	//Position Rules
 
@@ -548,11 +609,30 @@ init : function(){
 	a.style.left = positionA;
 	c.style.left = positionC;
 
-
 	function createChildren(){
 
 		parent.appendChild(a).classList.add('slide');
-		parent.appendChild(b).classList.add('slide');
+
+		if (current.classList.contains('video')){
+
+				parent.appendChild(b).classList.add('slide', 'video');
+
+				//Featured Video
+
+				b.innerHTML = currentInner;
+
+				isVideo = true;
+
+		} else {
+
+			parent.appendChild(b).classList.add('slide');
+
+			//Featured Image
+
+			b.style.backgroundImage = 'url("' + currentUrl + '")'
+
+		}
+
 		parent.appendChild(c).classList.add('slide');
 
 	}
@@ -564,7 +644,9 @@ init : function(){
 	function loadNeighbor(){
 
 	    while (parent.firstChild) {
+
 	        parent.removeChild(parent.firstChild);
+
 	    }
 
 	    createChildren();
@@ -572,10 +654,6 @@ init : function(){
 	    var info = document.querySelector('.right_justified_partial');
 
 	    lazyLoad(info);
-
-	    //Featured Image
-
-		b.style.backgroundImage = 'url("' + currentUrl + '")'
 
 		//Slide ID
 
@@ -695,11 +773,17 @@ init : function(){
 
 					a = document.createElement('div');
 
-					a.style.left = "-110%"
+					a.style.left = "-110%";
 
 					parent.insertBefore(a, b).classList.add('slide');
 
 					parent.classList.remove('animating');
+
+					if(b.classList.contains('video')){
+
+						b.querySelector('video').play();
+						
+					}
 
 					getNextP();
 					
@@ -731,6 +815,12 @@ init : function(){
 					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
 
 					parent.classList.remove('animating');
+
+					if(b.classList.contains('video')){
+
+						b.querySelector('video').play();
+
+					}
 
 					getNextN();
 
@@ -904,11 +994,29 @@ init : function(){
 
 			var thumbUrl = $(this).attr('data-url');
 
+			var thumbVideo = $(this).hasClass('video');
+
+			var thumbHtml = $(this).html();
+
 			gsap.to(b, {duration: .25, autoAlpha: '0', onComplete: addBackground});
 
 			function addBackground(){
 
-				b.style.backgroundImage = 'url(' + thumbUrl + ')';
+				console.log(thumbVideo)
+
+				if (thumbVideo == false){
+
+					b.innerHTML = ""
+
+					b.style.backgroundImage = 'url(' + thumbUrl + ')';
+
+				} else if (thumbVideo == true) {
+
+					b.innerHTML = thumbHtml;
+
+					b.style.backgroundImage = ""
+
+				}
 
 				gsap.to(b, {duration: .25, autoAlpha: '1'});
 

@@ -486,6 +486,10 @@ label{
     display: block;
     width: 25px;
     height: 25px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40%;
     margin: 0 auto;
   /*  margin-top: -15px;*/
     border-radius: 100%;
@@ -930,6 +934,10 @@ footer.innner_content{
   background-repeat:no-repeat;
   background-size:contain;
   position:absolute;
+}
+
+.slide>.reel{
+  object-fit: contain;
 }
 
 .right_justified_partial{

@@ -11,11 +11,21 @@
  
 	{{range $paginator.Pages}}
 
+	{{ $media_featured_ext := path.Ext .Params.featured }}
+
 		<div id="{{ .Title }}" class="project_slide" data-total="{{$paginator.TotalPages}}">
 			<div class="left_justified_full viewportFixed">
 				<div id="slide_container">
 					<div class="slide" id="prev_slide"></div>
+					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 					<div class="slide" id="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
+					{{else if eq $media_featured_ext ".mp4" }}
+					<div class="slide video" id="main_slide" data-url="{{ .Params.featured }}">
+						<video class="reel" plasysinline autoplay muted loop preload="none">
+							<source src="{{ .Params.featured }}" type="video/mp4">
+						</video>
+					</div>
+					{{end}}
 					<div class="slide" id="next_slide"></div>
 				</div>
 				{{ if gt $paginator.TotalPages 1 }}
@@ -48,10 +58,33 @@
 			<div class="right_justified_partial">
 				<div class="thumbnails">
 					<h2 class="upperHeader margin">Production Stage</h2>
+
+					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 					<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
-					{{range .Params.Thumbnailimages}}
-						<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.image}}"></button>
+					{{else if eq $media_featured_ext ".mp4" }}
+					<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.Params.featured}}">
+						<video class="reel" plasysinline autoplay muted loop preload="none">
+							<source src="" data-url="{{ .Params.featured }}" type="video/mp4">
+						</video>
+					</button>
 					{{end}}
+
+					{{range .Params.thumbnailImages}}
+
+						{{ $media_thumbnail_ext := path.Ext .image }}
+
+						{{if (eq $media_thumbnail_ext ".jpeg") | or (eq $media_thumbnail_ext ".jpg") | or (eq $media_thumbnail_ext ".JPG") }}
+							<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.image}}"></button>
+							{{else if eq $media_thumbnail_ext ".mp4" }}
+							<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.image}}">
+								<video class="reel" plasysinline autoplay muted loop preload="none">
+									<source src="" type="video/mp4" data-url="{{ .image }}">
+								</video>
+							</button>
+						{{end}}
+
+					{{end}}
+
 					<div id="tag_wrapper">
 						<!-- <h2 class="upperHeader margin">Tags</h2> -->
 						{{range .Params.material_tag}}
@@ -84,13 +117,11 @@
 						<label>Material</label>
 						{{ .Params.material }}
 						</li>
-						{{ if (not (isset .Params "attribution")) | or (eq .Params.attribution "") }}
-						<li class="last"></li>
-						{{else}}
-						<li class="black_under upperHeader last" >
-						<label>Photo Credit & Copyright</label>
-						{{.Params.attribution}}
-						</li>
+						{{with .Params.attribution}}
+							<li class="black_under upperHeader last" >
+								<label>Photo Credit & Copyright</label>
+								{{.}}
+							</li>
 						{{end}}
 					</ul>
 				</div>
