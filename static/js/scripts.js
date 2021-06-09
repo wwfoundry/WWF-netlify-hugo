@@ -391,8 +391,6 @@ init : function(){
 
 						cachedImg.remove();
 
-						console.log('work');
-
 						t.style.backgroundImage = "url(" + cachedSrc + ")"
 
 						t.classList.remove('loadingImg');
@@ -417,8 +415,6 @@ init : function(){
 						tempStored.find('link').remove();
 
 						tempHtml = tempStored.html();
-
-						console.log(tempHtml)
 
 						var temp = document.createElement('div');
 
