@@ -367,6 +367,21 @@ init : function(){
 		loadUrl,
 		loadState = false,
 		isVideo = false,
+		playMain =  function (b, mainVideo){
+
+				mainVideo.load();
+
+				mainVideo.oncanplay = function (){
+
+				mainVideo.play();
+
+				b.classList.remove('loadingImg');
+
+			
+
+			}
+
+		},
 		lazyLoad = function (info){
 
 			var thumbs = info.getElementsByClassName('thumbnail'),
@@ -536,7 +551,7 @@ init : function(){
 
 						a.innerHTML = storedFeaturedVideo;
 
-						a.classList.add('video');
+						a.classList.add('video', 'loadingImg');
 
 						a.querySelector('video').pause();
 
@@ -580,7 +595,7 @@ init : function(){
 
 						c.innerHTML = storedFeaturedVideo;
 
-						c.classList.add('video');
+						c.classList.add('video', 'loadingImg');
 
 						c.querySelector('video').pause();
 
@@ -781,8 +796,10 @@ init : function(){
 
 					if(b.classList.contains('video')){
 
-						b.querySelector('video').play();
-						
+						var mainVideo = b.querySelector('video');
+
+						playMain(b, mainVideo);
+
 					}
 
 					getNextP();
@@ -818,7 +835,9 @@ init : function(){
 
 					if(b.classList.contains('video')){
 
-						b.querySelector('video').play();
+						var mainVideo = b.querySelector('video');
+
+						playMain(b, mainVideo);
 
 					}
 

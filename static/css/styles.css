@@ -489,7 +489,7 @@ label{
     position: absolute;
     left: 0;
     right: 0;
-    top: 40%;
+    top: 45%;
     margin: 0 auto;
   /*  margin-top: -15px;*/
     border-radius: 100%;
@@ -938,6 +938,10 @@ footer.innner_content{
 
 .slide>.reel{
   object-fit: contain;
+}
+
+.slide.loadingImg{
+  background: unset;
 }
 
 .right_justified_partial{
