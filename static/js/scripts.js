@@ -410,6 +410,10 @@ init : function(){
 					dataType: 'text',
 					success: function (stored){
 
+						var cleanedStored = $.parseHTML(stored)
+
+						$(cleanedStored).find('head').remove();
+
 						var temp = document.createElement('div');
 
 						document.querySelector('body').appendChild(temp).style.display = 'none';
@@ -466,8 +470,12 @@ init : function(){
 		pjax = function () {$.ajax({
 								
 				url: p,
-				dataType: 'text',
+				dataType: 'html',
 				success: function (stored){
+
+					var cleanedStored = $.parseHTML(stored)
+
+					$(cleanedStored).find('head').remove();
 
 					var temp = document.createElement('div');
 
@@ -487,25 +495,29 @@ init : function(){
 				})},
 		njax = function () {$.ajax({
 				
-						url: n,
-						dataType: 'text',
-						success: function (stored){
+				url: n,
+				dataType: 'html',
+				success: function (stored){
 
-							var temp = document.createElement('div');
+					var cleanedStored = $.parseHTML(stored)
 
-							document.querySelector('body').appendChild(temp).style.display = 'none';
+					$(cleanedStored).find('head').remove();
 
-							temp.innerHTML = stored;
+					var temp = document.createElement('div');
 
-							var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
+					document.querySelector('body').appendChild(temp).style.display = 'none';
 
-							var test = temp.querySelector('#main_slide');
+					temp.innerHTML = stored;
 
-							c.style.backgroundImage = 'url("' + storedFeatured + '")'
+					var	storedFeatured = temp.querySelector('#main_slide').getAttribute('data-url');
 
-							temp.remove();
+					var test = temp.querySelector('#main_slide');
 
-						}
+					c.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+					temp.remove();
+
+				}
 
 					})},
 		leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
