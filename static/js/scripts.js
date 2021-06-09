@@ -367,17 +367,15 @@ init : function(){
 		loadUrl,
 		loadState = false,
 		isVideo = false,
-		playMain =  function (b, mainVideo){
+		playMain =  function (container, video){
 
-				mainVideo.load();
+				video.load();
 
-				mainVideo.oncanplay = function (){
+				video.oncanplay = function (){
 
-				mainVideo.play();
+				video.play();
 
-				b.classList.remove('loadingImg');
-
-			
+				container.classList.remove('loadingImg');
 
 			}
 
@@ -429,21 +427,7 @@ init : function(){
 
 						thumbVidSrc.setAttribute('src', thumbVidattr);
 
-						videoLoaded(t, thumbVid);
-
-						function videoLoaded(t, thumbVid){
-
-								thumbVid.load();
-
-								thumbVid.oncanplay = function(){
-
-									thumbVid.play();
-
-									t.classList.remove('loadingImg');
-
-							}
-
-						}
+						playMain(t, thumbVid);
 
 					}
 
