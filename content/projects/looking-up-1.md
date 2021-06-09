@@ -5,7 +5,7 @@ year_tag: "2021"
 material: Stainless Steel
 featured: /images/uploads/Test_WebVideo.mp4
 thumbnailImages:
-  - image: /images/uploads/Test_WebVideo.mp4
+  - image: /images/uploads/5174.1_50'_Looking_Up_Process_005.jpeg
   - image: /images/uploads/5174.1_50'_LookingUp_Process_040.jpeg
   - image: /images/uploads/5174.1_50'_LookingUp_Process_076.jpeg
 material_tag:
