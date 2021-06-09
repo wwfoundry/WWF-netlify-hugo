@@ -363,13 +363,43 @@ init : function(){
 		lazyLoad = function (info){
 
 			var thumbs = info.getElementsByClassName('thumbnail'),
-				i;
+				temp = info.getElementsByClassName('temp'),
+				i,
+				t;
 
 			for (i = 0; i < thumbs.length; i++){
 
 				var thumbBGattr = thumbs[i].getAttribute('data-url');
 
-				thumbs[i].style.backgroundImage = "url(" + thumbBGattr + ")"
+				var cachedImg = document.createElement('img');
+
+				cachedImg.classList.add('hide', 'temp');
+
+				document.querySelector('.thumbnails').appendChild(cachedImg).style.display = 'none';
+
+				cachedImg.src = thumbBGattr;
+
+				t = thumbs[i];
+
+				replaceWithCache(t, cachedImg)
+
+				function replaceWithCache(t, cachedImg){
+
+					cachedImg.onload = function(){
+
+						var cachedSrc = cachedImg.src;
+
+						cachedImg.remove();
+
+						console.log('work');
+
+						t.style.backgroundImage = "url(" + cachedSrc + ")"
+
+						t.classList.remove('loadingImg');
+
+					}
+
+				}
 
 			}
 
@@ -484,8 +514,8 @@ init : function(){
 	//Liquid Slides
 
 	var a = document.createElement('div'),
-			b = document.createElement('div'),
-			c = document.createElement('div');
+		b = document.createElement('div'),
+		c = document.createElement('div');
 
 	//Position Rules
 

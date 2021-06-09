@@ -475,7 +475,28 @@ label{
   margin:10px;
 }
 
+.loadingImg{
+  background-image:unset!important;
+  background:#E4E5E6;
+  position: relative;
+}
 
+.loadingImg:before{
+    content:'';
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin: 0 auto;
+  /*  margin-top: -15px;*/
+    border-radius: 100%;
+    border: 1px solid transparent;
+    border-top-color: #3b3b43;
+    animation: spinner .6s linear infinite;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
 
 /*3) Typography */
 /*---------------*/
