@@ -383,9 +383,9 @@ init : function(){
 		lazyLoad = function (info){
 
 			var thumbs = info.getElementsByClassName('thumbnail'),
-				temp = info.getElementsByClassName('temp'),
-				i,
-				t;
+					temp = info.getElementsByClassName('temp'),
+					i,
+					t;
 
 			for (i = 0; i < thumbs.length; i++){
 
@@ -501,53 +501,11 @@ init : function(){
 					}
 
 				})},
-		pjax = function () {$.ajax({
-								
-				url: p,
-				dataType: 'text',
-				success: function (stored){
-
-					var cleanedStored = $.parseHTML(stored),
-						tempStored = $('<div>').append(cleanedStored),
-						tempHTML;
-
-					tempStored.find('link').remove();
-
-					tempHtml = tempStored.html();
-
-					var temp = document.createElement('div');
-
-					document.querySelector('body').appendChild(temp).style.display = 'none';
-
-					temp.innerHTML = tempHtml;
-
-					var mainslideObj = temp.querySelector('#main_slide');
-
-					if ( !mainslideObj.classList.contains('video') ){
-
-						var	storedFeatured = mainslideObj.getAttribute('data-url');
-
-						a.style.backgroundImage = 'url("' + storedFeatured + '")'
-
-					} else {
-
-						var storedFeaturedVideo = mainslideObj.innerHTML;
-
-						a.innerHTML = storedFeaturedVideo;
-
-						a.classList.add('video', 'loadingImg');
-
-						a.querySelector('video').pause();
-
-					}
-
-					temp.remove();
-				}
-
-				})},
-		njax = function () {$.ajax({
+		replaceSlide,
+		slideUrl,
+		slideJax = function (replaceSlide, slideUrl) {$.ajax({
 				
-				url: n,
+				url: slideUrl,
 				dataType: 'text',
 				success: function (stored){
 
@@ -571,19 +529,21 @@ init : function(){
 
 						var	storedFeatured = mainslideObj.getAttribute('data-url');
 
-						c.style.backgroundImage = 'url("' + storedFeatured + '")'
+						replaceSlide.style.backgroundImage = 'url("' + storedFeatured + '")'
 
 					} else {
 
 						var storedFeaturedVideo = mainslideObj.innerHTML;
 
-						c.innerHTML = storedFeaturedVideo;
+						replaceSlide.innerHTML = storedFeaturedVideo;
 
-						c.classList.add('video', 'loadingImg');
+						replaceSlide.classList.add('video', 'loadingImg');
 
-						c.querySelector('video').pause();
+						replaceSlide.querySelector('video').pause();
 
 					}
+
+					console.log('works')
 
 					temp.remove();
 
@@ -834,12 +794,20 @@ init : function(){
 
 			if (p){
 
-				pjax();
+				replaceSlide = a;
+
+				slideUrl = p;
+
+				slideJax(replaceSlide, slideUrl);
 			}
 
 			if (n){
 
-				njax();
+				replaceSlide = c;
+
+				slideUrl = n;
+
+				slideJax(replaceSlide, slideUrl);
 
 			}
 
@@ -881,9 +849,11 @@ init : function(){
 
 			}
 
-		p = prevPath;
-		
-		pjax(p);
+		slideUrl = prevPath;
+
+		replaceSlide = a;
+
+		slideJax(replaceSlide, slideUrl);
 
 	}
 
@@ -921,10 +891,12 @@ init : function(){
 				}
 
 			}
-
-		n = nextPath;
 		
-		njax(n);
+		replaceSlide = c;
+
+		slideUrl = nextPath;
+
+		slideJax(replaceSlide, slideUrl);
 
 	}
 
