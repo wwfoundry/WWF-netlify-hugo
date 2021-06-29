@@ -629,27 +629,29 @@ nav.home{
   width: 30px;
   height: 1px;
   background-color: black;
-  transition:transform ease-in-out .25s;
   margin-left: auto;
   margin-right: auto;
+  -webkit-transition: -webkit-transform 0.25s ease;
+  -webkit-transition: transform 0.25s ease;
+  -moz-transition: -moz-transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 nav.active{
   filter: invert(1);
   position: fixed;
-  border-bottom: solid 1px black;
   box-shadow: unset!important;
 }
 
 nav.home.active{
-  border-bottom: solid 1px white;
   filter: unset;
 }
 
 #bar1.active{
 
   transform: rotate(45deg);
-
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
 }
 
 #bar2{
@@ -664,9 +666,9 @@ opacity: 1;
 }
 
 #bar3.active{
-
   transform: rotate(-45deg);
-
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
 }
 
 nav.home>#menu>#controls>#hamburger>.bar{
@@ -880,6 +882,7 @@ footer.innner_content{
 	object-fit:cover;
 	width:100vw;
 	height:100vh;
+  background-color: black;
 }
 
 #main_slide>ul{
@@ -1434,6 +1437,7 @@ footer.innner_content{
     width:270px;
     margin-left:auto;
     margin-right:auto;
+    padding-bottom: 10px;
 }
 
 }

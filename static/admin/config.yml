@@ -189,7 +189,20 @@ collections:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'contact'}
           - {label: 'Title', name: 'title', widget: 'string'}
           - {label: 'Intro', name: 'intro', widget: 'markdown'}
-          - {label: "Location", name: "location", widget: "map" }
+          - label: 'Locations'
+            label_singular: 'Location'
+            name: 'locations'
+            widget: 'list'
+            fields:
+              - label: 'Location Name'
+                name: 'location_name'
+                widget: 'string'
+              - label: 'Location Address'
+                name: 'location_address'
+                widget: 'text'
+              - label: 'Coordinates'
+                name: 'coordinates'
+                widget: 'map'
   - name: 'custom_page'
     label: 'Custom Page'
     folder: 'content/custom_page'

@@ -36,15 +36,22 @@ callPageJS = {
 
 		//Menu Behavior
 
-		var multiBurger = $("#hamburger");
+		var multiBurger = $("#hamburger"),
+				field = window.innerWidth,
+				fieldY = window.innerHeight,
+				menuWrapper = $('#side_menu_wrapper');
 
 		multiBurger.on("click", function(e){
+
+			menuWrapper.css('height', fieldY);
+
+			console.log(fieldY);
 
 			$('nav').addClass('active');
 
 			$('.bar').addClass('active');
 
-			$('#side_menu_wrapper').fadeIn(300).addClass("active");
+			menuWrapper.fadeIn(300).addClass("active");
 
 			$('body').addClass('locked');
 
@@ -58,7 +65,7 @@ callPageJS = {
 
 				$('.bar').removeClass('active');
 
-				$('#side_menu_wrapper').fadeOut(300).removeClass("active");
+				menuWrapper.fadeOut(300).removeClass("active");
 
 				$('body').removeClass('locked');
 
@@ -69,8 +76,6 @@ callPageJS = {
 		});
 
 		var navParent = $('nav'),
-					field = window.innerWidth,
-					fieldY = window.innerHeight,
 					navHeight = navParent.height(),
 					filledElem = document.createElement('div');
 
@@ -169,7 +174,7 @@ callPageJS = {
 
 			if( newField != field && newFieldY != fieldY ){
 
-				console.log('resized')
+				console.log('resized');
 
 				windowHeight = window.innerHeight;
 			
@@ -350,162 +355,93 @@ init : function(){
 			fieldY = window.innerHeight;
 
 	var parent = document.querySelector('#slide_container'),
-		current = document.querySelector('#main_slide'),
-		currentUrl = current.getAttribute('data-url'),
-		currentInner = current.innerHTML,
-		arrowPrev = document.querySelector('#arrow_left'),
-		arrowNext = document.querySelector('#arrow_right'),
-		slideAreaContainer = document.querySelector('.project_slide'),
-		slideID = slideAreaContainer.id.replace( / +/g, '-' ).toLowerCase(),
-		totalPages = slideAreaContainer.getAttribute('data-total'),
-		p,
-		n,
-		d,
-		trigger,
-		anim,
-		currentPage = window.location.pathname,
-		loadUrl,
-		loadState = false,
-		isVideo = false,
-		playMain =  function (container, video){
+			current = document.querySelector('#main_slide'),
+			currentUrl = current.getAttribute('data-url'),
+			currentInner = current.innerHTML,
+			arrowPrev = document.querySelector('#arrow_left'),
+			arrowNext = document.querySelector('#arrow_right'),
+			slideAreaContainer = document.querySelector('.project_slide'),
+			slideID = slideAreaContainer.id.replace( / +/g, '-' ).toLowerCase(),
+			totalPages = slideAreaContainer.getAttribute('data-total'),
+			p,
+			n,
+			d,
+			trigger,
+			anim,
+			currentPage = window.location.pathname,
+			loadUrl,
+			loadState = false,
+			isVideo = false,
+			playMain =  function (container, video){
 
-				video.load();
+					video.load();
 
-				video.oncanplay = function (){
+					video.oncanplay = function (){
 
-				video.play();
+					video.play();
 
-				container.classList.remove('loadingImg');
+					container.classList.remove('loadingImg');
 
-			}
+				}
 
-		},
-		lazyLoad = function (info){
+			},
+			lazyLoad = function (info){
 
-			var thumbs = info.getElementsByClassName('thumbnail'),
-					temp = info.getElementsByClassName('temp'),
-					i,
-					t;
+				var thumbs = info.getElementsByClassName('thumbnail'),
+						temp = info.getElementsByClassName('temp'),
+						i,
+						t;
 
-			for (i = 0; i < thumbs.length; i++){
+				for (i = 0; i < thumbs.length; i++){
 
-				var t = thumbs[i],
-						thumbBGattr = t.getAttribute('data-url'),
-						cachedImg = document.createElement('img');
+					var t = thumbs[i],
+							thumbBGattr = t.getAttribute('data-url'),
+							cachedImg = document.createElement('img');
 
-				cachedImg.classList.add('hide', 'temp');
+					cachedImg.classList.add('hide', 'temp');
 
-				document.querySelector('.thumbnails').appendChild(cachedImg).style.display = 'none';
+					document.querySelector('.thumbnails').appendChild(cachedImg).style.display = 'none';
 
-				if( !t.classList.contains('video') ){
+					if( !t.classList.contains('video') ){
 
-						cachedImg.src = thumbBGattr;
+							cachedImg.src = thumbBGattr;
 
-						replaceWithCache(t, cachedImg)
+							replaceWithCache(t, cachedImg)
 
-						function replaceWithCache(t, cachedImg){
+							function replaceWithCache(t, cachedImg){
 
-							cachedImg.onload = function(){
+								cachedImg.onload = function(){
 
-								var cachedSrc = cachedImg.src;
+									var cachedSrc = cachedImg.src;
 
-								cachedImg.remove();
+									cachedImg.remove();
 
-								t.style.backgroundImage = "url(" + cachedSrc + ")"
+									t.style.backgroundImage = "url(" + cachedSrc + ")"
 
-								t.classList.remove('loadingImg');
+									t.classList.remove('loadingImg');
+
+								}
 
 							}
 
-						}
+						} else {
 
-					} else {
+							var thumbVid = t.querySelector('video'),
+									thumbVidSrc = thumbVid.querySelector('source'),
+									thumbVidattr = thumbVidSrc.getAttribute('data-url');
 
-						var thumbVid = t.querySelector('video'),
-								thumbVidSrc = thumbVid.querySelector('source'),
-								thumbVidattr = thumbVidSrc.getAttribute('data-url');
+							thumbVidSrc.setAttribute('src', thumbVidattr);
 
-						thumbVidSrc.setAttribute('src', thumbVidattr);
-
-						playMain(t, thumbVid);
-
-					}
-
-			}
-
-		},
-		infojax = function () {$.ajax({
-			
-					url: loadUrl,
-					dataType: 'text',
-					success: function (stored){
-
-						var cleanedStored = $.parseHTML(stored),
-							tempStored = $('<div>').append(cleanedStored),
-							tempHTML;
-
-						tempStored.find('link').remove();
-
-						tempHtml = tempStored.html();
-
-						var temp = document.createElement('div');
-
-						document.querySelector('body').appendChild(temp).style.display = 'none';
-
-						temp.innerHTML = tempHtml;
-
-						var	arrowLeftTemp = temp.querySelector('#arrow_left'),
-							arrowRightTemp = temp.querySelector('#arrow_right'),
-							arrowLeftState,
-							arrowRightState,
-							storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
-							storedID = temp.querySelector('.project_slide').id,
-							transID = storedID.replace( / +/g, '-' ).toLowerCase();
-
-						if ( arrowLeftTemp && arrowRightTemp ){
-
-							arrowLeftState = arrowLeftTemp.getAttribute('href');
-							arrowRightState = arrowRightTemp.getAttribute('href');
-
-							arrowPrev.setAttribute( 'href', arrowLeftState );
-							arrowNext.setAttribute( 'href', arrowRightState );
-
-						} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
-
-							arrowRightState = arrowRightTemp.getAttribute('href');
-
-							arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
-							arrowNext.setAttribute( 'href', arrowRightState );
-
-						} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
-
-							arrowLeftState = arrowLeftTemp.getAttribute('href');
-
-							arrowNext.setAttribute( 'href', '/gallery/' );
-							arrowPrev.setAttribute( 'href', arrowLeftState );
+							playMain(t, thumbVid);
 
 						}
 
-						info.innerHTML = storedInfo;
-						slideAreaContainer.id = transID;
+				}
 
-						lazyLoad(info);
-
-						temp.remove();
-
-						if (window.history.pushState)
-							{
-								window.history.pushState(null, null, loadUrl + '#' + transID);
-							}
-
-					}
-
-				})},
-		replaceSlide,
-		slideUrl,
-		slideJax = function (replaceSlide, slideUrl) {$.ajax({
+			},
+			infojax = function () {$.ajax({
 				
-				url: slideUrl,
+				url: loadUrl,
 				dataType: 'text',
 				success: function (stored){
 
@@ -523,35 +459,104 @@ init : function(){
 
 					temp.innerHTML = tempHtml;
 
-					var mainslideObj = temp.querySelector('#main_slide');
+					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
+						arrowRightTemp = temp.querySelector('#arrow_right'),
+						arrowLeftState,
+						arrowRightState,
+						storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
+						storedID = temp.querySelector('.project_slide').id,
+						transID = storedID.replace( / +/g, '-' ).toLowerCase();
 
-					if ( !mainslideObj.classList.contains('video') ){
+					if ( arrowLeftTemp && arrowRightTemp ){
 
-						var	storedFeatured = mainslideObj.getAttribute('data-url');
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+						arrowRightState = arrowRightTemp.getAttribute('href');
 
-						replaceSlide.style.backgroundImage = 'url("' + storedFeatured + '")'
+						arrowPrev.setAttribute( 'href', arrowLeftState );
+						arrowNext.setAttribute( 'href', arrowRightState );
 
-					} else {
+					} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
 
-						var storedFeaturedVideo = mainslideObj.innerHTML;
+						arrowRightState = arrowRightTemp.getAttribute('href');
 
-						replaceSlide.innerHTML = storedFeaturedVideo;
+						arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
+						arrowNext.setAttribute( 'href', arrowRightState );
 
-						replaceSlide.classList.add('video', 'loadingImg');
+					} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
 
-						replaceSlide.querySelector('video').pause();
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+
+						arrowNext.setAttribute( 'href', '/gallery/' );
+						arrowPrev.setAttribute( 'href', arrowLeftState );
 
 					}
 
-					console.log('works')
+					info.innerHTML = storedInfo;
+					slideAreaContainer.id = transID;
+
+					lazyLoad(info);
 
 					temp.remove();
 
+					if (window.history.pushState)
+						{
+							window.history.pushState(null, null, loadUrl + '#' + transID);
+						}
+
 				}
 
-					})},
-		leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
-		rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>"
+			})},
+			replaceSlide,
+			slideUrl,
+			slideJax = function (replaceSlide, slideUrl) {$.ajax({
+					
+					url: slideUrl,
+					dataType: 'text',
+					success: function (stored){
+
+						var cleanedStored = $.parseHTML(stored),
+							tempStored = $('<div>').append(cleanedStored),
+							tempHTML;
+
+						tempStored.find('link').remove();
+
+						tempHtml = tempStored.html();
+
+						var temp = document.createElement('div');
+
+						document.querySelector('body').appendChild(temp).style.display = 'none';
+
+						temp.innerHTML = tempHtml;
+
+						var mainslideObj = temp.querySelector('#main_slide');
+
+						if ( !mainslideObj.classList.contains('video') ){
+
+							var	storedFeatured = mainslideObj.getAttribute('data-url');
+
+							replaceSlide.style.backgroundImage = 'url("' + storedFeatured + '")'
+
+						} else {
+
+							var storedFeaturedVideo = mainslideObj.innerHTML;
+
+							replaceSlide.innerHTML = storedFeaturedVideo;
+
+							replaceSlide.classList.add('video', 'loadingImg');
+
+							replaceSlide.querySelector('video').pause();
+
+						}
+
+						console.log('works')
+
+						temp.remove();
+
+					}
+
+						})},
+			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
+			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>"
 
 	//Liquid Slides
 
@@ -817,37 +822,37 @@ init : function(){
 	function getNextP(){
 
 		var pageP,
-			intP,
-			newP,
-			prevPath,
-			nextLast = totalPages - 1;
+				intP,
+				newP,
+				prevPath,
+				nextLast = totalPages - 1;
 
-		 	if ( p == null) {
+	 	if ( p == null) {
 
-		 		prevPath = '/gallery/page/' + nextLast + '/';
+	 		prevPath = '/gallery/page/' + nextLast + '/';
 
-		 	} else if ( p.match(/\d+/) == undefined ){
+	 	} else if ( p.match(/\d+/) == undefined ){
 
-				prevPath = '/gallery/page/' + totalPages + '/';
+			prevPath = '/gallery/page/' + totalPages + '/';
 
+		} else {
+
+			pageP = p.match(/\d+/);
+
+			intP = parseInt(pageP, 10)
+
+			newP = intP - 1;
+
+			if (newP <= 1 ){
+
+				prevPath = '/gallery/'
 			} else {
 
-				pageP = p.match(/\d+/);
-
-				intP = parseInt(pageP, 10)
-
-				newP = intP - 1;
-
-				if (newP <= 1 ){
-
-					prevPath = '/gallery/'
-				} else {
-
-					prevPath = '/gallery/page/' + newP + '/'
-
-				}
+				prevPath = '/gallery/page/' + newP + '/'
 
 			}
+
+		}
 
 		slideUrl = prevPath;
 
@@ -1001,5 +1006,44 @@ init : function(){
 
 	});
 }
-  }
+},
+contact : {
+init : function(){
+			//MAP
+
+		var map = L.map('mapBox', {
+		    center: [46.06362892338259, -118.36210206931129],
+		    zoom: 13,
+		    zoomControl: true
+		  });   
+
+		L.tileLayer('https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=UqsRtrg9BcWIXlx6LquC', {
+			maxZoom: 20,
+		//    mapbox://styles/mapbox/satellite-streets-v11
+			accessToken: 'UqsRtrg9BcWIXlx6LquC'
+		}).addTo(map);
+
+		var markerIcon = L.icon({
+			iconUrl: '/images/resources/location.svg',
+			iconSize: [38, 95],
+			iconAnchor: [0,5]
+		});
+
+		// L.marker([46.06362892338259, -118.36210206931129], {icon: markerIcon}).addTo(map);
+
+		var locations = [
+		  ["Main Campus", 46.06362892338259, -118.36210206931129],
+		  ["Crating Facility", 46.07190026554796, -118.35182193896028],
+		  ["Avery Facility", 46.05659416468007, -118.35979443478293],
+		  ["Mold Facility", 46.07484264936125, -118.35028436010276]
+
+		];
+
+		for (var i = 0; i < locations.length; i++) {
+		  marker = new L.marker([locations[i][1], locations[i][2]],{icon: markerIcon})
+		    .bindPopup(locations[i][0])
+		    .addTo(map);
+		}
+}
+}
 }
