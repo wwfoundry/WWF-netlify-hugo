@@ -319,6 +319,8 @@ index : {
 
 			}
 
+		  console.log('filtered')
+
 		});
 
 		if(window.location.hash){
@@ -1029,14 +1031,18 @@ init : function(){
 			iconAnchor: [0,5]
 		});
 
-		// L.marker([46.06362892338259, -118.36210206931129], {icon: markerIcon}).addTo(map);
+	// var mapDataContainer = document.getElementsByClassName('mapData'),
+
+
+	// 	for (var i = 0; i <){
+
+	// 	}
 
 		var locations = [
 		  ["Main Campus", 46.06362892338259, -118.36210206931129],
 		  ["Crating Facility", 46.07190026554796, -118.35182193896028],
 		  ["Avery Facility", 46.05659416468007, -118.35979443478293],
 		  ["Mold Facility", 46.07484264936125, -118.35028436010276]
-
 		];
 
 		for (var i = 0; i < locations.length; i++) {

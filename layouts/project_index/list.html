@@ -3,25 +3,26 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
-	<div id="filter_menu">
+	<div class="abs_wrapper">
+		<div id="filter_menu">
 
-		{{ $projects := .Site.GetPage "projects"}}
+			{{ $projects := .Site.GetPage "projects"}}
 
-		{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
+			{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
-		<div class="left_justified">
-			<label>Filter Projects</label>
-			<div id="filter_menu_inner">
-				<button class="filter_option material"><h3>Material</h3></button>
-				<button class="filter_option process"><h3>Process</h3></button>
-				<button class="filter_option year"><h3>Year</h3></button>
-				<button class="filter_option all"><h3>All</h3></button>
+			<div class="left_justified">
+				<label>Filter Projects</label>
+				<div id="filter_menu_inner">
+					<button class="filter_option material"><h3>Material</h3></button>
+					<button class="filter_option process"><h3>Process</h3></button>
+					<button class="filter_option year"><h3>Year</h3></button>
+					<button class="filter_option all"><h3>All</h3></button>
+				</div>
+			</div>
+			<div class="right_justified">
+				<h1 class="page_title">{{.Title}}</h1>
 			</div>
 		</div>
-		<div class="right_justified">
-			<h1 class="page_title">{{.Title}}</h1>
-		</div>
-	</div>
 		<div class="filter overlay">
 			<button class="filter_xit" id="xit">
 						<img class="icon" src="/images/resources/xit.svg">
@@ -54,6 +55,7 @@
 
 			</div>
 		</div>
+	</div>
 	<div id="index_container">
 		<div class="index">
 			{{range $sortedProjects }}
@@ -87,5 +89,5 @@
 		</div>
 	</div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.3/jquery.scrollTo.min.js"></script>
 {{ end }}

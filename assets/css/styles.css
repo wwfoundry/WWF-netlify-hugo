@@ -506,10 +506,8 @@ label{
 /*---------------*/
 
 h1{
-
   font-size:2.1em;
-  font-weight:normal;
-
+  font-weight:bold;
 }
 
 
@@ -543,11 +541,11 @@ h3{
 nav{
 	display:flex;
   flex: 0 1 auto;
-  width:calc(100% - 50px);
-	max-width: 1850px;
+  width:calc(100% - 100px);
+/*	max-width: 1850px;
   margin-left: auto;
-  margin-right: auto;
-  padding: 25px 25px 0px 25px;
+  margin-right: auto;*/
+  padding: 50px 50px 0px 50px;
 	flex-direction:row;
 	/*border-bottom:solid .012px #bebec1;*/
 	justify-content: space-between;
@@ -778,7 +776,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 .inner_content{
     display: block;
-    max-width: 1850px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding: 50px 0px 50px 0px;
@@ -795,12 +793,25 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 }
 
+.collapse>.right_justified_partial{
+  width: 25%;
+}
+
 .left_justified{
 
 }
 
 .right_justified{
+  margin-bottom: 30px;
+  float: right;
+}
 
+.vert_centered_flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 25px;
 }
 
 #fullHeight{
@@ -1137,7 +1148,7 @@ footer.innner_content{
 }
 
 .project{
-  width:20%;
+  width:25%;
   display:none;
   flex-direction:column;
   justify-content: center;
@@ -1158,12 +1169,40 @@ footer.innner_content{
   object-fit: cover;
 }
 
+/*9) Contact */
+/*---------------*/
+
+#mapBox{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mapData{
+  display: none;
+}
+
+.vert_centered_flex>a{
+  margin-bottom: 10px;
+  width: fit-content;
+}
 
 
-/*9) Media Queries */
+/*10) Media Queries */
 /*---------------*/
 
 /*Content Sections*/
+
+@media screen and (max-width:1600px){
+
+  nav{
+    padding: 50px 25px 0px;
+    width: calc(100% - 50px);
+  }
+
+
+
+}
 
 @media screen and (max-width:800px){
 
@@ -1205,6 +1244,10 @@ footer.innner_content{
 
    margin: 0 -10px;
 
+  }
+
+  .inner_content.margin{
+    margin: unset;
   }
 
   #xit{
@@ -1268,6 +1311,7 @@ footer.innner_content{
     width:100%;
     height:calc(55vh - 100px);
     min-height: 250px;
+    overflow: hidden;
   }
 
   #slide_container{
@@ -1373,7 +1417,7 @@ footer.innner_content{
 @media screen and (max-width:900px){
 
   #filter_menu{
-    flex-wrap:wrap-reverse;
+    flex-direction: column-reverse;
   }
 
   #index_container{
@@ -1439,5 +1483,19 @@ footer.innner_content{
     margin-right:auto;
     padding-bottom: 10px;
 }
+
+}
+
+/*Contact*/
+
+@media screen and (max-width:1100px){
+
+  .project_slide.collapse{
+    flex-direction: column;
+  }
+
+  .collapse>.right_justified_partial{
+    width: 100%;
+  }
 
 }
