@@ -3,59 +3,60 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
-	<div class="abs_wrapper">
-		<div id="filter_menu">
+		<div id="filter_wrapper">
+			<div id="filter_menu">
 
-			{{ $projects := .Site.GetPage "projects"}}
+				{{ $projects := .Site.GetPage "projects"}}
 
-			{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
+				{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
-			<div class="left_justified">
-				<label>Filter Projects</label>
-				<div id="filter_menu_inner">
-					<button class="filter_option material"><h3>Material</h3></button>
-					<button class="filter_option process"><h3>Process</h3></button>
-					<button class="filter_option year"><h3>Year</h3></button>
-					<button class="filter_option all"><h3>All</h3></button>
+				<div class="left_justified">
+					<label>Filter Projects</label>
+					<div id="filter_menu_inner">
+						<button class="filter_option material"><h3>Material</h3></button>
+						<button class="filter_option process"><h3>Process</h3></button>
+						<button class="filter_option year"><h3>Year</h3></button>
+						<button class="filter_option all"><h3>All</h3></button>
+					</div>
+				</div>
+				<div class="right_justified">
+					<h1 class="page_title">{{.Title}}</h1>
 				</div>
 			</div>
-			<div class="right_justified">
-				<h1 class="page_title">{{.Title}}</h1>
+			<div class="filter overlay">
+				<button class="filter_xit" id="xit">
+							<img class="icon" src="/images/resources/xit.svg">
+				</button>
+				<div id="filter_inner">
+
+					{{ range sort .Site.Data.tags.material_tag }}
+						{{with .material_string}}
+							<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+								<h3>{{.}}</h3>
+							</button>
+						{{end}}
+					{{end}}
+
+					{{range sort .Site.Data.tags.process_tag }}
+						{{with .process_string }}
+							<button class="process_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+								<h3>{{.}}</h3>
+							</button>
+						{{end}}
+					{{end}}
+
+					{{range sort .Site.Data.tags.year_tag }}
+						{{with .year_string }}
+							<button class="year_tag tag margin " data-filter="{{ replaceRE "(\\s)" "" . | lower}}">
+								<h3>{{.}}</h3>
+							</button>
+						{{end}}
+					{{end}}
+
+				</div>
 			</div>
 		</div>
-		<div class="filter overlay">
-			<button class="filter_xit" id="xit">
-						<img class="icon" src="/images/resources/xit.svg">
-			</button>
-			<div id="filter_inner">
-
-				{{ range sort .Site.Data.tags.material_tag }}
-					{{with .material_string}}
-						<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-							<h3>{{.}}</h3>
-						</button>
-					{{end}}
-				{{end}}
-
-				{{range sort .Site.Data.tags.process_tag }}
-					{{with .process_string }}
-						<button class="process_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-							<h3>{{.}}</h3>
-						</button>
-					{{end}}
-				{{end}}
-
-				{{range sort .Site.Data.tags.year_tag }}
-					{{with .year_string }}
-						<button class="year_tag tag margin " data-filter="{{ replaceRE "(\\s)" "" . | lower}}">
-							<h3>{{.}}</h3>
-						</button>
-					{{end}}
-				{{end}}
-
-			</div>
-		</div>
-	</div>
+		<div class="abs_wrapper"></div>
 	<div id="index_container">
 		<div class="index">
 			{{range $sortedProjects }}

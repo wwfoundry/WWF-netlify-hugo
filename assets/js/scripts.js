@@ -39,15 +39,26 @@ callPageJS = {
 		var multiBurger = $("#hamburger"),
 				field = window.innerWidth,
 				fieldY = window.innerHeight,
-				menuWrapper = $('#side_menu_wrapper');
+				menuWrapper = $('#side_menu_wrapper'),
+				navParent = $('nav'),
+				navHeight = navParent.height(),
+				filledElem = document.createElement('div');
+;
 
 		multiBurger.on("click", function(e){
+
+			if ( !navParent.hasClass('scroll') ){
+
+				filledElem.style.height = '55px';
+				$('body').prepend(filledElem);
+
+			}
 
 			menuWrapper.css('height', fieldY);
 
 			console.log(fieldY);
 
-			$('nav').addClass('active');
+			navParent.addClass('active');
 
 			$('.bar').addClass('active');
 
@@ -59,7 +70,7 @@ callPageJS = {
 
 			if ( multiBurger.hasClass('active') ){
 
-				$('nav').removeClass('active');
+				navParent.removeClass('active');
 
 				multiBurger.removeClass('active');
 
@@ -69,15 +80,17 @@ callPageJS = {
 
 				$('body').removeClass('locked');
 
+				if ( !navParent.hasClass('scroll') ){
+
+				filledElem.remove();
+
+				}
+
 			} else {
 				multiBurger.addClass('active');
 			}
 
 		});
-
-		var navParent = $('nav'),
-					navHeight = navParent.height(),
-					filledElem = document.createElement('div');
 
 		$(window).on('scroll', function(){
 
@@ -219,17 +232,21 @@ index : {
 		}
 
 		var o = $('.overlay'),
-			xit = $('.filter_xit'),
-			container = $('.tag'),
-			material_container = $('.material_tag'),
-			process_container = $('.process_tag'),
-			year_container = $('.year_tag'),
-			m = $('#filter_menu'),
-			all = $('.all'),
-			tagBtn = $('.filter_option'),
-			filterTag = $('.tag'),
-			filterProjects = document.getElementsByClassName('project'),
-			filterLength = filterProjects.length;
+				abs = $('.abs_wrapper'),
+				bodyWrapper = $('.inner_content'),
+				indexContainer = $('#index_container'),
+				filterContainer = $('#filter_wrapper'),
+				xit = $('.filter_xit'),
+				container = $('.tag'),
+				material_container = $('.material_tag'),
+				process_container = $('.process_tag'),
+				year_container = $('.year_tag'),
+				m = $('#filter_menu'),
+				all = $('.all'),
+				tagBtn = $('.filter_option'),
+				filterTag = $('.tag'),
+				filterProjects = document.getElementsByClassName('project'),
+				filterLength = filterProjects.length;
 
 		tagBtn.on('click', function(){
 
@@ -237,9 +254,21 @@ index : {
 
 				if( !o.hasClass('active') ){
 
+					$('#filter_inner').css({'position':'relative', 'display': 'flex'});
+
+					$('body').addClass('locked');
+
+					abs.fadeIn(300).addClass('active');
+
+					indexContainer.addClass('active');
+
+					filterContainer.addClass('active');
+
+					// gsap.to(filterContainer, {duration: .5, top: '0'});
+
 					o.fadeIn(300).addClass('active');
 
-					o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+					o.css('borderTop', 'solid 1px black');
 
 				}
 
@@ -249,7 +278,7 @@ index : {
 
 				container.not(material_container).css('display', 'none');
 
-				material_container.fadeIn(300);
+				material_container.css('display', 'block');
 
 				openFilterMenu()
 
@@ -257,7 +286,7 @@ index : {
 
 				container.not(process_container).css('display', 'none');
 
-				process_container.fadeIn(300);
+				process_container.css('display', 'block');
 
 				openFilterMenu()
 
@@ -265,7 +294,7 @@ index : {
 
 				container.not(year_container).css('display', 'none');
 
-				year_container.fadeIn(300);
+				year_container.css('display', 'block');
 
 				openFilterMenu()
 
@@ -279,19 +308,35 @@ index : {
 
 		});
 
+	function closeFilterWindow(){
+
+				o.fadeOut(300).removeClass('active');
+
+				o.css('borderBottom', 'unset');
+
+				abs.fadeOut(300).removeClass('active');
+
+				container.fadeOut(300);
+
+				filterContainer.removeClass('active').attr('style', '');;
+
+				indexContainer.removeClass('active').css('opacity', '1');
+
+				$('body').removeClass('locked');
+
+		}
+
 		xit.on('click', function(){
 
 			if( o.hasClass('active') ){
 
-				o.fadeOut(300).removeClass('active');
-
-				o.css({'borderBottom' : 'unset', 'borderTop' : 'unset'});
-
-				container.fadeOut(300);
+				$('#filter_inner').css({'position':'absolute', 'display': 'none'});
 
 				$('.project').addClass('filtered');
 
 				all.fadeOut(300).removeClass('active');
+
+				closeFilterWindow();
 
 			}
 
@@ -318,6 +363,8 @@ index : {
 				}
 
 			}
+
+			closeFilterWindow();
 
 		  console.log('filtered')
 
@@ -721,7 +768,7 @@ init : function(){
 			if ( d == 'prev'){
 
 				var animBprev = gsap.to(b, {duration: .5, left: '110%'}),
-				 	animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
+				 		animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
 
 				if (!animAprev.isActive()){
 

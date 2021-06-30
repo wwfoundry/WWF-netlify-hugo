@@ -453,7 +453,7 @@ h2{
 label{
   padding-bottom:20px;
   font-family:'Supria Sans', sans-serif;
-  font-size:1em;
+  font-size:1rem;
   font-weight:normal;
   text-transform: uppercase;
   cursor:inherit;
@@ -507,7 +507,7 @@ label{
 
 h1{
   font-size:2.1em;
-  font-weight:bold;
+  font-weight:normal;
 }
 
 
@@ -770,6 +770,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 .main_content{
     display: block;
+    position: relative;
     min-height: calc(100vh - 125px);
     padding: 50px 25px 25px 25px;
 }
@@ -780,6 +781,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
     margin-left: auto;
     margin-right: auto;
     padding: 50px 0px 50px 0px;
+    position: relative;
 }
 
 .project_slide{
@@ -835,6 +837,25 @@ border-bottom:solid 1px white;
   margin-right: -10px;
   margin-left: -10px;
 }
+
+.abs_wrapper{
+
+}
+
+.abs_wrapper{
+  display: none;
+  background-color: white;
+/*  opacity: .75;*/
+  position: fixed;
+  z-index: 5000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 
 /*6) Footer*/
 /*---------------*/
@@ -1082,12 +1103,28 @@ footer.innner_content{
   position:relative;
 }
 
+#filter_wrapper{
+}
+
+#filter_wrapper.active{
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: calc(100% - 50px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 25px;
+  max-width: 1400px;
+  z-index: 5001;
+}
+
 #filter_inner{
   width: calc(100% - 50px);
   height:fit-content;
   display:flex;
   flex-wrap:wrap;
   bottom:35%;
+  overflow: auto;
 }
 
 #filter_inner>button{
@@ -1112,7 +1149,7 @@ footer.innner_content{
 .overlay{
   display:none;
   min-height:unset;
-  transition:padding ease-in-out .5s;
+/*  transition:padding ease-in-out .5s;*/
 }
 
 .overlay.active{
@@ -1145,6 +1182,9 @@ footer.innner_content{
 
 #index_container{
 
+}
+
+#index_container.active{
 }
 
 .project{
@@ -1185,6 +1225,10 @@ footer.innner_content{
 .vert_centered_flex>a{
   margin-bottom: 10px;
   width: fit-content;
+}
+
+.leaflet-control-attribution{
+  display: none;
 }
 
 
@@ -1230,6 +1274,7 @@ footer.innner_content{
   nav.scroll{
   background-color: white;
   position: fixed;
+  z-index: 4099;
   }
 
   #wwf_logo{
@@ -1442,6 +1487,11 @@ footer.innner_content{
     height:250px;
     width:100%;
     background-size:cover;
+  }
+
+  #filter_wrapper.active{
+    width: 100%;
+    padding: unset;
   }
 
 }
