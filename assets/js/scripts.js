@@ -211,6 +211,18 @@ callPageJS = {
 index : {
 	init : function(){
 
+		var oRemoveClass = $.fn.removeClass;
+		$.fn.removeClass = function () {
+		    for (var i in arguments) {
+		        var arg = arguments[i];
+		        if ( !! (arg && arg.constructor && arg.call && arg.apply)) {
+		            arg();
+		            delete arg;
+		        }
+		    }
+		    return oRemoveClass.apply(this, arguments);
+		}
+
 		var projectElem = document.getElementsByClassName('project'),
 		length = projectElem.length;
 
@@ -318,13 +330,13 @@ index : {
 
 				o.css('borderBottom', 'unset');
 
-				abs.fadeOut(300).removeClass('active');
+				container.fadeOut(300);
 
-				container.fadeOut(300, function(){
-					gsap.to(indexContainer, {duration: 1, autoAlpha: '1'});
-				});
+				filterContainer.removeClass('active', function(){
+					abs.css('display', 'none').removeClass('active');
+				}).attr('style', '');
 
-				filterContainer.removeClass('active').attr('style', '');;
+				gsap.to(indexContainer, {duration: 1.2, autoAlpha: '1'});
 
 				$('body').removeClass('locked');
 
