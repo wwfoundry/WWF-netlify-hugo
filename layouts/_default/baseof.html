@@ -2,11 +2,13 @@
 <html lang="en">
   {{partial "head" .}}
   <body>
-  	{{block "pageID" . }}{{end}}
     {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
     {{ block "header" . }}{{partial "nav" . }}{{end}}
     <div class="main_content" {{if .IsHome}}id="fullHeight"{{end}}>
-    {{ block "main" . }}{{ end }}
+      <div class="loaded_inner">
+        {{block "pageID" . }}{{end}}
+        {{ block "main" . }}{{ end }}
+     </div>
     </div>
     {{ block "footer" . }} {{partial "footer" . }} {{ end }}
   </body>
