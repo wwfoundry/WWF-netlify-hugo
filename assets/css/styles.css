@@ -453,7 +453,7 @@ h2{
 label{
   padding-bottom:20px;
   font-family:'Supria Sans', sans-serif;
-  font-size:1rem;
+  font-size:.9rem;
   font-weight:normal;
   text-transform: uppercase;
   cursor:inherit;
@@ -516,8 +516,8 @@ h2{
 }
 
 h3{
-  font-size:1.2em;
-  font-weight:bold;
+  font-size:1.2rem;
+  font-weight:400;
 }
 
 .title{
@@ -545,7 +545,7 @@ nav{
 /*	max-width: 1850px;
   margin-left: auto;
   margin-right: auto;*/
-  padding: 50px 50px 0px 50px;
+  padding: 40px 50px 0px 50px;
 	flex-direction:row;
 	/*border-bottom:solid .012px #bebec1;*/
 	justify-content: space-between;
@@ -1117,6 +1117,8 @@ footer.innner_content{
   padding: 0 25px;
   max-width: 1400px;
   z-index: 5001;
+  overflow: auto;
+  height: 100vh;
 }
 
 #filter_inner{
@@ -1125,7 +1127,6 @@ footer.innner_content{
   display:flex;
   flex-wrap:wrap;
   bottom:35%;
-  overflow: auto;
 }
 
 #filter_inner>button{
@@ -1284,6 +1285,15 @@ footer.innner_content{
 /*  z-index: 4099;*/
   }
 
+  #filter_inner>button{
+  cursor: pointer;
+  padding: 0px 10px;
+  }
+
+/*  #filter_inner>button>h3{
+    font-size: 1.2rem;
+  }*/
+
   #wwf_logo{
     width:270px;
   }
@@ -1353,7 +1363,7 @@ footer.innner_content{
 
 }
 
-@media screen and (max-width:1100px){
+@media screen and (max-width:1150px){
 
   .project_slide{
   flex-direction:column;

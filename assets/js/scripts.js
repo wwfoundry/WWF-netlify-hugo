@@ -30,6 +30,23 @@ callPageJS = {
 	common : {
 		init : function(){
 
+		// Single Page App Support
+
+		function verifyLink(linkElem){
+			return(linkElem.host = window.location.host);
+		}
+
+		$('a').each(function(){
+
+			if (verifyLink(this)){
+
+				$(this).addClass('internal');
+
+			}
+
+			
+		})
+
 		//Accents
 
 		var homeNav = document.querySelector('nav.home');
@@ -94,7 +111,7 @@ callPageJS = {
 
 		$(window).on('scroll', function(){
 
-			if(!navParent.hasClass('home') && field < 800){
+			if(!navParent.hasClass('home') && !($('#filter_wrapper').hasClass('active')) && field < 800){
 
 				if (document.body.scrollTop > 100 | document.documentElement.scrollTop > 100) {
 					filledElem.style.height = '55px';
