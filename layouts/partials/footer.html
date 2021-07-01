@@ -26,5 +26,6 @@
 	</div>
 </footer>
 <!--Functions-->
+<script src="/js/jquery.scrollTo.min.js"></script>
 {{ $js := resources.Get "js/scripts.js" | js.Build "scripts.js" | minify }}
 <script src="{{$js.RelPermalink}}"></script>

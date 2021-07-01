@@ -232,6 +232,9 @@ index : {
 
 				if( !o.hasClass('active') ){
 
+					$(window).scrollTo(document.querySelector('#filter_menu'), 1500, {easing: 'easeInOutQuart'});
+					console.log('works')
+
 					o.fadeIn(300).addClass('active');
 
 					o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});

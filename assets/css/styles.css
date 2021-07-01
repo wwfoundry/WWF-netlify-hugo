@@ -849,7 +849,7 @@ border-bottom:solid 1px white;
   position: fixed;
   z-index: 5000;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
   right: 0;
@@ -1108,6 +1108,7 @@ footer.innner_content{
 
 #filter_wrapper.active{
   position: fixed;
+  top:50px;
   left: 0;
   right: 0;
   width: calc(100% - 50px);
@@ -1149,7 +1150,7 @@ footer.innner_content{
 .overlay{
   display:none;
   min-height:unset;
-/*  transition:padding ease-in-out .5s;*/
+  transition:padding ease-in-out .5s;
 }
 
 .overlay.active{
@@ -1174,6 +1175,12 @@ footer.innner_content{
 
 .filter_option{
   margin-right:25px;
+  border-bottom:2px solid transparent;
+}
+
+.filter_option.btnActive{
+  margin-right:25px;
+  border-bottom:2px solid black;
 }
 
 .all{
@@ -1274,7 +1281,7 @@ footer.innner_content{
   nav.scroll{
   background-color: white;
   position: fixed;
-  z-index: 4099;
+/*  z-index: 4099;*/
   }
 
   #wwf_logo{
@@ -1488,6 +1495,10 @@ footer.innner_content{
     width:100%;
     background-size:cover;
   }
+
+}
+
+@media screen and (max-width:800px){
 
   #filter_wrapper.active{
     width: 100%;

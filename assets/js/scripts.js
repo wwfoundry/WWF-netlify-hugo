@@ -232,43 +232,45 @@ index : {
 		}
 
 		var o = $('.overlay'),
-				abs = $('.abs_wrapper'),
-				bodyWrapper = $('.inner_content'),
-				indexContainer = $('#index_container'),
-				filterContainer = $('#filter_wrapper'),
-				xit = $('.filter_xit'),
-				container = $('.tag'),
-				material_container = $('.material_tag'),
-				process_container = $('.process_tag'),
-				year_container = $('.year_tag'),
-				m = $('#filter_menu'),
-				all = $('.all'),
-				tagBtn = $('.filter_option'),
-				filterTag = $('.tag'),
-				filterProjects = document.getElementsByClassName('project'),
-				filterLength = filterProjects.length;
+			abs = $('.abs_wrapper'),
+			bodyWrapper = $('.inner_content'),
+			indexContainer = $('#index_container'),
+			filterContainer = $('#filter_wrapper'),
+			xit = $('.filter_xit'),
+			container = $('.tag'),
+			material_container = $('.material_tag'),
+			process_container = $('.process_tag'),
+			year_container = $('.year_tag'),
+			m = $('#filter_menu'),
+			all = $('.all'),
+			tagBtn = $('.filter_option'),
+			filterTag = $('.tag'),
+			filterProjects = document.getElementsByClassName('project'),
+			filterLength = filterProjects.length;
 
 		tagBtn.on('click', function(){
 
 			function openFilterMenu(){
 
+				var fromTop = filterContainer.offset().top - 50;
+
 				if( !o.hasClass('active') ){
 
-					$('#filter_inner').css({'position':'relative', 'display': 'flex'});
+					gsap.to(indexContainer, {duration: .4, autoAlpha: '0'});	
 
-					$('body').addClass('locked');
+					$(window).animate({scrollTop: fromTop}, function(){
 
-					abs.fadeIn(300).addClass('active');
+						$('body').addClass('locked');
 
-					indexContainer.addClass('active');
+						abs.fadeIn(300).addClass('active');
 
-					filterContainer.addClass('active');
+						filterContainer.addClass('active');
 
-					// gsap.to(filterContainer, {duration: .5, top: '0'});
+						o.fadeIn(300).addClass('active');
 
-					o.fadeIn(300).addClass('active');
+						o.css('borderTop', 'solid 1px black');
 
-					o.css('borderTop', 'solid 1px black');
+					});
 
 				}
 
@@ -304,6 +306,8 @@ index : {
 
 				$('.project').addClass('filtered');
 
+				closeFilterWindow();
+
 			}
 
 		});
@@ -316,11 +320,11 @@ index : {
 
 				abs.fadeOut(300).removeClass('active');
 
-				container.fadeOut(300);
+				container.fadeOut(300, function(){
+					gsap.to(indexContainer, {duration: 1, autoAlpha: '1'});
+				});
 
 				filterContainer.removeClass('active').attr('style', '');;
-
-				indexContainer.removeClass('active').css('opacity', '1');
 
 				$('body').removeClass('locked');
 
@@ -329,8 +333,6 @@ index : {
 		xit.on('click', function(){
 
 			if( o.hasClass('active') ){
-
-				$('#filter_inner').css({'position':'absolute', 'display': 'none'});
 
 				$('.project').addClass('filtered');
 

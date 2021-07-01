@@ -228,17 +228,19 @@ index : {
 
 		tagBtn.on('click', function(){
 
-			function openFilterMenu(){
+			// $(window).scrollTo(document.querySelector('#filter_menu'), 1500, {easing: 'easeInOutQuart'});
+			// console.log('works')
+			// function openFilterMenu(){
 
-				if( !o.hasClass('active') ){
+			// 	if( !o.hasClass('active') ){
 
-					o.fadeIn(300).addClass('active');
+			// 		o.fadeIn(300).addClass('active');
 
-					o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
+			// 		o.css({'borderBottom' : 'solid 1px black', 'borderTop' : 'solid 1px black'});
 
-				}
+			// 	}
 
-			}
+			// }
 
 			if ( $(this).hasClass('material') ){
 
@@ -356,7 +358,7 @@ init : function(){
 		arrowPrev = document.querySelector('#arrow_left'),
 		arrowNext = document.querySelector('#arrow_right'),
 		slideAreaContainer = document.querySelector('.project_slide'),
-		slideID = slideAreaContainer.id.replace( / +/g, '-' ).toLowerCase(),
+		slideID = slideAreaContainer.id.replacas +/g, '-' ).toLowerCase(),
 		totalPages = slideAreaContainer.getAttribute('data-total'),
 		p,
 		n,

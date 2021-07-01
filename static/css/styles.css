@@ -707,7 +707,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 #side_menu_wrapper{
   display: none;
-  top:0;
+  top:50px;
   position:fixed;
   width:100vw;
   height:100vh;
