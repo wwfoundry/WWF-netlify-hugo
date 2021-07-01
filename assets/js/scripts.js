@@ -661,6 +661,8 @@ init : function(){
 
 					lazyLoad(info);
 
+					info.classList.remove('loadingImg');
+
 					temp.remove();
 
 					if (window.history.pushState)
@@ -855,6 +857,8 @@ init : function(){
 		e.stopPropagation();
 
 		if ( !parent.classList.contains('animating') ) {
+
+			info.classList.add('loadingImg');
 
 			if ( $(this).hasClass('left') ) {
 

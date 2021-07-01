@@ -799,6 +799,11 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 }
 
+.right_justified_partial.loadingImg{
+  background: unset;
+  filter: blur(2px);
+}
+
 .collapse>.right_justified_partial{
   width: 25%;
 }
