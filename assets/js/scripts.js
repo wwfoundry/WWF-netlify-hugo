@@ -33,12 +33,14 @@ callPageJS = {
 		// Single Page App Support
 
 		function verifyLink(linkElem){
-			return(linkElem.host = window.location.host);
+			if (linkElem.origin != window.location.origin){
+				return true;
+			}
 		}
 
 		$('a').each(function(){
 
-			if (verifyLink(this)){
+			if ( verifyLink(this) ){
 
 				$(this).addClass('internal');
 
