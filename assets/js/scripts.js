@@ -152,9 +152,7 @@ callPageJS = {
 			filledElem.remove();
 
 			if ( multiBurger.hasClass('active') ){
-
 				closeMenu();
-
 			}
 
 			$(window).animate({scrollTop: 0});
@@ -172,14 +170,27 @@ callPageJS = {
 
 			mainWrapper.load(mainUrl + " .loaded_inner", function(){
 
-				LOADJS.loadEvents();
-
 				if (window.history.pushState)
 						{
 							window.history.pushState(null, null, mainUrl);
+							LOADJS.loadEvents();
 						}
 
 				loadedInner = $('.main_content').find('.loaded_inner');
+
+				var videoTest = document.getElementsByTagName('video');
+
+				if (videoTest){
+
+					for (var i = 0; i < videoTest.length; i++){
+
+						videoTest[i].play();
+
+						console.log('played')
+
+					}
+
+					}
 				
 			});
 
@@ -474,6 +485,8 @@ index : {
 
 	 					$(this).trigger('click');
 
+	 					console.log('filtered')
+
 	 				}
 
 	 			history.replaceState(null, null, ' ');
@@ -515,15 +528,9 @@ init : function(){
 			isVideo = false,
 			playMain =  function (container, video){
 
-					video.load();
-
-					video.oncanplay = function (){
-
 					video.play();
 
 					container.classList.remove('loadingImg');
-
-				}
 
 			},
 			lazyLoad = function (info){

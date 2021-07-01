@@ -21,7 +21,7 @@
 					<div class="slide" id="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
 					{{else if eq $media_featured_ext ".mp4" }}
 					<div class="slide video" id="main_slide" data-url="{{ .Params.featured }}">
-						<video class="reel" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
+						<video class="slideVideo reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 							<source src="{{ .Params.featured }}" type="video/mp4">
 						</video>
 					</div>
@@ -63,7 +63,7 @@
 					<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
 					{{else if eq $media_featured_ext ".mp4" }}
 					<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.Params.featured}}">
-						<video class="reel" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
+						<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 							<source src="" data-url="{{ .Params.featured }}" type="video/mp4">
 						</video>
 					</button>
@@ -77,7 +77,7 @@
 							<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.image}}"></button>
 							{{else if eq $media_thumbnail_ext ".mp4" }}
 							<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.image}}">
-								<video class="reel" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
+								<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
 									<source src="" type="video/mp4" data-url="{{ .image }}">
 								</video>
 							</button>
