@@ -42,6 +42,10 @@ callPageJS = {
 
 			if ( verifyLink(this) ){
 
+				$(this).addClass('external');
+
+			} else {
+
 				$(this).addClass('internal');
 
 			}
