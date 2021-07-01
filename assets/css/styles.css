@@ -775,6 +775,10 @@ nav.home>#menu>#controls>#hamburger>.bar{
     padding: 50px 25px 25px 25px;
 }
 
+.main_content.loadingImg{
+  background: unset;
+}
+
 .inner_content{
     display: block;
     max-width: 1400px;

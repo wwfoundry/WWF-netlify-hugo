@@ -147,6 +147,8 @@ callPageJS = {
 
 		$('body').on('click', '.internal', function(e){
 
+			mainWrapper.addClass('loadingImg');
+
 			multiBurger.off('click');
 
 			filledElem.remove();
@@ -168,7 +170,22 @@ callPageJS = {
 
 			multiBurger.trigger('click');
 
-			mainWrapper.load(mainUrl + " .loaded_inner", function(){
+			mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
+        if (status == "error") {
+
+        	window.location.href = mainUrl;
+
+        } else {
+
+        	passNewPage();
+
+        }
+
+        });
+
+		function passNewPage(){
+
+				mainWrapper.removeClass('loadingImg');
 
 				if (window.history.pushState)
 						{
@@ -190,11 +207,11 @@ callPageJS = {
 
 					}
 
-					}
+				}
 				
-			});
+			}
 
-			});
+		});
 
 		//Accents
 
@@ -700,7 +717,11 @@ init : function(){
 
 						temp.remove();
 
-					}
+					},
+						error: function(xhr, status, error) {
+						console.error(xhr, status, error);
+						window.location.href = slideUrl;
+				}
 
 						})},
 			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
