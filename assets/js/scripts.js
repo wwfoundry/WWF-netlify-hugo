@@ -56,8 +56,6 @@ callPageJS = {
 
 			menuWrapper.css('height', fieldY);
 
-			console.log(fieldY);
-
 			navParent.addClass('active');
 
 			$('.bar').addClass('active');
@@ -145,7 +143,7 @@ callPageJS = {
 			
 		});
 
-		$('body').on('click', '.internal', function(e){
+		function loadPage(mainUrl){
 
 			mainWrapper.addClass('loadingImg');
 
@@ -159,12 +157,7 @@ callPageJS = {
 
 			$(window).animate({scrollTop: 0});
 
-			e.preventDefault();
-			e.stopPropagation();
-
-			var mainUrl = $(this).attr('href');
-
-			console.log(mainUrl)
+			console.log(mainUrl);
 
 			loadedInner.remove();
 
@@ -177,21 +170,21 @@ callPageJS = {
 
         } else {
 
-        	passNewPage();
+        	passNewPage(mainUrl);
 
         }
 
         });
 
-		function passNewPage(){
+		function passNewPage(mainUrl){
 
 				mainWrapper.removeClass('loadingImg');
 
-				if (window.history.pushState)
-						{
-							window.history.pushState(null, null, mainUrl);
-							LOADJS.loadEvents();
-						}
+				if (window.history.pushState){
+					window.history.pushState(null, null, mainUrl);
+				}
+
+				LOADJS.loadEvents();
 
 				loadedInner = $('.main_content').find('.loaded_inner');
 
@@ -203,13 +196,32 @@ callPageJS = {
 
 						videoTest[i].play();
 
-						console.log('played')
-
 					}
 
 				}
 				
 			}
+
+		}
+
+		$('body').on('click', '.internal', function(e){
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			var mainUrl = $(this).attr('href');
+
+			loadPage(mainUrl);
+
+		});
+
+		window.addEventListener("popstate", function popstateListener(e) {
+
+			console.log('pushed')
+
+			var mainUrl = location.pathname;
+
+	    loadPage(mainUrl);
 
 		});
 
@@ -292,8 +304,6 @@ callPageJS = {
 					newFieldY = window.innerHeight;
 
 			if( newField != field && newFieldY != fieldY ){
-
-				console.log('resized');
 
 				windowHeight = window.innerHeight;
 			
@@ -486,8 +496,6 @@ index : {
 
 			closeFilterWindow();
 
-		  console.log('filtered')
-
 		});
 
 		if(window.location.hash){
@@ -501,8 +509,6 @@ index : {
 	 				if ( $(this).hasClass(removeHash) ){
 
 	 					$(this).trigger('click');
-
-	 					console.log('filtered')
 
 	 				}
 
@@ -714,8 +720,6 @@ init : function(){
 							replaceSlide.querySelector('video').pause();
 
 						}
-
-						console.log('works')
 
 						temp.remove();
 
@@ -1156,8 +1160,6 @@ init : function(){
 			gsap.to(b, {duration: .25, autoAlpha: '0', onComplete: addBackground});
 
 			function addBackground(){
-
-				console.log(thumbVideo)
 
 				if (thumbVideo == false){
 

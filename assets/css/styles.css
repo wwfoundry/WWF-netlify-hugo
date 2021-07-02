@@ -801,7 +801,12 @@ nav.home>#menu>#controls>#hamburger>.bar{
 
 .right_justified_partial.loadingImg{
   background: unset;
-  filter: blur(2px);
+}
+
+.right_justified_partial.loadingImg:before{
+  width: 50px;
+  height: 50px;
+  z-index: 4000;
 }
 
 .collapse>.right_justified_partial{
