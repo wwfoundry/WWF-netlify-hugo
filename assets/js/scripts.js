@@ -1033,11 +1033,7 @@ init : function(){
 
 		}
 
-		slideUrl = prevPath;
-
-		replaceSlide = a;
-
-		slideJax(replaceSlide, slideUrl);
+		slideJax(a, prevPath);
 
 	}
 
@@ -1075,12 +1071,8 @@ init : function(){
 				}
 
 			}
-		
-		replaceSlide = c;
 
-		slideUrl = nextPath;
-
-		slideJax(replaceSlide, slideUrl);
+		slideJax(c, nextPath);
 
 	}
 
@@ -1120,7 +1112,6 @@ init : function(){
 	});
 
 	function trans_slide(d){
-
 
 		if ( !parent.classList.contains('animating') ) {
 
