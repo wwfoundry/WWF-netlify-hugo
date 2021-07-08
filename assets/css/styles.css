@@ -941,6 +941,9 @@ footer.innner_content{
 	object-fit:cover;
 	width:100vw;
 	height:100vh;
+}
+
+#main_slide.home{
   background-color: black;
 }
 
