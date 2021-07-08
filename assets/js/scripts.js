@@ -16,8 +16,8 @@ LOADJS = {
 
   	$(window).off('scroll');
 
-  	var idElem = document.querySelector('.hide')
-    var bodyId = idElem.id;
+  	var idElem = document.querySelector('.hide'),
+    		bodyId = idElem.id;
 
     LOADJS.fire('common');
 

@@ -809,6 +809,20 @@ nav.home>#menu>#controls>#hamburger>.bar{
   z-index: 4000;
 }
 
+.right_justified_partial.loadingImg:after{
+  content:'';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 45%;
+  margin: 0 auto;
+  background-color: white;
+  opacity: 70%;
+}
+
 .collapse>.right_justified_partial{
   width: 25%;
 }
