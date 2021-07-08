@@ -817,7 +817,6 @@ nav.home>#menu>#controls>#hamburger>.bar{
   position: absolute;
   left: 0;
   right: 0;
-  top: 45%;
   margin: 0 auto;
   background-color: white;
   opacity: 70%;
