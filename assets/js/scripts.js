@@ -549,6 +549,12 @@ init : function(){
 			loadUrl,
 			loadState = false,
 			isVideo = false,
+			a = document.createElement('div'),
+			b = document.createElement('div'),
+			c = document.createElement('div'),
+			aInfo = document.createElement('div'),
+			bInfo = document.createElement('div'),
+			cInfo = document.createElement('div'),
 			playMain =  function (container, video){
 
 					video.play();
@@ -617,8 +623,8 @@ init : function(){
 				success: function (stored){
 
 					var cleanedStored = $.parseHTML(stored),
-						tempStored = $('<div>').append(cleanedStored),
-						tempHTML;
+							tempStored = $('<div>').append(cleanedStored),
+							tempHTML;
 
 					tempStored.find('link').remove();
 
@@ -631,11 +637,11 @@ init : function(){
 					temp.innerHTML = tempHtml;
 
 					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
-						arrowRightTemp = temp.querySelector('#arrow_right'),
-						arrowLeftState,
-						arrowRightState,
-						storedID = temp.querySelector('.project_slide').id,
-						transID = storedID.replace( / +/g, '-' ).toLowerCase();
+							arrowRightTemp = temp.querySelector('#arrow_right'),
+							arrowLeftState,
+							arrowRightState,
+							storedID = temp.querySelector('.project_slide').id,
+							transID = storedID.replace( / +/g, '-' ).toLowerCase();
 
 					if ( arrowLeftTemp && arrowRightTemp ){
 
@@ -661,6 +667,8 @@ init : function(){
 
 					}
 
+					slideAreaContainer.id = transID;
+
 					temp.remove();
 
 					if (window.history.pushState)
@@ -668,12 +676,21 @@ init : function(){
 							window.history.pushState(null, null, loadUrl + '#' + transID);
 						}
 
-				}
+				},
+				
+						error: function(xhr, status, error) {
+						console.error(xhr, status, error);
+						window.location.href = slideUrl;
+					},
+
+						timeout: 3000
 
 			})},
 			replaceSlide,
 			slideUrl,
-			slideJax = function (replaceSlide, slideInfo, slideUrl) {$.ajax({
+			slideJax = function (replaceSlide, slideInfo, slideUrl) {
+
+				$.ajax({
 					
 					url: slideUrl,
 					dataType: 'text',
@@ -725,20 +742,11 @@ init : function(){
 						error: function(xhr, status, error) {
 						console.error(xhr, status, error);
 						window.location.href = slideUrl;
-				}
+					}
 
-						})},
+				})},
 			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
-			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>"
-
-	//Liquid Slides
-
-	var a = document.createElement('div'),
-			b = document.createElement('div'),
-			c = document.createElement('div'),
-			aInfo = document.createElement('div'),
-			bInfo = document.createElement('div'),
-			cInfo = document.createElement('div');
+			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
 
 	//Position Rules
 
@@ -913,7 +921,7 @@ init : function(){
 
 				}
 
-				function replacePrev () {
+				function replacePrev (loadUrl) {
 
 					info.innerHTML = aInfo.innerHTML;
 
@@ -954,7 +962,7 @@ init : function(){
 			} else {
 
 				var animBnext = gsap.to(b, {duration: .5, left: '-110%'}),
-					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});
+					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});   
 
 				if (!animAnext.isActive()){
 
@@ -962,7 +970,7 @@ init : function(){
 
 				}
 
-				function replaceNext(){
+				function replaceNext(loadUrl){
 
 					info.innerHTML = cInfo.innerHTML;
 
@@ -988,7 +996,7 @@ init : function(){
 
 					parent.classList.remove('animating');
 
-					if(b.classList.contains('video')){
+					if( b.classList.contains('video') ){
 
 						var mainVideo = b.querySelector('video');
 
@@ -1052,6 +1060,7 @@ init : function(){
 			if (newP <= 1 ){
 
 				prevPath = '/gallery/'
+
 			} else {
 
 				prevPath = '/gallery/page/' + newP + '/'
@@ -1168,11 +1177,9 @@ init : function(){
 
 		if (!parent.classList.contains('animating')){
 
-			var thumbUrl = $(this).attr('data-url');
-
-			var thumbVideo = $(this).hasClass('video');
-
-			var thumbHtml = $(this).html();
+			var thumbUrl = $(this).attr('data-url'),
+					thumbVideo = $(this).hasClass('video'),
+					thumbHtml = $(this).html();
 
 			gsap.to(b, {duration: .25, autoAlpha: '0', onComplete: addBackground});
 
