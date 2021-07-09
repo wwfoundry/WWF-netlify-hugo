@@ -737,6 +737,7 @@ init : function(){
 			b = document.createElement('div'),
 			c = document.createElement('div'),
 			aInfo = document.createElement('div'),
+			bInfo = document.createElement('div'),
 			cInfo = document.createElement('div');
 
 	//Position Rules
@@ -772,6 +773,10 @@ init : function(){
 			b.style.backgroundImage = 'url("' + currentUrl + '")'
 
 		}
+
+		b.appendChild(bInfo).classList.add('hide');
+
+		bInfo.innerHTML = info.innerHTML;
 
 		parent.appendChild(c).classList.add('slide');
 		c.appendChild(cInfo).classList.add('hide');
@@ -864,8 +869,6 @@ init : function(){
 
 		if ( !parent.classList.contains('animating') ) {
 
-			info.classList.add('loadingImg');
-
 			if ( $(this).hasClass('left') ) {
 
 				d = 'prev';
@@ -895,6 +898,8 @@ init : function(){
 
 		if ( loadState == false && d && loadUrl ){
 
+			info.classList.add('loadingImg');
+
 			infojax(loadUrl);
 
 			if ( d == 'prev'){
@@ -916,15 +921,17 @@ init : function(){
 
 					c.remove();
 
-					c = b;
+					c = b, cInfo = bInfo;
 
-					b = a;
+					b = a, bInfo = aInfo;
 
 					a = document.createElement('div');
 
 					a.style.left = "-110%";
 
 					aInfo = document.createElement('div');
+
+					a.appendChild(aInfo).classList.add('hide');
 
 					aInfo.classList.add('hide');
 
@@ -963,15 +970,17 @@ init : function(){
 
 					a.remove();
 
-					a = b;
+					a = b, aInfo = bInfo;
 
-					b = c;
+					b = c, bInfo = cInfo;
 
 					c = document.createElement('div');
 
 					c.style.left = "110%";
 
 					cInfo = document.createElement('div');
+
+					c.appendChild(cInfo).classList.add('hide');
 
 					cInfo.classList.add('hide');
 
