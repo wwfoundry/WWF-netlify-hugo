@@ -622,6 +622,8 @@ init : function(){
 				dataType: 'text',
 				success: function (stored){
 
+					console.log('infojax')
+
 					var cleanedStored = $.parseHTML(stored),
 							tempStored = $('<div>').append(cleanedStored),
 							tempHTML;
@@ -673,17 +675,17 @@ init : function(){
 
 					if (window.history.pushState)
 						{
-							window.history.pushState(null, null, loadUrl + '#' + transID);
+							window.history.pushState(null, null, '#' + transID);
 						}
 
 				},
-				
+
 						error: function(xhr, status, error) {
 						console.error(xhr, status, error);
 						window.location.href = slideUrl;
 					},
 
-						timeout: 3000
+						timeout: 5000
 
 			})},
 			replaceSlide,
@@ -906,9 +908,21 @@ init : function(){
 
 		if ( loadState == false && d && loadUrl ){
 
+			if (window.history.pushState){
+
+				window.history.pushState(null, null, loadUrl);
+				
+			}
+
 			info.classList.add('loadingImg');
 
 			infojax(loadUrl);
+
+			if(cInfo.children.length == 0 || aInfo.children.length == 0){
+
+				window.location.href = slideUrl;
+
+			}
 
 			if ( d == 'prev'){
 
