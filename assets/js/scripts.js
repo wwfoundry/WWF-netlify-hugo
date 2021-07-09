@@ -16,7 +16,7 @@ LOADJS = {
 
   	$(window).off('scroll');
 
-  	var idElem = document.querySelector('.hide'),
+  	var idElem = document.querySelector('.page'),
     		bodyId = idElem.id;
 
     LOADJS.fire('common');
@@ -634,7 +634,6 @@ init : function(){
 						arrowRightTemp = temp.querySelector('#arrow_right'),
 						arrowLeftState,
 						arrowRightState,
-						storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
 						storedID = temp.querySelector('.project_slide').id,
 						transID = storedID.replace( / +/g, '-' ).toLowerCase();
 
@@ -662,13 +661,6 @@ init : function(){
 
 					}
 
-					info.innerHTML = storedInfo;
-					slideAreaContainer.id = transID;
-
-					lazyLoad(info);
-
-					info.classList.remove('loadingImg');
-
 					temp.remove();
 
 					if (window.history.pushState)
@@ -681,15 +673,16 @@ init : function(){
 			})},
 			replaceSlide,
 			slideUrl,
-			slideJax = function (replaceSlide, slideUrl) {$.ajax({
+			slideJax = function (replaceSlide, slideInfo, slideUrl) {$.ajax({
 					
 					url: slideUrl,
 					dataType: 'text',
 					success: function (stored){
 
 						var cleanedStored = $.parseHTML(stored),
-							tempStored = $('<div>').append(cleanedStored),
-							tempHTML;
+								tempStored = $('<div>').append(cleanedStored),
+								storedInfo,
+								tempHTML;
 
 						tempStored.find('link').remove();
 
@@ -721,6 +714,11 @@ init : function(){
 
 						}
 
+						storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
+						slideInfo.innerHTML = storedInfo;
+
+						info.classList.remove('loadingImg');
+
 						temp.remove();
 
 					},
@@ -737,7 +735,9 @@ init : function(){
 
 	var a = document.createElement('div'),
 			b = document.createElement('div'),
-			c = document.createElement('div');
+			c = document.createElement('div'),
+			aInfo = document.createElement('div'),
+			cInfo = document.createElement('div');
 
 	//Position Rules
 
@@ -751,6 +751,7 @@ init : function(){
 	function createChildren(){
 
 		parent.appendChild(a).classList.add('slide');
+		a.appendChild(aInfo).classList.add('hide');
 
 		if (current.classList.contains('video')){
 
@@ -773,6 +774,7 @@ init : function(){
 		}
 
 		parent.appendChild(c).classList.add('slide');
+		c.appendChild(cInfo).classList.add('hide');
 
 	}
 
@@ -908,6 +910,10 @@ init : function(){
 
 				function replacePrev () {
 
+					info.innerHTML = aInfo.innerHTML;
+
+					lazyLoad(info);
+
 					c.remove();
 
 					c = b;
@@ -917,6 +923,10 @@ init : function(){
 					a = document.createElement('div');
 
 					a.style.left = "-110%";
+
+					aInfo = document.createElement('div');
+
+					aInfo.classList.add('hide');
 
 					parent.insertBefore(a, b).classList.add('slide');
 
@@ -930,7 +940,7 @@ init : function(){
 
 					}
 
-					getNextP();
+					getNextP(a, aInfo);
 					
 				}
 
@@ -947,6 +957,10 @@ init : function(){
 
 				function replaceNext(){
 
+					info.innerHTML = cInfo.innerHTML;
+
+					lazyLoad(info);
+
 					a.remove();
 
 					a = b;
@@ -956,6 +970,10 @@ init : function(){
 					c = document.createElement('div');
 
 					c.style.left = "110%";
+
+					cInfo = document.createElement('div');
+
+					cInfo.classList.add('hide');
 
 					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
 
@@ -969,7 +987,7 @@ init : function(){
 
 					}
 
-					getNextN();
+					getNextN(c, cInfo);
 
 				}
 			}
@@ -982,7 +1000,7 @@ init : function(){
 
 				slideUrl = p;
 
-				slideJax(replaceSlide, slideUrl);
+				slideJax(replaceSlide, aInfo, slideUrl);
 			}
 
 			if (n){
@@ -991,14 +1009,14 @@ init : function(){
 
 				slideUrl = n;
 
-				slideJax(replaceSlide, slideUrl);
+				slideJax(replaceSlide, cInfo, slideUrl);
 
 			}
 
 		}
 	}
 
-	function getNextP(){
+	function getNextP(a, aInfo){
 
 		var pageP,
 				intP,
@@ -1033,11 +1051,11 @@ init : function(){
 
 		}
 
-		slideJax(a, prevPath);
+		slideJax(a, aInfo, prevPath);
 
 	}
 
-	function getNextN(){
+	function getNextN(c, cInfo){
 
 		var pageN,
 			intN,
@@ -1072,10 +1090,9 @@ init : function(){
 
 			}
 
-		slideJax(c, nextPath);
+		slideJax(c, cInfo, nextPath);
 
 	}
-
 
 	//On directional key click, move slide
 
