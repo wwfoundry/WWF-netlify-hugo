@@ -921,6 +921,7 @@ init : function(){
 			if(cInfo.children.length == 0 || aInfo.children.length == 0){
 
 				window.location.href = loadUrl;
+				
 
 			}
 
