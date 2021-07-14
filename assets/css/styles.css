@@ -1318,6 +1318,7 @@ footer.innner_content{
   background-color: white;
   position: fixed;
 /*  z-index: 4099;*/
+  display: none;
   }
 
   #filter_inner>button{

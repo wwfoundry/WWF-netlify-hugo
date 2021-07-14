@@ -23,6 +23,8 @@ LOADJS = {
 
     LOADJS.fire(bodyId);
 
+    console.log('fired');
+
   }
 };
 
@@ -42,15 +44,14 @@ callPageJS = {
 				menuWrapper = $('#side_menu_wrapper'),
 				navParent = $('nav'),
 				navHeight = navParent.height(),
-				filledElem = document.createElement('div');
-;
+				mainWrapper = $('.main_content'),
+				loadedInner = $('.loaded_inner');
 
 		multiBurger.on("click", function(e){
 
 			if ( !navParent.hasClass('scroll') ){
 
-				filledElem.style.height = '55px';
-				$('body').prepend(filledElem);
+				mainWrapper.css('paddingTop', '55px');
 
 			}
 
@@ -66,48 +67,49 @@ callPageJS = {
 
 			e.stopPropagation();
 
-			if ( multiBurger.hasClass('active') ){
-
-				closeMenu();
-
-			} else {
-				multiBurger.addClass('active');
-			}
+			closeMenu();
 
 		});
 
 		function closeMenu(){
 
-			navParent.removeClass('active');
+			if ( multiBurger.hasClass('active') ){
 
-			multiBurger.removeClass('active');
+				navParent.removeClass('active');
 
-			$('.bar').removeClass('active');
+				multiBurger.removeClass('active');
 
-			menuWrapper.fadeOut(500, function(){
-				menuWrapper.removeClass("active")
-			});
+				$('.bar').removeClass('active');
 
-			$('body').removeClass('locked');
+				menuWrapper.fadeOut(500, function(){
+					menuWrapper.removeClass("active")
+				});
 
-			if ( !navParent.hasClass('scroll') ){
+				$('body').removeClass('locked');
 
-				filledElem.remove();
+				if ( !navParent.hasClass('scroll') ){
 
+					mainWrapper.css('paddingTop', 'unset');
+
+				}
+
+			} else {
+				multiBurger.addClass('active');
 			}
+
 		}
 
 		$(window).on('scroll', function(){
 
 			if(!navParent.hasClass('home') && !($('#filter_wrapper').hasClass('active')) && field < 800){
 
-				if (document.body.scrollTop > 100 | document.documentElement.scrollTop > 100) {
-					filledElem.style.height = '55px';
-					$('body').prepend(filledElem);
-					navParent.addClass('scroll');
+				if (document.body.scrollTop > 55 | document.documentElement.scrollTop > 55) {
+					mainWrapper.css('paddingTop', '55px');
+					navParent.addClass('scroll').fadeIn(300);
 					gsap.to(navParent, .5, {backgroundColor: "#ffffff"});
+
 				} else { 
-					filledElem.remove();
+					mainWrapper.css('paddingTop', 'unset');
 					navParent.removeClass('scroll');
 					gsap.to(navParent, .5, {backgroundColor: "transparent"});
 				}
@@ -117,10 +119,6 @@ callPageJS = {
 		});
 
 		// Single Page Behavior
-
-		var mainWrapper = $('.main_content'),
-				loadedInner = $('.loaded_inner');
-
 
 		function verifyLink(linkElem){
 			if (linkElem.origin != window.location.origin){
@@ -150,8 +148,6 @@ callPageJS = {
 			mainWrapper.addClass('loadingImg');
 
 			multiBurger.off('click');
-
-			filledElem.remove();
 
 			if ( multiBurger.hasClass('active') ){
 				closeMenu();
