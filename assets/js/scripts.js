@@ -363,7 +363,7 @@ index : {
 	init : function(){
 
 		//Extend Remove Class
-		
+
 		var oRemoveClass = $.fn.removeClass;
 		$.fn.removeClass = function () {
 		    for (var i in arguments) {
@@ -570,6 +570,7 @@ init : function(){
 			a = document.createElement('div'),
 			b = document.createElement('div'),
 			c = document.createElement('div'),
+
 			aInfo = document.createElement('div'),
 			bInfo = document.createElement('div'),
 			cInfo = document.createElement('div'),
@@ -634,78 +635,6 @@ init : function(){
 				}
 
 			},
-			infojax = function () {$.ajax({
-				
-				url: loadUrl,
-				dataType: 'text',
-				beforeSend: function(xhr){
-					navReset = false;
-				},
-				success: function (stored){
-
-					var cleanedStored = $.parseHTML(stored),
-							tempStored = $('<div>').append(cleanedStored),
-							tempHTML;
-
-					tempStored.find('link').remove();
-
-					tempHtml = tempStored.html();
-
-					var temp = document.createElement('div');
-
-					document.querySelector('body').appendChild(temp).style.display = 'none';
-
-					temp.innerHTML = tempHtml;
-
-					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
-							arrowRightTemp = temp.querySelector('#arrow_right'),
-							arrowLeftState,
-							arrowRightState,
-							storedID = temp.querySelector('.project_slide').id,
-							transID = storedID.replace( / +/g, '-' ).toLowerCase();
-
-					if ( arrowLeftTemp && arrowRightTemp ){
-
-						arrowLeftState = arrowLeftTemp.getAttribute('href');
-						arrowRightState = arrowRightTemp.getAttribute('href');
-
-						arrowPrev.setAttribute( 'href', arrowLeftState );
-						arrowNext.setAttribute( 'href', arrowRightState );
-
-					} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
-
-						arrowRightState = arrowRightTemp.getAttribute('href');
-
-						arrowPrev.setAttribute( 'href', '/gallery/page/' + totalPages + '/' );
-						arrowNext.setAttribute( 'href', arrowRightState );
-
-					} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
-
-						arrowLeftState = arrowLeftTemp.getAttribute('href');
-
-						arrowNext.setAttribute( 'href', '/gallery/' );
-						arrowPrev.setAttribute( 'href', arrowLeftState );
-
-					}
-
-					slideAreaContainer.id = transID;
-
-					temp.remove();
-
-					if (window.history.pushState)
-						{
-							window.history.pushState(null, null, '#' + transID);
-						}
-
-					navReset = true;
-
-				},
-						error: function(xhr, status, error) {
-						console.error(xhr, status, error);
-						window.location.href = slideUrl;
-					}
-
-			})},
 			replaceSlide,
 			slideUrl,
 			slideJax = function (replaceSlide, slideInfo, slideUrl) {
@@ -730,6 +659,8 @@ init : function(){
 						document.querySelector('body').appendChild(temp).style.display = 'none';
 
 						temp.innerHTML = tempHtml;
+
+						getArrowStates(replaceSlide, temp);
 
 						var mainslideObj = temp.querySelector('#main_slide');
 
@@ -765,6 +696,49 @@ init : function(){
 					}
 
 				})},
+				getArrowStates = function(slide, temp){
+
+					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
+							arrowRightTemp = temp.querySelector('#arrow_right'),
+							arrowLeftState,
+							arrowRightState,
+							storedID = temp.querySelector('.project_slide').id,
+							transID = storedID.replace( / +/g, '-' ).toLowerCase();
+
+					if ( arrowLeftTemp && arrowRightTemp ){
+
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+						arrowRightState = arrowRightTemp.getAttribute('href');
+
+						slide.setAttribute( 'data-arrow-left', arrowLeftState );
+						slide.setAttribute( 'data-arrow-right', arrowRightState );
+
+					} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
+
+						arrowRightState = arrowRightTemp.getAttribute('href');
+
+						slide.setAttribute( 'data-arrow-left', '/gallery/page/' + totalPages + '/' );
+						slide.setAttribute( 'data-arrow-right', arrowRightState );
+
+					} else if ( arrowRightTemp == undefined && arrowLeftTemp ) {
+
+						arrowLeftState = arrowLeftTemp.getAttribute('href');
+
+						slide.setAttribute( 'data-arrow-left', arrowLeftState );
+						slide.setAttribute( 'data-arrow-right', '/gallery/' );
+
+					}
+
+					slide.setAttribute('data-id', transID);
+
+				},
+			setArrowStates = function(b){
+				var leftArrow = b.getAttribute('data-arrow-left'),
+						rightArrow = b.getAttribute('data-arrow-left');
+
+				arrowPrev.setAttribute('href', leftArrow), arrowNext.setAttribute('href', rightArrow);
+
+			},
 			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
 			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
 
@@ -780,7 +754,7 @@ init : function(){
 	function createChildren(){
 
 		parent.appendChild(a).classList.add('slide');
-		a.appendChild(aInfo).classList.add('hide');
+		a.appendChild(aInfo).classList.add('hide'), a.setAttribute('data-arrow-left',''), a.setAttribute('data-arrow-right','');
 
 		if (current.classList.contains('video')){
 
@@ -802,12 +776,12 @@ init : function(){
 
 		}
 
-		b.appendChild(bInfo).classList.add('hide');
+		b.appendChild(bInfo).classList.add('hide'), b.setAttribute('data-arrow-left',''), b.setAttribute('data-arrow-right','');
 
 		bInfo.innerHTML = info.innerHTML;
 
 		parent.appendChild(c).classList.add('slide');
-		c.appendChild(cInfo).classList.add('hide');
+		c.appendChild(cInfo).classList.add('hide'), c.setAttribute('data-arrow-left',''), c.setAttribute('data-arrow-right','');
 
 	}
 
@@ -934,8 +908,6 @@ init : function(){
 
 			info.classList.add('loadingImg');
 
-			infojax(loadUrl);
-
 			if(cInfo.children.length == 0 || aInfo.children.length == 0){
 
 				window.location.href = loadUrl;
@@ -977,6 +949,8 @@ init : function(){
 					aInfo.classList.add('hide');
 
 					parent.insertBefore(a, b).classList.add('slide');
+
+					setArrowStates(b);
 
 					parent.classList.remove('animating');
 
@@ -1026,6 +1000,8 @@ init : function(){
 					cInfo.classList.add('hide');
 
 					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
+
+					setArrowStates(b);
 
 					parent.classList.remove('animating');
 
