@@ -332,9 +332,9 @@ callPageJS = {
 
 			}
 
-			if ( multiBurger.hasClass('active') && newFieldY != fieldY ){
+			if ( multiBurger.hasClass('active') && newField != field && newFieldY != fieldY ){
 
-					multiBurger.trigger("click");
+					closeMenu();
 
 				}
 
@@ -377,7 +377,8 @@ index : {
 			tagBtn = $('.filter_option'),
 			filterTag = $('.tag'),
 			filterProjects = document.getElementsByClassName('project'),
-			filterLength = filterProjects.length;
+			filterLength = filterProjects.length,
+			navParent = $('nav');
 
 		tagBtn.on('click', function(){
 
@@ -391,11 +392,13 @@ index : {
 
 					$(window).animate({scrollTop: fromTop}, function(){
 
+						navParent.css('visibility', 'hidden');
+
+						filterContainer.addClass('active');
+
 						$('body').addClass('locked');
 
 						abs.fadeIn(300).addClass('active');
-
-						filterContainer.addClass('active');
 
 						o.fadeIn(300).addClass('active');
 
@@ -446,6 +449,8 @@ index : {
 	function closeFilterWindow(){
 
 				o.fadeOut(300).removeClass('active');
+
+				navParent.css('visibility', 'visible');
 
 				o.css('borderBottom', 'unset');
 
