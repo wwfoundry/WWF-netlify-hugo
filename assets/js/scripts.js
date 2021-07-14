@@ -143,7 +143,31 @@ callPageJS = {
 			
 		});
 
-		function loadPage(mainUrl){
+		function loadPage(mainUrl, page){
+
+			console.log(page)
+
+			if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+
+				mainWrapper.removeClass('fullHeight');
+
+				navParent.removeClass('home');
+
+				$('#wwf_logo').removeClass('fill_change');
+
+				$('#menu_wrapper').removeClass('fill_change');
+
+			} else if (page == 'home') {
+
+				mainWrapper.addClass('fullHeight');
+
+				navParent.addClass('home');
+
+				$('#wwf_logo').addClass('fill_change');
+
+				$('#menu_wrapper').addClass('fill_change');
+
+			}
 
 			mainWrapper.addClass('loadingImg');
 
@@ -173,10 +197,9 @@ callPageJS = {
         	passNewPage(mainUrl);
 
         }
+      });
 
-        });
-
-		function passNewPage(mainUrl){
+		function passNewPage(mainUrl, page){
 
 				mainWrapper.removeClass('loadingImg');
 
@@ -209,9 +232,10 @@ callPageJS = {
 			e.preventDefault();
 			e.stopPropagation();
 
-			var mainUrl = $(this).attr('href');
+			var mainUrl = $(this).attr('href'),
+					page = checkUrl(mainUrl);
 
-			loadPage(mainUrl);
+			loadPage(mainUrl, page);
 
 		});
 
@@ -219,11 +243,22 @@ callPageJS = {
 
 			console.log('pushed')
 
-			var mainUrl = location.pathname;
+			var mainUrl = location.pathname,
+					page = checkUrl(mainUrl);
 
-	    loadPage(mainUrl);
+	    loadPage(mainUrl, page);
 
 		});
+
+		function checkUrl(link){
+
+			if(link == '/'){
+				return 'home';
+			} else {
+				return false;
+			}
+
+		}
 
 		//Accents
 
@@ -911,7 +946,7 @@ init : function(){
 			if (window.history.pushState){
 
 				window.history.pushState(null, null, loadUrl);
-				
+
 			}
 
 			info.classList.add('loadingImg');

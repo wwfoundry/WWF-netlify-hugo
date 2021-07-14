@@ -779,6 +779,12 @@ nav.home>#menu>#controls>#hamburger>.bar{
   background: unset;
 }
 
+.main_content.fullHeight{
+  padding: unset;
+  margin:unset;
+  max-width:unset;
+}
+
 .inner_content{
     display: block;
     max-width: 1400px;
@@ -843,11 +849,10 @@ nav.home>#menu>#controls>#hamburger>.bar{
   padding-left: 25px;
 }
 
-#fullHeight{
+.fullHeight{
   padding: unset;
   margin:unset;
   max-width:unset;
-
 }
 
 .white_under{
