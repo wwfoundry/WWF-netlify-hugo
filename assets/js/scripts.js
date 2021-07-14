@@ -734,7 +734,7 @@ init : function(){
 				},
 			setArrowStates = function(b){
 				var leftArrow = b.getAttribute('data-arrow-left'),
-						rightArrow = b.getAttribute('data-arrow-left');
+						rightArrow = b.getAttribute('data-arrow-right');
 
 				arrowPrev.setAttribute('href', leftArrow), arrowNext.setAttribute('href', rightArrow);
 
