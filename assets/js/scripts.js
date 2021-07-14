@@ -23,8 +23,6 @@ LOADJS = {
 
     LOADJS.fire(bodyId);
 
-    console.log('fired');
-
   }
 };
 
@@ -49,7 +47,7 @@ callPageJS = {
 
 		multiBurger.on("click", function(e){
 
-			if ( !navParent.hasClass('scroll') ){
+			if ( !navParent.hasClass('scroll') && !navParent.hasClass('home') ){
 
 				mainWrapper.css('paddingTop', '55px');
 
@@ -87,7 +85,7 @@ callPageJS = {
 
 				$('body').removeClass('locked');
 
-				if ( !navParent.hasClass('scroll') ){
+				if ( !navParent.hasClass('scroll') && !navParent.hasClass('home') ){
 
 					mainWrapper.css('paddingTop', 'unset');
 
@@ -103,15 +101,13 @@ callPageJS = {
 
 			if(!navParent.hasClass('home') && !($('#filter_wrapper').hasClass('active')) && field < 800){
 
-				if (document.body.scrollTop > 55 | document.documentElement.scrollTop > 55) {
+				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 					mainWrapper.css('paddingTop', '55px');
-					navParent.addClass('scroll').fadeIn(300);
-					gsap.to(navParent, .5, {backgroundColor: "#ffffff"});
+					navParent.addClass('scroll');
 
 				} else { 
 					mainWrapper.css('paddingTop', 'unset');
 					navParent.removeClass('scroll');
-					gsap.to(navParent, .5, {backgroundColor: "transparent"});
 				}
 
 			}
@@ -143,8 +139,6 @@ callPageJS = {
 
 		function loadPage(mainUrl, page){
 
-			console.log(page)
-
 			mainWrapper.addClass('loadingImg');
 
 			multiBurger.off('click');
@@ -154,8 +148,6 @@ callPageJS = {
 			}
 
 			$(window).animate({scrollTop: 0});
-
-			console.log(mainUrl);
 
 			loadedInner.remove();
 
@@ -236,8 +228,6 @@ callPageJS = {
 		});
 
 		window.addEventListener("popstate", function popstateListener(e) {
-
-			console.log('pushed')
 
 			var mainUrl = location.pathname,
 					page = checkUrl(mainUrl);
