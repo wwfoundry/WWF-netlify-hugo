@@ -657,8 +657,6 @@ init : function(){
 				dataType: 'text',
 				success: function (stored){
 
-					console.log('infojax')
-
 					var cleanedStored = $.parseHTML(stored),
 							tempStored = $('<div>').append(cleanedStored),
 							tempHTML;
@@ -714,13 +712,10 @@ init : function(){
 						}
 
 				},
-
 						error: function(xhr, status, error) {
 						console.error(xhr, status, error);
 						window.location.href = slideUrl;
-					},
-
-						timeout: 5000
+					}
 
 			})},
 			replaceSlide,
@@ -941,7 +936,7 @@ init : function(){
 
 		verifyNeighbors();
 
-		if ( loadState == false && d && loadUrl ){
+		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
 
 			if (window.history.pushState){
 
