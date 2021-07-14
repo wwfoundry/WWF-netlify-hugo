@@ -147,28 +147,6 @@ callPageJS = {
 
 			console.log(page)
 
-			if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
-
-				mainWrapper.removeClass('fullHeight');
-
-				navParent.removeClass('home');
-
-				$('#wwf_logo').removeClass('fill_change');
-
-				$('#menu_wrapper').removeClass('fill_change');
-
-			} else if (page == 'home') {
-
-				mainWrapper.addClass('fullHeight');
-
-				navParent.addClass('home');
-
-				$('#wwf_logo').addClass('fill_change');
-
-				$('#menu_wrapper').addClass('fill_change');
-
-			}
-
 			mainWrapper.addClass('loadingImg');
 
 			multiBurger.off('click');
@@ -195,6 +173,28 @@ callPageJS = {
         } else {
 
         	passNewPage(mainUrl);
+
+        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+
+						mainWrapper.removeClass('fullHeight');
+
+						navParent.removeClass('home');
+
+						$('#wwf_logo').removeClass('fill_change');
+
+						$('#menu_wrapper').removeClass('fill_change');
+
+					} else if (page == 'home') {
+
+						mainWrapper.addClass('fullHeight');
+
+						navParent.addClass('home');
+
+						$('#wwf_logo').addClass('fill_change');
+
+						$('#menu_wrapper').addClass('fill_change');
+
+					}
 
         }
       });
@@ -362,6 +362,8 @@ callPageJS = {
 index : {
 	init : function(){
 
+		//Extend Remove Class
+		
 		var oRemoveClass = $.fn.removeClass;
 		$.fn.removeClass = function () {
 		    for (var i in arguments) {
@@ -372,26 +374,6 @@ index : {
 		        }
 		    }
 		    return oRemoveClass.apply(this, arguments);
-		}
-
-		var projectElem = document.getElementsByClassName('project'),
-		length = projectElem.length;
-
-		for (var i = 0; i < length; i++){
-
-			var pageNumber = parseInt([i], 10),
-				pageInt = pageNumber + 1;
-
-			if (pageInt == 1){
-
-				projectElem[i].setAttribute('href', '/gallery/');
-
-			} else {
-
-				projectElem[i].setAttribute('href', '/gallery/page/' + pageInt + '/');
-
-			}
-			
 		}
 
 		var o = $('.overlay'),
@@ -584,6 +566,7 @@ init : function(){
 			loadUrl,
 			loadState = false,
 			isVideo = false,
+			navReset = true,
 			a = document.createElement('div'),
 			b = document.createElement('div'),
 			c = document.createElement('div'),
@@ -655,6 +638,9 @@ init : function(){
 				
 				url: loadUrl,
 				dataType: 'text',
+				beforeSend: function(xhr){
+					navReset = false;
+				},
 				success: function (stored){
 
 					var cleanedStored = $.parseHTML(stored),
@@ -710,6 +696,8 @@ init : function(){
 						{
 							window.history.pushState(null, null, '#' + transID);
 						}
+
+					navReset = true;
 
 				},
 						error: function(xhr, status, error) {
