@@ -1303,7 +1303,7 @@ footer.innner_content{
   width: calc(100% - 20px);
   top: 0;
   height: 55px;
-  background-color: #ffffff;
+  background-color:rgba(255,255,255,0.72)
   }
 
   nav.active{
@@ -1312,6 +1312,8 @@ footer.innner_content{
 
   nav.home{
   background-color: rgba(0, 0, 0, .5);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
   }
 
   nav.home.active{
@@ -1325,6 +1327,8 @@ footer.innner_content{
 
   nav.scroll{
   position: fixed;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
 /*  z-index: 4099;*/
   }
 
