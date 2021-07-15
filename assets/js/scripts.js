@@ -595,22 +595,6 @@ init : function(){
 
 							replaceWithCache(t, cachedImg)
 
-							function replaceWithCache(t, cachedImg){
-
-								cachedImg.onload = function(){
-
-									var cachedSrc = cachedImg.src;
-
-									cachedImg.remove();
-
-									t.style.backgroundImage = "url(" + cachedSrc + ")"
-
-									t.classList.remove('loadingImg');
-
-								}
-
-							}
-
 						} else {
 
 							var thumbVid = t.querySelector('video'),
@@ -636,8 +620,9 @@ init : function(){
 					dataType: 'text',
 					success: function (stored){
 
-						var cleanedStored = $.parseHTML(stored),
-								tempStored = $('<div>').append(cleanedStored),
+						var cleanedStoredImg = stored.replace(/<img\b[^>]*>/ig, ''),
+								cleanedStoredLink = cleanedStoredImg.replace(/<link\b[^>]*>/ig, ''),
+								tempStored = $('<div>').append(cleanedStoredLink),
 								storedInfo,
 								tempHTML;
 
@@ -657,9 +642,16 @@ init : function(){
 
 						if ( !mainslideObj.classList.contains('video') ){
 
-							var	storedFeatured = mainslideObj.getAttribute('data-url');
+							var	storedFeatured = mainslideObj.getAttribute('data-url'),
+									cachedImg = document.createElement('img');
 
-							replaceSlide.style.backgroundImage = 'url("' + storedFeatured + '")'
+							cachedImg.classList.add('hide', 'temp');
+
+							replaceSlide.appendChild(cachedImg).style.display = 'none';
+
+							cachedImg.src = storedFeatured;
+
+							replaceWithCache(replaceSlide, cachedImg);
 
 						} else {
 
@@ -687,6 +679,20 @@ init : function(){
 					}
 
 				})},
+				replaceWithCache = function(container, cached){
+
+					cached.onload = function(){
+
+						var cachedSrc = cached.src;
+
+						cached.remove();
+
+						container.style.backgroundImage = "url(" + cachedSrc + ")"
+
+						container.classList.remove('loadingImg');
+
+					}
+				},
 				getArrowStates = function(slide, temp){
 
 					var	arrowLeftTemp = temp.querySelector('#arrow_left'),
@@ -744,7 +750,7 @@ init : function(){
 
 	function createChildren(){
 
-		parent.appendChild(a).classList.add('slide');
+		parent.appendChild(a).classList.add('slide', 'loadingImg');
 		a.appendChild(aInfo).classList.add('hide'), a.setAttribute('data-arrow-left',''), a.setAttribute('data-arrow-right','');
 
 		if (current.classList.contains('video')){
@@ -771,7 +777,7 @@ init : function(){
 
 		bInfo.innerHTML = info.innerHTML;
 
-		parent.appendChild(c).classList.add('slide');
+		parent.appendChild(c).classList.add('slide', 'loadingImg');
 		c.appendChild(cInfo).classList.add('hide'), c.setAttribute('data-arrow-left',''), c.setAttribute('data-arrow-right','');
 
 	}
@@ -939,7 +945,7 @@ init : function(){
 
 					aInfo.classList.add('hide');
 
-					parent.insertBefore(a, b).classList.add('slide');
+					parent.insertBefore(a, b).classList.add('slide', 'loadingImg');
 
 					setArrowStates(b);
 
@@ -990,7 +996,7 @@ init : function(){
 
 					cInfo.classList.add('hide');
 
-					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide');
+					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg');
 
 					setArrowStates(b);
 
