@@ -1,3 +1,18 @@
+	//Extend Remove Class
+
+		var oRemoveClass = $.fn.removeClass;
+		$.fn.removeClass = function () {
+		    for (var i in arguments) {
+		        var arg = arguments[i];
+		        if ( !! (arg && arg.constructor && arg.call && arg.apply)) {
+		            arg();
+		            delete arg;
+		        }
+		    }
+		    return oRemoveClass.apply(this, arguments);
+		}
+
+
 //Page Specific Functions
 
 LOADJS = { 
@@ -43,9 +58,25 @@ callPageJS = {
 				navParent = $('nav'),
 				navHeight = navParent.height(),
 				mainWrapper = $('.main_content'),
-				loadedInner = $('.loaded_inner');
+				loadedInner = $('.loaded_inner'),
+				state,
+				lockBody = function(state){
+
+				if( state == 'lock' ){
+
+					$('body').addClass('locked');
+		
+				} else if (state == 'unlock') {
+
+					$('body').removeClass('locked');
+
+				};
+
+		};
 
 		multiBurger.on("click", function(e){
+
+			state = 'lock';
 
 			if ( !navParent.hasClass('scroll') && !navParent.hasClass('home') ){
 
@@ -61,7 +92,7 @@ callPageJS = {
 
 			menuWrapper.fadeIn(300).addClass("active");
 
-			$('body').addClass('locked');
+			lockBody(state);
 
 			e.stopPropagation();
 
@@ -70,6 +101,8 @@ callPageJS = {
 		});
 
 		function closeMenu(){
+
+			state = 'unlock';
 
 			if ( multiBurger.hasClass('active') ){
 
@@ -83,7 +116,7 @@ callPageJS = {
 					menuWrapper.removeClass("active")
 				});
 
-				$('body').removeClass('locked');
+				lockBody(state);
 
 				if ( !navParent.hasClass('scroll') && !navParent.hasClass('home') ){
 
@@ -99,7 +132,7 @@ callPageJS = {
 
 		$(window).on('scroll', function(){
 
-			if(!navParent.hasClass('home') && !($('#filter_wrapper').hasClass('active')) && field < 800){
+			if(!navParent.hasClass('home') && !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800){
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 					mainWrapper.css('paddingTop', '55px');
@@ -348,20 +381,6 @@ callPageJS = {
 index : {
 	init : function(){
 
-		//Extend Remove Class
-
-		var oRemoveClass = $.fn.removeClass;
-		$.fn.removeClass = function () {
-		    for (var i in arguments) {
-		        var arg = arguments[i];
-		        if ( !! (arg && arg.constructor && arg.call && arg.apply)) {
-		            arg();
-		            delete arg;
-		        }
-		    }
-		    return oRemoveClass.apply(this, arguments);
-		}
-
 		var o = $('.overlay'),
 			abs = $('.abs_wrapper'),
 			bodyWrapper = $('.inner_content'),
@@ -378,7 +397,20 @@ index : {
 			filterTag = $('.tag'),
 			filterProjects = document.getElementsByClassName('project'),
 			filterLength = filterProjects.length,
-			navParent = $('nav');
+			navParent = $('nav'),
+			lockBody = function(state){
+
+				if( state == 'lock' ){
+
+					$('body').addClass('locked');
+		
+				} else if (state == 'unlock') {
+
+					$('body').removeClass('locked');
+
+				};
+
+			};
 
 		tagBtn.on('click', function(){
 
@@ -396,7 +428,9 @@ index : {
 
 						filterContainer.addClass('active');
 
-						$('body').addClass('locked');
+						state = 'lock';
+
+						lockBody();
 
 						abs.fadeIn(300).addClass('active');
 
@@ -462,7 +496,8 @@ index : {
 
 				gsap.to(indexContainer, {duration: 1.2, autoAlpha: '1'});
 
-				$('body').removeClass('locked');
+				state = 'unlock';
+				lockBody(state)
 
 		}
 
