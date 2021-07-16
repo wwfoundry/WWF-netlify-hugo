@@ -74,9 +74,9 @@
 						{{ $media_thumbnail_ext := path.Ext .image }}
 
 						{{if (eq $media_thumbnail_ext ".jpeg") | or (eq $media_thumbnail_ext ".jpg") | or (eq $media_thumbnail_ext ".JPG") }}
-							<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.image}}"></button>
+							<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{.image}}"></button>
 							{{else if eq $media_thumbnail_ext ".mp4" }}
-							<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.image}}">
+							<button class="thumbnail margin loadingImg video slideshow" style="background-image:url('')" data-url="{{.image}}">
 								<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
 									<source src="" type="video/mp4" data-url="{{ .image }}">
 								</video>

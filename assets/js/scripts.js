@@ -543,21 +543,21 @@ index : {
 
 		if(window.location.hash){
 
-	  var getHash = window.location.hash,
-	 			removeHash = getHash.replace('#', ''),
-	 			hashSelect;
+		  var getHash = window.location.hash,
+		 			removeHash = getHash.replace('#', ''),
+		 			hashSelect;
 
-	 			filterTag.each(function(){
+		 			filterTag.each(function(){
 
-	 				if ( $(this).hasClass(removeHash) ){
+		 				if ( $(this).hasClass(removeHash) ){
 
-	 					$(this).trigger('click');
+		 					$(this).trigger('click');
 
-	 				}
+		 				}
 
-	 			history.replaceState(null, null, ' ');
+		 			history.replaceState(null, null, ' ');
 
-	 			});
+		 	});
 
 		}
 
@@ -571,6 +571,7 @@ init : function(){
  //On load, get prev, current, next
 
 	var info = document.querySelector('.right_justified_partial'),
+			currentThumbs = info.querySelectorAll('.thumbnail'),
 			field = window.innerWidth,
 			fieldY = window.innerHeight;
 
@@ -596,10 +597,35 @@ init : function(){
 			a = document.createElement('div'),
 			b = document.createElement('div'),
 			c = document.createElement('div'),
-
+			projectSlide,
+			projectSlideArr = [],
 			aInfo = document.createElement('div'),
 			bInfo = document.createElement('div'),
 			cInfo = document.createElement('div'),
+			slideCount = 0,
+			animAprev,
+			animBprev,
+			animAnext,
+			animBnext,
+			createProjectSlides = function(currentThumbs){
+
+				console.log('run')
+				
+				for(var thumbs = 0; thumbs < currentThumbs.length; thumbs++){
+
+					projectSlide = document.createElement('div');
+
+					b.parentNode.insertBefore(projectSlide, b.nextElementSibling).classList.add('slide');
+
+					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.left = positionC;
+
+					projectSlideArr.push(projectSlide);
+
+				}
+
+				slideCount = 0;
+
+			},
 			playMain =  function (container, video){
 
 					video.play();
@@ -778,7 +804,8 @@ init : function(){
 
 	var positionB = b.offsetLeft,
 			positionA = ((field/(positionB - field)*100)-10).toString() + '%',
-			positionC = ((field/(positionB + field)*100)+10).toString() + '%';
+			positionC = ((field/(positionB + field)*100)+10).toString() + '%',
+			positionProjectSlide = ((field/(positionB + field)*100)+10).toString() + '%';
 
 	a.style.left = positionA;
 	c.style.left = positionC;
@@ -815,6 +842,8 @@ init : function(){
 		parent.appendChild(c).classList.add('slide', 'loadingImg');
 		c.appendChild(cInfo).classList.add('hide'), c.setAttribute('data-arrow-left',''), c.setAttribute('data-arrow-right','');
 
+		createProjectSlides(currentThumbs);
+
 	}
 
 	//Set onload state
@@ -846,7 +875,7 @@ init : function(){
 			window.history.pushState(null, null, '#' + slideID);
 		}
 
-		animateSlides();
+		animateSlides(d, loadUrl, slideCount);
 
 		loadState = true;
 
@@ -907,9 +936,13 @@ init : function(){
 
 				d = 'prev';
 
+				slideCount--
+
 			} else {
 
 				d = 'next';
+
+				slideCount++
 
 			}
 
@@ -917,7 +950,7 @@ init : function(){
 
 			loadUrl = $(this).prop('href');
 
-			animateSlides(d, loadUrl);
+			animateSlides(d, loadUrl, slideCount);
 
 			arrowPrev = document.querySelector('#arrow_left');
 			arrowNext = document.querySelector('#arrow_right');
@@ -926,128 +959,173 @@ init : function(){
 
 	});
 
-	function animateSlides(d, loadUrl){
+	function animateSlides(d, loadUrl, slideCount){
+
+		var wobble = false;
 
 		verifyNeighbors();
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
 
-			if (window.history.pushState){
+			if( d == 'prev' && slideCount > 0){
 
-				window.history.pushState(null, null, loadUrl);
+				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev  = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
+			
+			} else if (d == 'prev' && slideCount == 0) {
 
-			}
+				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev = gsap.to(b, {duration: .5, left: '0%'});
 
-			info.classList.add('loadingImg');
+			} else if (d == 'next' && slideCount == 1) {
 
-			if(cInfo.children.length == 0 || aInfo.children.length == 0){
+				animBnext = gsap.to(b, {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
-				window.location.href = loadUrl;
-				
+			} else if (d == 'next' && slideCount < projectSlideArr.length) {
 
-			}
+				animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
-			if ( d == 'prev'){
+			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
 
-				var animBprev = gsap.to(b, {duration: .5, left: '110%'}),
-				 		animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
+				if (window.history.pushState){
 
-				if (!animAprev.isActive()){
-
-					parent.classList.add('animating');
+					window.history.pushState(null, null, loadUrl);
 
 				}
 
-				function replacePrev (loadUrl) {
+				info.classList.add('loadingImg');
 
-					info.innerHTML = aInfo.innerHTML;
+				if(cInfo.children.length == 0 || aInfo.children.length == 0){
 
-					lazyLoad(info);
-
-					c.remove();
-
-					c = b, cInfo = bInfo;
-
-					b = a, bInfo = aInfo;
-
-					a = document.createElement('div');
-
-					a.style.left = "-110%";
-
-					aInfo = document.createElement('div');
-
-					a.appendChild(aInfo).classList.add('hide');
-
-					aInfo.classList.add('hide');
-
-					parent.insertBefore(a, b).classList.add('slide', 'loadingImg');
-
-					setArrowStates(b);
-
-					parent.classList.remove('animating');
-
-					if(b.classList.contains('video')){
-
-						var mainVideo = b.querySelector('video');
-
-						playMain(b, mainVideo);
-
-					}
-
-					getNextP(a, aInfo);
+					window.location.href = loadUrl;
 					
 				}
 
-			} else {
+				if ( d == 'prev'){
 
-				var animBnext = gsap.to(b, {duration: .5, left: '-110%'}),
-					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});   
+					animBprev = gsap.to(b, {duration: .5, left: '110%'}),
+					animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
 
-				if (!animAnext.isActive()){
+					if (!animAprev.isActive()){
 
-					parent.classList.add('animating');
-
-				}
-
-				function replaceNext(loadUrl){
-
-					info.innerHTML = cInfo.innerHTML;
-
-					lazyLoad(info);
-
-					a.remove();
-
-					a = b, aInfo = bInfo;
-
-					b = c, bInfo = cInfo;
-
-					c = document.createElement('div');
-
-					c.style.left = "110%";
-
-					cInfo = document.createElement('div');
-
-					c.appendChild(cInfo).classList.add('hide');
-
-					cInfo.classList.add('hide');
-
-					b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg');
-
-					setArrowStates(b);
-
-					parent.classList.remove('animating');
-
-					if( b.classList.contains('video') ){
-
-						var mainVideo = b.querySelector('video');
-
-						playMain(b, mainVideo);
+						parent.classList.add('animating');
 
 					}
 
-					getNextN(c, cInfo);
+					function replacePrev (loadUrl) {
 
+						for (var i = 0; i < projectSlideArr.length; i++){
+							projectSlideArr[i].remove();
+						}
+
+						projectSlideArr = [];
+
+						info.innerHTML = aInfo.innerHTML;
+
+						currentThumbs = aInfo.querySelectorAll('.thumbnail');
+
+						createProjectSlides(currentThumbs);
+
+						slideCount = projectSlideArr.length;
+
+						lazyLoad(info);
+
+						c.remove();
+
+						c = b, cInfo = bInfo;
+
+						b = a, bInfo = aInfo;
+
+						a = document.createElement('div');
+
+						a.style.left = "-110%";
+
+						aInfo = document.createElement('div');
+
+						a.appendChild(aInfo).classList.add('hide');
+
+						aInfo.classList.add('hide');
+
+						parent.insertBefore(a, b).classList.add('slide', 'loadingImg');
+
+						setArrowStates(b);
+
+						parent.classList.remove('animating');
+
+						if(b.classList.contains('video')){
+
+							var mainVideo = b.querySelector('video');
+
+							playMain(b, mainVideo);
+
+						}
+
+						getNextP(a, aInfo);
+						
+					}
+
+				} else {
+
+					animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}),
+					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});  
+
+					if (!animAnext.isActive()){
+
+						parent.classList.add('animating');
+
+					}
+
+					function replaceNext(loadUrl){
+
+						for (var i = 0; i < projectSlideArr.length; i++){
+							projectSlideArr[i].remove();
+						}
+
+						projectSlideArr = [];
+
+						info.innerHTML = cInfo.innerHTML;
+
+						currentThumbs = cInfo.querySelectorAll('.thumbnail');
+
+						createProjectSlides(currentThumbs);
+
+						console.log(projectSlideArr.length);
+
+						lazyLoad(info);
+
+						a.remove();
+
+						a = b, aInfo = bInfo;
+
+						b = c, bInfo = cInfo;
+
+						c = document.createElement('div');
+
+						c.style.left = "110%";
+
+						cInfo = document.createElement('div');
+
+						c.appendChild(cInfo).classList.add('hide');
+
+						cInfo.classList.add('hide');
+
+						b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg');
+
+						setArrowStates(b);
+
+						parent.classList.remove('animating');
+
+						if( b.classList.contains('video') ){
+
+							var mainVideo = b.querySelector('video');
+
+							playMain(b, mainVideo);
+
+						}
+
+						getNextN(c, cInfo);
+
+					}
 				}
+
 			}
 
 		} else {
@@ -1197,13 +1275,17 @@ init : function(){
 
 					loadUrl = $('#arrow_left').prop('href');
 
+					slideCount--
+
 				} else {
 
 					loadUrl = $('#arrow_right').prop('href');
 
+					slideCount++
+
 				}
 
-				animateSlides(d, loadUrl);
+				animateSlides(d, loadUrl, slideCount);
 
 				arrowPrev = document.querySelector('#arrow_left');
 				arrowNext = document.querySelector('#arrow_right');

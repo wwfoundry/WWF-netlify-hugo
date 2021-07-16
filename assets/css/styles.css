@@ -788,7 +788,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 .main_content{
     display: block;
     position: relative;
-    min-height: calc(100vh - 125px);
+    min-height: calc(100vh - 97px);
     padding: 50px 25px 25px 25px;
 }
 
