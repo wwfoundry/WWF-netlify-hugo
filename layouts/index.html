@@ -10,11 +10,9 @@
 			{{range .Params.reelVideo}}
 
 			<li class="video_slide">
-
-					<video class="reel" data-setup="{}" autoplay plasysinline muted loop preload="none">
-							<source src="{{ .video }}" type="video/mp4">
-					</video>
-
+				<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
+						<source src="{{ .video }}" type="video/mp4">
+				</video>
 			</li>
 
 			{{end}}

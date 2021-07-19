@@ -132,7 +132,7 @@ callPageJS = {
 
 		$(window).on('scroll', function(){
 
-			if(!navParent.hasClass('home') && !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800){
+			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 					mainWrapper.css('paddingTop', '55px');
