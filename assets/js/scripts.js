@@ -575,6 +575,21 @@ init : function(){
 
 	var info = document.querySelector('.right_justified_partial'),
 			currentThumbs = info.querySelectorAll('.thumbnail'),
+			activateThumb = function(currentThumbs, slideCount){
+
+				console.log(currentThumbs)
+
+				for(var thumbs = 0; thumbs < currentThumbs.length; thumbs++){
+
+				currentThumbs[thumbs].classList.remove('btnActive');
+
+				}
+
+				currentThumbs[slideCount].classList.add('btnActive');
+
+				console.log(currentThumbs[slideCount]);
+				console.log(slideCount + ' slideCount');
+			},
 			field = window.innerWidth,
 			fieldY = window.innerHeight;
 
@@ -627,6 +642,8 @@ init : function(){
 				}
 
 				slideCount = 0;
+
+				activateThumb(currentThumbs, slideCount);
 
 			},
 			playMain =  function (container, video){
@@ -863,6 +880,8 @@ init : function(){
 
 	    }
 
+	  	currentThumbs[slideCount].classList.add('btnActive');
+
 	    createChildren();
 
 	    var info = document.querySelector('.right_justified_partial');
@@ -973,20 +992,30 @@ init : function(){
 			if( d == 'prev' && slideCount > 0){
 
 				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev  = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
+
+				activateThumb(currentThumbs, slideCount);
 			
 			} else if (d == 'prev' && slideCount == 0) {
 
 				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev = gsap.to(b, {duration: .5, left: '0%'});
 
+				activateThumb(currentThumbs, slideCount);
+
 			} else if (d == 'next' && slideCount == 1) {
 
 				animBnext = gsap.to(b, {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
+
+				activateThumb(currentThumbs, slideCount);
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
 
 				animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
+				activateThumb(currentThumbs, slideCount);
+
 			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
+
+				console.log(loadUrl);
 
 				if (window.history.pushState){
 
@@ -1299,22 +1328,26 @@ init : function(){
 
 	//Thumbnail Gallery
 
-
-
 	$('body').on('click', '.thumbnail', function(){
 
 		var index = $(this).index() - 1,
 				range = [];
 
 		if (index < slideCount){
-			for (var i = 0; i >= index && i <= slideCount; i++){
+
+			for (var i = 0;(i > index && i < slideCount); i++){
 				range.push([i]);
 			}
+
 		} else if (index > slideCount){
-			for (var i = 0; i <= slideCount && i <= slideCount; i++){
+
+			for (var i = 0;(i < index && i > slideCount); i++){
 				range.push([i]);
 			}
+
 		}
+
+		console.log(range)
 
 		if (!parent.classList.contains('animating') && index != slideCount){
 
@@ -1322,7 +1355,7 @@ init : function(){
 
 				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '110%'});
 
-				gsap.to( b, {duration: .5, left: '0%'})
+				gsap.to( b, {duration: .5, left: '0%'});
 
 			} else if (slideCount == 0){
 
@@ -1330,7 +1363,7 @@ init : function(){
 
 				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
 
-			}else if (index > slideCount && index > 0){
+			} else if (index > slideCount && index > 0){
 
 				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '-110%'});
 
@@ -1369,6 +1402,7 @@ init : function(){
 		}
 
 	});
+
 }
 },
 contact : {

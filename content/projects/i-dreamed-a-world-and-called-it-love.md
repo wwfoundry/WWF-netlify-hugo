@@ -7,7 +7,7 @@ featured: /images/uploads/hod-at-grand-central-station-2021.jpeg
 thumbnailImages:
   - image: /images/uploads/5177.1_MTAGlassPanel_Progress_004.jpeg
   - image: /images/uploads/5117.1_MTAGlassPanel_Process_003.jpeg
-  - image: /images/uploads/5177.1_MTAGlass_Process_012.jpg
+  - image: /images/uploads/5177.1_MTAGlass_Process_012.jpeg
 material_tag:
   - Glass
 process_tag:
