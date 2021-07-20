@@ -577,8 +577,6 @@ init : function(){
 			currentThumbs = info.querySelectorAll('.thumbnail'),
 			activateThumb = function(currentThumbs, slideCount){
 
-				console.log(currentThumbs)
-
 				for(var thumbs = 0; thumbs < currentThumbs.length; thumbs++){
 
 				currentThumbs[thumbs].classList.remove('btnActive');
@@ -587,8 +585,6 @@ init : function(){
 
 				currentThumbs[slideCount].classList.add('btnActive');
 
-				console.log(currentThumbs[slideCount]);
-				console.log(slideCount + ' slideCount');
 			},
 			field = window.innerWidth,
 			fieldY = window.innerHeight;
@@ -626,8 +622,6 @@ init : function(){
 			animAnext,
 			animBnext,
 			createProjectSlides = function(currentThumbs){
-
-				console.log('run')
 				
 				for(var thumbs = 0; thumbs < currentThumbs.length; thumbs++){
 
@@ -989,6 +983,8 @@ init : function(){
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
 
+			console.log(b)
+
 			if( d == 'prev' && slideCount > 0){
 
 				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev  = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
@@ -1014,8 +1010,6 @@ init : function(){
 				activateThumb(currentThumbs, slideCount);
 
 			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
-
-				console.log(loadUrl);
 
 				if (window.history.pushState){
 
@@ -1118,8 +1112,6 @@ init : function(){
 						currentThumbs = cInfo.querySelectorAll('.thumbnail');
 
 						createProjectSlides(currentThumbs);
-
-						console.log(projectSlideArr.length);
 
 						lazyLoad(info);
 
@@ -1346,8 +1338,6 @@ init : function(){
 			}
 
 		}
-
-		console.log(range)
 
 		if (!parent.classList.contains('animating') && index != slideCount){
 
