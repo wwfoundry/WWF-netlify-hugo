@@ -1352,14 +1352,19 @@ footer.innner_content{
   }
 
   nav.scroll{
+  height: 55px;
   position: fixed;
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
+  top: -55px;
+  animation: fromTop .6s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 /*  z-index: 4099;*/
   }
 
   @keyframes fromTop {
-  to {top: translate(360deg);}
+  to {top: 0px;}
   }
 
   #filter_inner>button{
@@ -1444,6 +1449,9 @@ footer.innner_content{
 
   .project_slide{
   flex-direction:column;
+  width: unset;
+  margin: 0 -10px;
+  overflow-x: hidden;
   }
 
   .left_justified_full{

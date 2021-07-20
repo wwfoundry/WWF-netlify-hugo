@@ -135,12 +135,15 @@ callPageJS = {
 			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
+
 					mainWrapper.css('paddingTop', '55px');
 					navParent.addClass('scroll');
 
-				} else { 
+				} else {
+
 					mainWrapper.css('paddingTop', 'unset');
 					navParent.removeClass('scroll');
+
 				}
 
 			}
@@ -420,11 +423,11 @@ index : {
 
 				if( !o.hasClass('active') ){
 
-					gsap.to(indexContainer, {duration: .4, autoAlpha: '0'});	
+					gsap.to(indexContainer, {duration: .4, autoAlpha: '0'});
+
+					navParent.css('visibility', 'hidden');
 
 					$(window).animate({scrollTop: fromTop}, function(){
-
-						navParent.css('visibility', 'hidden');
 
 						filterContainer.addClass('active');
 
@@ -1247,7 +1250,7 @@ init : function(){
 
 	// On swipe left or right, move slide
 
-	var detectSwipe = new Hammer(parent);
+	var detectSwipe = new Hammer(slideAreaContainer);
 
 	detectSwipe.on("swipeleft", function(e) {
 
@@ -1296,35 +1299,72 @@ init : function(){
 
 	//Thumbnail Gallery
 
+
+
 	$('body').on('click', '.thumbnail', function(){
 
-		if (!parent.classList.contains('animating')){
+		var index = $(this).index() - 1,
+				range = [];
 
-			var thumbUrl = $(this).attr('data-url'),
-					thumbVideo = $(this).hasClass('video'),
-					thumbHtml = $(this).html();
+		if (index < slideCount){
+			for (var i = 0; i >= index && i <= slideCount; i++){
+				range.push([i]);
+			}
+		} else if (index > slideCount){
+			for (var i = 0; i <= slideCount && i <= slideCount; i++){
+				range.push([i]);
+			}
+		}
 
-			gsap.to(b, {duration: .25, autoAlpha: '0', onComplete: addBackground});
+		if (!parent.classList.contains('animating') && index != slideCount){
 
-			function addBackground(){
+			if (index == 0 && slideCount != 0){
 
-				if (thumbVideo == false){
+				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '110%'});
 
-					b.innerHTML = ""
+				gsap.to( b, {duration: .5, left: '0%'})
 
-					b.style.backgroundImage = 'url(' + thumbUrl + ')';
+			} else if (slideCount == 0){
 
-				} else if (thumbVideo == true) {
+				gsap.to( b, {duration: .5, left: '-110%'});
 
-					b.innerHTML = thumbHtml;
+				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
 
-					b.style.backgroundImage = ""
+			}else if (index > slideCount && index > 0){
 
-				}
+				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '-110%'});
 
-				gsap.to(b, {duration: .25, autoAlpha: '1'});
+				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
+
+			} else if ( index < slideCount){
+
+				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '110%'});
+
+				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
 
 			}
+
+			slideCount = index;
+
+			// function addBackground(){
+
+			// 	if (thumbVideo == false){
+
+			// 		b.innerHTML = ""
+
+			// 		b.style.backgroundImage = 'url(' + thumbUrl + ')';
+
+			// 	} else if (thumbVideo == true) {
+
+			// 		b.innerHTML = thumbHtml;
+
+			// 		b.style.backgroundImage = ""
+
+			// 	}
+
+			// 	gsap.to(b, {duration: .25, autoAlpha: '1'});
+
+			// }
 		
 		}
 
