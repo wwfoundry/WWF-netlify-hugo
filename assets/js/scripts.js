@@ -1050,7 +1050,7 @@ init : function(){
 
 						createProjectSlides(currentThumbs);
 
-						slideCount = projectSlideArr.length;
+						// slideCount = projectSlideArr.length;
 
 						lazyLoad(info);
 
@@ -1111,9 +1111,9 @@ init : function(){
 
 						currentThumbs = cInfo.querySelectorAll('.thumbnail');
 
-						createProjectSlides(currentThumbs);
-
 						slideCount = 0;
+
+						createProjectSlides(currentThumbs);
 
 						lazyLoad(info);
 
