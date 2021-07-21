@@ -1101,6 +1101,8 @@ init : function(){
 
 					function replaceNext(loadUrl){
 
+						console.clear();
+
 						for (var i = 0; i < projectSlideArr.length; i++){
 							projectSlideArr[i].remove();
 						}
