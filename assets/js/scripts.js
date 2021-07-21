@@ -966,6 +966,8 @@ init : function(){
 
 			loadUrl = $(this).prop('href');
 
+			console.log(d + ' ' + slideCount)
+
 			animateSlides(d, loadUrl, slideCount);
 
 			arrowPrev = document.querySelector('#arrow_left');
