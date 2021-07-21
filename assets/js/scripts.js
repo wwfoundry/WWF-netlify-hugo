@@ -1043,7 +1043,7 @@ init : function(){
 
 						info.innerHTML = aInfo.innerHTML;
 
-						currentThumbs = aInfo.querySelectorAll('.thumbnail');
+						currentThumbs = info.querySelectorAll('.thumbnail');
 
 						createProjectSlides(currentThumbs);
 
@@ -1097,7 +1097,7 @@ init : function(){
 
 						info.innerHTML = cInfo.innerHTML;
 
-						currentThumbs = cInfo.querySelectorAll('.thumbnail');
+						currentThumbs = info.querySelectorAll('.thumbnail');
 
 						slideCount = 0;
 

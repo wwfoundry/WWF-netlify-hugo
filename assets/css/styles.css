@@ -426,11 +426,31 @@ button{
 
 }
 
-.thumbnail + .btnActive{
-
-  box-shadow: 0px 0px 4px 0px rgb(0 0 0 / 40%);
-
+.thumbnail.btnActive{
+  position: relative;
+/*  overflow: hidden;*/
   }
+
+.thumbnail.btnActive:before{
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  height: calc(100% + 6px);
+  width: 0;
+  animation: load .2s ease-out;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes load {
+  to {width: 100%;}
+}
 
 button:hover{
   opacity:60%;
