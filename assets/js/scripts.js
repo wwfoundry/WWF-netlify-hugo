@@ -589,7 +589,8 @@ init : function(){
 			field = window.innerWidth,
 			fieldY = window.innerHeight;
 
-	var parent = document.querySelector('#slide_container'),
+	var pageContainer = document.querySelector('.main_content'),
+			parent = document.querySelector('#slide_container'),
 			current = document.querySelector('#main_slide'),
 			currentUrl = current.getAttribute('data-url'),
 			currentInner = current.innerHTML,
@@ -625,8 +626,8 @@ init : function(){
 			anim2,
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount){
 				// parent.classList.add('animating');
-				anim1 = gsap.to(p1, {duration: .65, transform: 'translate(' + l1 +')'});
-				anim2 = gsap.to(p2, {duration: .65, transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+				anim1 = gsap.to(p1, {duration: .65, ease: "power2.out", transform: 'translate(' + l1 +')'});
+				anim2 = gsap.to(p2, {duration: .65, ease: "power2.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 			},
 			createProjectSlides = function(currentThumbs){
 				
@@ -641,6 +642,8 @@ init : function(){
 					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.transform = 'translate(' + positionC + ')';
 
 					projectSlideArr.push(projectSlide);
+
+					projectSlideArr[0].classList.add('hide');
 
 				}
 
