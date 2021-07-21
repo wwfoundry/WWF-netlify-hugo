@@ -962,7 +962,7 @@ init : function(){
 		e.preventDefault();
 		e.stopPropagation();
 
-		if ( !parent.classList.contains('animating') ) {
+		if ( !info.classList.contains('loadingImg') ) {
 
 			if ( $(this).hasClass('left') ) {
 
@@ -1279,7 +1279,7 @@ init : function(){
 
 	function trans_slide(d){
 
-		if ( !parent.classList.contains('animating') ) {
+		if ( !info.classList.contains('loadingImg') ) {
 
 				loadState = false;
 
