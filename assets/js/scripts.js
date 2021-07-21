@@ -966,8 +966,6 @@ init : function(){
 
 			loadUrl = $(this).prop('href');
 
-			console.log(d + ' ' + slideCount)
-
 			animateSlides(d, loadUrl, slideCount);
 
 			arrowPrev = document.querySelector('#arrow_left');
@@ -979,7 +977,7 @@ init : function(){
 
 	function animateSlides(d, loadUrl, slideCount){
 
-		console.clear();
+		console.log(slideCount)
 
 		var wobble = false;
 
@@ -999,15 +997,13 @@ init : function(){
 
 				activateThumb(currentThumbs, slideCount);
 
-			} else if (d == 'next' && slideCount == 1) {
+			} else if (d == 'next' && slideCount === 1) {
 
 				animBnext = gsap.to(b, {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
 				activateThumb(currentThumbs, slideCount);
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
-
-				console.log('oops');
 
 				animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
@@ -1116,6 +1112,8 @@ init : function(){
 						currentThumbs = cInfo.querySelectorAll('.thumbnail');
 
 						createProjectSlides(currentThumbs);
+
+						slideCount = 0;
 
 						lazyLoad(info);
 
