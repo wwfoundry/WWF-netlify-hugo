@@ -979,13 +979,13 @@ init : function(){
 
 	function animateSlides(d, loadUrl, slideCount){
 
+		console.clear();
+
 		var wobble = false;
 
 		verifyNeighbors();
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
-
-			console.log(b)
 
 			if( d == 'prev' && slideCount > 0){
 
@@ -1006,6 +1006,8 @@ init : function(){
 				activateThumb(currentThumbs, slideCount);
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
+
+				console.log('oops');
 
 				animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
 
@@ -1102,8 +1104,6 @@ init : function(){
 					}
 
 					function replaceNext(loadUrl){
-
-						console.clear();
 
 						for (var i = 0; i < projectSlideArr.length; i++){
 							projectSlideArr[i].remove();
