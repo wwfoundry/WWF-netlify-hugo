@@ -639,6 +639,8 @@ init : function(){
 
 				activateThumb(currentThumbs, slideCount);
 
+				return slideCount;
+
 			},
 			playMain =  function (container, video){
 
@@ -943,6 +945,8 @@ init : function(){
 
 	$('body').on('click', '.arrow', function(e){
 
+		console.log('new ' + slideCount)
+
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -977,13 +981,13 @@ init : function(){
 
 	function animateSlides(d, loadUrl, slideCount){
 
-		console.log(slideCount)
-
 		var wobble = false;
 
 		verifyNeighbors();
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
+
+			console.log('test ' + slideCount)
 
 			if( d == 'prev' && slideCount > 0){
 
