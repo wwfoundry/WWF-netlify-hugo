@@ -617,10 +617,16 @@ init : function(){
 			bInfo = document.createElement('div'),
 			cInfo = document.createElement('div'),
 			slideCount = 0,
-			animAprev,
-			animBprev,
-			animAnext,
-			animBnext,
+			removeAnim = function(){
+				parent.classList.remove('animating');
+			},
+			anim1,
+			anim2,
+			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount){
+				// parent.classList.add('animating');
+				anim1 = gsap.to(p1, {duration: .5, transform: 'translate(' + l1 +')'});
+				anim2 = gsap.to(p2, {duration: .5, transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+			},
 			createProjectSlides = function(currentThumbs){
 				
 				for(var thumbs = 0; thumbs < currentThumbs.length; thumbs++){
@@ -629,7 +635,7 @@ init : function(){
 
 					b.parentNode.insertBefore(projectSlide, b.nextElementSibling).classList.add('slide');
 
-					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.left = positionC;
+					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.transform = 'translate(' + positionC + ')';
 
 					projectSlideArr.push(projectSlide);
 
@@ -823,8 +829,8 @@ init : function(){
 			positionC = ((field/(positionB + field)*100)+10).toString() + '%',
 			positionProjectSlide = ((field/(positionB + field)*100)+10).toString() + '%';
 
-	a.style.left = positionA;
-	c.style.left = positionC;
+	a.style.transform = 'translate(' + positionA + ')';
+	c.style.transform = 'translate(' + positionC + ')';
 
 	function createChildren(){
 
@@ -991,27 +997,19 @@ init : function(){
 
 			if( d == 'prev' && slideCount > 0){
 
-				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev  = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
-
-				activateThumb(currentThumbs, slideCount);
+				animAll(projectSlideArr[slideCount + 1], '110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount);
 			
 			} else if (d == 'prev' && slideCount == 0) {
 
-				animBprev = gsap.to(projectSlideArr[slideCount + 1], {duration: .5, left: '110%'}), animAprev = gsap.to(b, {duration: .5, left: '0%'});
-
-				activateThumb(currentThumbs, slideCount);
+				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount);
 
 			} else if (d == 'next' && slideCount === 1) {
 
-				animBnext = gsap.to(b, {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
-
-				activateThumb(currentThumbs, slideCount);
+				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount);
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
 
-				animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}), animAnext = gsap.to(projectSlideArr[slideCount], {duration: .5, left: '0%'});
-
-				activateThumb(currentThumbs, slideCount);
+				animAll(projectSlideArr[slideCount - 1], '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount);
 
 			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
 
@@ -1031,14 +1029,7 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					animBprev = gsap.to(b, {duration: .5, left: '110%'}),
-					animAprev  = gsap.to(a, {duration: .5, left: '0%', onComplete: replacePrev});
-
-					if (!animAprev.isActive()){
-
-						parent.classList.add('animating');
-
-					}
+					animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount);
 
 					function replacePrev (loadUrl) {
 
@@ -1054,8 +1045,6 @@ init : function(){
 
 						createProjectSlides(currentThumbs);
 
-						// slideCount = projectSlideArr.length;
-
 						lazyLoad(info);
 
 						c.remove();
@@ -1066,7 +1055,7 @@ init : function(){
 
 						a = document.createElement('div');
 
-						a.style.left = "-110%";
+						a.style.transform = 'translate(-110%)';
 
 						aInfo = document.createElement('div');
 
@@ -1094,14 +1083,7 @@ init : function(){
 
 				} else {
 
-					animBnext = gsap.to(projectSlideArr[slideCount - 1], {duration: .5, left: '-110%'}),
-					animAnext = gsap.to(c, {duration: .5, left: '0%', onComplete: replaceNext});  
-
-					if (!animAnext.isActive()){
-
-						parent.classList.add('animating');
-
-					}
+					animAll(projectSlideArr[slideCount - 1], '-110%', c, '0%', replaceNext, currentThumbs, slideCount);
 
 					function replaceNext(loadUrl){
 
@@ -1129,7 +1111,7 @@ init : function(){
 
 						c = document.createElement('div');
 
-						c.style.left = "110%";
+						c.style.transform = 'translate(110%)';
 
 						cInfo = document.createElement('div');
 
@@ -1140,8 +1122,6 @@ init : function(){
 						b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg');
 
 						setArrowStates(b);
-
-						parent.classList.remove('animating');
 
 						if( b.classList.contains('video') ){
 
@@ -1351,52 +1331,24 @@ init : function(){
 
 			if (index == 0 && slideCount != 0){
 
-				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '110%'});
-
-				gsap.to( b, {duration: .5, left: '0%'});
+				animAll(projectSlideArr[slideCount], '110%', b, '0%', activateThumb, currentThumbs, index);
 
 			} else if (slideCount == 0){
 
-				gsap.to( b, {duration: .5, left: '-110%'});
-
-				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
+				animAll(b, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			} else if (index > slideCount && index > 0){
 
-				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '-110%'});
-
-				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
+				animAll(projectSlideArr[slideCount], '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			} else if ( index < slideCount){
 
-				gsap.to( projectSlideArr[slideCount], {duration: .5, left: '110%'});
-
-				gsap.to( projectSlideArr[index], {duration: .5, left: '0%'});
+				animAll(projectSlideArr[slideCount], '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			}
 
 			slideCount = index;
 
-			// function addBackground(){
-
-			// 	if (thumbVideo == false){
-
-			// 		b.innerHTML = ""
-
-			// 		b.style.backgroundImage = 'url(' + thumbUrl + ')';
-
-			// 	} else if (thumbVideo == true) {
-
-			// 		b.innerHTML = thumbHtml;
-
-			// 		b.style.backgroundImage = ""
-
-			// 	}
-
-			// 	gsap.to(b, {duration: .25, autoAlpha: '1'});
-
-			// }
-		
 		}
 
 	});
