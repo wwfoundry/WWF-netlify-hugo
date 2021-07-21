@@ -435,12 +435,11 @@ button{
   content: '';
   position: absolute;
   top: -4px;
-  left: 0;
+  left: -4.5px;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border: 1px solid #000;
   height: calc(100% + 6px);
   width: 0;
   animation: load .2s ease-out;
@@ -449,7 +448,7 @@ button{
 }
 
 @keyframes load {
-  to {width: 100%;}
+  to {width: calc(100% + 8px)}
 }
 
 button:hover{

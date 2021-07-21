@@ -624,8 +624,8 @@ init : function(){
 			anim1,
 			anim2,
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount){
-				parent.classList.add('animating');
-				anim1 = gsap.to(p1, {duration: .5, transform: 'translate(' + l1 +')', onComplete: removeAnim});
+				// parent.classList.add('animating');
+				anim1 = gsap.to(p1, {duration: .5, transform: 'translate(' + l1 +')'});
 				anim2 = gsap.to(p2, {duration: .5, transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 			},
 			createProjectSlides = function(currentThumbs){
