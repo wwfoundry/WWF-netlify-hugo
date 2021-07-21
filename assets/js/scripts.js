@@ -625,8 +625,8 @@ init : function(){
 			anim2,
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount){
 				// parent.classList.add('animating');
-				anim1 = gsap.to(p1, {duration: .5, transform: 'translate(' + l1 +')'});
-				anim2 = gsap.to(p2, {duration: .5, transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+				anim1 = gsap.to(p1, {duration: .65, transform: 'translate(' + l1 +')'});
+				anim2 = gsap.to(p2, {duration: .65, transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 			},
 			createProjectSlides = function(currentThumbs){
 				
@@ -1315,14 +1315,16 @@ init : function(){
 
 		if (index < slideCount){
 
-			for (var i = 0;(i > index && i < slideCount); i++){
-				range.push([i]);
+			for (var i = index;i < slideCount; i++){
+				range.push(projectSlideArr[i]);
 			}
+
+			range.reverse();
 
 		} else if (index > slideCount){
 
-			for (var i = 0;(i < index && i > slideCount); i++){
-				range.push([i]);
+			for (var i = slideCount;i < index; i++){
+				range.push(projectSlideArr[i]);
 			}
 
 		}
@@ -1331,19 +1333,19 @@ init : function(){
 
 			if (index == 0 && slideCount != 0){
 
-				animAll(projectSlideArr[slideCount], '110%', b, '0%', activateThumb, currentThumbs, index);
+				animAll([projectSlideArr[slideCount], range], '110%', b, '0%', activateThumb, currentThumbs, index);
 
 			} else if (slideCount == 0){
 
-				animAll(b, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
+				animAll([b, range], '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			} else if (index > slideCount && index > 0){
 
-				animAll(projectSlideArr[slideCount], '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
+				animAll([projectSlideArr[slideCount], range], '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			} else if ( index < slideCount){
 
-				animAll(projectSlideArr[slideCount], '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
+				animAll([projectSlideArr[slideCount], range], '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index);
 
 			}
 
