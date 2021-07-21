@@ -945,7 +945,7 @@ init : function(){
 
 	$('body').on('click', '.arrow', function(e){
 
-		console.log('new ' + slideCount)
+		console.log('start ' + slideCount)
 
 		e.preventDefault();
 		e.stopPropagation();
@@ -987,7 +987,7 @@ init : function(){
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
 
-			console.log('test ' + slideCount)
+			console.log('finish ' + slideCount)
 
 			if( d == 'prev' && slideCount > 0){
 
@@ -1298,6 +1298,8 @@ init : function(){
 	function trans_slide(d){
 
 		if ( !parent.classList.contains('animating') ) {
+
+			console.log('start ' + slideCount)
 
 				loadState = false;
 
