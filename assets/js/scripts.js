@@ -608,6 +608,7 @@ init : function(){
 			loadState = false,
 			isVideo = false,
 			navReset = true,
+			frag = document.createDocumentFragment(),
 			a = document.createElement('div'),
 			b = document.createElement('div'),
 			c = document.createElement('div'),
@@ -633,13 +634,17 @@ init : function(){
 
 					projectSlide = document.createElement('div');
 
-					b.parentNode.insertBefore(projectSlide, b.nextElementSibling).classList.add('slide');
+					projectSlide.classList.add('slide')
+
+					frag.append(projectSlide);
 
 					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.transform = 'translate(' + positionC + ')';
 
 					projectSlideArr.push(projectSlide);
 
 				}
+
+				b.parentNode.insertBefore(frag, b.nextElementSibling);
 
 				slideCount = 0;
 
@@ -657,8 +662,8 @@ init : function(){
 			},
 			lazyLoad = function (info){
 
-				var thumbs = info.getElementsByClassName('thumbnail'),
-						temp = info.getElementsByClassName('temp'),
+				var thumbs = info.querySelectorAll('.thumbnail'),
+						temp = info.querySelectorAll('.temp'),
 						i,
 						t;
 
@@ -669,8 +674,9 @@ init : function(){
 							cachedImg = document.createElement('img');
 
 					cachedImg.classList.add('hide', 'temp');
+					cachedImg.style.display = 'none';
 
-					document.querySelector('.thumbnails').appendChild(cachedImg).style.display = 'none';
+					frag.append(cachedImg);
 
 					if( !t.classList.contains('video') ){
 
@@ -692,6 +698,8 @@ init : function(){
 
 				}
 
+				document.querySelector('.thumbnails').appendChild(frag);
+
 			},
 			replaceSlide,
 			slideUrl,
@@ -705,7 +713,7 @@ init : function(){
 
 						var cleanedStoredImg = stored.replace(/<img\b[^>]*>/ig, ''),
 								cleanedStoredLink = cleanedStoredImg.replace(/<link\b[^>]*>/ig, ''),
-								tempStored = $('<div>').append(cleanedStoredLink),
+								tempStored = $(document.createElement('div')).append(cleanedStoredLink),
 								storedInfo,
 								tempHTML;
 
@@ -951,8 +959,6 @@ init : function(){
 
 	$('body').on('click', '.arrow', function(e){
 
-		console.log('start ' + slideCount)
-
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -987,13 +993,9 @@ init : function(){
 
 	function animateSlides(d, loadUrl, slideCount){
 
-		var wobble = false;
-
 		verifyNeighbors();
 
 		if ( loadState == false && d && loadUrl && !(info.classList.contains('loadingImg')) ){
-
-			console.log('finish ' + slideCount)
 
 			if( d == 'prev' && slideCount > 0){
 
@@ -1278,8 +1280,6 @@ init : function(){
 	function trans_slide(d){
 
 		if ( !parent.classList.contains('animating') ) {
-
-			console.log('start ' + slideCount)
 
 				loadState = false;
 
