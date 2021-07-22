@@ -624,10 +624,25 @@ init : function(){
 			},
 			anim1,
 			anim2,
+			currentSlide = {
+				slide: undefined,
+				get prop(){ 
+					return this.slide;
+				},
+				set prop(nextSlide){
+					nextSlide.classList.add('draggable');
+					this.slide = nextSlide;
+				}
+			},
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount){
-				// parent.classList.add('animating');
-				anim1 = gsap.to(p1, {duration: .65, ease: "power2.out", transform: 'translate(' + l1 +')'});
-				anim2 = gsap.to(p2, {duration: .65, ease: "power2.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+
+				currentSlide.prop.classList.remove('draggable');
+
+				currentSlide.prop = p2;
+
+				anim1 = gsap.to(p1, {duration: .75, ease: "power2.out", transform: 'translate(' + l1 +')'});
+				anim2 = gsap.to(p2, {duration: .75, ease: "power2.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+
 			},
 			createProjectSlides = function(currentThumbs){
 				
@@ -803,7 +818,7 @@ init : function(){
 
 						slide.setAttribute( 'data-arrow-left', arrowLeftState );
 						slide.setAttribute( 'data-arrow-right', arrowRightState );
-
+ 
 					} else if ( arrowLeftTemp == undefined && arrowRightTemp  ) {
 
 						arrowRightState = arrowRightTemp.getAttribute('href');
@@ -876,6 +891,8 @@ init : function(){
 		c.appendChild(cInfo).classList.add('hide'), c.setAttribute('data-arrow-left',''), c.setAttribute('data-arrow-right','');
 
 		createProjectSlides(currentThumbs);
+
+		currentSlide.prop = b;
 
 	}
 
@@ -1140,7 +1157,6 @@ init : function(){
 
 					}
 				}
-
 			}
 
 		} else {
@@ -1262,23 +1278,84 @@ init : function(){
 
 	// On swipe left or right, move slide
 
-	var detectSwipe = new Hammer(slideAreaContainer);
+	var swipedSlide;
 
-	detectSwipe.on("swipeleft", function(e) {
+	parent.ontouchstart = swipeSlide;
+	parent.onmousedown = swipeSlide;
 
-		e.preventDefault;
+	function swipeSlide(e){
 
-		trans_slide('next');
+		e.preventDefault();
+		e.stopPropagation();
 
-	});
+		var swipeArea = e.target;
 
-	detectSwipe.on("swiperight", function(e) {
+		swipeArea.moving = true;
 
-		e.preventDefault;
+		if (e.clientX){
 
-		trans_slide('prev');
+			swipeArea.oldX = e.clientX;
 
-	});
+		} else {
+
+			swipeArea.oldX = e.touches[0].clientX;
+
+		}
+
+		swipeArea.onmousemove = swipeDrag;
+		swipeArea.ontouchmove = swipeDrag;
+
+		function swipeDrag(d){
+
+			d.preventDefault();
+			d.stopPropagation();
+
+			if(!swipeArea.moving){
+				return;
+			}
+
+			if (d.clientX){
+
+				swipeArea.distX = d.clientX - swipeArea.oldX;
+
+			} else {
+
+				swipeArea.distX = d.touches[0].clientX - swipeArea.oldX;
+
+			}
+
+			currentSlide.prop.style.transform = 'translate(' + swipeArea.distX + 'px)'
+
+		}
+
+		swipeArea.onmouseup = endSwipe;
+		swipeArea.ontouchend = endSwipe;
+
+		function endSwipe(){
+
+			swipeArea.moving = false;
+
+			if( swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4){
+
+					trans_slide('prev');
+
+					return;
+
+			} else if ( -swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4) {
+
+					trans_slide('next');
+
+					return;
+
+			}
+
+			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .5, ease: "power2.in", transform: 'translate(0%)'});		
+
+		}
+
+	}
+
+	var count = 0;
 
 	function trans_slide(d){
 
@@ -1293,6 +1370,10 @@ init : function(){
 					slideCount--
 
 				} else {
+
+					count++
+
+					console.log('triggered ' + count);
 
 					loadUrl = $('#arrow_right').prop('href');
 
