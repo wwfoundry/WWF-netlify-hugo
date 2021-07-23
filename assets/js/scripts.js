@@ -1304,7 +1304,7 @@ init : function(){
 
 		setTimeout(function(){
 			longTouch = true;
-		}, 150)
+		}, 250)
 
 		swipeArea.moving = true;
 
@@ -1317,6 +1317,8 @@ init : function(){
 			swipeArea.oldX = e.touches[0].clientX;
 
 		}
+
+		e.touches = [];
 
 		swipeArea.onmousemove = swipeDrag;
 		swipeArea.ontouchmove = swipeDrag;
@@ -1350,7 +1352,7 @@ init : function(){
 
 			event.preventDefault();
 			event.stopPropagation();
-			gsap.to(currentSlide.prop, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});
+			gsap.to(currentSlide.prop, {duration: .35, ease: "power2.in", transform: 'translate(0%)'});
 
 			swipeArea.moving = false;
 
@@ -1361,7 +1363,9 @@ init : function(){
 
 			swipeArea.moving = false;
 
-			if( (swipeArea.distX > 0) && (swipeArea.distX > parent.offsetWidth/4) && longTouch ){
+			console.log(swipeArea.distX)
+
+			if( swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 ){
 
 					trans_slide('prev', swipeArea.distX);
 
@@ -1369,7 +1373,7 @@ init : function(){
 
 					return;
 
-			} else if ( (-swipeArea.distX > 0) && (-swipeArea.distX > parent.offsetWidth/4) && longTouch ) {
+			} else if ( -swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 ){
 
 					trans_slide('next', swipeArea.distX);
 
@@ -1379,11 +1383,17 @@ init : function(){
 
 			}
 
-			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});		
+			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .35, ease: "power2.in", transform: 'translate(0%)'});
+			
+			longTouch = false;
+
+			return;		
 
 		}
 
 	}
+
+
 
 	function trans_slide(d, swiper){
 
