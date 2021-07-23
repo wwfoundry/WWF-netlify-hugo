@@ -640,8 +640,8 @@ init : function(){
 
 				currentSlide.prop = p2;
 
-				anim1 = gsap.to(p1, {duration: .75, ease: "power2.out", transform: 'translate(' + l1 +')'});
-				anim2 = gsap.to(p2, {duration: .75, ease: "power2.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+				anim1 = gsap.to(p1, {duration: .65, ease: "power2.out", transform: 'translate(' + l1 +')'});
+				anim2 = gsap.to(p2, {duration: .65, ease: "power2.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
 			createProjectSlides = function(currentThumbs){
@@ -1285,6 +1285,8 @@ init : function(){
 
 	function swipeSlide(e){
 
+		console.log(parent);
+
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -1304,6 +1306,11 @@ init : function(){
 
 		swipeArea.onmousemove = swipeDrag;
 		swipeArea.ontouchmove = swipeDrag;
+		parent.addEventListener("mouseleave", event => {
+			event.preventDefault();
+			event.stopPropagation();
+			endSwipe();
+		});
 
 		function swipeDrag(d){
 
@@ -1324,8 +1331,8 @@ init : function(){
 
 			}
 
-			currentSlide.prop.style.transform = 'translate(' + swipeArea.distX + 'px)'
-
+			currentSlide.prop.style.transform = 'translate(' + swipeArea.distX + 'px)';
+ 
 		}
 
 		swipeArea.onmouseup = endSwipe;
@@ -1335,13 +1342,13 @@ init : function(){
 
 			swipeArea.moving = false;
 
-			if( swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4){
+			if( swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/2){
 
 					trans_slide('prev');
 
 					return;
 
-			} else if ( -swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4) {
+			} else if ( Math.abs(swipeArea.distX) > 0 && Math.abs(swipeArea.distX) > parent.offsetWidth/2) {
 
 					trans_slide('next');
 
@@ -1349,7 +1356,7 @@ init : function(){
 
 			}
 
-			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .5, ease: "power2.in", transform: 'translate(0%)'});		
+			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});		
 
 		}
 
