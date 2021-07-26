@@ -1474,13 +1474,6 @@ footer.innner_content{
 
 @media screen and (max-width:1600px){
 
-  .thumbnail{
-    width: calc(29% - 20px);
-    max-width: 100px;
-    min-width: 65px;
-    height: 65px;
-  }
-
 }
 
 @media screen and (max-width:1800px){
@@ -1550,13 +1543,6 @@ footer.innner_content{
 
   .thumbnails>.upperHeader{
     font-size: 1.2em;
-  }
-
-  .thumbnail{
-    width: calc(25% - 20px);
-    max-width: 100px;
-    min-width: 65px;
-    height: 65px;
   }
 
   #tag_wrapper{
