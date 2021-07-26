@@ -833,15 +833,21 @@ nav.home>#menu>#controls>#hamburger>.bar{
     position: relative;
 }
 
+.inner_content.gallery{
+  padding-top: unset;
+}
+
+
 .project_slide{
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   width:100%;
   height:100%;
+  cursor: move;
 }
 
 .right_justified_partial{
-
+  margin-top: 25px;
 }
 
 .right_justified_partial.loadingImg{
@@ -1011,8 +1017,8 @@ footer.innner_content{
 /*---------------*/
 
 .left_justified_full{
-  width:70%;
-  height:calc(100vh - 150px);
+  width:100%;
+  height:calc(80vh - 150px);
   position:relative;
 }
 
@@ -1054,30 +1060,41 @@ footer.innner_content{
 }
 
 .right_justified_partial{
-  width:30%;
+  border-top: 1px solid black;
+  width:80%;
+  margin-right: auto;
+  margin-left: auto;
   display:flex;
-  flex-direction: column-reverse;
+  flex-direction:row-reverse;
   justify-content: space-between;
 }
 
 .bottom_justified{
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
 
 }
 
 .thumbnails{
   display:flex;
-  flex-wrap:wrap;
-  justify-content: flex-start;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  width: fit-content;
+  
+}
+
+.thumbnail_wrapper{
+  display:flex;
   background-color:unset;
   width:100%;
   transition:height, opacity ease-in-out .25s;
 }
 
 .thumbnail{
-  width:100%;
-  min-width:100px;
+  width:100px;
+  flex: 1 0 auto;
+  max-width:100px;
   height:100px;
   background-size:cover;
   background-position: center;
@@ -1412,6 +1429,10 @@ footer.innner_content{
 
   }
 
+  .inner_content.gallery{
+    margin: unset;
+  }
+
   .inner_content.margin{
     margin: unset;
   }
@@ -1427,20 +1448,6 @@ footer.innner_content{
 
 @media screen and (max-width:1600px){
 
-
-  .right_justified_partial{
-
-    width: 20%;
-
-  }
-
-  .left_justified_full{
-
-    width: 80%;
-
-  }
-
-
   .thumbnail{
     width: calc(29% - 20px);
     max-width: 100px;
@@ -1452,18 +1459,6 @@ footer.innner_content{
 
 @media screen and (max-width:1800px){
 
-
-  .right_justified_partial{
-
-    width: 25%;
-
-  }
-
-  .left_justified_full{
-
-    width: 75%;
-
-  }
 
 }
 
@@ -1483,6 +1478,10 @@ footer.innner_content{
     overflow: hidden;
   }
 
+  .thumbnails{
+    width: 100%;
+  }
+
   #slide_container{
     margin:0;
     width:100%;
@@ -1495,6 +1494,7 @@ footer.innner_content{
   }
 
   .right_justified_partial{
+    border-top: unset;
     flex-direction: column;
     width:100%;
   }

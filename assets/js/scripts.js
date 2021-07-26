@@ -643,7 +643,6 @@ init : function(){
 				if(!swiper){
 					anim1 = gsap.to(p1, {duration: .65, ease: "sine.out", transform: 'translate(' + l1 +')'});
 				} else {
-					console.log('swiper');
 					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .65, ease: "sine.out", transform: 'translate(' + l1 +')'});
 				}
 
@@ -1418,7 +1417,7 @@ init : function(){
 
 	$('body').on('click', '.thumbnail', function(){
 
-		var index = $(this).index() - 1,
+		var index = $(this).index(),
 				range = [];
 
 		if (index < slideCount){

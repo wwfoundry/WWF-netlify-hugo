@@ -2,7 +2,7 @@
 	<div id="gallery" class="page hide"></div>
 {{end}}
 {{define "main"}}
-
+<div class="inner_content gallery">
 	{{ $projects := .Site.GetPage "projects"}}
 
 	{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
@@ -57,36 +57,34 @@
 			</div>
 			<div class="right_justified_partial">
 				<div class="thumbnails">
-					<h2 class="upperHeader margin">Production Stage</h2>
-
-					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
-					<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
-					{{else if eq $media_featured_ext ".mp4" }}
-					<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.Params.featured}}">
-						<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
-							<source src="" data-url="{{ .Params.featured }}" type="video/mp4">
-						</video>
-					</button>
-					{{end}}
-
-					{{range .Params.thumbnailImages}}
-
-						{{ $media_thumbnail_ext := path.Ext .image }}
-
-						{{if (eq $media_thumbnail_ext ".jpeg") | or (eq $media_thumbnail_ext ".jpg") | or (eq $media_thumbnail_ext ".JPG") }}
-							<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{.image}}"></button>
-							{{else if eq $media_thumbnail_ext ".mp4" }}
-							<button class="thumbnail margin loadingImg video slideshow" style="background-image:url('')" data-url="{{.image}}">
-								<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
-									<source src="" type="video/mp4" data-url="{{ .image }}">
-								</video>
-							</button>
+					<div class="thumbnail_wrapper">
+						{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
+						<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
+						{{else if eq $media_featured_ext ".mp4" }}
+						<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.Params.featured}}">
+							<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
+								<source src="" data-url="{{ .Params.featured }}" type="video/mp4">
+							</video>
+						</button>
 						{{end}}
 
-					{{end}}
+						{{range .Params.thumbnailImages}}
 
+							{{ $media_thumbnail_ext := path.Ext .image }}
+
+							{{if (eq $media_thumbnail_ext ".jpeg") | or (eq $media_thumbnail_ext ".jpg") | or (eq $media_thumbnail_ext ".JPG") }}
+								<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{.image}}"></button>
+								{{else if eq $media_thumbnail_ext ".mp4" }}
+								<button class="thumbnail margin loadingImg video slideshow" style="background-image:url('')" data-url="{{.image}}">
+									<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
+										<source src="" type="video/mp4" data-url="{{ .image }}">
+									</video>
+								</button>
+							{{end}}
+
+						{{end}}
+					</div>
 					<div id="tag_wrapper">
-						<!-- <h2 class="upperHeader margin">Tags</h2> -->
 						{{range .Params.material_tag}}
 							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
@@ -101,7 +99,7 @@
 				</div>
 				<div class="bottom_justified">
 					<ul class="attribution margin">
-						<li class="upperHeader">
+						<li class="upperHeader title">
 						<label>Title</label>
 						{{ .Title }}
 						</li>
@@ -130,4 +128,5 @@
 		</div>
 
 	{{end}}
+</div>
 {{end}}
