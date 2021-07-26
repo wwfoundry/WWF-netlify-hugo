@@ -1303,7 +1303,7 @@ init : function(){
 
 		setTimeout(function(){
 			longTouch = true;
-		}, 150)
+		}, 250)
 
 		swipeArea.moving = true;
 
@@ -1360,7 +1360,7 @@ init : function(){
 
 			swipeArea.moving = false;
 
-			if( (swipeArea.distX > 0) && (swipeArea.distX > parent.offsetWidth/4) && longTouch ){
+			if( (swipeArea.distX > 0) && (swipeArea.distX > parent.offsetWidth/4) ){
 
 					trans_slide('prev', swipeArea.distX);
 
@@ -1368,7 +1368,7 @@ init : function(){
 
 					return;
 
-			} else if ( (-swipeArea.distX > 0) && (-swipeArea.distX > parent.offsetWidth/4) && longTouch ) {
+			} else if ( (-swipeArea.distX > 0) && (-swipeArea.distX > parent.offsetWidth/4) ) {
 
 					trans_slide('next', swipeArea.distX);
 

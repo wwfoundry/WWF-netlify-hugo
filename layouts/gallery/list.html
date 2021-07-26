@@ -15,7 +15,7 @@
 
 		<div id="{{ .Title }}" class="project_slide" data-total="{{$paginator.TotalPages}}">
 			<div class="left_justified_full viewportFixed">
-				<div id="slide_container">
+				<div id="slide_container" style="">
 					<div class="slide" id="prev_slide"></div>
 					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 					<div class="slide" id="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
