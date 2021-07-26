@@ -1295,10 +1295,6 @@ init : function(){
 		e.preventDefault();
 		e.stopPropagation();
 
-		if(longTouch){
-			return;
-		}
-
 		var swipeArea = e.target;
 
 		setTimeout(function(){
@@ -1356,11 +1352,18 @@ init : function(){
 		});
 
 
-		function endSwipe(){
+		function endSwipe(end){
+
+			end.preventDefault();
+			end.stopPropagation();
+
+			console.log('Swipe ended')
 
 			swipeArea.moving = false;
 
-			if( (swipeArea.distX > 0) && (swipeArea.distX > parent.offsetWidth/4) ){
+			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && longTouch == false)){
+
+					console.log('Swipe left')
 
 					trans_slide('prev', swipeArea.distX);
 
@@ -1368,7 +1371,9 @@ init : function(){
 
 					return;
 
-			} else if ( (-swipeArea.distX > 0) && (-swipeArea.distX > parent.offsetWidth/4) ) {
+			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && longTouch == false)) {
+
+					console.log('Swipe right')
 
 					trans_slide('next', swipeArea.distX);
 
