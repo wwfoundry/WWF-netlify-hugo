@@ -31,7 +31,7 @@
 				{{ if gt $paginator.TotalPages 1 }}
 					<div id="directional_arrows">
 					    {{ if $paginator.HasPrev }}
-							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow left menu_item icon">
+							<a id="arrow_left" href="{{ $paginator.Prev.URL }}" class="arrow arrow_nav left menu_item icon">
 								<svg version="1.1" class=" menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 								<style type="text/css">
 									.st0{fill:none;}
@@ -42,7 +42,7 @@
 							</a>
 						{{end}}
 						{{ if $paginator.HasNext }}
-							<a id="arrow_right" href="{{ $paginator.Next.URL }}" class="menu_item icon right arrow">
+							<a id="arrow_right" href="{{ $paginator.Next.URL }}" class="arrow menu_item icon right arrow_nav">
 								<svg version="1.1" class="menu_item" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 								<style type="text/css">
 									.st0{fill:none;}
@@ -58,6 +58,18 @@
 			<div class="right_justified_partial">
 				<div class="thumbnails">
 					<div class="thumbnail_wrapper">
+						<button id="project_left" class="menu_item icon left arrow">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+							<style type="text/css">
+								.st0{fill:none;}
+							</style>
+							<line class="st0" x1="29.7" y1="20.4" x2="0" y2="50"/>
+							<line class="st0" x1="98.7" y1="50" x2="0" y2="50"/>
+							<line class="st0" x1="29.7" y1="79.6" x2="0" y2="50"/>
+							</svg>
+							<label>prev</label>
+						</button>
 						{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 						<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
 						{{else if eq $media_featured_ext ".mp4" }}
@@ -83,6 +95,18 @@
 							{{end}}
 
 						{{end}}
+						<button id="project_right" class="menu_item icon right arrow">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+							<style type="text/css">
+								.st0{fill:none;}
+							</style>
+							<line class="st0" x1="29.7" y1="20.4" x2="0" y2="50"/>
+							<line class="st0" x1="98.7" y1="50" x2="0" y2="50"/>
+							<line class="st0" x1="29.7" y1="79.6" x2="0" y2="50"/>
+							</svg>
+							<label>next</label>
+						</button>
 					</div>
 					<div id="tag_wrapper">
 						{{range .Params.material_tag}}

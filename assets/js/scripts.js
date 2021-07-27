@@ -908,7 +908,7 @@ init : function(){
 
 	function loadNeighbor(){
 
-			$('.arrow').removeClass('internal');
+			$('.arrow_nav').removeClass('internal');
 
 	    while (parent.firstChild) {
 
@@ -990,23 +990,41 @@ init : function(){
 
 		if ( !info.classList.contains('loadingImg') ) {
 
-			if ( $(this).hasClass('left') ) {
+			if ( $(this).hasClass('left') && $(this).hasClass('arrow_nav') ) {
 
 				d = 'prev';
 
 				slideCount--
 
-			} else {
+				loadUrl = $(this).prop('href');
+
+			} else if ( $(this).hasClass('right') && $(this).hasClass('arrow_nav') ) {
 
 				d = 'next';
 
 				slideCount++
 
+				loadUrl = $(this).prop('href');
+
+			} else if ( $(this).hasClass('left') && !($(this).hasClass('arrow_nav')) ) {
+
+				d = 'prev';
+
+				loadUrl = $('#arrow_left').prop('href');
+
+				slideCount = -1;
+
+			} else if ( $(this).hasClass('right') && !($(this).hasClass('arrow_nav')) ) {
+
+				d = 'next';
+
+				loadUrl = $('#arrow_right').prop('href');
+
+				slideCount = projectSlideArr.length;
+
 			}
 
 			loadState = false;
-
-			loadUrl = $(this).prop('href');
 
 			animateSlides(d, loadUrl, slideCount, swiper);
 
@@ -1014,6 +1032,12 @@ init : function(){
 			arrowNext = document.querySelector('#arrow_right');
 
 		}
+
+	});
+
+	$('body').on('click', '.arrow_nav', function(e){
+
+
 
 	});
 
@@ -1057,7 +1081,9 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount);
+
+
+					animAll([b, projectSlideArr[slideCount + 2]], '110%', a, '0%', replacePrev, currentThumbs, slideCount);
 
 					function replacePrev (loadUrl) {
 
@@ -1110,6 +1136,8 @@ init : function(){
 					}
 
 				} else {
+
+					
 
 					animAll(projectSlideArr[slideCount - 1], '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
 
@@ -1285,7 +1313,7 @@ init : function(){
 	// On swipe left or right, move slide
 
 	var swipedSlide,
-			longTouch = false;
+	longTouch = false;
 
 	parent.ontouchstart = swipeSlide;
 	parent.onmousedown = swipeSlide;
@@ -1296,10 +1324,6 @@ init : function(){
 		e.stopPropagation();
 
 		var swipeArea = e.target;
-
-		setTimeout(function(){
-			longTouch = true;
-		}, 250)
 
 		swipeArea.moving = true;
 
@@ -1324,6 +1348,10 @@ init : function(){
 			if(!swipeArea.moving){
 				return;
 			}
+
+			setTimeout(function(){
+				longTouch = true;
+			}, 550)
 
 			if (d.clientX){
 
@@ -1361,7 +1389,7 @@ init : function(){
 
 			swipeArea.moving = false;
 
-			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && longTouch == false)){
+			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && !longTouch)){
 
 					console.log('Swipe left')
 
@@ -1371,7 +1399,7 @@ init : function(){
 
 					return;
 
-			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && longTouch == false)) {
+			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && !longTouch)) {
 
 					console.log('Swipe right')
 
@@ -1422,7 +1450,7 @@ init : function(){
 
 	$('body').on('click', '.thumbnail', function(){
 
-		var index = $(this).index(),
+		var index = $(this).index() - 1,
 				range = [];
 
 		if (index < slideCount){
