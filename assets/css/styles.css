@@ -975,6 +975,7 @@ footer.innner_content{
   display:flex;
   align-items: flex-end;
   flex-direction: row;
+  align-self: flex-start;
 /*  text-align:center;*/
 }
 
