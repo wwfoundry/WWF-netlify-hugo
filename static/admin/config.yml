@@ -313,7 +313,7 @@ collections:
         name: 'attribution'
         widget: 'string'
         required: false
-      - { label: 'Featured Image', name: 'featured', widget: 'image' }
+      - { label: 'Featured Image', name: 'featured', widget: 'file' }
       - label: "Thumbnails"
         name: "thumbnailImages"
         widget: "list"
