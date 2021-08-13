@@ -641,12 +641,12 @@ init : function(){
 				currentSlide.prop = p2;
 
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .65, ease: "sine.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.to(p1, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				} else {
-					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .65, ease: "sine.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				}
 
-				anim2 = gsap.to(p2, {duration: .65, ease: "sine.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+				anim2 = gsap.to(p2, {duration: .65, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
 			swiper = false,
@@ -1389,7 +1389,7 @@ init : function(){
 
 			swipeArea.moving = false;
 
-			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && !longTouch)){
+			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && longTouch == false)){
 
 					console.log('Swipe left')
 
@@ -1399,7 +1399,7 @@ init : function(){
 
 					return;
 
-			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && !longTouch)) {
+			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && longTouch == false)) {
 
 					console.log('Swipe right')
 
