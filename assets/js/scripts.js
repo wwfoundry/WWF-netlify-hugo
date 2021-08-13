@@ -615,6 +615,7 @@ init : function(){
 			c = document.createElement('div'),
 			projectSlide,
 			projectSlideArr = [],
+			range = [],
 			aInfo = document.createElement('div'),
 			bInfo = document.createElement('div'),
 			cInfo = document.createElement('div'),
@@ -933,7 +934,7 @@ init : function(){
 			window.history.pushState(null, null, '#' + slideID);
 		}
 
-		animateSlides(d, loadUrl, slideCount, swiper);
+		animateSlides(d, loadUrl, slideCount, swiper, range);
 
 		loadState = true;
 
@@ -992,6 +993,8 @@ init : function(){
 
 			if ( $(this).hasClass('left') && $(this).hasClass('arrow_nav') ) {
 
+				range = [null];
+
 				d = 'prev';
 
 				slideCount--
@@ -999,6 +1002,10 @@ init : function(){
 				loadUrl = $(this).prop('href');
 
 			} else if ( $(this).hasClass('right') && $(this).hasClass('arrow_nav') ) {
+
+				if ((slideCount+1) == projectSlideArr.length){
+					range.push(projectSlideArr[slideCount]);
+				}
 
 				d = 'next';
 
@@ -1008,6 +1015,12 @@ init : function(){
 
 			} else if ( $(this).hasClass('left') && !($(this).hasClass('arrow_nav')) ) {
 
+				for (var i = 0;i < slideCount + 1; i++){
+						range.push(projectSlideArr[i]);
+				}
+
+				range.reverse();
+
 				d = 'prev';
 
 				loadUrl = $('#arrow_left').prop('href');
@@ -1015,6 +1028,10 @@ init : function(){
 				slideCount = -1;
 
 			} else if ( $(this).hasClass('right') && !($(this).hasClass('arrow_nav')) ) {
+
+				for (var i = slideCount;i < projectSlideArr.length; i++){
+					range.push(projectSlideArr[i]);
+				}
 
 				d = 'next';
 
@@ -1026,7 +1043,7 @@ init : function(){
 
 			loadState = false;
 
-			animateSlides(d, loadUrl, slideCount, swiper);
+			animateSlides(d, loadUrl, slideCount, swiper, range);
 
 			arrowPrev = document.querySelector('#arrow_left');
 			arrowNext = document.querySelector('#arrow_right');
@@ -1041,7 +1058,7 @@ init : function(){
 
 	});
 
-	function animateSlides(d, loadUrl, slideCount, swiper){
+	function animateSlides(d, loadUrl, slideCount, swiper, range){
 
 		verifyNeighbors();
 
@@ -1081,9 +1098,9 @@ init : function(){
 
 				if ( d == 'prev'){
 
+					animAll([b, range], '110%', a, '0%', replacePrev, currentThumbs, slideCount);
 
-
-					animAll([b, projectSlideArr[slideCount + 2]], '110%', a, '0%', replacePrev, currentThumbs, slideCount);
+					range = []
 
 					function replacePrev (loadUrl) {
 
@@ -1137,9 +1154,9 @@ init : function(){
 
 				} else {
 
-					
+					animAll([b, range], '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
 
-					animAll(projectSlideArr[slideCount - 1], '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
+					range = [];
 
 					function replaceNext(loadUrl){
 
@@ -1437,7 +1454,7 @@ init : function(){
 
 				}
 
-				animateSlides(d, loadUrl, slideCount, swiper);
+				animateSlides(d, loadUrl, slideCount, swiper, range);
 
 				arrowPrev = document.querySelector('#arrow_left');
 				arrowNext = document.querySelector('#arrow_right');
@@ -1450,8 +1467,7 @@ init : function(){
 
 	$('body').on('click', '.thumbnail', function(){
 
-		var index = $(this).index() - 1,
-				range = [];
+		var index = $(this).index() - 1;
 
 		if (index < slideCount){
 
@@ -1490,6 +1506,8 @@ init : function(){
 			}
 
 			slideCount = index;
+
+			range = [];
 
 		}
 
