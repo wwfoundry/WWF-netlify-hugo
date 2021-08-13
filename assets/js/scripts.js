@@ -634,6 +634,7 @@ init : function(){
 					this.slide = nextSlide;
 				}
 			},
+
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper){
 
 				currentSlide.prop.classList.remove('draggable');
@@ -641,12 +642,11 @@ init : function(){
 				currentSlide.prop = p2;
 
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.to(p1, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')', delay: d});
 				} else {
 					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				}
-
-				anim2 = gsap.to(p2, {duration: .65, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim2 = gsap.to(p2, {duration: .65, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
 			swiper = false,
