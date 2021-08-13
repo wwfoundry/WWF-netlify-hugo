@@ -1005,11 +1005,16 @@ init : function(){
 
 				if ((slideCount+1) == projectSlideArr.length){
 					range.push(projectSlideArr[slideCount]);
+
+					slideCount = projectSlideArr.length;
+
+				} else {
+
+					slideCount++
+
 				}
 
 				d = 'next';
-
-				slideCount++
 
 				loadUrl = $(this).prop('href');
 
@@ -1100,7 +1105,7 @@ init : function(){
 
 					animAll([b, range], '110%', a, '0%', replacePrev, currentThumbs, slideCount);
 
-					range = []
+					range = [];
 
 					function replacePrev (loadUrl) {
 
@@ -1467,6 +1472,8 @@ init : function(){
 
 	$('body').on('click', '.thumbnail', function(){
 
+		range = [];
+
 		var index = $(this).index() - 1;
 
 		if (index < slideCount){
@@ -1506,8 +1513,6 @@ init : function(){
 			}
 
 			slideCount = index;
-
-			range = [];
 
 		}
 
