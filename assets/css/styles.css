@@ -1120,10 +1120,9 @@ footer.innner_content{
 }
 
 .thumbnail{
-  width: 100%;
+  width: 10px;
+  height: 30px;
   flex: 1 1 auto;
-  max-width:100px;
-  min-height:50px;
   background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
