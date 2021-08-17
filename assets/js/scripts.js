@@ -653,7 +653,7 @@ init : function(){
 					this.slide = nextSlide;
 				}
 			},
-
+			switchOver = gsap.timeline(),
 			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper){
 
 				currentSlide.prop.classList.remove('draggable');
@@ -663,11 +663,11 @@ init : function(){
 				var staggerLength = p1.length*.35;
 
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')', stagger:{ amount:.35, from: 0}, onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim1 = gsap.to(p1, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				} else {
-					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				}
-					anim2 = gsap.to(p2, {duration: .35, ease: "steps.out", transform: 'translate(' + l2 +')', delay: .35});
+					anim2 = gsap.to(p2, {duration: .35, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
 			swiper = false,
@@ -1118,11 +1118,23 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					range.push(b);
+					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(100%)', autoAlpha: '0', onComplete: beginSwitchover});
+					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
+					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
 
-					animAll(range, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper);
+					function beginSwitchover(){
+							range.push(b);
+							for(var r = 0; r < range.length; r++){
+								range[r].style.visibility = 'hidden';
+							}
+							animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper);
+					}
 
 					function replacePrev (loadUrl) {
+
+						for(var r = 0; r < range.length; r++){
+							range[r].style.visibility = 'visible';
+						}
 
 						for (var i = 0; i < projectSlideArr.length; i++){
 							projectSlideArr[i].remove();
@@ -1174,11 +1186,27 @@ init : function(){
 
 				} else {
 
-					range.unshift(b);
+					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(-100%)', autoAlpha: '0', onComplete: beginSwitchover});
+					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
+					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
 
-					animAll(range, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
+					function beginSwitchover(){
+
+						range.push(b);
+						for(var r = 0; r < range.length; r++){
+							range[r].style.visibility = 'hidden';
+						}
+
+						range.push(b);
+						animAll(b, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
+
+					}
 
 					function replaceNext(loadUrl){
+
+						for(var r = 0; r < range.length; r++){
+							range[r].style.visibility = 'visible';
+						}
 
 						for (var i = 0; i < projectSlideArr.length; i++){
 							projectSlideArr[i].remove();
@@ -1349,9 +1377,10 @@ init : function(){
 
 	// On swipe left or right, move slide
 
-	var swipedSlide,
+	var touchTimeout,
+			swipedSlide,
 			swipeCount = 0,
-			longTouch = false,
+			longTouch,
 			openLightBox = function(){
 				parent.classList.add('fullHeight');
 			};
@@ -1401,7 +1430,9 @@ init : function(){
 				return;
 			}
 
-			setTimeout(function(){
+			longTouch = false;
+
+			touchTimeout = setTimeout( function(){
 				longTouch = true;
 			}, 550)
 
@@ -1419,8 +1450,12 @@ init : function(){
  
 		}
 
-		swipeArea.onmouseup = endSwipe;
-		swipeArea.ontouchend = endSwipe;
+		swipeArea.onmouseup = function(end){
+			endSwipe(end, longTouch) 
+		};
+		swipeArea.ontouchend = function(end){
+			endSwipe(end, longTouch) 
+		};
 		parent.addEventListener("mouseleave", event => {
 
 			event.preventDefault();
@@ -1432,7 +1467,7 @@ init : function(){
 		});
 
 
-		function endSwipe(end){
+		function endSwipe(end, longTouch){
 
 			end.preventDefault();
 			end.stopPropagation();
@@ -1441,21 +1476,19 @@ init : function(){
 
 			swipeCount = 0;
 
-			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/5 && longTouch) || (swipeArea.distX > 0  && longTouch == false)){
+			window.clearTimeout(touchTimeout);
+
+			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && swipeArea.distX > parent.offsetWidth/15 && longTouch == false)){
 
 					trans_slide('prev', swipeArea.distX);
 
-					longTouch = false;
+					return longTouch = false;
 
-					return;
-
-			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/5 && longTouch) || (-swipeArea.distX > 0 && longTouch == false)) {
+			} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/15 && longTouch == false)) {
 
 					trans_slide('next', swipeArea.distX);
 
-					longTouch = false;
-
-					return;
+					return longTouch = false;
 
 			}
 
