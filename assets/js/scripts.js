@@ -130,25 +130,43 @@ callPageJS = {
 
 		}
 
-		$(window).on('scroll', function(){
+		var newPageOffset = 0,
+				pageOffset,
+				isScrolling;
+
+		window.addEventListener('scroll', function(e){
+
+			console.log(newPageOffset);
+
+			pageOffset = window.pageYOffset;
 
 			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
 
-				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
+				window.clearTimeout(isScrolling);
+
+				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50 && newPageOffset > pageOffset) {
 
 					mainWrapper.css('paddingTop', '55px');
 					navParent.addClass('scroll');
 
-				} else {
+				} else if (document.body.scrollTop < 50 | document.documentElement.scrollTop < 50 || newPageOffset < pageOffset) {
 
 					mainWrapper.css('paddingTop', 'unset');
 					navParent.removeClass('scroll');
 
 				}
 
+				isScrolling = setTimeout( function(){
+
+					console.log('scroll stop')
+
+					newPageOffset = pageOffset;
+
+				}, 66);
+
 			}
 
-		});
+		}, false);
 
 		// Single Page Behavior
 
@@ -642,15 +660,14 @@ init : function(){
 
 				currentSlide.prop = p2;
 
-				var staggerLength;
-		
+				var staggerLength = p1.length*.35;
 
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')', stagger:{each: .35, from: 1}});
+					anim1 = gsap.to(p1, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')', stagger:{ amount:.35, from: 0}, onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 				} else {
-					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .65, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 				}
-					anim2 = gsap.to(p2, {duration: .65, ease: "steps.out", transform: 'translate(' + l2 +')', delay: staggerLength, onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim2 = gsap.to(p2, {duration: .35, ease: "steps.out", transform: 'translate(' + l2 +')', delay: .35});
 
 			},
 			swiper = false,
@@ -996,7 +1013,7 @@ init : function(){
 
 			if ( $(this).hasClass('left') && $(this).hasClass('arrow_nav') ) {
 
-				range = [null];
+				range = [];
 
 				d = 'prev';
 
@@ -1006,7 +1023,7 @@ init : function(){
 
 			} else if ( $(this).hasClass('right') && $(this).hasClass('arrow_nav') ) {
 
-				if ((slideCount+1) == projectSlideArr.length){
+				if ( (slideCount+1) == projectSlideArr.length){
 
 					range.push(projectSlideArr[slideCount]);
 
@@ -1103,7 +1120,7 @@ init : function(){
 
 					range.push(b);
 
-					animAll(range, '110%', a, '0%', replacePrev, currentThumbs, slideCount);
+					animAll(range, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper);
 
 					function replacePrev (loadUrl) {
 
@@ -1333,7 +1350,11 @@ init : function(){
 	// On swipe left or right, move slide
 
 	var swipedSlide,
-	longTouch = false;
+			swipeCount = 0,
+			longTouch = false,
+			openLightBox = function(){
+				parent.classList.add('fullHeight');
+			};
 
 	parent.ontouchstart = swipeSlide;
 	parent.onmousedown = swipeSlide;
@@ -1346,6 +1367,13 @@ init : function(){
 		if ( info.classList.contains('loadingImg') ) {
 			return;
 		}
+
+		if (e.touches && e.touches.length > 1 || swipeCount > 0){
+			endSwipe();
+			return;
+		}
+
+		swipeCount++
 
 		var swipeArea = e.target;
 
@@ -1411,6 +1439,8 @@ init : function(){
 
 			swipeArea.moving = false;
 
+			swipeCount = 0;
+
 			if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/5 && longTouch) || (swipeArea.distX > 0  && longTouch == false)){
 
 					trans_slide('prev', swipeArea.distX);
@@ -1445,7 +1475,7 @@ init : function(){
 
 		if ( d == 'prev'){
 
-			range = [null];
+			range = [];
 
 			loadUrl = $('#arrow_left').prop('href');
 

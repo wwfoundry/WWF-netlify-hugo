@@ -834,6 +834,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
   padding: unset;
   margin:unset;
   max-width:unset;
+  background-color: #131313;
 }
 
 .inner_content{
@@ -1055,6 +1056,16 @@ footer.innner_content{
     width:calc(100% - 150px);
     height:100%;
     overflow:hidden;
+    touch-action: pan-right pinch-zoom;
+}
+
+#slide_container.fullHeight{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
 }
 
 .main_slide{
@@ -1096,7 +1107,7 @@ footer.innner_content{
 
 .bottom_justified{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   width: 100%;
 
 }
@@ -1165,6 +1176,7 @@ footer.innner_content{
     justify-content: flex-start;
     background-color: unset;
     width: 100%;
+    height: fit-content;
 }
 
 .gallery_tag{
@@ -1569,9 +1581,8 @@ footer.innner_content{
   }
 
   #tag_wrapper{
-    padding-top: 0px;
+    margin-top: 25px;
     border-top: solid black 1px;
-    border-bottom: solid black 1px;
   }
 
   #tag_wrapper>.upperHeader{
