@@ -136,8 +136,6 @@ callPageJS = {
 
 		window.addEventListener('scroll', function(e){
 
-			console.log(newPageOffset);
-
 			pageOffset = window.pageYOffset;
 
 			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
@@ -157,8 +155,6 @@ callPageJS = {
 				}
 
 				isScrolling = setTimeout( function(){
-
-					console.log('scroll stop')
 
 					newPageOffset = pageOffset;
 
@@ -314,7 +310,7 @@ callPageJS = {
 
 		$('.menu_links li:last-child').addClass('last');
 
-		//Get Element Height (vanilla)
+		//Get Element Height
 
 		var innerHeight,
 				calculatedHeight,
@@ -612,6 +608,8 @@ init : function(){
 			current = document.querySelector('#main_slide'),
 			currentUrl = current.getAttribute('data-url'),
 			currentInner = current.innerHTML,
+			arrows = document.querySelectorAll('.arrow'),
+			arrowSet = Array.prototype.slice.call(arrows),
 			arrowPrev = document.querySelector('#arrow_left'),
 			arrowNext = document.querySelector('#arrow_right'),
 			slideAreaContainer = document.querySelector('.project_slide'),
@@ -869,11 +867,12 @@ init : function(){
 				var leftArrow = b.getAttribute('data-arrow-left'),
 						rightArrow = b.getAttribute('data-arrow-right');
 
-				arrowPrev.setAttribute('href', leftArrow), arrowNext.setAttribute('href', rightArrow);
+				arrowPrev.setAttribute('href', leftArrow);
+				arrowNext.setAttribute('href', rightArrow);
 
 			},
-			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
-			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
+			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
+			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
 
 	//Position Rules
 
@@ -984,6 +983,8 @@ init : function(){
 
 			n = '/gallery/';
 
+			arrowSet.push(arrowNext);
+
 		} else if ( arrowPrev == undefined && arrowNext !== undefined ){
 
 			var replacePrev = document.createElement('a');
@@ -998,85 +999,88 @@ init : function(){
 
 			n = arrowNext.getAttribute('href');
 
+			arrowSet.push(arrowPrev);
+
 		}
 
 	}
 
+for (var aw = 0; aw < arrowSet.length; aw++){
+
+	arrowSet[aw].addEventListener('click', function(t){
+
+		t.preventDefault();
+		t.stopPropagation();
+
+		triggerChange(this)
+	});
+
+}
 	//Trigger Slide Change
 
-	$('body').on('click', '.arrow', function(e){
+	function triggerChange(arrow){
 
-		e.preventDefault();
-		e.stopPropagation();
+		if (arrow == arrowPrev){
 
-		if ( !info.classList.contains('loadingImg') ) {
+			range = [];
 
-			if ( $(this).hasClass('left') && $(this).hasClass('arrow_nav') ) {
+			d = 'prev';
 
-				range = [];
+			slideCount--
 
-				d = 'prev';
+			loadUrl = arrowPrev.getAttribute('href');
 
-				slideCount--
+		} else if ( arrow == arrowNext){
 
-				loadUrl = $(this).prop('href');
+			if ( (slideCount+1) == projectSlideArr.length){
 
-			} else if ( $(this).hasClass('right') && $(this).hasClass('arrow_nav') ) {
+						range.push(projectSlideArr[slideCount]);
 
-				if ( (slideCount+1) == projectSlideArr.length){
+						slideCount = projectSlideArr.length;
 
-					range.push(projectSlideArr[slideCount]);
+			} else {
 
-					slideCount = projectSlideArr.length;
-
-				} else {
-
-					slideCount++
-
-				}
-
-				d = 'next';
-
-				loadUrl = $(this).prop('href');
-
-			} else if ( $(this).hasClass('left') && !($(this).hasClass('arrow_nav')) ) {
-
-				for (var i = 0;i < slideCount + 1; i++){
-						range.push(projectSlideArr[i]);
-				}
-
-				range.reverse();
-
-				d = 'prev';
-
-				loadUrl = $('#arrow_left').prop('href');
-
-				slideCount = -1;
-
-			} else if ( $(this).hasClass('right') && !($(this).hasClass('arrow_nav')) ) {
-
-				for (var i = slideCount;i < projectSlideArr.length; i++){
-					range.push(projectSlideArr[i]);
-				}
-
-				d = 'next';
-
-				loadUrl = $('#arrow_right').prop('href');
-
-				slideCount = projectSlideArr.length;
+				slideCount++
 
 			}
 
-			loadState = false;
+			d = 'next';
 
-			animateSlides(d, loadUrl, slideCount, swiper, range);
+			loadUrl = arrowNext.getAttribute('href');
 
-			arrowPrev = document.querySelector('#arrow_left');
-			arrowNext = document.querySelector('#arrow_right');
+		} else if (arrow.classList.contains('left') && arrow != arrowPrev){
+
+			for (var i = 0;i < slideCount + 1; i++){
+				range.push(projectSlideArr[i]);
+			}
+
+			range.reverse();
+
+			d = 'prev';
+
+			loadUrl = arrowPrev.getAttribute('href');
+
+			slideCount = -1;
+
+		} else if (arrow.classList.contains('right') && arrow != arrowNext){
+
+			for (var i = slideCount;i < projectSlideArr.length; i++){
+				range.push(projectSlideArr[i]);
+			}
+
+			d = 'next';
+
+			loadUrl = arrowNext.getAttribute('href');
+
+			slideCount = projectSlideArr.length;
 
 		}
 
-	});
+		loadState = false;
+
+		animateSlides(d, loadUrl, slideCount, swiper, range);
+
+	}
 
 	function animateSlides(d, loadUrl, slideCount, swiper, range){
 
@@ -1280,6 +1284,7 @@ init : function(){
 			}
 
 		}
+
 	}
 
 	function getNextP(a, aInfo){
@@ -1390,9 +1395,6 @@ init : function(){
 
 	function swipeSlide(e){
 
-		e.preventDefault();
-		e.stopPropagation();
-
 		if ( info.classList.contains('loadingImg') ) {
 			return;
 		}
@@ -1423,7 +1425,6 @@ init : function(){
 	
 		function swipeDrag(d){
 
-			d.preventDefault();
 			d.stopPropagation();
 
 			if(!swipeArea.moving){
@@ -1451,14 +1452,19 @@ init : function(){
 		}
 
 		swipeArea.onmouseup = function(end){
-			endSwipe(end, longTouch) 
+			endSwipe(end, longTouch);
+			return swipeArea.moving = false;
 		};
 		swipeArea.ontouchend = function(end){
-			endSwipe(end, longTouch) 
+			endSwipe(end, longTouch)
+			return swipeArea.moving = false;
 		};
 		parent.addEventListener("mouseleave", event => {
 
-			event.preventDefault();
+			if (swipeArea.moving == false){
+				return;
+			}
+
 			event.stopPropagation();
 			gsap.to(currentSlide.prop, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});
 
@@ -1469,10 +1475,7 @@ init : function(){
 
 		function endSwipe(end, longTouch){
 
-			end.preventDefault();
 			end.stopPropagation();
-
-			swipeArea.moving = false;
 
 			swipeCount = 0;
 
