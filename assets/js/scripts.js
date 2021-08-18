@@ -1118,9 +1118,9 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(100%)', autoAlpha: '0', onComplete: beginSwitchover});
+					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(100%)', autoAlpha: '0', onComplete: beginSwitchover});
 					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
-					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
 
 					function beginSwitchover(){
 							range.push(b);
@@ -1186,9 +1186,9 @@ init : function(){
 
 				} else {
 
-					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(-100%)', autoAlpha: '0', onComplete: beginSwitchover});
+					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(-100%)', autoAlpha: '0', onComplete: beginSwitchover});
 					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
-					switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
 
 					function beginSwitchover(){
 

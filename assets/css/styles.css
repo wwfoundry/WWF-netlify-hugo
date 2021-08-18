@@ -1125,13 +1125,13 @@ footer.innner_content{
   display:flex;
   box-sizing: content-box;
   background-color:unset;
-  width:100%;
+  width:fit-content;
   transition:height, opacity ease-in-out .25s;
   align-items: center;
 }
 
 .thumbnail{
-  width: 10px;
+  width: 30px;
   height: 30px;
   flex: 1 1 auto;
   background-size:cover;
@@ -1574,6 +1574,7 @@ footer.innner_content{
 
   .thumbnail_wrapper{
     justify-content: center;
+    width:100%
   }
 
   .thumbnails>.upperHeader{
