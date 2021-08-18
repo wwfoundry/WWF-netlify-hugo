@@ -983,8 +983,6 @@ init : function(){
 
 			n = '/gallery/';
 
-			arrowSet.push(arrowNext);
-
 		} else if ( arrowPrev == undefined && arrowNext !== undefined ){
 
 			var replacePrev = document.createElement('a');
@@ -999,35 +997,23 @@ init : function(){
 
 			n = arrowNext.getAttribute('href');
 
-			arrowSet.push(arrowPrev);
-
 		}
 
 	}
 
 	//Trigger Slide Change
 
-	info.addEventListener("click", function(r){
+	document.addEventListener("click", function(r){
 
-		if(r.target.closest.id == "project_left" || r.target.closest.id == "project_right"){
+		if(r.target.id == "project_left" || r.target.id == "project_right" || r.target.id == "arrow_left" || r.target.id == "arrow_right"){
+
+			r.preventDefault();
 
 			triggerChange(r.target);
 
-		}
+		} 
 
 	});
-
-	for (var aw = 0; aw < arrowSet.length; aw++){
-
-		arrowSet[aw].addEventListener('click', function(t){
-
-			t.preventDefault();
-			t.stopPropagation();
-
-			triggerChange(this)
-		});
-
-	}
 
 	function triggerChange(arrow){
 

@@ -1199,6 +1199,14 @@ footer.innner_content{
   z-index:15;
 }
 
+.arrow>label{
+  pointer-events: none;
+}
+
+.arrow>svg{
+  pointer-events: none;
+}
+
 @supports (  (-webkit-backdrop-filter: saturate(180%) blur(20px)) or (backdrop-filter: saturate(180%) blur(20px)) ){
 
   .arrow{
