@@ -1007,6 +1007,16 @@ init : function(){
 
 	//Trigger Slide Change
 
+	info.addEventListener("click", function(r){
+
+		if(r.target.closest.id == "project_left" || r.target.closest.id == "project_right"){
+
+			triggerChange(r.target);
+
+		}
+
+	});
+
 	for (var aw = 0; aw < arrowSet.length; aw++){
 
 		arrowSet[aw].addEventListener('click', function(t){
@@ -1149,10 +1159,6 @@ init : function(){
 
 						info.innerHTML = aInfo.innerHTML;
 
-						arrowSet.push($('#project_left').get(0), $('#project_right').get(0));
-
-						console.log(arrowSet);
-
 						currentThumbs = info.querySelectorAll('.thumbnail');
 
 						createProjectSlides(currentThumbs);
@@ -1224,10 +1230,6 @@ init : function(){
 						projectSlideArr = [];
 
 						info.innerHTML = cInfo.innerHTML;
-
-						arrowSet.push($('#project_left').get(0), $('#project_right').get(0));
-
-						console.log(arrowSet);
 
 						currentThumbs = info.querySelectorAll('.thumbnail');
 
