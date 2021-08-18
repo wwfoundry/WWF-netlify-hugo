@@ -871,8 +871,8 @@ init : function(){
 				arrowNext.setAttribute('href', rightArrow);
 
 			},
-			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='menu_item icon left arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
-			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='menu_item icon right arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
+			leftArrowHtml = "<a id='arrow_left' href='/gallery/page/" + totalPages + "/' class='arrow menu_item icon left arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>",
+			rightArrowHtml = "<a id='arrow_right' href='/gallery/' class='arrow menu_item icon right arrow_nav'><svg version='1.1' class='menu_item' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' style='enable-background:new 0 0 100 100;' xml:space='preserve'><style type='text/css'>.st0{fill:none;}</style><line class='st0' x1='73.02' y1='4.01' x2='26.98' y2='50.04'/><line class='st0' x1='73.02' y1='95.99' x2='26.98' y2='49.96'/></svg></a>";
 
 	//Position Rules
 
@@ -928,7 +928,7 @@ init : function(){
 
 	function loadNeighbor(){
 
-			$('.arrow_nav').removeClass('internal');
+		$('.arrow_nav').removeClass('internal');
 
 	    while (parent.firstChild) {
 
@@ -977,7 +977,7 @@ init : function(){
 
 			replaceNext.outerHTML = rightArrowHtml;
 
-			arrowNext = replaceNext;
+			arrowNext = $('#arrow_right').get(0);
 
 			p = arrowPrev.getAttribute('href');
 
@@ -993,7 +993,7 @@ init : function(){
 
 			replacePrev.outerHTML = leftArrowHtml;
 
-			arrowPrev = replacePrev;
+			arrowPrev = $('#arrow_left').get(0);
 
 			p = '/gallery/page/' + totalPages + '/';
 
@@ -1005,18 +1005,19 @@ init : function(){
 
 	}
 
-for (var aw = 0; aw < arrowSet.length; aw++){
-
-	arrowSet[aw].addEventListener('click', function(t){
-
-		t.preventDefault();
-		t.stopPropagation();
-
-		triggerChange(this)
-	});
-
-}
 	//Trigger Slide Change
+
+	for (var aw = 0; aw < arrowSet.length; aw++){
+
+		arrowSet[aw].addEventListener('click', function(t){
+
+			t.preventDefault();
+			t.stopPropagation();
+
+			triggerChange(this)
+		});
+
+	}
 
 	function triggerChange(arrow){
 
@@ -1148,6 +1149,10 @@ for (var aw = 0; aw < arrowSet.length; aw++){
 
 						info.innerHTML = aInfo.innerHTML;
 
+						arrowSet.push($('#project_left').get(0), $('#project_right').get(0));
+
+						console.log(arrowSet);
+
 						currentThumbs = info.querySelectorAll('.thumbnail');
 
 						createProjectSlides(currentThumbs);
@@ -1219,6 +1224,10 @@ for (var aw = 0; aw < arrowSet.length; aw++){
 						projectSlideArr = [];
 
 						info.innerHTML = cInfo.innerHTML;
+
+						arrowSet.push($('#project_left').get(0), $('#project_right').get(0));
+
+						console.log(arrowSet);
 
 						currentThumbs = info.querySelectorAll('.thumbnail');
 
