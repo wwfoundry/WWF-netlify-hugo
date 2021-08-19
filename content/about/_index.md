@@ -14,4 +14,10 @@ statement: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
   a ornare mi dignissim tempus. Aliquam erat volutpat. Duis nec ligula vitae mi
   facilisis finibus. Praesent et elementum quam. Suspendisse potenti. Nullam
   mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
+archive:
+  - archive_obj:
+      archive_image: /images/uploads/Mine_Camp.jpg
+      archive_title: Mine Camp
+      archive_artist: Ed Kienholz
+      archive_year: "1990"
 ---
