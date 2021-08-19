@@ -180,6 +180,7 @@ collections:
         fields:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'about'}
           - {label: 'Title', name: 'title', widget: 'string'}
+          - {label: 'Subtitle', name: 'subtitle', widget: 'string'}
           - label: 'Hero Banner'
             name: 'hero_obj'
             widget: 'object'

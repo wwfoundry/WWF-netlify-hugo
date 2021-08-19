@@ -782,6 +782,14 @@ nav.home>#menu>#controls>#hamburger>.bar{
     padding: 50px 0px 50px 0px;
 }
 
+.hero{
+  width: 100%;
+}
+
+.hero_banner{
+  object-fit: ;
+}
+
 .project_slide{
   display:flex;
   flex-direction: row;

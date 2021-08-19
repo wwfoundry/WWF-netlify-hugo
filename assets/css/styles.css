@@ -850,6 +850,27 @@ nav.home>#menu>#controls>#hamburger>.bar{
   padding-top: unset;
 }
 
+.two_column{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.hero{
+  width: 100%;
+  padding-bottom: 25px;
+/*  border-bottom: 1px solid black;*/
+}
+
+.hero_banner{
+  width: 100%;
+  object-fit: cover;
+}
+
+.blackBG{
+  background-color:#131313;
+}
 
 .project_slide{
   display:flex;
@@ -890,7 +911,8 @@ nav.home>#menu>#controls>#hamburger>.bar{
 }
 
 .left_justified{
-
+  float: left;
+  margin-right: 50px;
 }
 
 .right_justified{
@@ -952,7 +974,6 @@ border-bottom:solid 1px white;
 footer{
   width: calc(100% - 50px);
   padding: 0 25px;
-  background-color:#131313;
   color:white;
 }
 
@@ -1416,6 +1437,11 @@ footer.innner_content{
 /*Content Sections*/
 
 @media screen and (max-width:1600px){
+
+  .two_column{
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 
   nav{
     padding: 50px 25px 0px;

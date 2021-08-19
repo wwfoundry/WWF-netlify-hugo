@@ -3,13 +3,24 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
-	<div class="left_justified">
-	</div>
-	<div class="right_justified">
-		<h1>{{.Title}}</h1>
-	</div>
 	<div class="hero">
-		<img class="hero_banner" src="{{.Params.hero}}" alt="{{.Params.alt}}">
+		<img class="hero_banner" src="{{.Params.hero_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
+	</div>
+	<div class="main_content">
+		<div class="two_column">
+			<div class="left_justified">
+				<h1>{{.Title}}</h1>
+				<label>{{.Params.subtitle}}</label>
+			</div>
+			<div class="right_justified">
+				<p class="text_block">{{.Params.statement}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="main_content blackBG">
+		<div class="two_column">
+
+		</div>
 	</div>
 </div>
 {{ end }}
