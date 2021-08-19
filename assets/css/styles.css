@@ -824,6 +824,12 @@ nav.home>#menu>#controls>#hamburger>.bar{
     position: relative;
     min-height: calc(100vh - 97px);
     padding: 50px 25px 25px 25px;
+    -webkit-mask-size: 200% 100%;
+    mask-size: 200% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repat: no-repeat;
+    -webkit-mask-position: 0%;
+    mask-image: linear-gradient(90deg, white, transparent);
 }
 
 .main_content.loadingImg{

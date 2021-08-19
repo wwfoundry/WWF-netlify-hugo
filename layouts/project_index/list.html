@@ -25,10 +25,9 @@
 			</div>
 			<div class="filter overlay">
 				<button class="filter_xit" id="xit">
-							<img class="icon" src="/images/resources/xit.svg">
+						<img class="icon" src="/images/resources/xit.svg">
 				</button>
 				<div id="filter_inner">
-
 					{{ range sort .Site.Data.tags.material_tag }}
 						{{with .material_string}}
 							<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">

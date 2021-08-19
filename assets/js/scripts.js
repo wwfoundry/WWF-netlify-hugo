@@ -652,20 +652,18 @@ init : function(){
 				}
 			},
 			switchOver = gsap.timeline(),
-			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper){
+			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper, d){
 
 				currentSlide.prop.classList.remove('draggable');
 
 				currentSlide.prop = p2;
 
-				var staggerLength = p1.length*.35;
-
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.to(p1, {duration: d, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				} else {
-					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: d, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				}
-					anim2 = gsap.to(p2, {duration: .35, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim2 = gsap.to(p2, {duration: d, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
 			swiper = false,
@@ -1089,19 +1087,19 @@ init : function(){
 
 			if( d == 'prev' && slideCount > 0){
 
-				animAll(projectSlideArr[slideCount + 1], '110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount + 1], '110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 			
 			} else if (d == 'prev' && slideCount == 0) {
 
-				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount, swiper,'.35');
 
 			} else if (d == 'next' && slideCount === 1) {
 
-				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
 
-				animAll(projectSlideArr[slideCount - 1], '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount - 1], '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 
 			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
 
@@ -1121,16 +1119,18 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(100%)', autoAlpha: '0', onComplete: beginSwitchover});
-					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.to(pageContainer, {duration: 0, ease: "none", WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255,1) 70%)'});
+					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: beginSwitchover});
+					switchOver.to(pageContainer, {duration: .5, delay: .25, ease: "steps.out", WebkitMaskPosition: '0%, 0%'});
+					// switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
+					// switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)'});
 
 					function beginSwitchover(){
 							range.push(b);
 							for(var r = 0; r < range.length; r++){
 								range[r].style.visibility = 'hidden';
 							}
-							animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper);
+							animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper, '0');
 					}
 
 					function replacePrev (loadUrl) {
@@ -1189,9 +1189,11 @@ init : function(){
 
 				} else {
 
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(-100%)', autoAlpha: '0', onComplete: beginSwitchover});
-					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.to(pageContainer, {duration: 0, ease: "none", WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 70%, rgba(255,255,255, 0))'});
+					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: beginSwitchover});
+					switchOver.to(pageContainer, {duration: .5, delay: .25, ease: "steps.out", WebkitMaskPosition: '0%, 0%'});
+					// switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
+					// switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)'});
 
 					function beginSwitchover(){
 
@@ -1201,7 +1203,7 @@ init : function(){
 						}
 
 						range.push(b);
-						animAll(b, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
+						animAll(b, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper, '0');
 
 					}
 
@@ -1571,25 +1573,25 @@ init : function(){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '110%', b, '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '110%', b, '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if (slideCount == 0){
 
 				range.unshift(b);
 
-				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if (index > slideCount && index > 0){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if ( index < slideCount){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			}
 
