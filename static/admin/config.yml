@@ -191,7 +191,9 @@ collections:
               - label: 'Alt Text'
                 name: 'alt'
                 widget: 'string'
+          - {label: 'Statement', name: 'statement', widget: 'markdown'}
           - label: 'Archived Projects'
+            label_singular: 'Archive Project'
             name: 'archive'
             widget: 'list'
             fields: 
@@ -212,7 +214,6 @@ collections:
                   - label: 'Year'
                     name: 'archive_year'
                     widget: 'string'
-          - {label: 'Statement', name: 'statement', widget: 'markdown'}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
