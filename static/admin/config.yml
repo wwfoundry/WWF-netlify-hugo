@@ -180,7 +180,17 @@ collections:
         fields:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'about'}
           - {label: 'Title', name: 'title', widget: 'string'}
-          - {label: 'Intro', name: 'intro', widget: 'markdown'}
+          - label: 'Hero Banner'
+            name: 'hero_obj'
+            widget: 'object'
+            fields:
+              - label: 'Hero Image'
+                name: 'hero'
+                widget: 'image'
+              - label: 'Alt Text'
+                name: 'alt'
+                widget: 'string'
+          - {label: 'Statement', name: 'statement', widget: 'markdown'}
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"

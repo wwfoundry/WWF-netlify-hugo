@@ -1005,13 +1005,15 @@ init : function(){
 
 	document.addEventListener("click", function(r){
 
-		if(r.target.id == "project_left" || r.target.id == "project_right" || r.target.id == "arrow_left" || r.target.id == "arrow_right"){
+		if(r.target.classList.contains('arrow')){
 
 			r.preventDefault();
 
 			triggerChange(r.target);
 
-		} 
+		} else {
+			return;
+		}
 
 	});
 
