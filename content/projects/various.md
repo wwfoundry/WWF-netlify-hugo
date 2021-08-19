@@ -3,11 +3,11 @@ title: Various
 artist: James Siena
 year_tag: "2013"
 material: Bronze
-featured: /uploads/4125.1_reclinging_branch_final_5.jpeg
+featured: /uploads/images/4125.1_reclinging_branch_final_5.jpeg
 thumbnailImages:
-  - image: /uploads/4125.1_Branch_Re_Print_16.jpeg
-  - image: /uploads/4125.1_reclinging_branch_final_11.jpeg
-  - image: /uploads/4125.1_reclining_branch_final_27.jpeg
+  - image: /uploads/images/4125.1_Branch_Re_Print_16.jpeg
+  - image: /uploads/images/4125.1_reclinging_branch_final_11.jpeg
+  - image: /uploads/images/4125.1_reclining_branch_final_27.jpeg
 material_tag:
   - Bronze
 process_tag:

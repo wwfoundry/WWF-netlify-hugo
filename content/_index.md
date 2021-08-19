@@ -1,4 +1,4 @@
 ---
 reelVideo:
-  - video: /uploads/barney_test_3.mp4
+  - video: /uploads/images/barney_test_3.mp4
 ---

@@ -4,7 +4,7 @@ title: About
 intro: Test...
 subtitle: Est. 1981
 hero_obj:
-  hero: /uploads/WWF_Historic_Campus.jpg
+  hero: /uploads/images/WWF_Historic_Campus.jpg
   alt: Walla Walla Foundry Historic Campus
 statement: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
   condimentum turpis, id dignissim orci. Suspendisse potenti. Donec consectetur,
@@ -16,12 +16,7 @@ statement: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
   mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
 archive:
   - archive_obj:
-      archive_image: /uploads/Mine_Camp.jpg
-      archive_title: Mine Camp
-      archive_artist: Ed Kienholz
-      archive_year: "1990"
-  - archive_obj:
-      archive_image: /uploads/Mine_Camp.jpg
+      archive_image: /uploads/images/Mine_Camp.jpg
       archive_title: Mine Camp
       archive_artist: Ed Kienholz
       archive_year: "1990"
