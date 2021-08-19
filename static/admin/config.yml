@@ -191,6 +191,27 @@ collections:
               - label: 'Alt Text'
                 name: 'alt'
                 widget: 'string'
+          - label: 'Archived Projects'
+            name: 'archive'
+            widget: 'list'
+            fields: 
+              - label: 'Archive Entries'
+                label_singular: 'Archive Entry'
+                name: 'archive_obj'
+                widget: 'object'
+                fields:
+                  - label: 'Archive Image'
+                    name: 'archive_image'
+                    widget: 'image'
+                  - label: 'Title'
+                    name: 'archive_title'
+                    widget: 'string'
+                  - label: 'Artist'
+                    name: 'archive_artist'
+                    widget: 'string'
+                  - label: 'Year'
+                    name: 'archive_year'
+                    widget: 'string'
           - {label: 'Statement', name: 'statement', widget: 'markdown'}
       - label: "Contact"
         name: "contact"
