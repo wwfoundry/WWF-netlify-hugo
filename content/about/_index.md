@@ -2,6 +2,7 @@
 url: about
 title: About
 intro: Test...
+subtitle: Est. 1981
 hero_obj:
   hero: /images/uploads/WWF_Historic_Campus.jpg
   alt: Walla Walla Foundry Historic Campus
