@@ -2,4 +2,15 @@
 url: about
 title: About
 intro: Test...
+hero_obj:
+  hero: /images/uploads/WWF_Historic_Campus.jpg
+  alt: Walla Walla Foundry Historic Campus
+statement: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
+  condimentum turpis, id dignissim orci. Suspendisse potenti. Donec consectetur,
+  est facilisis consectetur pretium, magna risus dictum elit, sit amet dictum
+  est libero vel nunc. Phasellus pretium dui at aliquet imperdiet. Nulla mauris
+  tellus, rhoncus et varius vitae, sagittis a nunc. Curabitur luctus ligula leo,
+  a ornare mi dignissim tempus. Aliquam erat volutpat. Duis nec ligula vitae mi
+  facilisis finibus. Praesent et elementum quam. Suspendisse potenti. Nullam
+  mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
 ---
