@@ -1555,7 +1555,8 @@ footer.innner_content{
   .project_slide{
   flex-direction:column;
   width: unset;
-/*  margin: 0 -10px;*/
+  margin: 0 -10px;
+  overflow-x: hidden;
   }
 
   .right_justified_partial{
