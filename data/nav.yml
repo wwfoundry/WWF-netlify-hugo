@@ -10,7 +10,7 @@ topLevelItems:
     itemType: Link
 customItems: []
 socialItems:
-  - socialIcon: /images/uploads/instagram.png
+  - socialIcon: /uploads/instagram.png
     socialURL: https://www.instagram.com/wallawallafoundry/
-  - socialIcon: /images/uploads/linkedin.png
+  - socialIcon: /uploads/linkedin.png
     socialURL: https://www.linkedin.com/company/walla-walla-foundry

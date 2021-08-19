@@ -3,13 +3,13 @@ title: I dreamed a world and called it Love
 artist: Jim Hodges
 year_tag: "2016"
 material: Laminated Mirror Glass
-featured: /images/uploads/hodges-fullscope.jpeg
+featured: /uploads/hodges-fullscope.jpeg
 thumbnailImages:
-  - image: /images/uploads/hodges.jpeg
-  - image: /images/uploads/4558.1_Glass_Panels_Process_Photos_308.jpeg
-  - image: /images/uploads/4558.1_Glass_Panels_Process_Photos_264.jpeg
-  - image: /images/uploads/4558.1_Glass_Panels_Process_Photos_147.jpeg
-  - image: /images/uploads/4558.1_Camo_Panel_Glass_Process_027.jpeg
+  - image: /uploads/hodges.jpeg
+  - image: /uploads/4558.1_Glass_Panels_Process_Photos_308.jpeg
+  - image: /uploads/4558.1_Glass_Panels_Process_Photos_264.jpeg
+  - image: /uploads/4558.1_Glass_Panels_Process_Photos_147.jpeg
+  - image: /uploads/4558.1_Camo_Panel_Glass_Process_027.jpeg
 material_tag:
   - Glass
 process_tag:
