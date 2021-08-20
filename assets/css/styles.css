@@ -828,8 +828,6 @@ nav.home>#menu>#controls>#hamburger>.bar{
     mask-size: 200% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repat: no-repeat;
-    -webkit-mask-position: 0%;
-    mask-image: linear-gradient(90deg, white, transparent);
 }
 
 .main_content.loadingImg{
@@ -1555,8 +1553,6 @@ footer.innner_content{
   .project_slide{
   flex-direction:column;
   width: unset;
-  margin: 0 -10px;
-  overflow-x: hidden;
   }
 
   .right_justified_partial{

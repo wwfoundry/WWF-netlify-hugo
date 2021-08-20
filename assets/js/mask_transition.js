@@ -665,6 +665,7 @@ init : function(){
 					anim2 = gsap.to(p2, {duration: d, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
+			switchOver = gsap.timeline(),
 			swiper = false,
 			createProjectSlides = function(currentThumbs){
 				
@@ -1118,8 +1119,6 @@ init : function(){
 
 				if ( d == 'prev'){
 
-					var switchOver = gsap.timeline();
-
 					switchOver.to(pageContainer, {duration: 0, ease: "none", WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255, 0), rgba(255,255,255,1) 70%)'});
 					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: beginSwitchover});
 					switchOver.to(pageContainer, {duration: .5, delay: .25, ease: "steps.out", WebkitMaskPosition: '0%, 0%'});
@@ -1189,8 +1188,6 @@ init : function(){
 					}
 
 				} else {
-
-					var switchOver = gsap.timeline()
 
 					switchOver.to(pageContainer, {duration: 0, ease: "none", WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 70%, rgba(255,255,255, 0))'});
 					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: beginSwitchover});

@@ -1,4 +1,3 @@
-
 	//Extend Remove Class
 
 		var oRemoveClass = $.fn.removeClass;
@@ -53,25 +52,27 @@ callPageJS = {
 		//Menu Behavior
 
 		var multiBurger = $("#hamburger"),
-				field = window.innerWidth,
-				fieldY = window.innerHeight,
-				menuWrapper = $('#side_menu_wrapper'),
-				navParent = $('nav'),
-				navHeight = navParent.height(),
-				mainWrapper = $('.main_content'),
-				loadedInner = $('.loaded_inner'),
-				state,
-				lockBody = function(state){
+			field = window.innerWidth,
+			fieldY = window.innerHeight,
+			menuWrapper = $('#side_menu_wrapper'),
+			navParent = $('nav'),
+			navHeight = navParent.height(),
+			mainWrapper = $('.main_content'),
+			loadedInner = $('.loaded_inner'),
+			state,
+			switchOver = gsap.timeline(),
+			pageContainer = document.querySelector('.main_content'),
+			lockBody = function(state){
 
-				if( state == 'lock' ){
+			if( state == 'lock' ){
 
-					$('body').addClass('locked');
-		
-				} else if (state == 'unlock') {
+				$('body').addClass('locked');
+	
+			} else if (state == 'unlock') {
 
-					$('body').removeClass('locked');
+				$('body').removeClass('locked');
 
-				};
+			};
 
 		};
 
@@ -190,7 +191,7 @@ callPageJS = {
 
 		function loadPage(mainUrl, page){
 
-			mainWrapper.addClass('loadingImg');
+			// mainWrapper.addClass('loadingImg');
 
 			multiBurger.off('click');
 
@@ -204,43 +205,55 @@ callPageJS = {
 
 			multiBurger.trigger('click');
 
-			mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
-        if (status == "error") {
+			switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
+			switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
+			switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax});
 
-        	window.location.href = mainUrl;
+			function pageJax(){
 
-        } else {
+				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
+			        if (status == "error") {
 
-        	passNewPage(mainUrl);
+			        	window.location.href = mainUrl;
 
-        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+			        } else {
 
-						mainWrapper.removeClass('fullHeight');
+			        	switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 80%, rgba(255,255,255, 0)'});
+						switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
+						switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
 
-						navParent.removeClass('home');
+			        	passNewPage(mainUrl);
 
-						$('#wwf_logo').removeClass('fill_change');
+			        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
 
-						$('#menu_wrapper').removeClass('fill_change');
+									mainWrapper.removeClass('fullHeight');
 
-					} else if (page == 'home') {
+									navParent.removeClass('home');
 
-						mainWrapper.addClass('fullHeight');
+									$('#wwf_logo').removeClass('fill_change');
 
-						navParent.addClass('home');
+									$('#menu_wrapper').removeClass('fill_change');
 
-						$('#wwf_logo').addClass('fill_change');
+								} else if (page == 'home') {
 
-						$('#menu_wrapper').addClass('fill_change');
+									mainWrapper.addClass('fullHeight');
 
-					}
+									navParent.addClass('home');
 
-        }
-      });
+									$('#wwf_logo').addClass('fill_change');
+
+									$('#menu_wrapper').addClass('fill_change');
+
+								}
+
+						}
+					 });
+
+			}
 
 		function passNewPage(mainUrl, page){
 
-				mainWrapper.removeClass('loadingImg');
+				// mainWrapper.removeClass('loadingImg');
 
 				if (window.history.pushState){
 					window.history.pushState(null, null, mainUrl);
@@ -652,23 +665,21 @@ init : function(){
 					this.slide = nextSlide;
 				}
 			},
-			switchOver = gsap.timeline(),
-			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper){
+			animAll = function (p1, l1, p2, l2, addSlide, currentThumbs, slideCount, swiper, d){
 
 				currentSlide.prop.classList.remove('draggable');
 
 				currentSlide.prop = p2;
 
-				var staggerLength = p1.length*.35;
-
 				if(!swiper){
-					anim1 = gsap.to(p1, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.to(p1, {duration: d, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				} else {
-					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: .35, ease: "steps.out", transform: 'translate(' + l1 +')'});
+					anim1 = gsap.fromTo(p1, {transform: 'translate(' + swiper +'px)'}, {duration: d, ease: "steps.out", transform: 'translate(' + l1 +')'});
 				}
-					anim2 = gsap.to(p2, {duration: .35, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
+					anim2 = gsap.to(p2, {duration: d, ease: "steps.out", transform: 'translate(' + l2 +')', onComplete: addSlide.bind(null, currentThumbs, slideCount)});
 
 			},
+			switchOver = gsap.timeline(),
 			swiper = false,
 			createProjectSlides = function(currentThumbs){
 				
@@ -1004,7 +1015,9 @@ init : function(){
 
 	//Trigger Slide Change
 
-	document.addEventListener("click", function(r){
+	document.addEventListener("click", checkTrigger, false);
+
+	function checkTrigger(r){
 
 		if(r.target.classList.contains('arrow')){
 
@@ -1012,11 +1025,10 @@ init : function(){
 
 			triggerChange(r.target);
 
-		} else {
-			return;
 		}
 
-	});
+		return false;
+	}
 
 	function triggerChange(arrow){
 
@@ -1028,7 +1040,7 @@ init : function(){
 
 			slideCount--
 
-			loadUrl = arrowPrev.getAttribute('href');
+			loadUrl = $('#arrow_left').prop('href')
 
 		} else if ( arrow == arrowNext){
 
@@ -1039,14 +1051,12 @@ init : function(){
 						slideCount = projectSlideArr.length;
 
 			} else {
-
 				slideCount++
-
 			}
 
 			d = 'next';
 
-			loadUrl = arrowNext.getAttribute('href');
+			loadUrl = $('#arrow_right').prop('href')
 
 		} else if (arrow.classList.contains('left') && arrow != arrowPrev){
 
@@ -1058,7 +1068,7 @@ init : function(){
 
 			d = 'prev';
 
-			loadUrl = arrowPrev.getAttribute('href');
+			loadUrl = $('#arrow_left').prop('href');
 
 			slideCount = -1;
 
@@ -1070,7 +1080,7 @@ init : function(){
 
 			d = 'next';
 
-			loadUrl = arrowNext.getAttribute('href');
+			loadUrl = $('#arrow_right').prop('href')
 
 			slideCount = projectSlideArr.length;
 
@@ -1090,19 +1100,19 @@ init : function(){
 
 			if( d == 'prev' && slideCount > 0){
 
-				animAll(projectSlideArr[slideCount + 1], '110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount + 1], '110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 			
 			} else if (d == 'prev' && slideCount == 0) {
 
-				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount, swiper,'.35');
 
 			} else if (d == 'next' && slideCount === 1) {
 
-				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 
 			} else if (d == 'next' && slideCount < projectSlideArr.length) {
 
-				animAll(projectSlideArr[slideCount - 1], '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper);
+				animAll(projectSlideArr[slideCount - 1], '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 
 			} else if (d == 'prev' || d == 'next' && slideCount < 0 || slideCount >= projectSlideArr.length) {
 
@@ -1121,20 +1131,24 @@ init : function(){
 				}
 
 				if ( d == 'prev'){
-
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(100%)', autoAlpha: '0', onComplete: beginSwitchover});
-					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.set(pageContainer, {WebkitMaskPosition: '100%, 0%'});
+					switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 70%, rgba(255,255,255, 0)'});
+					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '-100%, 0%', onComplete: beginSwitchover});
+					switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 70%, rgba(255,255,255, 0))'});
+					switchOver.set(pageContainer, {WebkitMaskPosition: '200%, 0%',});
+					switchOver.to(pageContainer, {duration: .75, ease: "steps.out", WebkitMaskPosition: '0%, 0%'});
+					// switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(-100%)'});
+					// switchOver.to(slideAreaContainer, {duration: .65, ease: "steps.out", transform: 'translate(0%)'});
 
 					function beginSwitchover(){
 							range.push(b);
 							for(var r = 0; r < range.length; r++){
 								range[r].style.visibility = 'hidden';
 							}
-							animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper);
+							animAll(b, '110%', a, '0%', replacePrev, currentThumbs, slideCount, swiper, '0');
 					}
 
-					function replacePrev (loadUrl) {
+					function replacePrev () {
 
 						for(var r = 0; r < range.length; r++){
 							range[r].style.visibility = 'visible';
@@ -1190,9 +1204,14 @@ init : function(){
 
 				} else {
 
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(-100%)', autoAlpha: '0', onComplete: beginSwitchover});
-					switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
-					switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)', autoAlpha: '1'});
+					switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
+					switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 70%, rgba(255,255,255, 0))'});
+					switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: beginSwitchover});
+					switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 70%, rgba(255,255,255, 0)'});
+					switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
+					switchOver.to(pageContainer, {duration: .75, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
+					// switchOver.to(slideAreaContainer, {duration: 0, ease: "steps.out", transform: 'translate(100%)'});
+					// switchOver.to(slideAreaContainer, {duration: .45, ease: "steps.out", transform: 'translate(0%)'});
 
 					function beginSwitchover(){
 
@@ -1202,11 +1221,11 @@ init : function(){
 						}
 
 						range.push(b);
-						animAll(b, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper);
+						animAll(b, '-110%', c, '0%', replaceNext, currentThumbs, slideCount, swiper, '0');
 
 					}
 
-					function replaceNext(loadUrl){
+					function replaceNext(){
 
 						for(var r = 0; r < range.length; r++){
 							range[r].style.visibility = 'visible';
@@ -1425,8 +1444,6 @@ init : function(){
 	
 		function swipeDrag(d){
 
-			d.stopPropagation();
-
 			if(!swipeArea.moving){
 				return;
 			}
@@ -1474,8 +1491,6 @@ init : function(){
 
 
 		function endSwipe(end, longTouch){
-
-			end.stopPropagation();
 
 			swipeCount = 0;
 
@@ -1572,25 +1587,25 @@ init : function(){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '110%', b, '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '110%', b, '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if (slideCount == 0){
 
 				range.unshift(b);
 
-				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if (index > slideCount && index > 0){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '-110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			} else if ( index < slideCount){
 
 				range.unshift(projectSlideArr[slideCount]);
 
-				animAll(range, '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper);
+				animAll(range, '110%', projectSlideArr[index], '0%', activateThumb, currentThumbs, index, swiper, '.35');
 
 			}
 
