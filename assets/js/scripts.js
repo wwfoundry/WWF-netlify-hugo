@@ -15,39 +15,39 @@
 
 //Page Specific Functions
 
-// LOADJS = { 
-//   fire : function(func,funcname, args){
-//     var namespace = callPageJS;
+LOADJS = { 
+  fire : function(func,funcname, args){
+    var namespace = callPageJS;
 
-//     funcname = (funcname === undefined) ? 'init' : funcname;
-//     if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
-//       namespace[func][funcname](args);
-//     }
-//   }, 
+    funcname = (funcname === undefined) ? 'init' : funcname;
+    if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
+      namespace[func][funcname](args);
+    }
+  }, 
 
-//   loadEvents : function(){
+  loadEvents : function(){
 
-//   	$('body').off('click');
+  	$('body').off('click');
 
-//   	$(window).off('scroll');
+  	$(window).off('scroll');
 
-//   	var idElem = document.querySelector('.page'),
-//     	bodyId = idElem.id;
+  	var idElem = document.querySelector('.page'),
+    	bodyId = idElem.id;
 
-//     LOADJS.fire('common');
+    LOADJS.fire('common');
 
-//     LOADJS.fire(bodyId);
+    LOADJS.fire(bodyId);
 
-//   }
-// };
+  }
+};
 
-// $(document).ready(LOADJS.loadEvents);
+$(document).ready(LOADJS.loadEvents);
 
 /////////////////////Namespaces/////////////////////
 
-// callPageJS = {
-// 	common : {
-// 		init : function(){
+callPageJS = {
+	common : {
+		init : function(){
 
 		//Menu Behavior
 
@@ -406,12 +406,12 @@
 		});
 
 
-	// 	}
+		}
 
-	// },
+	},
 
-// index : {
-// 	init : function(){
+index : {
+	init : function(){
 
 		var o = $('.overlay'),
 			abs = $('.abs_wrapper'),
@@ -593,12 +593,12 @@
 
 		}
 
-// 	}
+	}
 
-// },
+},
 
-// gallery : {
-// init : function(){
+gallery : {
+init : function(){
 
  //On load, get prev, current, next
 
@@ -1616,10 +1616,10 @@
 
 	});
 
-// }
-// },
-// contact : {
-// init : function(){
+}
+},
+contact : {
+init : function(){
 			//MAP
 
 		var map = L.map('mapBox', {
@@ -1659,6 +1659,6 @@
 		    .bindPopup(locations[i][0])
 		    .addTo(map);
 		}
-// }
-// }
-// }
+}
+}
+}
