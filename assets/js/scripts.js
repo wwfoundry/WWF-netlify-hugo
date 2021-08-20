@@ -293,7 +293,7 @@ callPageJS = {
 					window.history.pushState(null, null, mainUrl);
 				}
 
-				// LOADJS.loadEvents();
+				LOADJS.loadEvents();
 
 				loadedInner = $('.main_content').find('.loaded_inner');
 
