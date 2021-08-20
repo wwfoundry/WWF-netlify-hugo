@@ -191,7 +191,7 @@ callPageJS = {
 
 		function loadPage(mainUrl, page){
 
-			// mainWrapper.addClass('loadingImg');
+			$('body').addClass('loadingImg');
 
 			multiBurger.off('click');
 
@@ -255,7 +255,7 @@ callPageJS = {
 
 		function passNewPage(mainUrl, page){
 
-				// mainWrapper.removeClass('loadingImg');
+				$('body').removeClass('loadingImg');
 
 				if (window.history.pushState){
 					window.history.pushState(null, null, mainUrl);

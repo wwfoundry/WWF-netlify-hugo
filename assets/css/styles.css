@@ -831,6 +831,21 @@ nav.home>#menu>#controls>#hamburger>.bar{
     mask-repat: no-repeat;
 }
 
+body.loadingImg{
+  background: unset;
+}
+
+body.loadingImg:before{
+  position:fixed;
+  width:45px;
+  height:45px;
+  top:unset;
+  left:unset;
+  bottom:25px;
+  right:25px;
+  margin: 0;
+}
+
 .main_content.loadingImg{
   background: unset;
 }
