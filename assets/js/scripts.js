@@ -211,6 +211,8 @@ callPageJS = {
 
 			function pageJax(){
 
+				console.log('loaded');
+
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
 			        if (status == "error") {
 

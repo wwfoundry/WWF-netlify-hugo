@@ -629,6 +629,7 @@ nav.home{
 	fill:white;
   color:white;
 	transition: fill ease-in-out .5s;
+  width:fit-content;
 }
 
 #wwf_logo.fill_change{
@@ -822,7 +823,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 .main_content{
     display: block;
     position: relative;
-    min-height: calc(100vh - 97px);
+    min-height: 100vh;
     padding: 50px 25px 25px 25px;
     -webkit-mask-size: 200% 100%;
     mask-size: 200% 100%;
@@ -993,13 +994,13 @@ footer.innner_content{
   justify-content: space-between;
   flex-wrap:wrap;
   align-items: center;
-  padding-bottom:50px;
 }
 
 .footer_section{
-  width:49%;
+  width:100%;
   display:flex;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: row;
   align-self: flex-start;
 /*  text-align:center;*/
@@ -1027,7 +1028,7 @@ footer.innner_content{
 /*  padding-right:25px;*/
 }
 
-.footer_item>#social_links{
+.footer_item>.fill_change>#social_links{
   justify-content: flex-end;
   }
 
@@ -1677,12 +1678,12 @@ footer.innner_content{
   .footer_section{
     width:100%;
     flex-direction:column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .footer_item{
-    width:100%;
-    padding: 50px 0px 0px 0px;
+    width:fit-content;
+    padding: 0;
   }
 
   .footer_item>.menu_links{
@@ -1699,7 +1700,7 @@ footer.innner_content{
 
   .footer_item #wwf_logo{
     width:270px;
-    padding-bottom: 10px;
+    padding: 0px 0px 10px 0px;
 }
 
 }
