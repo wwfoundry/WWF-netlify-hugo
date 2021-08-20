@@ -15,39 +15,39 @@
 
 //Page Specific Functions
 
-LOADJS = { 
-  fire : function(func,funcname, args){
-    var namespace = callPageJS;
+// LOADJS = { 
+//   fire : function(func,funcname, args){
+//     var namespace = callPageJS;
 
-    funcname = (funcname === undefined) ? 'init' : funcname;
-    if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
-      namespace[func][funcname](args);
-    }
-  }, 
+//     funcname = (funcname === undefined) ? 'init' : funcname;
+//     if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
+//       namespace[func][funcname](args);
+//     }
+//   }, 
 
-  loadEvents : function(){
+//   loadEvents : function(){
 
-  	$('body').off('click');
+//   	$('body').off('click');
 
-  	$(window).off('scroll');
+//   	$(window).off('scroll');
 
-  	var idElem = document.querySelector('.page'),
-    		bodyId = idElem.id;
+//   	var idElem = document.querySelector('.page'),
+//     	bodyId = idElem.id;
 
-    LOADJS.fire('common');
+//     LOADJS.fire('common');
 
-    LOADJS.fire(bodyId);
+//     LOADJS.fire(bodyId);
 
-  }
-};
+//   }
+// };
 
-$(document).ready(LOADJS.loadEvents);
+// $(document).ready(LOADJS.loadEvents);
 
 /////////////////////Namespaces/////////////////////
 
-callPageJS = {
-	common : {
-		init : function(){
+// callPageJS = {
+// 	common : {
+// 		init : function(){
 
 		//Menu Behavior
 
@@ -168,6 +168,37 @@ callPageJS = {
 
 		// Single Page Behavior
 
+		$('body').on('click', '.internal', function(e){
+
+			e.preventDefault();
+			e.stopPropagation();
+
+			var mainUrl = $(this).attr('href'),
+				page = checkUrl(mainUrl);
+
+			loadPage(mainUrl, page);
+
+		});
+
+		window.addEventListener("popstate", function popstateListener(e) {
+
+			var mainUrl = location.pathname,
+				page = checkUrl(mainUrl);
+
+	    loadPage(mainUrl, page);
+
+		});
+
+		function checkUrl(link){
+
+			if(link == '/'){
+				return 'home';
+			} else {
+				return false;
+			}
+
+		}
+
 		function verifyLink(linkElem){
 			if (linkElem.origin != window.location.origin){
 				return true;
@@ -185,11 +216,12 @@ callPageJS = {
 				$(this).addClass('internal');
 
 			}
-
 			
 		});
 
 		function loadPage(mainUrl, page){
+
+			console.log('clicked')
 
 			$('body').addClass('loadingImg');
 
@@ -207,11 +239,11 @@ callPageJS = {
 
 			switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
 			switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
-			switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax});
+			switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
 
-			function pageJax(){
+		}
 
-				console.log('loaded');
+		function pageJax(mainUrl, page){
 
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
 			        if (status == "error") {
@@ -224,7 +256,7 @@ callPageJS = {
 						switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
 						switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
 
-			        	passNewPage(mainUrl);
+			        	passNewPage(mainUrl, page);
 
 			        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
 
@@ -261,7 +293,7 @@ callPageJS = {
 					window.history.pushState(null, null, mainUrl);
 				}
 
-				LOADJS.loadEvents();
+				// LOADJS.loadEvents();
 
 				loadedInner = $('.main_content').find('.loaded_inner');
 
@@ -278,39 +310,6 @@ callPageJS = {
 				}
 				
 			}
-
-		}
-
-		$('body').on('click', '.internal', function(e){
-
-			e.preventDefault();
-			e.stopPropagation();
-
-			var mainUrl = $(this).attr('href'),
-					page = checkUrl(mainUrl);
-
-			loadPage(mainUrl, page);
-
-		});
-
-		window.addEventListener("popstate", function popstateListener(e) {
-
-			var mainUrl = location.pathname,
-					page = checkUrl(mainUrl);
-
-	    loadPage(mainUrl, page);
-
-		});
-
-		function checkUrl(link){
-
-			if(link == '/'){
-				return 'home';
-			} else {
-				return false;
-			}
-
-		}
 
 		//Accents
 
@@ -407,12 +406,12 @@ callPageJS = {
 		});
 
 
-		}
+	// 	}
 
-	},
+	// },
 
-index : {
-	init : function(){
+// index : {
+// 	init : function(){
 
 		var o = $('.overlay'),
 			abs = $('.abs_wrapper'),
@@ -594,12 +593,12 @@ index : {
 
 		}
 
-	}
+// 	}
 
-},
+// },
 
-gallery : {
-init : function(){
+// gallery : {
+// init : function(){
 
  //On load, get prev, current, next
 
@@ -1617,10 +1616,10 @@ init : function(){
 
 	});
 
-}
-},
-contact : {
-init : function(){
+// }
+// },
+// contact : {
+// init : function(){
 			//MAP
 
 		var map = L.map('mapBox', {
@@ -1660,6 +1659,6 @@ init : function(){
 		    .bindPopup(locations[i][0])
 		    .addTo(map);
 		}
-}
-}
-}
+// }
+// }
+// }
