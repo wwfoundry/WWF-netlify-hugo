@@ -23,25 +23,19 @@ LOADJS = {
     if (func !== '' && namespace[func] && typeof namespace[func][funcname] == 'function'){
       namespace[func][funcname](args);
     }
-  }, 
-
-  loadEvents : function(){
-
-  	$('body').off('click');
-
-  	$(window).off('scroll');
-
-  	var idElem = document.querySelector('.page'),
-    	bodyId = idElem.id;
-
-    LOADJS.fire('common');
-
-    LOADJS.fire(bodyId);
-
   }
+
 };
 
-$(document).ready(LOADJS.loadEvents);
+$(document).ready(function(){
+
+	var pageId = $('.page').get(0).id;
+
+	LOADJS.fire(pageId);
+
+	LOADJS.fire('common');
+
+});
 
 /////////////////////Namespaces/////////////////////
 
@@ -205,27 +199,31 @@ callPageJS = {
 			}
 		}
 
-		$('a').each(function(){
+		setLinkState();
 
-			if ( verifyLink(this) ){
+		function setLinkState(){
 
-				$(this).addClass('external');
+			$('a').each(function(){
 
-			} else {
+				if ( verifyLink(this) ){
 
-				$(this).addClass('internal');
+					$(this).addClass('external');
 
-			}
-			
-		});
+				} else if ( $(this).get(0).id !== 'arrow_left' && $(this).get(0).id !== 'arrow_right') {
+
+					$(this).addClass('internal');
+
+				}
+				
+			});
+
+		}
 
 		function loadPage(mainUrl, page){
 
-			console.log('clicked')
+			$(document).off('click');
 
 			$('body').addClass('loadingImg');
-
-			multiBurger.off('click');
 
 			if ( multiBurger.hasClass('active') ){
 				closeMenu();
@@ -235,17 +233,18 @@ callPageJS = {
 
 			loadedInner.remove();
 
-			multiBurger.trigger('click');
-
 			switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
 			switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
 			switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
 
-		}
+		};
 
 		function pageJax(mainUrl, page){
 
+				console.log('clicked')
+
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
+
 			        if (status == "error") {
 
 			        	window.location.href = mainUrl;
@@ -253,37 +252,37 @@ callPageJS = {
 			        } else {
 
 			        	switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 80%, rgba(255,255,255, 0)'});
-						switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
-						switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
+								switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
+								switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
 
 			        	passNewPage(mainUrl, page);
 
-			        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+	        			if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
 
-									mainWrapper.removeClass('fullHeight');
+								mainWrapper.removeClass('fullHeight');
 
-									navParent.removeClass('home');
+								navParent.removeClass('home');
 
-									$('#wwf_logo').removeClass('fill_change');
+								$('#wwf_logo').removeClass('fill_change');
 
-									$('#menu_wrapper').removeClass('fill_change');
+								$('#menu_wrapper').removeClass('fill_change');
 
-								} else if (page == 'home') {
+							} else if (page == 'home') {
 
-									mainWrapper.addClass('fullHeight');
+								mainWrapper.addClass('fullHeight');
 
-									navParent.addClass('home');
+								navParent.addClass('home');
 
-									$('#wwf_logo').addClass('fill_change');
+								$('#wwf_logo').addClass('fill_change');
 
-									$('#menu_wrapper').addClass('fill_change');
+								$('#menu_wrapper').addClass('fill_change');
 
-								}
+							}
 
-						}
-					 });
+							}
+				 });
 
-			}
+		}
 
 		function passNewPage(mainUrl, page){
 
@@ -293,7 +292,11 @@ callPageJS = {
 					window.history.pushState(null, null, mainUrl);
 				}
 
-				LOADJS.loadEvents();
+				var pageId = $('.page').get(0).id;
+
+				LOADJS.fire(pageId);
+
+				setLinkState();
 
 				loadedInner = $('.main_content').find('.loaded_inner');
 
@@ -941,8 +944,6 @@ init : function(){
 
 	function loadNeighbor(){
 
-		$('.arrow_nav').removeClass('internal');
-
 	    while (parent.firstChild) {
 
 	        parent.removeChild(parent.firstChild);
@@ -961,8 +962,7 @@ init : function(){
 
 		slideAreaContainer.id = slideID;
 
-		if (window.history.pushState)
-		{
+		if (window.history.pushState){
 			window.history.pushState(null, null, '#' + slideID);
 		}
 
@@ -1016,7 +1016,7 @@ init : function(){
 
 	//Trigger Slide Change
 
-	document.addEventListener("click", checkTrigger, false);
+	document.querySelector('body').addEventListener("click", checkTrigger, false);
 
 	function checkTrigger(r){
 

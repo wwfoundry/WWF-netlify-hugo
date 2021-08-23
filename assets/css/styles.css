@@ -829,6 +829,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
     mask-size: 200% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repat: no-repeat;
+    will-change: -webkit-mask-position;
 }
 
 body.loadingImg{
@@ -854,7 +855,7 @@ body.loadingImg:before{
   padding: unset;
   margin:unset;
   max-width:unset;
-  background-color: #131313;
+/*  background-color: #131313;*/
 }
 
 .inner_content{
