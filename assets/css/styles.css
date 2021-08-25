@@ -833,10 +833,10 @@ nav.home>#menu>#controls>#hamburger>.bar{
 }
 
 body.loadingImg{
-  background: unset;
+  background: white;
 }
 
-body.loadingImg:before{
+/*body.loadingImg:before{
   position:fixed;
   width:45px;
   height:45px;
@@ -845,7 +845,7 @@ body.loadingImg:before{
   bottom:25px;
   right:25px;
   margin: 0;
-}
+}*/
 
 .main_content.loadingImg{
   background: unset;

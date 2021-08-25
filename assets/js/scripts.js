@@ -55,6 +55,8 @@ callPageJS = {
 			loadedInner = $('.loaded_inner'),
 			state,
 			switchOver = gsap.timeline(),
+			loadReady = false,
+			loadTimeout,
 			pageContainer = document.querySelector('.main_content'),
 			lockBody = function(state){
 
@@ -168,7 +170,15 @@ callPageJS = {
 			e.stopPropagation();
 
 			var mainUrl = $(this).attr('href'),
-				page = checkUrl(mainUrl);
+					page = checkUrl(mainUrl);
+
+			if(mainUrl == window.location.pathname){
+				return;
+			}
+
+			loadTimeout =	setTimeout( function(){
+				loadReady = false;
+			}, 700);
 
 			loadPage(mainUrl, page);
 
@@ -178,6 +188,8 @@ callPageJS = {
 
 			var mainUrl = location.pathname,
 				page = checkUrl(mainUrl);
+
+			loadReady = false;
 
 	    loadPage(mainUrl, page);
 
@@ -194,9 +206,11 @@ callPageJS = {
 		}
 
 		function verifyLink(linkElem){
+
 			if (linkElem.origin != window.location.origin){
 				return true;
 			}
+
 		}
 
 		setLinkState();
@@ -221,27 +235,31 @@ callPageJS = {
 
 		function loadPage(mainUrl, page){
 
-			$(document).off('click');
+				if (loadReady == true){
+					return;
+				}
 
-			$('body').addClass('loadingImg');
+				$(document).off('click');
 
-			if ( multiBurger.hasClass('active') ){
-				closeMenu();
-			}
+				$('body').addClass('loadingImg');
 
-			$(window).animate({scrollTop: 0});
+				if ( multiBurger.hasClass('active') ){
+					closeMenu();
+				}
 
-			loadedInner.remove();
+				$(window).animate({scrollTop: 0});
 
-			switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
-			switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
-			switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
+				loadedInner.remove();
+
+				switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
+				switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
+				switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
+
+				loadReady = true;
 
 		};
 
 		function pageJax(mainUrl, page){
-
-				console.log('clicked')
 
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
 
@@ -251,33 +269,33 @@ callPageJS = {
 
 			        } else {
 
+			        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+
+									mainWrapper.removeClass('fullHeight');
+
+									navParent.removeClass('home');
+
+									$('#wwf_logo').removeClass('fill_change');
+
+									$('#menu_wrapper').removeClass('fill_change');
+
+								} else if (page == 'home') {
+
+									mainWrapper.addClass('fullHeight');
+
+									navParent.addClass('home');
+
+									$('#wwf_logo').addClass('fill_change');
+
+									$('#menu_wrapper').addClass('fill_change');
+
+								}
+
 			        	switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 80%, rgba(255,255,255, 0)'});
 								switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
 								switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
 
 			        	passNewPage(mainUrl, page);
-
-	        			if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
-
-								mainWrapper.removeClass('fullHeight');
-
-								navParent.removeClass('home');
-
-								$('#wwf_logo').removeClass('fill_change');
-
-								$('#menu_wrapper').removeClass('fill_change');
-
-							} else if (page == 'home') {
-
-								mainWrapper.addClass('fullHeight');
-
-								navParent.addClass('home');
-
-								$('#wwf_logo').addClass('fill_change');
-
-								$('#menu_wrapper').addClass('fill_change');
-
-							}
 
 							}
 				 });
@@ -303,6 +321,8 @@ callPageJS = {
 				var videoTest = document.getElementsByTagName('video');
 
 				if (videoTest){
+
+					console.log(videoTest)
 
 					for (var i = 0; i < videoTest.length; i++){
 
