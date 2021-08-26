@@ -165,13 +165,15 @@ callPageJS = {
 
 		// Single Page Behavior
 
-		$('body').on('click', '.internal', function(e){
+		$('body').on('click', '.internal', router);
+
+		function router(e){
 
 			e.preventDefault();
 			e.stopPropagation();
 
 			var mainUrl = $(this).attr('href'),
-				page = checkUrl(mainUrl);
+					page = checkUrl(mainUrl);
 
 			if(mainUrl == window.location.pathname){
 				return;
@@ -181,12 +183,16 @@ callPageJS = {
 
 			loadReady = true;
 
-		});
+			if (window.history.pushState){
+				window.history.pushState(null, null, mainUrl);
+			}
+
+		};
 
 		window.addEventListener("popstate", function popstateListener(e) {
 
-			var mainUrl = location.pathname,
-				page = checkUrl(mainUrl);
+			var mainUrl = e.currentTarget.location.pathname,
+					page = checkUrl(mainUrl);
 
 			loadReady = false;
 
@@ -238,16 +244,6 @@ callPageJS = {
 				return;
 			}
 
-			//Remove delegated event handlers
-
-			pageId = $('.page').get(0).id;
-
-			if(pageId == 'gallery'){
-
-				callPageJS.gallery.init('switch');
-
-			}
-
 			$('body').addClass('loadingImg');
 
 			if ( multiBurger.hasClass('active') ){
@@ -294,6 +290,12 @@ callPageJS = {
 
 								}
 
+								//Remove delegated event handlers
+
+								$('body').off('click');
+
+								$(document).off('keydown');
+
 								switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", autoAlpha: '1',});
 
 			        	passNewPage(mainUrl, page);
@@ -309,9 +311,7 @@ callPageJS = {
 
 				$('body').removeClass('loadingImg');
 
-				if (window.history.pushState){
-					window.history.pushState(null, null, mainUrl);
-				}
+				$('body').on('click', '.internal', router);
 
 				pageId = $('.page').get(0).id;
 
@@ -623,16 +623,6 @@ index : {
 
 gallery : {
 init : function(eh){
-
-if(eh == 'switch'){
-
-	console.log('sigh')
-
-	document.querySelector('body').removeEventListener("click", checkTrigger);
-
-	return;
-	 	
-}
 
  //On load, get prev, current, next
 
@@ -1047,7 +1037,7 @@ if(eh == 'switch'){
 
 	//Trigger Slide Change
 
-	document.querySelector('body').addEventListener("click", checkTrigger);
+	$('body').on('click', checkTrigger);
 
 	function checkTrigger(r){
 
