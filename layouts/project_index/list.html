@@ -8,8 +8,6 @@
 
 				{{ $projects := .Site.GetPage "projects"}}
 
-				{{ $resources := .Site.GetPage "uploads" }}
-
 				{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
 				<div class="left_justified">
@@ -63,10 +61,16 @@
 
 				{{ $media_featured_ext := path.Ext .Params.featured }}
 
+				{{ $featured := .Params.featured }}
+
+				{{ $resources_featured_image := $projects.Resources.GetMatch .Params.featured }}
+
+				{{ $resized_featured := $resources_featured_image.Resize "100x" }}
+
 				{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}{{end}}">
 						<div class="margin project_inner">
-							<img class="index_thumbnail lazyload" src="" data-src="{{.Params.featured}}" alt="{{.Title}}">
+							<img class="index_thumbnail lazyload" src="" data-src="{{.Params.featured}}" data-thumb="{{$resized_featured.RelPermalink}}" alt="{{.Title}}">
 							<div class="project_info">
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>

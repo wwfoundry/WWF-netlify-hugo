@@ -7,7 +7,10 @@
 						{{ .Site.Data.logo.svgEditor.code | safeHTML}}
 					</a>
 				</div>
-				<div class="footer_item">
+				<div class="footer_item last">
+					<div class="margin">
+						{{partial "menu_base" .}}
+					</div>
 					<div class="fill_change margin">
 						{{partial "social_base" .}}
 					</div>

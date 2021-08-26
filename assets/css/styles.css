@@ -620,7 +620,6 @@ nav.home{
 	fill:white;
   color:white;
 	transition: fill ease-in-out .5s;
-  width:fit-content;
 }
 
 #wwf_logo.fill_change{
@@ -820,7 +819,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
     mask-size: 200% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repat: no-repeat;
-    will-change: -webkit-mask-position;
+    will-change: -webkit-mask-position, opacity, visibility;
 }
 
 body.loadingImg{
@@ -1018,27 +1017,25 @@ footer.innner_content{
 .footer_item{
   align-items: center;
   justify-content: space-between;
-  padding-right: 100px;
 }
-
 
 .footer_item#contact{
   align-items: flex-end;
 }
 
-.footer_item>.menu_links{
+.footer_item>.margin>.menu_links{
   display:flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: row;
 }
 
 
-.footer_item>.menu_links>li{
-/*  padding-right:25px;*/
+.footer_item>.margin>.menu_links>li{
+  padding-right:25px;
 }
 
 .footer_item>.fill_change>#social_links{
   justify-content: flex-end;
+  padding-bottom: unset;
   }
 
 /*7) Homepage */
@@ -1733,10 +1730,14 @@ footer.innner_content{
 
   .footer_item{
     width:fit-content;
-    padding: 0;
+    padding: 0 0 10px 0;
   }
 
   .footer_item>.menu_links{
+    justify-content: center;
+  }
+
+  .footer_item>.fill_change>#social_links{
     justify-content: center;
   }
 
