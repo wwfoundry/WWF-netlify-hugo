@@ -624,6 +624,16 @@ index : {
 gallery : {
 init : function(eh){
 
+if(eh == 'switch'){
+
+	console.log('sigh')
+
+	document.querySelector('body').removeEventListener("click", checkTrigger);
+
+	return;
+	 	
+}
+
  //On load, get prev, current, next
 
 	var info = document.querySelector('.right_justified_partial'),
@@ -1038,16 +1048,6 @@ init : function(eh){
 	//Trigger Slide Change
 
 	document.querySelector('body').addEventListener("click", checkTrigger);
-
-	 if(eh == 'switch'){
-
-	 	console.log('sigh')
-
-	 	document.querySelector('body').removeEventListener("click", checkTrigger);
-
-	 	return;
-	 	
-	 }
 
 	function checkTrigger(r){
 
