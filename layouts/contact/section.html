@@ -4,23 +4,32 @@
 {{ define "main" }}
 	<div class="inner_content">
 		<div class="project_slide collapse">
-			<div class="left_justified_full viewportFixed">
-				<div id="mapBox">
-					<div class="mapData">
-						{{range .Params.locations }}
-							<h3 class="location_name">{{.location_name}}</h3>
-							<p class="address">{{.location_address}}</p>
-							<p class="coordinates">{{.coordinates}}</p>
-						{{end}}
+			<div class="two_column first">
+				<div class="left_justified">
+					<h1>{{.Title}}</h1>
+				</div>
+				<div class="right_justified">
+					<div class="column_flex">
+						<a href="mailto:{{.Site.Data.contact.email}}">{{.Site.Data.contact.email}}</a>
+						<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
+						<a class="gallery_tag"><label>Employment Opportunities</label></a>
 					</div>
 				</div>
 			</div>
-			<div class="right_justified_partial">
-				<div class="vert_centered_flex margin">
-					<h1>{{.Title}}</h1>
-					<a href="mailto:{{.Site.Data.contact.email}}">{{.Site.Data.contact.email}}</a>
-					<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
-					<a class="gallery_tag"><label>Employment Opportunities</label></a>
+			<div  class="two_column last">
+				<div class="left_justified">
+					<h1>Locations</h1>
+				</div>
+				<div class="right_justified">
+					<div id="mapBox">
+						<div class="mapData">
+							{{range .Params.locations }}
+								<h3 class="location_name">{{.location_name}}</h3>
+								<p class="address">{{.location_address}}</p>
+								<p class="coordinates">{{.coordinates}}</p>
+							{{end}}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

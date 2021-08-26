@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 callPageJS = {
 	common : {
-		init : function(){
+		init : function(eh){
 
 		//Menu Behavior
 
@@ -56,6 +56,7 @@ callPageJS = {
 			state,
 			switchOver = gsap.timeline(),
 			loadReady = false,
+			pageId,
 			loadTimeout,
 			pageContainer = document.querySelector('.main_content'),
 			lockBody = function(state){
@@ -170,17 +171,15 @@ callPageJS = {
 			e.stopPropagation();
 
 			var mainUrl = $(this).attr('href'),
-					page = checkUrl(mainUrl);
+				page = checkUrl(mainUrl);
 
 			if(mainUrl == window.location.pathname){
 				return;
 			}
 
-			loadTimeout =	setTimeout( function(){
-				loadReady = false;
-			}, 700);
-
 			loadPage(mainUrl, page);
+
+			loadReady = true;
 
 		});
 
@@ -235,27 +234,31 @@ callPageJS = {
 
 		function loadPage(mainUrl, page){
 
-				if (loadReady == true){
-					return;
-				}
+			if (loadReady == true){
+				return;
+			}
 
-				$(document).off('click');
+			//Remove delegated event handlers
 
-				$('body').addClass('loadingImg');
+			pageId = $('.page').get(0).id;
 
-				if ( multiBurger.hasClass('active') ){
-					closeMenu();
-				}
+			if(pageId == 'gallery'){
 
-				$(window).animate({scrollTop: 0});
+				callPageJS.gallery.init('switch');
 
-				loadedInner.remove();
+			}
 
-				switchOver.set(pageContainer,  {WebkitMaskPosition: '0%, 0%'});
-				switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to right, rgba(255,255,255,1) 80%, rgba(255,255,255, 0))'});
-				switchOver.to(pageContainer, {duration: .5, ease: "steps.out", WebkitMaskPosition: '200%, 0%', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
+			$('body').addClass('loadingImg');
 
-				loadReady = true;
+			if ( multiBurger.hasClass('active') ){
+				closeMenu();
+			}
+
+			$(window).animate({scrollTop: 0});
+
+			loadedInner.remove();
+
+			switchOver.to(pageContainer, {duration: .75, ease: "steps.out", autoAlpha: '0', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
 
 		};
 
@@ -291,9 +294,7 @@ callPageJS = {
 
 								}
 
-			        	switchOver.set(pageContainer, {WebkitMaskImage: 'linear-gradient(to left, rgba(255,255,255,1) 80%, rgba(255,255,255, 0)'});
-								switchOver.set(pageContainer, {WebkitMaskPosition: '-100%, 0%'});
-								switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", WebkitMaskPosition: '100%, 0%'});
+								switchOver.to(pageContainer, {duration: .75, delay:.25, ease: "steps.out", autoAlpha: '1',});
 
 			        	passNewPage(mainUrl, page);
 
@@ -304,13 +305,15 @@ callPageJS = {
 
 		function passNewPage(mainUrl, page){
 
+				loadReady = false;
+
 				$('body').removeClass('loadingImg');
 
 				if (window.history.pushState){
 					window.history.pushState(null, null, mainUrl);
 				}
 
-				var pageId = $('.page').get(0).id;
+				pageId = $('.page').get(0).id;
 
 				LOADJS.fire(pageId);
 
@@ -321,8 +324,6 @@ callPageJS = {
 				var videoTest = document.getElementsByTagName('video');
 
 				if (videoTest){
-
-					console.log(videoTest)
 
 					for (var i = 0; i < videoTest.length; i++){
 
@@ -434,7 +435,7 @@ callPageJS = {
 	},
 
 index : {
-	init : function(){
+	init : function(eh){
 
 		var o = $('.overlay'),
 			abs = $('.abs_wrapper'),
@@ -621,7 +622,7 @@ index : {
 },
 
 gallery : {
-init : function(){
+init : function(eh){
 
  //On load, get prev, current, next
 
@@ -1036,7 +1037,17 @@ init : function(){
 
 	//Trigger Slide Change
 
-	document.querySelector('body').addEventListener("click", checkTrigger, false);
+	document.querySelector('body').addEventListener("click", checkTrigger);
+
+	 if(eh == 'switch'){
+
+	 	console.log('sigh')
+
+	 	document.querySelector('body').removeEventListener("click", checkTrigger);
+
+	 	return;
+	 	
+	 }
 
 	function checkTrigger(r){
 
@@ -1639,7 +1650,7 @@ init : function(){
 }
 },
 contact : {
-init : function(){
+init : function(eh){
 			//MAP
 
 		var map = L.map('mapBox', {
