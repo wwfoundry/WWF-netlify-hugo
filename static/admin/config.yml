@@ -328,7 +328,7 @@ collections:
     folder: 'content/projects'
     media_folder: ''
     public_folder: ''
-    path: '/content/projects/{{title}}/index'
+    path: 'content/projects/{{title}}/index'
     create: true
     slug: '{{slug}}'
     editor:
