@@ -326,6 +326,9 @@ collections:
     label_singular: 'Project'
     name: 'projects'
     folder: 'content/projects'
+    media_folder: ''
+    public_folder: ''
+    path: '{{title}}/index'
     create: true
     slug: '{{slug}}'
     editor:
