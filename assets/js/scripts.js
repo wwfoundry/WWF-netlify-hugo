@@ -717,10 +717,10 @@ init : function(eh){
 
 					lazySlide.classList.add('hide');
 
-					projectSlide.classList.add('slide');
+					projectSlide.classList.add('slide', 'loadingImg');
 
 					frag.append(projectSlide);
-					
+
 					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')';
 
 					projectSlide.append(lazySlide);
