@@ -669,6 +669,7 @@ init : function(eh){
 			b = document.createElement('div'),
 			c = document.createElement('div'),
 			projectSlide,
+			lazySlide,
 			projectSlideArr = [],
 			range = [],
 			aInfo = document.createElement('div'),
@@ -712,11 +713,21 @@ init : function(eh){
 
 					projectSlide = document.createElement('div');
 
-					projectSlide.classList.add('slide')
+					lazySlide = document.createElement('img');
+
+					lazySlide.classList.add('hide');
+
+					projectSlide.classList.add('slide');
 
 					frag.append(projectSlide);
-
+					
 					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')';
+
+					projectSlide.append(lazySlide);
+
+					lazySlide.src = currentThumbs[thumbs].getAttribute('data-full');
+
+					replaceWithCache(projectSlide, lazySlide);
 
 					projectSlide.style.transform = 'translate(' + positionC + ')';
 
