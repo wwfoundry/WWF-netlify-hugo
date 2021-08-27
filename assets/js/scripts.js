@@ -652,7 +652,7 @@ init : function(eh){
 			arrowPrev = document.querySelector('#arrow_left'),
 			arrowNext = document.querySelector('#arrow_right'),
 			slideAreaContainer = document.querySelector('.project_slide'),
-			slideID = slideAreaContainer.id.replace( / +/g, '-' ).toLowerCase(),
+			slideID = slideAreaContainer.getAttribute("data-project"),
 			totalPages = slideAreaContainer.getAttribute('data-total'),
 			p,
 			n,
@@ -716,7 +716,9 @@ init : function(eh){
 
 					frag.append(projectSlide);
 
-					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')', projectSlide.style.transform = 'translate(' + positionC + ')';
+					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')';
+
+					projectSlide.style.transform = 'translate(' + positionC + ')';
 
 					projectSlideArr.push(projectSlide);
 
@@ -981,10 +983,10 @@ init : function(eh){
 
 		//Slide ID
 
-		slideAreaContainer.id = slideID;
+		slideAreaContainer.setAttribute('data-project', slideID );
 
 		if (window.history.pushState){
-			window.history.pushState(null, null, '#' + slideID);
+				window.history.pushState(null, null, '#' + slideID);
 		}
 
 		animateSlides(d, loadUrl, slideCount, swiper, range);

@@ -9,16 +9,34 @@
 
 	{{ $paginator := .Paginate $sortedProjects }}
  
-	{{range $paginator.Pages}}
+	{{range $index, $value := $paginator.Pages}}
 
-	{{ $media_featured_ext := path.Ext .Params.featured }}
+		{{ $media_featured_ext := path.Ext .Params.featured }}
 
-		<div id="{{ .Title }}" class="project_slide" data-total="{{$paginator.TotalPages}}">
+		{{ $featured := path.Base .Params.featured }}
+
+		{{ $dir_featured := printf "images/%s*" $featured}}
+
+		{{ $resources_featured_image := $value.Resources.GetMatch $dir_featured }}
+
+		{{ $resize_load_set := default "50x" }}
+
+		<div class="project_slide" data-project="{{ lower (replaceRE "(\\s)" "-" .Title) }}" data-total="{{$paginator.TotalPages}}">
 			<div class="left_justified_full viewportFixed">
 				<div id="slide_container" style="">
 					<div class="slide" id="prev_slide"></div>
 					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
-					<div class="slide" id="main_slide" style="background-image:url({{ .Params.featured }})" data-url="{{ .Params.featured }}"></div>
+
+						{{ if $resources_featured_image }}
+
+							{{ .Scratch.Set "resized_load_featured" ($resources_featured_image.Resize $resize_load_set) }}
+
+							{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
+
+					<div class="slide" id="main_slide" style="background-image:url({{ $scratch_load_src.RelPermalink }})" data-url="{{ $resources_featured_image.RelPermalink }}"></div>
+
+						{{end}}
+
 					{{else if eq $media_featured_ext ".mp4" }}
 					<div class="slide video" id="main_slide" data-url="{{ .Params.featured }}">
 						<video class="slideVideo reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
@@ -71,7 +89,17 @@
 							<label>prev</label>
 						</button>
 						{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
-						<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{.Params.featured}}"></button>
+
+						{{ if $resources_featured_image }}
+
+							{{ .Scratch.Set "resized_load_featured" ($resources_featured_image.Resize $resize_load_set) }}
+
+							{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
+
+						<button class="thumbnail margin loadingImg" style="background-image:url('')" data-url="{{$scratch_load_src.RelPermalink}}"></button>
+
+						{{end}}
+
 						{{else if eq $media_featured_ext ".mp4" }}
 						<button class="thumbnail margin loadingImg video" style="background-image:url('')" data-url="{{.Params.featured}}">
 							<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
@@ -84,9 +112,24 @@
 
 							{{ $media_thumbnail_ext := path.Ext .image }}
 
+							{{ $thumb := path.Base .image }}
+
+							{{ $dir_thumb := printf "images/%s*" $thumb}}
+
+							{{ $resources_thumb_image := $value.Resources.GetMatch $dir_thumb }}
+
+
 							{{if (eq $media_thumbnail_ext ".jpeg") | or (eq $media_thumbnail_ext ".jpg") | or (eq $media_thumbnail_ext ".JPG") }}
-								<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{.image}}"></button>
-								{{else if eq $media_thumbnail_ext ".mp4" }}
+
+								{{ if $resources_thumb_image }}
+
+									{{$scratch_load_thumb_src := $resources_thumb_image.Resize "50x"}}
+
+									<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{$scratch_load_thumb_src.RelPermalink}}" data-full="{{$resources_thumb_image.RelPermalink}}" ></button>
+
+								{{end}}
+
+							{{else if eq $media_thumbnail_ext ".mp4" }}
 								<button class="thumbnail margin loadingImg video slideshow" style="background-image:url('')" data-url="{{.image}}">
 									<video class="reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted" preload="none">
 										<source src="" type="video/mp4" data-url="{{ .image }}">
