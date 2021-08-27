@@ -61,22 +61,33 @@
 
 				{{ $media_featured_ext := path.Ext .Params.featured }}
 
-				{{ $featured := .Params.featured }}
-
-				{{ $resources_featured_image := $projects.Resources.GetMatch .Params.featured }}
-
-				{{ $resized_featured := $resources_featured_image.Resize "100x" }}
-
 				{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
+
+					{{ $featured := path.Base .Params.featured }}
+
+					{{ $dir_featured := printf "images/%s*" $featured}}
+
+					{{ $resources_featured_image := $value.Resources.GetMatch $dir_featured }}
+
+					{{ if $resources_featured_image }}
+
+					{{ $resize_set := default "50x" }}
+
+					{{ .Scratch.Set "resized_featured" ($resources_featured_image.Resize $resize_set) }}
+
+					{{ $scratch_src := .Scratch.Get "resized_featured"}}
+
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}{{end}}">
 						<div class="margin project_inner">
-							<img class="index_thumbnail lazyload" src="" data-src="{{.Params.featured}}" data-thumb="{{$resized_featured.RelPermalink}}" alt="{{.Title}}">
+							<img class="index_thumbnail lazyload" src="{{$scratch_src.RelPermalink}}" data-src="{{.Params.featured}}" alt="{{.Title}}">
 							<div class="project_info">
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
 							</div>
 						</div>
 					</a>
+
+					{{ end }}
 				{{else if eq $media_featured_ext ".mp4" }}
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}{{end}}">
 						<div class="margin project_inner">
