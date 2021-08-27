@@ -72,6 +72,10 @@
 						{{end}}
 					</div>
 				{{end}}
+				<div class="project_transition">
+					<h1 class="title_transition">{{ .Title }}</h1>
+					<label class="artist_transition">{{ .Params.artist }}</label>
+				</div>
 			</div>
 			<div class="right_justified_partial">
 				<div class="thumbnails">
@@ -152,12 +156,12 @@
 					</div>
 					<div id="tag_wrapper">
 						{{range .Params.material_tag}}
-							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}
 						{{range .Params.process_tag}}
-							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}

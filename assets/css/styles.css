@@ -1128,7 +1128,7 @@ footer.innner_content{
 
 }
 
-@supports (  (-webkit-backdrop-filter: blur(5px)) or (backdrop-filter: blur(5px)) ){
+@supports (  (-webkit-backdrop-filter: blur(11px)) or (backdrop-filter: blur(11px)) ){
 
 .slide.loadingImg:after{
     content: '';
@@ -1147,10 +1147,22 @@ footer.innner_content{
 
 .slide.loadingImg:before{
    border-top-color: #ffffff;
-    width: 40px;
-    height: 40px;
-    top: 49%;
+    width: 25px;
+    height: 25px;
+    top: 45%;
     z-index: 1;
+}
+
+.project_transition{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .right_justified_partial{

@@ -721,11 +721,15 @@ init : function(eh){
 
 					frag.append(projectSlide);
 
-					projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')';
+					if (thumbs > 0){
 
-					projectSlide.append(lazySlide);
+						projectSlide.style.backgroundImage = 'url(' + currentThumbs[thumbs].getAttribute('data-url') + ')';
 
-					lazySlide.src = currentThumbs[thumbs].getAttribute('data-full');
+						projectSlide.append(lazySlide);
+
+						lazySlide.src = currentThumbs[thumbs].getAttribute('data-full');
+
+					}
 
 					replaceWithCache(projectSlide, lazySlide);
 
@@ -808,6 +812,7 @@ init : function(eh){
 								cleanedStoredLink = cleanedStoredImg.replace(/<link\b[^>]*>/ig, ''),
 								tempStored = $(document.createElement('div')).append(cleanedStoredLink),
 								storedInfo,
+								storeTransition,
 								tempHTML;
 
 						tempStored.find('link').remove();
