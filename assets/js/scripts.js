@@ -1054,7 +1054,7 @@ init : function(eh){
 
 	function checkTrigger(r){
 
-		if(r.target.classList.contains('arrow')){
+		if(r.target.classList.contains('arrow') && !(info.classList.contains('loadingImg')) ){
 
 			r.preventDefault();
 
