@@ -178,6 +178,9 @@ collections:
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
+        media_folder: '/content/about/images/'
+        public_folder: '/about/images/'
+        path: 'about/index'
         fields:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'about'}
           - {label: 'Title', name: 'title', widget: 'string'}
@@ -219,6 +222,9 @@ collections:
       - label: "Contact"
         name: "contact"
         file: "/content/contact/_index.md"
+        media_folder: '/content/contact/images/'
+        public_folder: '/contact/images/'
+        path: 'contact/index'
         fields:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'contact'}
           - {label: 'Title', name: 'title', widget: 'string'}

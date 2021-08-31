@@ -2,9 +2,18 @@
 	<div id="about" class="page hide"></div>
 {{end}}
 {{ define "main" }}
+
+{{ $context := . }}
+
+{{ $comparison := .Params.hero_obj.hero }}
+
+{{ $thumb_test := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
+
+<p>{{.Resources}}</p>
+
 <div class="inner_content">
 	<div class="hero">
-		<img class="hero_banner lazyload" src="{{.Params.hero_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
+		<img class="hero_banner lazyload" src="" alt="{{.Params.hero_obj.alt}}">
 	</div>
 	<div class="main_content">
 		<div class="two_column">
@@ -19,7 +28,9 @@
 		{{range .Params.archive}}
 		<div class="two_column">
 			<div class="left_justified">
+
 				<img class="lazyload" src="{{.archive_obj.archive_image}}">
+			
 			</div>
 			<div class="right_justified">
 				<label>{{.archive_obj.archive_year}}</label>

@@ -775,7 +775,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
 }
 
 #menu_inner label{
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 #menu_inner .menu_links{
@@ -783,8 +783,12 @@ nav.home>#menu>#controls>#hamburger>.bar{
   border-bottom: 1px solid grey;
 }
 
-#menu_inner>div .social_links{
-  padding: 25px 0;
+#menu_inner>.margin_negative{
+
+}
+
+#menu_inner>.margin_negative>#social_links{
+  padding: 15px 0;
 }
 
 .menu_links>li{

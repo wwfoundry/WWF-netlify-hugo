@@ -1,0 +1,17 @@
+{{ $this := .context }}
+
+{{ $media_path := path.Base .comparison }}
+
+{{ $dir_media := printf "/images/%s" $media_path }}
+
+{{ $resource_match := $this.Resources.GetMatch $dir_media }}
+
+{{ $resize_for_load := default "50x" }}
+
+	{{ return $this.Resources }}
+
+{{ if $resource_match }}
+
+	{{ .Scratch.Set "resource_load_media" ( $resource_match.Resize $resize_for_load ) }}
+
+{{end}}
