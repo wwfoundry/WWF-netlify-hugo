@@ -47,7 +47,9 @@ callPageJS = {
 
 		var multiBurger = $("#hamburger"),
 			field = window.innerWidth,
+			newField,
 			fieldY = window.innerHeight,
+			newFieldY,
 			menuWrapper = $('#side_menu_wrapper'),
 			navParent = $('nav'),
 			navHeight = navParent.height(),
@@ -372,9 +374,11 @@ callPageJS = {
 
 			//Onload, set VH elements to viewport height
 
-			storeVHeight();
+			windowHeight = window.innerHeight;
 
-			function storeVHeight(){
+			storeVHeight(windowHeight);
+
+			function storeVHeight(windowHeight){
 
 				var viewportCached = document.getElementsByClassName('viewportFixed');
 		
@@ -402,7 +406,7 @@ callPageJS = {
 
     		windowHeight = window.innerHeight;
 			
-				storeVHeight();
+				storeVHeight(windowHeight);
 
     }, false);
 
@@ -410,14 +414,16 @@ callPageJS = {
 
 		$(window).resize( function(){
 
-			var newField = window.innerWidth,
-					newFieldY = window.innerHeight;
+			newField = window.innerWidth;
+			newFieldY = window.innerHeight;
 
 			if( newField != field && newFieldY != fieldY ){
 
+				console.log('broken');
+
 				windowHeight = window.innerHeight;
 			
-				storeVHeight();
+				storeVHeight(windowHeight);
 
 			}
 
