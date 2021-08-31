@@ -854,8 +854,9 @@ init : function(eh){
 
 						}
 
-						storedInfo = temp.querySelector('.right_justified_partial').innerHTML,
+						storedInfo = temp.querySelector('.right_justified_partial').innerHTML;
 						slideInfo.innerHTML = storedInfo;
+						// storedTransition = temp.querySelector('')
 
 						info.classList.remove('loadingImg');
 

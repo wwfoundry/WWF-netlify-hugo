@@ -1,23 +1,32 @@
 <footer class="blackBG">
 	<div class="inner_content">
 		<div class="footer_section">
-				<div class="footer_item">
+			<div class="footer_item">
 					<!--LOGO SVG -->
 					<a id="wwf_logo" class="fill_change" href="/">
 						{{ .Site.Data.logo.svgEditor.code | safeHTML}}
 					</a>
 				</div>
-				<div class="footer_item last">
-					<div class="margin">
+			<div class="footer_item last">
+				<div class="margin">
 						{{partial "menu_base" .}}
-					</div>
-					<div class="fill_change margin">
-						{{partial "social_base" .}}
-					</div>
 				</div>
-	</div>
+				<div class="fill_change margin">
+						{{partial "social_base" .}}
+				</div>
+			</div>
+		</div>
+		<div class="footer_section">
+		</div>
 </footer>
 <!--Functions-->
 <script src="/js/jquery.scrollTo.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+<!--Lazyload-->
+<script src="/js/lazysizes.min.js" async=""></script>
+<!--Leaflet-->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
 {{ $js := resources.Get "js/scripts.js" | js.Build "scripts.js" | minify }}
 <script src="{{$js.RelPermalink}}"></script>
