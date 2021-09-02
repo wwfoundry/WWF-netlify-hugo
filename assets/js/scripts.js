@@ -1664,6 +1664,15 @@ init : function(eh){
 
 }
 },
+
+about : {
+init : function(eh){
+
+
+
+}
+},
+
 contact : {
 init : function(eh){
 			//MAP

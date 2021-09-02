@@ -4,7 +4,7 @@ title: About
 intro: Test...
 subtitle: Est. 1981
 hero_obj:
-  hero: /about/images/WWF_Historic_Campus.jpg
+  hero: /uploads/images/WWF_Historic_Campus.jpg
   alt: Walla Walla Foundry Historic Campus
 statement: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
   condimentum turpis, id dignissim orci. Suspendisse potenti. Donec consectetur,

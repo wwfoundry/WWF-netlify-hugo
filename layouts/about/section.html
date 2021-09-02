@@ -1,0 +1,47 @@
+{{define "pageID"}}
+  <div id="about" class="page hide"></div>
+{{end}}
+{{ define "main" }}
+
+{{ $context := .Site.GetPage "uploads" }}
+
+{{ $comparison := .Params.hero_obj.hero }}
+
+{{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
+
+<div class="inner_content">
+  <div class="hero">
+    <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.here_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
+  </div>
+  <div class="main_content">
+    <div class="two_column">
+      <div class="left_justified">
+        <h1>{{.Title}}</h1>
+        <label>{{.Params.subtitle}}</label>
+      </div>
+      <div class="right_justified">
+        <p class="text_block">{{.Params.statement}}</p>
+      </div>
+    </div>
+    {{range $index, $value := .Params.archive}}
+    <div class="two_column">
+      <div class="left_justified">
+
+        {{ $comparison := $value.archive_obj.archive_image }}
+
+        {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
+
+        <img class="lazyload" src="{{$thumb_result.RelPermalink}}">
+      
+      </div>
+      <div class="right_justified">
+        <label>{{.archive_obj.archive_year}}</label>
+        <p class="upperHeader">{{.archive_obj.archive_title}}</p>
+        <p class="upperHeader">{{.archive_obj.archive_artist}}</p>
+      </div>
+    </div>
+    {{end}}
+  </div>
+  </div>
+</div>
+{{ end }}
