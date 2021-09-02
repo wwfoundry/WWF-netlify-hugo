@@ -1,7 +1,7 @@
 <ul class="menu_links">
 {{range $.Site.Data.nav.topLevelItems}}
 	<li>
-		<a href="/{{.selectPage}}"><label>{{ .displayText }}</label></a>
+		<a href="/{{.selectPage}}/"><label>{{ .displayText }}</label></a>
 	</li>
 {{end}}
 {{range $.Site.Data.nav.customItems}}

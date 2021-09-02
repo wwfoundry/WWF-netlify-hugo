@@ -71,19 +71,19 @@
 
 					{{ if $resources_featured_image }}
 
-					{{ $resize_load_set := default "50x" }}
+						{{ $resize_load_set := default "50x" }}
 
-					{{ $resize_thumb_set := default "800x" }}
+						{{ $resize_thumb_set := default "800x" }}
 
-					{{ .Scratch.Set "resized_load_featured" ($resources_featured_image.Resize $resize_load_set) }}
+						{{ .Scratch.Set "resized_load_featured" ($resources_featured_image.Resize $resize_load_set) }}
 
-					{{ .Scratch.Set "resized_thumb_featured" ($resources_featured_image.Resize $resize_thumb_set) }}
+						{{ .Scratch.Set "resized_thumb_featured" ($resources_featured_image.Resize $resize_thumb_set) }}
 
-					{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
+						{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
 
-					{{ $scratch_thumb_src := .Scratch.Get "resized_thumb_featured" }}
+						{{ $scratch_thumb_src := .Scratch.Get "resized_thumb_featured" }}
 
-					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}{{end}}">
+					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
 						<div class="margin project_inner">
 							<img class="index_thumbnail lazyload" src="{{$scratch_load_src.RelPermalink}}" data-src="{{$scratch_thumb_src.RelPermalink}}" alt="{{.Title}}">
 							<div class="project_info">
@@ -92,10 +92,9 @@
 							</div>
 						</div>
 					</a>
-
 					{{ end }}
 				{{else if eq $media_featured_ext ".mp4" }}
-					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}{{end}}">
+					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
 						<div class="margin project_inner">
 								<video class="reel index_thumbnail lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 										<source src="{{ .Params.featured }}" type="video/mp4" data-url="">

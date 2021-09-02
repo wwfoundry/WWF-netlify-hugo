@@ -167,6 +167,8 @@ callPageJS = {
 
 		// Single Page Behavior
 
+		var num = 0;
+
 		$('body').on('click', '.internal', router);
 
 		function router(e){
@@ -262,6 +264,8 @@ callPageJS = {
 
 		function pageJax(mainUrl, page){
 
+				console.log('pageJax');
+
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
 
 			        if (status == "error") {
@@ -308,6 +312,10 @@ callPageJS = {
 		}
 
 		function passNewPage(mainUrl, page){
+
+				num++
+
+				console.log('fired ' + num)
 
 				loadReady = false;
 
@@ -629,6 +637,8 @@ index : {
 
 gallery : {
 init : function(eh){
+
+	console.log('gallery')
 
  //On load, get prev, current, next
 
@@ -1519,10 +1529,12 @@ init : function(eh){
 			endSwipe(end, longTouch);
 			return swipeArea.moving = false;
 		};
+
 		swipeArea.ontouchend = function(end){
 			endSwipe(end, longTouch)
 			return swipeArea.moving = false;
 		};
+
 		parent.addEventListener("mouseleave", event => {
 
 			if (swipeArea.moving == false){
