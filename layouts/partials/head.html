@@ -13,8 +13,7 @@
     <link href="/fonts/fonts.css" rel="stylesheet">
     <!--Stylesheet-->
     {{ $style := resources.Get "css/styles.css" | resources.Minify }}
-    <link rel="preload "href="{{ $style.Permalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ $style.Permalink }}"></noscript>
+    <link rel="stylesheet "href="{{ $style.Permalink }}">
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
