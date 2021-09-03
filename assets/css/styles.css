@@ -428,30 +428,14 @@ button{
 
 .thumbnail.btnActive{
   position: relative;
+  outline: 1px solid black;
+  outline-offset: 3px;
+
 /*  overflow: hidden;*/
   }
 
-.thumbnail.btnActive:before{
-  content: '';
-  background-color: rgb(228, 229, 230, .2);
-  -webkit-backdrop-filter: blur(.25px);
-  backdrop-filter: blur(.25px);
-  position: absolute;
-  top: -4px;
-  left: -5px;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid #000;
-  height: calc(100% + 6px);
-  width: 0;
-  animation: load .2s ease-out;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
-}
-
 @keyframes load {
-  to {width: calc(100% + 8px)}
+  to {outline-offset: 3px;}
 }
 
 button:hover{
@@ -826,12 +810,15 @@ nav.home>#menu>#controls>#hamburger>.bar{
     display: block;
     position: relative;
     min-height: 100vh;
-    padding: 50px 25px 25px 25px;
     -webkit-mask-size: 200% 100%;
     mask-size: 200% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repat: no-repeat;
     will-change: -webkit-mask-position, opacity, visibility;
+}
+
+.loaded_inner{
+   padding: 50px 25px 25px 25px;
 }
 
 body.loadingImg{
@@ -853,7 +840,7 @@ body.loadingImg{
   background: unset;
 }
 
-.main_content.fullHeight{
+.main_content.fullHeight>.loaded_inner{
   padding: unset;
   margin:unset;
   max-width:unset;
@@ -878,7 +865,6 @@ body.loadingImg{
   flex-direction: row;
   justify-content: space-between;
   padding: 0 10px;
-  border-bottom:1px solid black;
 }
 
 .hero{
@@ -1212,10 +1198,21 @@ footer.innner_content{
   align-items: center;
 }
 
+.thumbnails_inner{
+  white-space: nowrap;
+  overflow-x: scroll;
+  position: relative;
+}
+
+.thumbnails_inner::-webkit-scrollbar {
+  display: none;
+}
+
+
 .thumbnail{
-  width: 50px;
-  height: 30px;
-  flex: 1 1 auto;
+  width: 40px;
+  height: 25px;
+  display: inline-block;
   background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1492,7 +1489,18 @@ footer.innner_content{
 }
 
 
-/*10) Media Queries */
+/*10) About */
+/*---------------*/
+
+
+
+.left_justified>img{
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+/*11) Media Queries */
 /*---------------*/
 
 /*Content Sections*/
@@ -1568,7 +1576,7 @@ footer.innner_content{
     right:0px;
   }
 
-  .main_content{
+  .main_content>.loaded_inner{
     padding: 0px 10px;
   }
 

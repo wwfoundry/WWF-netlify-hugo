@@ -13,16 +13,8 @@
     <link href="/fonts/fonts.css" rel="stylesheet">
     <!--Stylesheet-->
     {{ $style := resources.Get "css/styles.css" | resources.Minify }}
-    <link href="{{ $style.Permalink }}" rel="stylesheet">
+    <link rel="preload "href="{{ $style.Permalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ $style.Permalink }}"></noscript>
     <!--jQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
-    <!--hammer.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <!--Lazyload-->
-    <script src="/js/lazysizes.min.js" async=""></script>
-    <!--Leaflet-->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
   </head>

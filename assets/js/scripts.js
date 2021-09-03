@@ -264,8 +264,6 @@ callPageJS = {
 
 		function pageJax(mainUrl, page){
 
-				console.log('pageJax');
-
 				mainWrapper.load(mainUrl + " .loaded_inner", function (response, status, xhr) {
 
 			        if (status == "error") {
@@ -312,10 +310,6 @@ callPageJS = {
 		}
 
 		function passNewPage(mainUrl, page){
-
-				num++
-
-				console.log('fired ' + num)
 
 				loadReady = false;
 
@@ -392,7 +386,7 @@ callPageJS = {
 		
 				for (var i = 0; i < viewportCached.length; i++){
 
-					getElemHeight( viewportCached[i] );
+					innerHeight = getElemHeight( viewportCached[i] );
 
 					calculatedHeight = windowHeight - innerHeight;
 
@@ -426,8 +420,6 @@ callPageJS = {
 			newFieldY = window.innerHeight;
 
 			if( newField != field && newFieldY != fieldY ){
-
-				console.log('broken');
 
 				windowHeight = window.innerHeight;
 			
@@ -638,8 +630,6 @@ index : {
 gallery : {
 init : function(eh){
 
-	console.log('gallery')
-
  //On load, get prev, current, next
 
 	var info = document.querySelector('.right_justified_partial'),
@@ -651,6 +641,17 @@ init : function(eh){
 				currentThumbs[thumbs].classList.remove('btnActive');
 
 				}
+
+				var thumbContainer = currentThumbs[slideCount].parentElement,
+						thumbPosition = currentThumbs[slideCount].offsetLeft,
+						thumbContainerWidth = thumbContainer.offsetWidth,
+						thumbWidth = currentThumbs[0].offsetWidth,
+						thumbsWidth = thumbWidth*currentThumbs.length + currentThumbs.length*20;
+						scrollPosition = (thumbPosition/thumbsWidth * thumbsWidth - 10);
+
+				console.log(scrollPosition)
+
+				thumbContainer.scroll(scrollPosition, 0);
 
 				currentThumbs[slideCount].classList.add('btnActive');
 
@@ -1622,7 +1623,7 @@ init : function(eh){
 
 		range = [];
 
-		var index = $(this).index() - 1;
+		var index = $(this).index();
 
 		if (index < slideCount){
 

@@ -13,7 +13,7 @@
   <div class="hero">
     <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.here_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
   </div>
-  <div class="main_content">
+
     <div class="two_column">
       <div class="left_justified">
         <h1>{{.Title}}</h1>
@@ -24,7 +24,7 @@
       </div>
     </div>
     {{range $index, $value := .Params.archive}}
-    <div class="two_column">
+    <div class="two_column archive_wrapper">
       <div class="left_justified">
 
         {{ $comparison := $value.archive_obj.archive_image }}
@@ -41,7 +41,6 @@
       </div>
     </div>
     {{end}}
-  </div>
   </div>
 </div>
 {{ end }}
