@@ -141,26 +141,18 @@ callPageJS = {
 
 			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
 
-				window.clearTimeout(isScrolling);
-
-				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50 && newPageOffset > pageOffset) {
+				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 
 					mainWrapper.css('paddingTop', '55px');
 					navParent.addClass('scroll');
 
-				} else if (document.body.scrollTop < 50 | document.documentElement.scrollTop < 50 || newPageOffset < pageOffset) {
+				} else if (document.body.scrollTop < 50 | document.documentElement.scrollTop < 50 ) {
 
 					mainWrapper.css('paddingTop', 'unset');
 					navParent.removeClass('scroll');
 
 				}
-
-				isScrolling = setTimeout( function(){
-
-					newPageOffset = pageOffset;
-
-				}, 66);
-
+	
 			}
 
 		}, false);
@@ -436,6 +428,11 @@ callPageJS = {
 		});
 
 
+// Lazyload
+
+
+
+
 		}
 
 	},
@@ -648,8 +645,6 @@ init : function(eh){
 						thumbWidth = currentThumbs[0].offsetWidth,
 						thumbsWidth = thumbWidth*currentThumbs.length + currentThumbs.length*20;
 						scrollPosition = (thumbPosition/thumbsWidth * thumbsWidth - 10);
-
-				console.log(scrollPosition)
 
 				thumbContainer.scroll(scrollPosition, 0);
 

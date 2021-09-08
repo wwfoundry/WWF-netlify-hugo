@@ -196,12 +196,12 @@
 					</ul>
 					<div id="tag_wrapper" class="hide">
 						{{range .Params.material_tag}}
-							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}
 						{{range .Params.process_tag}}
-							<a class="gallery_tag margin" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}

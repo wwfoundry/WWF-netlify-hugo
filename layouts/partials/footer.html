@@ -1,17 +1,17 @@
-<footer class="blackBG">
+<footer class="greyBG">
 	<div class="inner_content">
 		<div class="footer_section">
 			<div class="footer_item">
 					<!--LOGO SVG -->
-					<a id="wwf_logo" class="fill_change" href="/">
+					<a id="wwf_logo" href="/">
 						{{ .Site.Data.logo.svgEditor.code | safeHTML}}
 					</a>
 				</div>
-			<div class="footer_item last">
+			<div class="footer_item last fill_change_dark">
 				<div class="margin">
 						{{partial "menu_base" .}}
 				</div>
-				<div class="fill_change margin">
+				<div class="margin">
 						{{partial "social_base" .}}
 				</div>
 			</div>
