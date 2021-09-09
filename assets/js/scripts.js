@@ -487,9 +487,9 @@ index : {
 
 						filterContainer.addClass('active');
 
-						state = 'lock';
+						// state = 'lock';
 
-						lockBody(state);
+						// lockBody(state);
 
 						abs.fadeIn(300).addClass('active');
 
@@ -555,8 +555,8 @@ index : {
 
 				gsap.to(indexContainer, {duration: 1.2, autoAlpha: '1'});
 
-				state = 'unlock';
-				lockBody(state)
+				// state = 'unlock';
+				// lockBody(state);
 
 		}
 
