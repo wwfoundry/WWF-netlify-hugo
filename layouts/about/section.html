@@ -10,7 +10,7 @@
 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
 
 <div class="inner_content">
-  <div class="hero">
+  <div class="hero loadingImg">
     <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.here_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
   </div>
 

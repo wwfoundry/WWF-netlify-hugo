@@ -1469,6 +1469,14 @@ footer.innner_content{
   flex: 1 0 auto;
 }
 
+.project_inner.loadingImg{
+  background-color: unset;
+}
+
+.project_inner.loadingImg:before{
+  border-top-color: #ffffff;
+}
+
 .index_thumbnail{
   width:100%;
   height:430px;

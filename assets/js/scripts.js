@@ -489,7 +489,7 @@ index : {
 
 						state = 'lock';
 
-						lockBody();
+						lockBody(state);
 
 						abs.fadeIn(300).addClass('active');
 
