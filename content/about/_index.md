@@ -19,10 +19,5 @@ archive:
       archive_title: Mine Camp
       archive_artist: Ed Kienholz
       archive_year: "1990"
-  - archive_obj:
-      archive_image: /uploads/images/Mine_Camp.jpg
-      archive_title: Test
-      archive_artist: TEst
-      archive_year: TEst
 intro: Test...
 ---
