@@ -1525,7 +1525,7 @@ footer.innner_content{
 }
 
 .archive_wrapper{
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 
 .archive_caption_inner{
@@ -1536,14 +1536,24 @@ footer.innner_content{
   height: 100%;
 }
 
-.archive_caption_inner:after{
+.archive_year:before{
+  content: '';
+  position: absolute;
+  text-align: right;
+  right: 0;
+  width: 5px;
+  height: 35px;
+  background-color: white;
+}
+
+/*.archive_year:after{
   content: '';
   position: absolute;
   right: 0;
-  width: 5px;
-  height: 45px;
-  background-color: white;
-}
+  width: 20%;
+  height: 2.5px;
+  border-bottom: 1px solid white;
+}*/
 
 .archive_image{
   width: 100%;
@@ -1929,10 +1939,10 @@ footer.innner_content{
     #timeline{
       position: absolute;
       right: 0;
-      top: 100px;
+      top: 125px;
       bottom: 75px;
       width: 1px;
-      height: calc(100% - 175px);
+      height: calc(100% - 200px);
     }
 
     .hero{
@@ -1944,6 +1954,28 @@ footer.innner_content{
       margin-right: auto;
       padding: 0px 10px;
       position: relative;
+    }
+
+    .archive_wrapper{
+      padding-bottom: 25px;
+    }
+
+    .archive_caption_inner{
+      text-align: right;
+    }
+
+    #timeline{
+      left: 10px;
+    }
+
+    .archive_year:before{
+      content: '';
+      position: absolute;
+      text-align: right;
+      left: 10px;
+      width: 5px;
+      height: 35px;
+      background-color: white;
     }
 
 }
