@@ -19,5 +19,10 @@ archive:
       archive_title: Mine Camp
       archive_artist: Ed Kienholz
       archive_year: "1990"
+  - archive_obj:
+      archive_image: /uploads/images/4333.1_looking_at_the_river_final_15.jpg
+      archive_title: Looking at the River
+      archive_artist: Terry Allen
+      archive_year: "2014"
 intro: Test...
 ---
