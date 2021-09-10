@@ -8,8 +8,8 @@
 {{ $comparison := .Params.hero_obj.hero }}
 
 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
-<div class="page_section hero loadingImg">
-      <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.hero_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
+<div class="page_section hero loadingImg lazyTrueImg">
+      <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
 </div>
 <div class="page_section">
   <div class="inner_content">
@@ -26,6 +26,7 @@
 </div>
 <div class="page_section blackBG">
   <div class="inner_content">
+    <h1 class="page_title">Historic Projects</h1>
     {{range $index, $value := .Params.archive}}
     <div class="two_column archive_wrapper">
       <div class="left_justified">
@@ -34,10 +35,10 @@
 
         {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
 
-        <div class="loadingImg">
-          <img class="lazyload archive_image" src="{{$thumb_result.RelPermalink}}" data-src>
+        <div class="loadingImg lazyTrueImg">
+          <img class="lazyload archive_image" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}">
         </div>
-      
+    
       </div>
       <div class="right_justified">
         <div class="archive_caption_inner">

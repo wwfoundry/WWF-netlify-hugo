@@ -84,7 +84,7 @@
 						{{ $scratch_thumb_src := .Scratch.Get "resized_thumb_featured" }}
 
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
-						<div class="margin project_inner loadingImg">
+						<div class="margin project_inner loadingImg lazyTrueImg">
 							<img class="index_thumbnail lazyload" src="{{$scratch_load_src.RelPermalink}}" data-src="{{$scratch_thumb_src.RelPermalink}}" alt="{{.Title}}">
 							<div class="project_info">
 								<h3>{{.Title}}</h3>

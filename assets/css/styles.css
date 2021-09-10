@@ -500,6 +500,16 @@ label{
     animation: spinner .6s linear infinite;
 }
 
+.lazyTrueImg.loadingImg{
+  background-color: unset;
+}
+
+.lazyTrueImg.loadingImg:before{
+  width: 45px;
+  height: 45px;
+  border-top-color: #ffffff;
+}
+
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
@@ -879,6 +889,7 @@ body.loadingImg{
   padding-bottom: 25px;
   margin-top: -72px;
   z-index: -8;
+  min-height: 150px;
 }
 
 .hero_banner{
@@ -1474,14 +1485,6 @@ footer.innner_content{
   flex: 1 0 auto;
 }
 
-.project_inner.loadingImg{
-  background-color: unset;
-}
-
-.project_inner.loadingImg:before{
-  border-top-color: #ffffff;
-}
-
 .index_thumbnail{
   width:100%;
   height:430px;
@@ -1541,7 +1544,8 @@ footer.innner_content{
 .archive_image{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  min-height: 350px;
+  object-fit: contain;
 }
 
 #timeline{
