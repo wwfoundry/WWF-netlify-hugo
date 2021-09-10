@@ -1524,6 +1524,10 @@ footer.innner_content{
   height: auto;
 }
 
+.archive_wrapper{
+  padding-bottom: 50px;
+}
+
 .archive_caption_inner{
   display: flex;
   text-align: right;

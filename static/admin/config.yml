@@ -178,8 +178,6 @@ collections:
       - label: "About"
         name: "about"
         file: "/content/about/_index.md"
-        media_folder: '/content/about/images/'
-        public_folder: '/about/images/'
         path: 'about/index'
         fields:
           - {label: 'URL Slug', name: 'url', widget: 'hidden', default: 'about'}

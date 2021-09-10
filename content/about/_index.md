@@ -20,7 +20,7 @@ archive:
       archive_artist: Ed Kienholz
       archive_year: "1990"
   - archive_obj:
-      archive_image: /about/images/5067.1_final_photos_03.jpg
+      archive_image: /uploads/images/Mine_Camp.jpg
       archive_title: Test
       archive_artist: TEst
       archive_year: TEst
