@@ -8,12 +8,11 @@
 {{ $comparison := .Params.hero_obj.hero }}
 
 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
-
+<div class="page_section hero loadingImg">
+      <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.hero_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
+</div>
 <div class="page_section">
   <div class="inner_content">
-    <div class="hero loadingImg">
-      <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{.Params.here_obj.hero}}" alt="{{.Params.hero_obj.alt}}">
-    </div>
       <div class="two_column">
         <div class="left_justified">
           <h1>{{.Title}}</h1>
@@ -41,9 +40,11 @@
       <div class="right_justified">
         <div class="archive_caption_inner">
           <label>{{.archive_obj.archive_year}}</label>
-          <p class="upperHeader">{{.archive_obj.archive_title}}</p>
-          <p class="upperHeader">{{.archive_obj.archive_artist}}</p>
+          <h1 class="first">{{.archive_obj.archive_title}}</h1>
+          <h3>{{.archive_obj.archive_artist}}</h3>
         </div>
+      </div>
+      <div id="timeline">
       </div>
     </div>
     {{end}}
