@@ -1956,6 +1956,10 @@ footer.innner_content{
       position: relative;
     }
 
+    .archive.page_title{
+      text-align: left;
+    }
+
     .archive_wrapper{
       padding-bottom: 25px;
     }
