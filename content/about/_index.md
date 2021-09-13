@@ -94,5 +94,15 @@ archive:
       archive_title: Wishbone
       archive_artist: Terry Allen
       archive_year: "2003"
+  - archive_obj:
+      archive_image: /uploads/images/l1010628.jpeg
+      archive_title: L'Homme Presse
+      archive_artist: Thomas Houseago
+      archive_year: "2010"
+  - archive_obj:
+      archive_image: /uploads/images/houseago_web_frontpage.jpeg
+      archive_title: Striding Figure
+      archive_artist: Thomas Houseago
+      archive_year: "2012"
 intro: Test...
 ---
