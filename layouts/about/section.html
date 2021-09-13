@@ -13,13 +13,14 @@
   <div class="inner_content">
       <div class="hero loadingImg lazyTrueImg">
         <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
+        <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
       </div>
       <div class="two_column">
-        <div class="left_justified">
+        <div class="col_40">
           <h1>{{.Title}}</h1>
           <label>{{.Params.subtitle}}</label>
         </div>
-        <div class="right_justified">
+        <div class="col_60">
           <p class="text_block">{{.Params.statement}}</p>
         </div>
       </div>
@@ -27,21 +28,21 @@
 </div>
 <div class="page_section blackBG">
   <div class="inner_content">
-    <h1 class="archive page_title">Historic Projects</h1>
+    <h1 class="archive page_title upperHeader">Historic Projects</h1>
     {{range sort .Params.archive ".archive_obj.archive_year" }}
     <div class="two_column archive_wrapper">
-      <div class="left_justified">
+      <div class="col_60">
 
         {{ $comparison := .archive_obj.archive_image }}
 
         {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
 
         <div class="loadingImg lazyTrueImg">
-          <img class="lazyload archive_image" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}">
+          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}">
         </div>
     
       </div>
-      <div class="right_justified">
+      <div class="col_40">
         <div class="archive_caption_inner">
           <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
           <h1 class="first">{{.archive_obj.archive_title}}</h1>

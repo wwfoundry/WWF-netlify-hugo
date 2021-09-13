@@ -4,6 +4,7 @@
   <body>
     {{ block "menuWrapper" . }}{{partial "menu" . }}{{end}}
     {{ block "header" . }}{{partial "nav" . }}{{end}}
+    {{ block "lightbox" . }} {{partial "lightbox" . }} {{end}}
     <div class="main_content {{if .IsHome}}fullHeight{{end}} ">
       <div class="loaded_inner">
         {{block "pageID" . }}{{end}}

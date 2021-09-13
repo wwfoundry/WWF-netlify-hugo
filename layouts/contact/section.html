@@ -5,10 +5,10 @@
 	<div class="inner_content">
 		<div class="project_slide collapse">
 			<div class="two_column first">
-				<div class="left_justified">
+				<div class="col_40">
 					<h1>{{.Title}}</h1>
 				</div>
-				<div class="right_justified">
+				<div class="col_60">
 					<div class="column_flex">
 						<a href="mailto:{{.Site.Data.contact.email}}">{{.Site.Data.contact.email}}</a>
 						<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
@@ -17,10 +17,10 @@
 				</div>
 			</div>
 			<div  class="two_column last">
-				<div class="left_justified">
+				<div class="col_40">
 					<h1>Locations</h1>
 				</div>
-				<div class="right_justified">
+				<div class="col_60">
 					<div id="mapBox">
 						<div class="mapData">
 							{{range .Params.locations }}

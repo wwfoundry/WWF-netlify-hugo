@@ -3,7 +3,7 @@
 {{end}}
 {{define "main"}}
 <div class="inner_content gallery">
-	{{ $projects := .Site.GetPage "projects"}}
+	{{ $projects := .Site.GetPage "projects_main"}}
 
 	{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
@@ -24,7 +24,7 @@
 		<div class="project_slide" data-project="{{ lower (replaceRE "(\\s)" "-" .Title) }}" data-total="{{$paginator.TotalPages}}">
 			<div class="left_justified_full viewportFixed">
 				<div id="slide_container" style="">
-					<div class="slide" id="prev_slide"></div>
+					<div class="slide abs_target" id="prev_slide"></div>
 					{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
 
 						{{ if $resources_featured_image }}
@@ -33,18 +33,18 @@
 
 							{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
 
-					<div class="slide" id="main_slide" style="background-image:url({{ $scratch_load_src.RelPermalink }})" data-url="{{ $resources_featured_image.RelPermalink }}"></div>
+					<div class="slide abs_target" id="main_slide" style="background-image:url({{ $scratch_load_src.RelPermalink }})" data-url="{{ $resources_featured_image.RelPermalink }}"></div>
 
 						{{end}}
 
 					{{else if eq $media_featured_ext ".mp4" }}
-					<div class="slide video" id="main_slide" data-url="{{ .Params.featured }}">
+					<div class="slide video abs_target" id="main_slide" data-url="{{ .Params.featured }}">
 						<video class="slideVideo reel" data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 							<source src="{{ .Params.featured }}" type="video/mp4">
 						</video>
 					</div>
 					{{end}}
-					<div class="slide" id="next_slide"></div>
+					<div class="slide abs_target" id="next_slide"></div>
 				</div>
 				{{ if gt $paginator.TotalPages 1 }}
 					<div id="directional_arrows">
@@ -158,12 +158,12 @@
 					</div>
 					<div id="tag_wrapper">
 						{{range .Params.material_tag}}
-							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/projects/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}
 						{{range .Params.process_tag}}
-							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/projects/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}
@@ -196,12 +196,12 @@
 					</ul>
 					<div id="tag_wrapper" class="hide">
 						{{range .Params.material_tag}}
-							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/projects/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}
 						{{range .Params.process_tag}}
-							<a class="gallery_tag margin internal" href="/project_index/#{{replaceRE "(\\s)" "" . | lower}}">
+							<a class="gallery_tag margin internal" href="/projects/#{{replaceRE "(\\s)" "" . | lower}}">
 								<label>{{.}}</label>
 							</a>
 						{{end}}

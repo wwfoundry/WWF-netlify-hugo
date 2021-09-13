@@ -1,5 +1,5 @@
 topLevelItems:
-  - selectPage: project_index
+  - selectPage: projects
     displayText: Projects
     itemType: Link
   - selectPage: about

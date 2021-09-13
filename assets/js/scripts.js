@@ -143,19 +143,33 @@ callPageJS = {
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 
-					mainWrapper.css('paddingTop', '55px');
-					navParent.addClass('scroll');
+					showNav();
 
 				} else if (document.body.scrollTop < 50 | document.documentElement.scrollTop < 50 ) {
 
-					mainWrapper.css('paddingTop', 'unset');
-					navParent.removeClass('scroll');
+					hideNav();
 
 				}
 	
 			}
 
 		}, false);
+
+
+		function showNav(){
+
+			mainWrapper.css('paddingTop', '55px');
+			navParent.addClass('scroll');
+
+		}
+
+
+		function hideNav(){
+
+			mainWrapper.css('paddingTop', 'unset');
+			navParent.removeClass('scroll');
+
+		}
 
 		// Single Page Behavior
 
@@ -309,6 +323,8 @@ callPageJS = {
 
 				$('body').on('click', '.internal', router);
 
+				$('body').on('click', '.abs_target', openLightbox);
+
 				pageId = $('.page').get(0).id;
 
 				LOADJS.fire(pageId);
@@ -427,11 +443,51 @@ callPageJS = {
 
 		});
 
+		//Lightbox
 
-// Lazyload
+		$('body').on('click', '.abs_target', openLightbox);
 
+		var lightboxWrapper = $('.abs_wrapper'),
+				lightboxInner = document.querySelector('.lightbox_container'),
+				lightboxXit = $('.lightbox_xit');
 
+		function openLightbox(l){
 
+			l.preventDefault();
+
+			if( !$(this).hasClass('loadingImg') ){
+
+				var imageElem = $(this)[0].outerHTML;
+
+				lightboxInner.innerHTML = imageElem;
+
+				hideNav();
+
+				$('body').addClass('locked');
+
+				lightboxWrapper.fadeIn(300).addClass('active');
+
+			} else {
+				return;
+			}
+
+		};
+
+		lightboxXit.on('click', closeLightbox );
+
+		function closeLightbox(){
+
+			showNav();
+
+			console.log('click')
+
+			$('body').removeClass('locked');
+
+			lightboxWrapper.fadeOut(300).removeClass('active');
+
+			lightboxInner.innerHTML = '';
+
+		}
 
 		}
 
@@ -441,7 +497,7 @@ index : {
 	init : function(eh){
 
 		var o = $('.overlay'),
-			abs = $('.abs_wrapper'),
+			abs = $('.abs_filter'),
 			bodyWrapper = $('.inner_content'),
 			indexContainer = $('#index_container'),
 			filterContainer = $('#filter_wrapper'),
@@ -729,7 +785,7 @@ init : function(eh){
 
 					lazySlide.classList.add('hide');
 
-					projectSlide.classList.add('slide', 'loadingImg');
+					projectSlide.classList.add('slide', 'loadingImg', 'abs_target');
 
 					frag.append(projectSlide);
 
@@ -954,12 +1010,12 @@ init : function(eh){
 
 	function createChildren(){
 
-		parent.appendChild(a).classList.add('slide', 'loadingImg');
+		parent.appendChild(a).classList.add('slide', 'loadingImg', 'abs_target');
 		a.appendChild(aInfo).classList.add('hide'), a.setAttribute('data-arrow-left',''), a.setAttribute('data-arrow-right','');
 
 		if (current.classList.contains('video')){
 
-				parent.appendChild(b).classList.add('slide', 'video');
+				parent.appendChild(b).classList.add('slide', 'video', 'abs_target');
 
 				//Featured Video
 
@@ -969,7 +1025,7 @@ init : function(eh){
 
 		} else {
 
-			parent.appendChild(b).classList.add('slide');
+			parent.appendChild(b).classList.add('slide', 'abs_target');
 
 			//Featured Image
 
@@ -981,7 +1037,7 @@ init : function(eh){
 
 		bInfo.innerHTML = info.innerHTML;
 
-		parent.appendChild(c).classList.add('slide', 'loadingImg');
+		parent.appendChild(c).classList.add('slide', 'loadingImg', 'abs_target');
 		c.appendChild(cInfo).classList.add('hide'), c.setAttribute('data-arrow-left',''), c.setAttribute('data-arrow-right','');
 
 		createProjectSlides(currentThumbs);
@@ -1237,7 +1293,7 @@ init : function(eh){
 
 						aInfo.classList.add('hide');
 
-						parent.insertBefore(a, b).classList.add('slide', 'loadingImg');
+						parent.insertBefore(a, b).classList.add('slide', 'loadingImg', 'abs_target');
 
 						setArrowStates(b);
 
@@ -1316,7 +1372,7 @@ init : function(eh){
 
 						cInfo.classList.add('hide');
 
-						b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg');
+						b.parentNode.insertBefore(c, b.nextElementSibling).classList.add('slide', 'loadingImg', 'abs_target');
 
 						setArrowStates(b);
 
@@ -1564,6 +1620,8 @@ init : function(eh){
 					return longTouch = false;
 
 			}
+
+			currentSlide.prop.click();
 
 			gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});		
 

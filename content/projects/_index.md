@@ -1,5 +1,5 @@
 ---
-url: project_index
+url: projects
 title: Projects
 intro: Test...
 ---
