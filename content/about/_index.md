@@ -24,5 +24,75 @@ archive:
       archive_title: Looking at the River
       archive_artist: Terry Allen
       archive_year: "2014"
+  - archive_obj:
+      archive_image: /uploads/images/9934.2_fatal_laff_final_rqrtfront-crop.jpg
+      archive_title: Eye on Mrak
+      archive_artist: Bob Arneson
+      archive_year: "1992"
+  - archive_obj:
+      archive_image: /uploads/images/619.01_nuke_news_ph_cast_final_4.jpg
+      archive_title: Nuke News
+      archive_artist: Bob Arneson
+      archive_year: "1984"
+  - archive_obj:
+      archive_image: /uploads/images/132-3204_img.jpeg
+      archive_title: 40' Venus
+      archive_artist: Jim Dine
+      archive_year: "2002"
+  - archive_obj:
+      archive_image: /uploads/images/2969.1_5-twisted-venuses-w-heart-front-1800x1275.jpg
+      archive_title: Five Colorful Dancers, One Bronze Heart
+      archive_artist: Jim Dine
+      archive_year: "2009"
+  - archive_obj:
+      archive_image: /uploads/images/3768.1_back_doubleheart-1800x1205.jpg
+      archive_title: Tools + Fire
+      archive_artist: Jim Dine
+      archive_year: "2010"
+  - archive_obj:
+      archive_image: /uploads/images/img_3652-1200x1800.jpeg
+      archive_title: Walking to the Boras
+      archive_artist: Jim Dine
+      archive_year: "2007"
+  - archive_obj:
+      archive_image: /uploads/images/wheatfields_final_-e1381419127409-1800x956.jpeg
+      archive_title: Wheatfields
+      archive_artist: Jim Dine
+      archive_year: "1989"
+  - archive_obj:
+      archive_image: /uploads/images/keithedmier_lava-and-resin-casting-nyc-1800x1352.jpeg
+      archive_title: Cycas Orogeny
+      archive_artist: Keith Edmier
+      archive_year: "2003"
+  - archive_obj:
+      archive_image: /uploads/images/close-up-2.jpeg
+      archive_title: H2O
+      archive_artist: Larry Kirkland
+      archive_year: "2013"
+  - archive_obj:
+      archive_image: /uploads/images/4280.1_sound_ring_final_wwf_front_crop_edit.jpg
+      archive_title: Sound Ring
+      archive_artist: Maya Lin
+      archive_year: "2014"
+  - archive_obj:
+      archive_image: /uploads/images/iiif-service_pnp_highsm_03600_03636-full-pct_25-0-default.jpeg
+      archive_title: Pillar Arc
+      archive_artist: Ming Fay
+      archive_year: "2004"
+  - archive_obj:
+      archive_image: /uploads/images/allenbigleaf-cincinatti-oh.jpeg
+      archive_title: Belief
+      archive_artist: Terry Allen
+      archive_year: "2009"
+  - archive_obj:
+      archive_image: /uploads/images/902.1_terry_allen_crop.jpg
+      archive_title: Liquid Assets
+      archive_artist: Terry Allen
+      archive_year: "1999"
+  - archive_obj:
+      archive_image: /uploads/images/171-7125_img.jpeg
+      archive_title: Wishbone
+      archive_artist: Terry Allen
+      archive_year: "2003"
 intro: Test...
 ---
