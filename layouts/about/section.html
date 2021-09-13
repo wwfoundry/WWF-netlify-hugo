@@ -8,11 +8,12 @@
 {{ $comparison := .Params.hero_obj.hero }}
 
 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
-<div class="page_section hero loadingImg lazyTrueImg">
-      <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
-</div>
+
 <div class="page_section">
   <div class="inner_content">
+      <div class="hero loadingImg lazyTrueImg">
+        <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
+      </div>
       <div class="two_column">
         <div class="left_justified">
           <h1>{{.Title}}</h1>

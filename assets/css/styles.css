@@ -874,7 +874,7 @@ body.loadingImg{
 }
 
 .inner_content.gallery{
-  padding-top: unset;
+  padding-top: 50px;
 }
 
 .two_column{
@@ -886,8 +886,7 @@ body.loadingImg{
 
 .hero{
   width: 100%;
-  padding-bottom: 25px;
-  margin-top: -80px;
+  padding-bottom: 50px;
   z-index: -8;
   min-height: 150px;
 }
