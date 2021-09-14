@@ -234,9 +234,17 @@ collections:
               - label: 'Location Name'
                 name: 'location_name'
                 widget: 'string'
+              - label: 'Location Description'
+                name: 'location_desc'
+                widget: 'string'
+                hint: "EG:'Shipping and Receiving'"
               - label: 'Location Address'
                 name: 'location_address'
-                widget: 'text'
+                widget: 'object'
+                fields:
+                  - {label: 'Street', name: 'street', widget: 'string'}
+                  - {label: 'City', name: 'city', widget: 'string'}
+                  - {label: 'Zip Code', name: 'zip', widget: 'string'}
               - label: 'Coordinates'
                 name: 'coordinates'
                 widget: 'map'

@@ -21,7 +21,12 @@
 					{{range .Params.locations }}
 						<div class="col_25">
 							<h3 class="location_name">{{.location_name}}</h3>
-							<p class="address">{{.location_address}}</p>
+							<div class="address">
+								<p>{{.location_address.street}}</p>
+								<p>{{.location_address.city}}</p>
+								<p>{{.location_address.zip}}</p>
+							</div>
+							<label>{{.location_desc}}</label>
 							<p class="coordinates">{{.coordinates}}</p>
 						</div>
 					{{end}}
