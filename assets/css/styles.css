@@ -896,7 +896,7 @@ body.loadingImg{
 }
 
 .inner_content.gallery{
-  padding-top: 50px;
+  padding-top: 25px;
 }
 
 .flex_row{
@@ -1076,11 +1076,13 @@ footer.innner_content{
   display:flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
 }
 
 
 .footer>.menu_links>li{
   padding-right:25px;
+  padding-bottom: unset;
 }
 
 .footer_item>.fill_change>#social_links{
@@ -1958,6 +1960,10 @@ footer.innner_content{
     flex-direction:column;
     justify-content: center;
     align-items: center;
+  }
+
+  .footer_section.last{
+    flex-direction: column-reverse;
   }
 
   .footer_item{
