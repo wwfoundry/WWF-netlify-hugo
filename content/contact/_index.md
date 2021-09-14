@@ -30,6 +30,5 @@ locations:
       zip: "99362"
     location_name: Main Campus
     coordinates: '{"type":"Point","coordinates":[-118.3617429,46.0635998]}'
-    location_desc: Main Office, Foundry Department, 3D Print Department, Wax
-      Department, Metal Department, Paint Department, Patina Department
+    location_desc: Main Office, Foundry, 3D Print, Wax, Metal, Paint, Patina
 ---

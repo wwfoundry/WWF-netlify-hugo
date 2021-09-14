@@ -112,14 +112,21 @@ collections:
           preview: false
         file: "/data/contact.yml"
         fields:
-          - label: "Address Line One"
-            name: "addressOne"
+          - label: "Street"
+            name: "data_street"
             widget: "text"
-          - label: "Address Line Two"
-            name: "addressTwo"
+          - label: "City and State"
+            name: "data_city"
+            widget: "text"
+          - label: "Zip Code"
+            name: "data_zip"
             widget: "text"
           - label: "Phone Number"
             name: "phone"
+            widget: "string"
+          - label: "Phone Extension"
+            name: "ext"
+            required: false
             widget: "string"
           - label: "Info Email"
             name: "email"
@@ -235,6 +242,7 @@ collections:
                 name: 'location_name'
                 widget: 'string'
               - label: 'Location Description'
+                required: false
                 name: 'location_desc'
                 widget: 'string'
                 hint: "EG:'Shipping and Receiving'"

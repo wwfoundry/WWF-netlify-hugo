@@ -3,30 +3,35 @@
 {{end}}
 {{ define "main" }}
 	<div class="inner_content">
-		<div class="column_flex collapse black_under">
-			<h1>{{.Title}}</h1>
-			<div class="two_column first">
-				<div class="col_25">
-					<div class="column_flex">
-						<a href="mailto:{{.Site.Data.contact.email}}">{{.Site.Data.contact.email}}</a>
-						<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
-						<a class="gallery_tag"><label>Employment Opportunities</label></a>
+		<div class="two_column collapse">
+				<div class="col_40">
+					<h1 class="first">{{.Title}}</h1>
+				</div>
+				<div class="col_60">
+					<div class="two_column margin_negative">
+						<div class="col_25 margin collapse">
+							<h3>Email</h3>
+							<a href="mailto:{{.Site.Data.contact.email}}" class="black_under">{{.Site.Data.contact.email}}</a>
+						</div>
+						<div class="col_25 margin collapse">
+							<h3>Phone</h3>
+							<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
+						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 			<div class="column_flex">
 				<h1>Locations</h1>
-				<div class="two_column last">
+				<div class="two_column margin_negative">
 					{{range .Params.locations }}
-						<div class="col_25">
+						<div class="col_25 margin">
 							<h3 class="location_name">{{.location_name}}</h3>
 							<div class="address">
-								<p>{{.location_address.street}}</p>
-								<p>{{.location_address.city}}</p>
-								<p>{{.location_address.zip}}</p>
+								<label>{{.location_address.street}}</label><br>
+								<label>{{.location_address.city}}</label><br>
+								<label>{{.location_address.zip}}</label><br>
 							</div>
-							<label>{{.location_desc}}</label>
+							<p>{{.location_desc}}</p>
 							<p class="coordinates">{{.coordinates}}</p>
 						</div>
 					{{end}}

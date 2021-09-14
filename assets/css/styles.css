@@ -902,8 +902,8 @@ body.loadingImg{
 .two_column{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 0 10px;
+  justify-content: flex-end;
+  margin-bottom: 25px;
 }
 
 .hero{
@@ -1746,7 +1746,16 @@ footer.innner_content{
   }
 
   .col_25{
-    width: 50%;
+    width: calc(50% - 20px);
+  }
+
+  .collapse{
+    width: 100%;
+  }
+
+  .col_25.collapse{
+    border-bottom: 1px solid black;
+    padding-bottom: 50px;
   }
 
 }
