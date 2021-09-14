@@ -1753,10 +1753,6 @@ footer.innner_content{
     margin: unset;
   }
 
-  .flex_row{
-  /*  border-top:1px solid black;*/
-    flex-wrap: wrap;
-}
 }
 
 @media screen and (max-width: 1200px){
@@ -1781,6 +1777,11 @@ footer.innner_content{
   .col_25.colapse{
     border-bottom: 1px solid black;
     padding-bottom: 50px;
+  }
+
+  .flex_row{
+  /*  border-top:1px solid black;*/
+    flex-wrap: wrap;
   }
 
 }
@@ -1964,7 +1965,7 @@ footer.innner_content{
     padding: 0 0 10px 0;
   }
 
-  .footer.menu_links{
+  .footer>.menu_links{
     justify-content: center;
   }
 
@@ -1980,10 +1981,18 @@ footer.innner_content{
     margin:-10px -10px;
   }
 
-  .footer_item #wwf_logo{
+  .footer#wwf_logo{
     width:270px;
     padding: 0px 0px 10px 0px;
-}
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer>.col_33.collapse{
+    border-bottom: unset;
+    padding-bottom: unset;
+    justify-content: flex-start;
+  }
 
 }
 

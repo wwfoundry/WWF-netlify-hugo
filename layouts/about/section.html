@@ -38,7 +38,7 @@
         {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
 
         <div class="loadingImg lazyTrueImg">
-          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}">
+          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.archive_obj.archive_title}}">
         </div>
     
       </div>
