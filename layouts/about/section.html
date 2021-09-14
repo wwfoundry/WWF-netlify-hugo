@@ -15,7 +15,7 @@
         <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
         <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
       </div>
-      <div class="two_column">
+      <div class="flex_row">
         <div class="col_40">
           <h1>{{.Title}}</h1>
           <label>{{.Params.subtitle}}</label>
@@ -30,7 +30,7 @@
   <div class="inner_content">
     <h1 class="archive page_title upperHeader">Historic Projects</h1>
     {{range sort .Params.archive ".archive_obj.archive_year" }}
-    <div class="two_column archive_wrapper">
+    <div class="flex_row archive_wrapper">
       <div class="col_60">
 
         {{ $comparison := .archive_obj.archive_image }}

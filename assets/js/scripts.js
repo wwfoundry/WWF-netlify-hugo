@@ -1578,11 +1578,13 @@ init : function(eh){
 		}
 
 		swipeArea.onmouseup = function(end){
+			var touchEvent = 'false'
 			endSwipe(end, longTouch);
 			return swipeArea.moving = false;
 		};
 
 		swipeArea.ontouchend = function(end){
+			var touchEvent = 'true'
 			endSwipe(end, longTouch)
 			return swipeArea.moving = false;
 		};
@@ -1620,6 +1622,8 @@ init : function(eh){
 					return longTouch = false;
 
 			}
+
+
 
 			currentSlide.prop.click();
 

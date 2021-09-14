@@ -3,26 +3,32 @@
 {{end}}
 {{ define "main" }}
 	<div class="inner_content">
-		<div class="two_column collapse">
+		<div class="flex_row collapse">
 				<div class="col_40">
 					<h1 class="first">{{.Title}}</h1>
 				</div>
 				<div class="col_60">
-					<div class="two_column margin_negative">
-						<div class="col_25 margin collapse">
+					<div class="flex_row margin_negative">
+						<div class="col_33 margin collapse">
 							<h3>Email</h3>
 							<a href="mailto:{{.Site.Data.contact.email}}" class="black_under">{{.Site.Data.contact.email}}</a>
 						</div>
-						<div class="col_25 margin collapse">
+						<div class="col_33 margin collapse">
 							<h3>Phone</h3>
-							<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
+							<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}} x {{.Site.Data.contact.ext}}</a>
+						</div>
+						<div class="col_33 margin collapse">
+							<h3>Address</h3>
+							<p>{{.Site.Data.contact.data_street}}<br>
+							{{.Site.Data.contact.data_city}}<br>
+							{{.Site.Data.contact.data_zip}}<br></p>
 						</div>
 					</div>
 				</div>
 		</div>
 			<div class="column_flex">
 				<h1>Locations</h1>
-				<div class="two_column margin_negative">
+				<div class="flex_row margin_negative">
 					{{range .Params.locations }}
 						<div class="col_25 margin">
 							<h3 class="location_name">{{.location_name}}</h3>
