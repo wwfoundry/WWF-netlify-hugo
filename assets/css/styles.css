@@ -940,6 +940,30 @@ body.loadingImg{
   height:100%;
 }
 
+.fullHeight{
+  padding: unset;
+  margin:unset;
+  max-width:unset;
+}
+
+.white_under{
+
+border-bottom:solid 1px white;
+
+}
+
+.black_under{
+  border-bottom:solid 1px black;
+}
+
+.margin_negative{
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+/*6) Columns*/
+/*---------------*/
+
 .right_justified_partial{
   margin-top: 25px;
 }
@@ -983,36 +1007,20 @@ body.loadingImg{
 /*  float: right;*/
 }
 
+.col_25{
+  width:25%;
+}
+
 .column_flex{
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-}
-
-.fullHeight{
-  padding: unset;
-  margin:unset;
-  max-width:unset;
-}
-
-.white_under{
-
-border-bottom:solid 1px white;
-
-}
-
-.black_under{
-  border-bottom:solid 1px black;
-}
-
-.margin_negative{
-  margin-right: -10px;
-  margin-left: -10px;
+  flex-wrap: wrap;
 }
 
 
-/*6) Footer*/
+/*7) Footer*/
 /*---------------*/
 
 footer{
@@ -1069,7 +1077,7 @@ footer.innner_content{
   padding-bottom: unset;
   }
 
-/*7) Homepage */
+/*8) Homepage */
 /*---------------*/
 
 #main_slide{
@@ -1102,7 +1110,7 @@ footer.innner_content{
   background-color: black;
 }
 
-/*7) Gallery */
+/*9) Gallery */
 /*---------------*/
 
 .left_justified_full{
@@ -1365,7 +1373,7 @@ footer.innner_content{
 }
 
 
-/*8) Index */
+/*10) Index */
 /*---------------*/
 
 #index_container{
@@ -1499,7 +1507,7 @@ footer.innner_content{
   object-fit: cover;
 }
 
-/*9) Contact */
+/*11) Contact */
 /*---------------*/
 
 #mapBox{
@@ -1513,6 +1521,10 @@ footer.innner_content{
   display: none;
 }
 
+.coordinates{
+  display: none;
+}
+
 .column_flex>a{
   margin-bottom: 10px;
   width: fit-content;
@@ -1523,7 +1535,7 @@ footer.innner_content{
 }
 
 
-/*10) About */
+/*12) About */
 /*---------------*/
 
 .col_40>img{
@@ -1580,7 +1592,7 @@ footer.innner_content{
   background-color: white;
 }
 
-/*11) Lightbox */
+/*13) Lightbox */
 /*---------------*/
 
 .abs_wrapper.lightbox{
@@ -1619,7 +1631,7 @@ footer.innner_content{
 }
 
 
-/*12) Media Queries */
+/*14) Media Queries */
 /*---------------*/
 
 /*Content Sections*/
@@ -1723,8 +1735,7 @@ footer.innner_content{
   .two_column{
   /*  border-top:1px solid black;*/
     flex-wrap: wrap;
-    flex-direction: column;
-  }
+}
 
   .col_40{
     width:100%;  
@@ -1732,6 +1743,10 @@ footer.innner_content{
 
   .col_60{
     width:100%;  
+  }
+
+  .col_25{
+    width: 50%;
   }
 
 }

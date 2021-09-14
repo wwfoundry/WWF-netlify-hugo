@@ -3,12 +3,10 @@
 {{end}}
 {{ define "main" }}
 	<div class="inner_content">
-		<div class="project_slide collapse">
+		<div class="column_flex collapse black_under">
+			<h1>{{.Title}}</h1>
 			<div class="two_column first">
-				<div class="col_40">
-					<h1>{{.Title}}</h1>
-				</div>
-				<div class="col_60">
+				<div class="col_25">
 					<div class="column_flex">
 						<a href="mailto:{{.Site.Data.contact.email}}">{{.Site.Data.contact.email}}</a>
 						<a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}}</a>
@@ -16,23 +14,23 @@
 					</div>
 				</div>
 			</div>
-			<div  class="two_column last">
-				<div class="col_40">
-					<h1>Locations</h1>
+		</div>
+			<div class="column_flex">
+				<h1>Locations</h1>
+				<div class="two_column last">
+					{{range .Params.locations }}
+						<div class="col_25">
+							<h3 class="location_name">{{.location_name}}</h3>
+							<p class="address">{{.location_address}}</p>
+							<p class="coordinates">{{.coordinates}}</p>
+						</div>
+					{{end}}
 				</div>
-				<div class="col_60">
 					<div id="mapBox">
 						<div class="mapData">
-							{{range .Params.locations }}
-								<h3 class="location_name">{{.location_name}}</h3>
-								<p class="address">{{.location_address}}</p>
-								<p class="coordinates">{{.coordinates}}</p>
-							{{end}}
 						</div>
 					</div>
-				</div>
 			</div>
-		</div>
 	</div>
  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
