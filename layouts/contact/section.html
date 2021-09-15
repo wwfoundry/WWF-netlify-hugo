@@ -7,7 +7,7 @@
 				<div class="col_40">
 					<h1 class="first">{{.Title}}</h1>
 				</div>
-				<div class="col_60">
+				<div class="col_60 last">
 					<div class="flex_row margin_negative">
 						<div class="col_33 margin collapse">
 							<h3>Email</h3>
@@ -20,8 +20,7 @@
 						<div class="col_33 margin collapse">
 							<h3>Address</h3>
 							<p>{{.Site.Data.contact.data_street}}<br>
-							{{.Site.Data.contact.data_city}}<br>
-							{{.Site.Data.contact.data_zip}}<br></p>
+							{{.Site.Data.contact.data_city}} {{.Site.Data.contact.data_zip}}<br></p>
 						</div>
 					</div>
 				</div>
@@ -33,9 +32,8 @@
 						<div class="col_25 margin">
 							<h3 class="location_name">{{.location_name}}</h3>
 							<div class="address">
-								<label>{{.location_address.street}}</label><br>
-								<label>{{.location_address.city}}</label><br>
-								<label>{{.location_address.zip}}</label><br>
+								<a href="{{.google_maps | safeURL}}"><label>{{.location_address.street}}</label><br>
+								<label>{{.location_address.city}} {{.location_address.zip}}</label><br></a>
 							</div>
 							<p>{{.location_desc}}</p>
 							<p class="coordinates">{{.coordinates}}</p>

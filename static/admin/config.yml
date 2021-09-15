@@ -246,6 +246,10 @@ collections:
                 name: 'location_desc'
                 widget: 'string'
                 hint: "EG:'Shipping and Receiving'"
+              - label: 'Google Maps Link'
+                name: 'google_maps'
+                required: false
+                widget: 'string'
               - label: 'Location Address'
                 name: 'location_address'
                 widget: 'object'

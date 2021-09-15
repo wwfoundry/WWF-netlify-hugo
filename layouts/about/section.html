@@ -7,12 +7,18 @@
 
 {{ $comparison := .Params.hero_obj.hero }}
 
-{{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
+{{ $full_size := "800x" }}
+
+{{ $thumb_size := "50x" }}
+
+{{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+{{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
 <div class="page_section">
   <div class="inner_content">
       <div class="hero loadingImg lazyTrueImg">
-        <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.Params.hero_obj.alt}}">
+        <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.Params.hero_obj.alt}}">
         <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
       </div>
       <div class="flex_row">
@@ -42,10 +48,14 @@
 
         {{ $comparison := .archive_obj.archive_image }}
 
-        {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison) }}
+        {{ $full_size := "700x" }}
+
+        {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+        {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
         <div class="loadingImg lazyTrueImg archive_image_inner">
-          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$comparison}}" alt="{{.archive_obj.archive_title}}">
+          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
         </div>
     
       </div>

@@ -4,7 +4,7 @@
 
 {{ $resource_match := .context.Resources.GetMatch $dir_media }}
 
-{{ $resize_for_load := default "50x" }}
+{{ $resize_for_load := .size }}
 
 {{ if $resource_match }}
 
