@@ -28,9 +28,16 @@
 </div>
 <div class="page_section blackBG">
   <div class="inner_content">
-    <h1 class="archive page_title upperHeader">Historic Projects</h1>
-    {{range sort .Params.archive ".archive_obj.archive_year" }}
-    <div class="flex_row archive_wrapper">
+    <h1 class="archive page_title">Historic Projects</h1>
+    {{range $index, $value := sort .Params.archive ".archive_obj.archive_year" }}
+    <div class="flex_row archive_wrapper blackBG" style="z-index: {{$index}}">
+      <div class="col_40">
+        <div class="archive_caption_inner">
+          <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
+          <h1 class="first">{{.archive_obj.archive_title}}</h1>
+          <h3>{{.archive_obj.archive_artist}}</h3>
+        </div>
+      </div>
       <div class="col_60">
 
         {{ $comparison := .archive_obj.archive_image }}
@@ -42,16 +49,9 @@
         </div>
     
       </div>
-      <div class="col_40">
-        <div class="archive_caption_inner">
-          <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
-          <h1 class="first">{{.archive_obj.archive_title}}</h1>
-          <h3>{{.archive_obj.archive_artist}}</h3>
-        </div>
-      </div>
-      <div id="timeline"></div>
     </div>
     {{end}}
+    <div id="timeline"></div>
   </div>
 </div>
 
