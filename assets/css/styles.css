@@ -1569,6 +1569,7 @@ footer.innner_content{
 
 .archive_wrapper{
   padding-bottom: 100px;
+  max-height: calc(100vh - 175px)
 }
 
 .archive_caption_inner{
@@ -1598,10 +1599,12 @@ footer.innner_content{
   border-bottom: 1px solid white;
 }*/
 
+.archive_image_inner{
+  height:100%;
+}
+
 .archive_image{
-  width: 100%;
   height: 100%;
-  min-height: 350px;
   object-fit: contain;
 }
 
@@ -1644,7 +1647,7 @@ footer.innner_content{
 }
 
 .abs_target{
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 .lightbox_container{
@@ -1666,9 +1669,9 @@ footer.innner_content{
     width: calc(100% - 50px);
   }
 
-  .hero{
+/*  .hero{
     margin-top: -82px;
-  }
+  }*/
 
 }
 
@@ -1743,7 +1746,11 @@ footer.innner_content{
     right:0px;
   }
 
-  .inner_content{
+}
+
+@media screen and (max-width: 1150px){
+
+    .inner_content{
     padding: 25px 10px;
   }
 
@@ -1754,10 +1761,6 @@ footer.innner_content{
   .inner_content.margin{
     margin: unset;
   }
-
-}
-
-@media screen and (max-width: 1200px){
 
   .col_40{
     width:100%;  
@@ -1830,6 +1833,7 @@ footer.innner_content{
     background-position: center center;
     height:100%;
     min-height: 250px;
+    cursor:move;
   }
 
   .attribution{
@@ -1988,7 +1992,7 @@ footer.innner_content{
   }
 
   .footer#wwf_logo{
-    width:270px;
+    width:240px;
     padding: 0px 0px 10px 0px;
     margin-left: auto;
     margin-right: auto;

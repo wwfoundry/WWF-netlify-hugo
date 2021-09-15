@@ -323,7 +323,7 @@ callPageJS = {
 
 				$('body').on('click', '.internal', router);
 
-				$('body').on('click', '.abs_target', openLightbox);
+				// $('body').on('click', '.abs_target', openLightbox);
 
 				pageId = $('.page').get(0).id;
 
@@ -445,49 +445,49 @@ callPageJS = {
 
 		//Lightbox
 
-		$('body').on('click', '.abs_target', openLightbox);
+		// $('body').on('click', '.abs_target', openLightbox);
 
-		var lightboxWrapper = $('.abs_wrapper'),
-				lightboxInner = document.querySelector('.lightbox_container'),
-				lightboxXit = $('.lightbox_xit');
+		// var lightboxWrapper = $('.abs_wrapper'),
+		// 		lightboxInner = document.querySelector('.lightbox_container'),
+		// 		lightboxXit = $('.lightbox_xit');
 
-		function openLightbox(l){
+		// function openLightbox(l){
 
-			l.preventDefault();
+		// 	l.preventDefault();
 
-			if( !$(this).hasClass('loadingImg') ){
+		// 	if( !$(this).hasClass('loadingImg') ){
 
-				var imageElem = $(this)[0].outerHTML;
+		// 		var imageElem = $(this)[0].outerHTML;
 
-				lightboxInner.innerHTML = imageElem;
+		// 		lightboxInner.innerHTML = imageElem;
 
-				hideNav();
+		// 		hideNav();
 
-				$('body').addClass('locked');
+		// 		$('body').addClass('locked');
 
-				lightboxWrapper.fadeIn(300).addClass('active');
+		// 		lightboxWrapper.fadeIn(300).addClass('active');
 
-			} else {
-				return;
-			}
+		// 	} else {
+		// 		return;
+		// 	}
 
-		};
+		// };
 
-		lightboxXit.on('click', closeLightbox );
+		// lightboxXit.on('click', closeLightbox );
 
-		function closeLightbox(){
+		// function closeLightbox(){
 
-			showNav();
+		// 	showNav();
 
-			console.log('click')
+		// 	console.log('click')
 
-			$('body').removeClass('locked');
+		// 	$('body').removeClass('locked');
 
-			lightboxWrapper.fadeOut(300).removeClass('active');
+		// 	lightboxWrapper.fadeOut(300).removeClass('active');
 
-			lightboxInner.innerHTML = '';
+		// 	lightboxInner.innerHTML = '';
 
-		}
+		// }
 
 		}
 
