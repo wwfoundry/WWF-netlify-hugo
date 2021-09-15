@@ -1672,10 +1672,6 @@ footer.innner_content{
     width: calc(100% - 50px);
   }
 
-  .hero{
-    margin-top: -82px;
-  }
-
 }
 
 @media screen and (max-width:800px){
@@ -2057,13 +2053,12 @@ footer.innner_content{
     }
 
     .hero{
-      width: calc(100% - 20px);
+      width: 100%
       margin-top: unset;
       display: block;
       max-width: 1400px;
       margin-left: auto;
       margin-right: auto;
-      padding: 0px 10px;
       position: relative;
     }
 
