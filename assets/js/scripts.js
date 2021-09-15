@@ -1743,7 +1743,7 @@ var archiveElem = document.querySelectorAll('.archive_wrapper');
 for( a = 0; a < archiveElem.length; a ++){
 
 	var slideScroller = new IntersectionObserver(
-		
+
 	  ([e]) => e.target.classList.toggle("slide_fade", e.intersectionRatio < 1),
 	  { threshold: [1] },
 

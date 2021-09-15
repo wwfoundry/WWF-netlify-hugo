@@ -7,7 +7,7 @@
 
 {{ $comparison := .Params.hero_obj.hero }}
 
-{{ $full_size := "800x" }}
+{{ $full_size := "900x" }}
 
 {{ $thumb_size := "50x" }}
 
@@ -41,7 +41,7 @@
         <div class="archive_caption_inner">
           <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
           <h1 class="first">{{.archive_obj.archive_title}}</h1>
-          <h3>{{.archive_obj.archive_artist}}</h3>
+          <p><label>{{.archive_obj.archive_artist}}</label></p>
         </div>
       </div>
       <div class="col_60">
