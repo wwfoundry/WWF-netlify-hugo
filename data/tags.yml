@@ -11,10 +11,8 @@ process_tag:
   - process_string: Cast
   - process_string: CNC
   - process_string: Water Jet
-  - process_string: Electropolish
   - process_string: Patina
   - process_string: Paint
-  - process_string: Gilded
   - process_string: On Site Installation
 year_tag:
   - year_string: "2021"
