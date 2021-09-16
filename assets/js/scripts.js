@@ -1215,7 +1215,7 @@ init : function(eh){
 
 				animAll(projectSlideArr[slideCount + 1], '110%', b, '0%', activateThumb, currentThumbs, slideCount, swiper,'.35');
 
-			} else if (d == 'next' && slideCount === 1) {
+			} else if (d == 'next' && slideCount === 1 && projectSlideArr.length !== slideCount) {
 
 				animAll(b, '-110%', projectSlideArr[slideCount], '0%', activateThumb, currentThumbs, slideCount, swiper, '.35');
 

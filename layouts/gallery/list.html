@@ -21,6 +21,8 @@
 
 		{{ $resize_load_set := default "50x" }}
 
+		{{ $resize_full_set := default "1200x" }}
+
 		<div class="project_slide" data-project="{{ lower (replaceRE "(\\s)" "-" .Title) }}" data-total="{{$paginator.TotalPages}}">
 			<div class="left_justified_full viewportFixed">
 				<div id="slide_container" style="">
@@ -29,11 +31,15 @@
 
 						{{ if $resources_featured_image }}
 
+							{{ .Scratch.Set "resized_full_featured" ($resources_featured_image.Resize $resize_full_set) }}
+
 							{{ .Scratch.Set "resized_load_featured" ($resources_featured_image.Resize $resize_load_set) }}
 
 							{{ $scratch_load_src := .Scratch.Get "resized_load_featured" }}
 
-					<div class="slide abs_target" id="main_slide" style="background-image:url({{ $scratch_load_src.RelPermalink }})" data-url="{{ $resources_featured_image.RelPermalink }}"></div>
+							{{ $scratch_full_src := .Scratch.Get "resized_full_featured" }}
+
+					<div class="slide abs_target" id="main_slide" style="background-image:url({{ $scratch_load_src.RelPermalink }})" data-url="{{ $scratch_full_src.RelPermalink }}"></div>
 
 						{{end}}
 
@@ -129,7 +135,9 @@
 
 									{{$scratch_load_thumb_src := $resources_thumb_image.Resize "50x"}}
 
-									<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{$scratch_load_thumb_src.RelPermalink}}" data-full="{{$resources_thumb_image.RelPermalink}}" ></button>
+									{{$scratch_full_thumb_src := $resources_thumb_image.Resize "1200x"}}
+
+									<button class="thumbnail margin loadingImg slideshow" style="background-image:url('')" data-url="{{$scratch_load_thumb_src.RelPermalink}}" data-full="{{$scratch_full_thumb_src.RelPermalink}}" ></button>
 
 								{{end}}
 
