@@ -363,77 +363,77 @@ callPageJS = {
 
 		//Get Element Height
 
-		var innerHeight,
-				calculatedHeight,
-				windowHeight = window.innerHeight,
-				field = window.innerWidth;
+		// var innerHeight,
+		// 		calculatedHeight,
+		// 		windowHeight = window.innerHeight,
+		// 		field = window.innerWidth;
 
-			function getElemHeight(elem){
+		// 	function getElemHeight(elem){
 
-				elem.removeAttribute('style');
+		// 		elem.removeAttribute('style');
 
-				var storedStyle = getComputedStyle(elem),
-						storedHeight = parseInt(storedStyle.height),
-						marPad = parseInt(storedStyle.paddingTop) + parseInt(storedStyle.paddingBottom) + parseInt(storedStyle.marginTop) + parseInt(storedStyle.marginBottom);
+		// 		var storedStyle = getComputedStyle(elem),
+		// 				storedHeight = parseInt(storedStyle.height),
+		// 				marPad = parseInt(storedStyle.paddingTop) + parseInt(storedStyle.paddingBottom) + parseInt(storedStyle.marginTop) + parseInt(storedStyle.marginBottom);
 				
-				innerHeight = storedHeight - marPad;
+		// 		innerHeight = storedHeight - marPad;
 
-				return innerHeight;
+		// 		return innerHeight;
 
-			}
+		// 	}
 
-			//Onload, set VH elements to viewport height
+		// 	//Onload, set VH elements to viewport height
 
-			windowHeight = window.innerHeight;
+		// 	windowHeight = window.innerHeight;
 
-			storeVHeight(windowHeight);
+		// 	storeVHeight(windowHeight);
 
-			function storeVHeight(windowHeight){
+		// 	function storeVHeight(windowHeight){
 
-				var viewportCached = document.getElementsByClassName('viewportFixed');
+		// 		var viewportCached = document.getElementsByClassName('viewportFixed');
 		
-				for (var i = 0; i < viewportCached.length; i++){
+		// 		for (var i = 0; i < viewportCached.length; i++){
 
-					innerHeight = getElemHeight( viewportCached[i] );
+		// 			innerHeight = getElemHeight( viewportCached[i] );
 
-					calculatedHeight = windowHeight - innerHeight;
+		// 			calculatedHeight = windowHeight - innerHeight;
 
-					calculatedWindowHeight = windowHeight - calculatedHeight;
+		// 			calculatedWindowHeight = windowHeight - calculatedHeight;
 
-					viewportCached[i].removeAttribute('style');
+		// 			viewportCached[i].removeAttribute('style');
 		
-					viewportCached[i].style.height = calculatedWindowHeight + 'px';
+		// 			viewportCached[i].style.height = calculatedWindowHeight + 'px';
 		
-				}
-			}
+		// 		}
+		// 	}
 
-		//Detect if device supports orientation change
+		// //Detect if device supports orientation change
 
-		var supportsOrientationChange = "onorientationchange" in window,
-    		orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+		// var supportsOrientationChange = "onorientationchange" in window,
+  //   		orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
-    window.addEventListener(orientationEvent, function(){
+  //   window.addEventListener(orientationEvent, function(){
 
-    		windowHeight = window.innerHeight;
+  //   		windowHeight = window.innerHeight;
 			
-				storeVHeight(windowHeight);
+		// 		storeVHeight(windowHeight);
 
-    }, false);
+  //   }, false);
 
     //On vertical resize (if window width has changed, too), adjust element height
 
 		$(window).resize( function(){
 
-			newField = window.innerWidth;
-			newFieldY = window.innerHeight;
+			// newField = window.innerWidth;
+			// newFieldY = window.innerHeight;
 
-			if( newField != field && newFieldY != fieldY ){
+			// if( newField != field && newFieldY != fieldY ){
 
-				windowHeight = window.innerHeight;
+			// 	windowHeight = window.innerHeight;
 			
-				storeVHeight(windowHeight);
+			// 	storeVHeight(windowHeight);
 
-			}
+			// }
 
 			if ( multiBurger.hasClass('active') && newField != field && newFieldY != fieldY ){
 
