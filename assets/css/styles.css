@@ -832,6 +832,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
     -webkit-mask-repeat: no-repeat;
     mask-repat: no-repeat;
     will-change: -webkit-mask-position, opacity, visibility;
+    transition: height .25s ease-in;
 }
 
 .page_section{
