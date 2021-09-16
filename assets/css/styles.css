@@ -566,6 +566,7 @@ nav{
 	z-index:5001;
   align-items:center;
   position: relative;
+  transition: background-color .25s ease-in;
 }
 
 nav.home{
