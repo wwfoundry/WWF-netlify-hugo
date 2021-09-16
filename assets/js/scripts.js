@@ -125,7 +125,7 @@ callPageJS = {
 
 				}
 
-			} else {
+			} else if (field < 1150) {
 				multiBurger.addClass('active');
 			}
 
@@ -139,7 +139,7 @@ callPageJS = {
 
 			pageOffset = window.pageYOffset;
 
-			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 800 ){
+			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 1150 ){
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 
@@ -186,6 +186,7 @@ callPageJS = {
 					page = checkUrl(mainUrl);
 
 			if(mainUrl == window.location.pathname){
+				closeMenu();
 				return;
 			}
 
@@ -435,6 +436,8 @@ callPageJS = {
 
 			// }
 
+			field = window.innerWidth;
+
 			if ( multiBurger.hasClass('active') && newField != field && newFieldY != fieldY ){
 
 					closeMenu();
@@ -605,11 +608,13 @@ index : {
 
 				container.fadeOut(300);
 
-				filterContainer.removeClass('active', function(){
+				gsap.to(indexContainer, {duration: .5, autoAlpha: '1', onComplete: resetFilterMenu});
+
+				function resetFilterMenu(){
+					filterContainer.removeClass('active', function(){
 					abs.css('display', 'none').removeClass('active');
 				}).attr('style', '');
-
-				gsap.to(indexContainer, {duration: .5, autoAlpha: '1'});
+				}
 
 				state = 'unlock';
 				lockBody(state);

@@ -8,16 +8,16 @@
 					<h1 class="first">{{.Title}}</h1>
 				</div>
 				<div class="col_60 last">
-					<div class="flex_row margin_negative">
-						<div class="col_33 margin collapse">
+					<div class="flex_row">
+						<div class="col_33 collapse">
 							<h3>Email</h3>
 							<a href="mailto:{{.Site.Data.contact.email}}" class="black_under">{{.Site.Data.contact.email}}</a>
 						</div>
-						<div class="col_33 margin collapse">
+						<div class="col_33 collapse">
 							<h3>Phone</h3>
 							<a href="tel:{{.Site.Data.contact.phone}} x{{.Site.Data.contact.ext}}">{{.Site.Data.contact.phone}} x {{.Site.Data.contact.ext}}</a>
 						</div>
-						<div class="col_33 margin collapse">
+						<div class="col_33 collapse">
 							<h3>Address</h3>
 							<p>{{.Site.Data.contact.data_street}}<br>
 							{{.Site.Data.contact.data_city}} {{.Site.Data.contact.data_zip}}<br></p>

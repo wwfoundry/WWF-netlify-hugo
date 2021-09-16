@@ -773,7 +773,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
   margin:0;
   padding-top: 100px;
   height: calc(100% - 100px);
-  width:calc(100% - 25px);
+  width:calc(100% - 10px);
 }
 
 #menu_inner label{
@@ -1693,7 +1693,7 @@ footer.innner_content{
 
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width:1150px){
 
   nav{
   padding: 0 10px 0 10px;
@@ -1963,7 +1963,7 @@ footer.innner_content{
 
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1150px){
   #filter_menu{
     flex-direction: column-reverse;
   }
@@ -2026,10 +2026,10 @@ footer.innner_content{
 
 /*Menu*/
 
-@media screen and (max-width:800px){
+@media screen and (max-width:1150px){
 
   #menu_side{
-  width:calc(100% - 15px);
+  width:calc(100% - 10px);
   border-left:unset;
   }
 
@@ -2059,7 +2059,7 @@ footer.innner_content{
 
 /* About */
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1150px){
 
     #timeline{
       display: none;
