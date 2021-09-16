@@ -5,6 +5,7 @@ material_tag:
   - material_string: Resin
   - material_string: Wood
   - material_string: Glass
+  - material_string: Stainless Steel Armature
 process_tag:
   - process_string: 3D Print
   - process_string: Silicone Mold
