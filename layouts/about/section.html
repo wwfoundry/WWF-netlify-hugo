@@ -22,12 +22,12 @@
         <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
     </div>
       <div class="flex_row">
-        <div class="col_40">
+        <div class="col_25">
           <h1>{{.Title}}</h1>
           <label>{{.Params.subtitle}}</label>
         </div>
-        <div class="col_60">
-          <p class="text_block">{{.Params.statement}}</p>
+        <div class="col_75">
+          <p class="text_block">{{.Params.statement | markdownify}}</p>
         </div>
       </div>
   </div>

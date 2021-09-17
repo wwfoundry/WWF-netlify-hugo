@@ -61,6 +61,7 @@ callPageJS = {
 			pageId,
 			loadTimeout,
 			pageContainer = document.querySelector('.main_content'),
+			body = $('body'),
 			lockBody = function(state){
 
 			if( state == 'lock' ){
@@ -263,7 +264,19 @@ callPageJS = {
 
 			$(window).animate({scrollTop: 0});
 
-			loadedInner.remove();
+			loadedInner.fadeOut(300, function(){
+
+				loadedInner.remove();
+
+			});
+
+			if( mainWrapper.hasClass('fullHeight') ){
+
+				console.log('tirg')
+
+				gsap.set(body, {duration: .1, backgroundColor: '#151515'});
+
+			}
 
 			switchOver.to(pageContainer, {duration: .75, ease: "steps.out", autoAlpha: '0', onComplete: pageJax, onCompleteParams: [mainUrl, page]});
 
@@ -279,7 +292,7 @@ callPageJS = {
 
 			        } else {
 
-			        	if( !page ){
+			        	if( !page && mainWrapper.hasClass('fullHeight') ){
 
 			        		// console.log(page)
 
@@ -291,9 +304,9 @@ callPageJS = {
 
 									$('#menu_wrapper').removeClass('fill_change');
 
-								} else if (page) {
+									switchOver.to(body, {duration: .75, backgroundColor: '#ffffff'});
 
-									console.log(page)
+								} else if (page) {
 
 									mainWrapper.addClass('fullHeight');
 
@@ -302,6 +315,8 @@ callPageJS = {
 									$('#wwf_logo').addClass('fill_change');
 
 									$('#menu_wrapper').addClass('fill_change');
+
+									
 
 								}
 
