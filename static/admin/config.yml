@@ -209,7 +209,6 @@ collections:
                 name: 'alt'
                 widget: 'string'
           - {label: 'Statement', name: 'statement', widget: 'markdown'}
-          - {label: 'Archive Statement', name: 'archive_statement', widget: 'markdown'}
           - label: 'Archived Projects'
             label_singular: 'Archive Project'
             name: 'archive'
