@@ -477,6 +477,10 @@ label{
   margin:10px;
 }
 
+.padding{
+  padding:10px;
+}
+
 .loadingImg{
   position: relative;
   background-repeat: no-repeat;
@@ -542,6 +546,12 @@ h3{
   height:auto;
 }
 
+.accent{
+  width: 100px;
+  height: auto;
+  display: inline-block;
+}
+
 .upperHeader{
   text-transform: uppercase;
   width: 100%;
@@ -573,6 +583,11 @@ nav.home{
   position:absolute;
   left:0;
   right:0;
+}
+
+.nav_placeholder{
+  height: 55px;
+  width: 100%;
 }
 
 #wwf_logo{
@@ -842,10 +857,6 @@ nav.home>#menu>#controls>#hamburger>.bar{
 }
 
 .page_section{
-}
-
-.page_section.blackBG{
-  padding-top: 55px;
 }
 
 .loaded_inner{
@@ -1344,6 +1355,10 @@ footer.innner_content{
   padding: 4px 6px;
 }
 
+.gallery_tag.invert{
+  border: 1px solid white;
+}
+
 #directional_arrows{
 
 }
@@ -1458,15 +1473,12 @@ footer.innner_content{
   bottom:35%;
 }
 
-#filter_inner>button{
-  cursor: pointer;
-  padding: 0px 20px;
-}
-
 .tag{
   display:none;
   border: solid 1px black;
   background-color:unset;
+  cursor: pointer;
+  padding: 0px 20px;
 }
 
 .tag:hover{
@@ -1762,7 +1774,7 @@ footer.innner_content{
   to {top: 0px;}
   }
 
-  #filter_inner>button{
+  .tag{
   cursor: pointer;
   padding: 0px 10px;
   }

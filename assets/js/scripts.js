@@ -159,7 +159,10 @@ callPageJS = {
 
 		function showNav(){
 
-			mainWrapper.css('paddingTop', '55px');
+			if ( !mainWrapper.hasClass('fullHeight') ){
+				mainWrapper.css('paddingTop', '55px');
+			}
+
 			navParent.addClass('scroll');
 
 		}
@@ -167,7 +170,10 @@ callPageJS = {
 
 		function hideNav(){
 
-			mainWrapper.css('paddingTop', 'unset');
+			if ( !mainWrapper.hasClass('fullHeight') ){
+				mainWrapper.css('paddingTop', 'unset');
+			}
+
 			navParent.removeClass('scroll');
 
 		}
@@ -343,7 +349,13 @@ callPageJS = {
 
 				$('body').on('click', '.internal', router);
 
-				// $('body').on('click', '.abs_target', openLightbox);
+				$('body').on('click', 'button', function(e){
+						e.stopPropagation;
+						$(this).addClass('btnActive');
+
+					$('button').not($(this)).removeClass('btnActive');
+
+					});
 
 				pageId = $('.page').get(0).id;
 
@@ -371,7 +383,7 @@ callPageJS = {
 
 		var homeNav = document.querySelector('nav.home');
 
-		$('button').on('click', function(e){
+		$('body').on('click', 'button', function(e){
 			e.stopPropagation;
 			$(this).addClass('btnActive');
 
@@ -1762,7 +1774,8 @@ init : function(eh){
 about : {
 init : function(eh){
 
-var archiveElem = document.querySelectorAll('.archive_wrapper');
+var archiveElem = document.querySelectorAll('.archive_wrapper'),
+		archive_tag = $('.archive_tag');
 
 for( a = 0; a < archiveElem.length; a ++){
 
@@ -1776,6 +1789,21 @@ for( a = 0; a < archiveElem.length; a ++){
 	slideScroller.observe(archiveElem[a]);
 
 }
+
+archive_tag.on('click', function(){
+
+	var scrollKey = $(this).attr('data-scroll'),
+			archiveWrapper = $('.archive_wrapper'),
+			archiveIndex = $(this).index()+1,
+			scrollDuration = archiveIndex*350,
+			scrollTarget = $("#" + scrollKey),
+			scrollTo = scrollTarget.offset().top;
+
+			console.log(scrollDuration);
+
+		$(window).animate({scrollTop: scrollTo}, scrollDuration)
+
+});
 
 }
 },
