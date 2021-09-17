@@ -916,7 +916,6 @@ body.loadingImg{
   width: 100%;
   z-index: -8;
   min-height: 150px;
-  margin-top: -85px;
 }
 
 .hero_banner{
@@ -928,7 +927,6 @@ body.loadingImg{
   text-align: right;
   width: 100%;
   float: right;
-  margin-right: 25px;
 }
 
 .blackBG{
@@ -2088,7 +2086,6 @@ footer.innner_content{
       margin-left: auto;
       margin-right: auto;
       position: relative;
-      margin-top: -75px;
     }
 
     .hero_caption{
