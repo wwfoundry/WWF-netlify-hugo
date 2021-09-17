@@ -208,7 +208,6 @@ collections:
               - label: 'Hero Description'
                 name: 'alt'
                 widget: 'string'
-          - {label: 'Statement', name: 'statement', widget: 'markdown'}
           - label: 'Archived Projects'
             label_singular: 'Archive Project'
             name: 'archive'
