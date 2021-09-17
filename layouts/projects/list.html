@@ -3,13 +3,15 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
+	<div class="page_header">
+		<h1 class="page_title">{{.Title}}</h1>
+	</div>
 		<div id="filter_wrapper">
 			<div id="filter_menu">
 
 				{{ $projects := .Site.GetPage "projects_main"}}
 
 				{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
-
 				<div class="col_40">
 					<label>Filter Projects</label>
 					<div id="filter_menu_inner">
@@ -20,7 +22,6 @@
 					</div>
 				</div>
 				<div class="col_60">
-					<h1 class="page_title">{{.Title}}</h1>
 				</div>
 			</div>
 			<div class="filter overlay">

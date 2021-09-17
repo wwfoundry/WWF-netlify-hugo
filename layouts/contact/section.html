@@ -22,6 +22,12 @@
 							<p>{{.Site.Data.contact.data_street}}<br>
 							{{.Site.Data.contact.data_city}} {{.Site.Data.contact.data_zip}}<br></p>
 						</div>
+						{{range .Site.Data.contact.custom_contact}}
+							<div class="col_33 collapse">
+							<h3>{{.custom_contact_type}}</h3>
+							<p>{{.custom_contact_information}}</p>
+						</div>
+						{{end}}
 					</div>
 				</div>
 		</div>

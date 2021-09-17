@@ -825,15 +825,19 @@ nav.home>#menu>#controls>#hamburger>.bar{
 /*---------------*/
 
 .main_content{
-    display: block;
-    position: relative;
-    min-height: 100vh;
-    -webkit-mask-size: 200% 100%;
-    mask-size: 200% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repat: no-repeat;
-    will-change: -webkit-mask-position, opacity, visibility;
-    transition: height .25s ease-in;
+  display: block;
+  position: relative;
+  min-height: calc(100vh - 55px);
+  -webkit-mask-size: 200% 100%;
+  mask-size: 200% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repat: no-repeat;
+  will-change: -webkit-mask-position, opacity, visibility;
+  transition: height .25s ease-in;
+}
+
+.main_content.fullHeight{
+  min-height: 100vh;
 }
 
 .page_section{
@@ -898,14 +902,13 @@ body.loadingImg{
 }
 
 .inner_content.gallery{
-  padding-top: 25px;
+  padding-top: 10px;
 }
 
 .flex_row{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-bottom: 25px;
   width: 100%;
 }
 
@@ -914,6 +917,7 @@ body.loadingImg{
   padding-bottom: 50px;
   z-index: -8;
   min-height: 150px;
+  margin-top: -85px;
 }
 
 .hero_banner{
@@ -1633,11 +1637,12 @@ footer.innner_content{
 #timeline{
   position: absolute;
   left: 10px;
-  top: 100px;
+  top: 125px;
   bottom: 75px;
   width: 1px;
-  height: calc(100% - 175px);
-  background-color: white;
+  height: calc(100% - 200px);
+  background-color: #ffffff;
+  opacity: .25;
 }
 
 /*13) Lightbox */
@@ -1768,8 +1773,8 @@ footer.innner_content{
 
 @media screen and (max-width: 1150px){
 
-    .inner_content{
-    padding: 25px 10px;
+  .inner_content{
+    padding: 10px;
   }
 
   .inner_content.gallery{
@@ -1798,8 +1803,12 @@ footer.innner_content{
 
   .col_33.collapse,
   .col_25.colapse{
-    border-bottom: 1px solid black;
     padding-bottom: 30px;
+  }
+
+  .col_25.collapse:last-child,
+  .col_33.collapse:last-child{
+    border-bottom: 1px solid black;
   }
 
   .flex_row{
@@ -1944,7 +1953,7 @@ footer.innner_content{
 
   .index{
     height:fit-content;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .filter{
@@ -2079,6 +2088,7 @@ footer.innner_content{
       margin-left: auto;
       margin-right: auto;
       position: relative;
+      margin-top: -75px;
     }
 
     .hero_caption{
@@ -2129,5 +2139,11 @@ footer.innner_content{
       height: 35px;
       background-color: white;*/
     }
+
+@media screen and (max-width: 800px){
+  .hero{
+    margin-top: unset;
+  }
+}
 
 }

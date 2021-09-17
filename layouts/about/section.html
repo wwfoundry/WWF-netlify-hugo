@@ -16,11 +16,11 @@
 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
 <div class="page_section">
-  <div class="inner_content">
-      <div class="hero loadingImg lazyTrueImg">
+  <div class="hero loadingImg lazyTrueImg">
         <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.Params.hero_obj.alt}}">
         <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
-      </div>
+    </div>
+  <div class="inner_content">
       <div class="flex_row">
         <div class="col_40">
           <h1>{{.Title}}</h1>

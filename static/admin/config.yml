@@ -131,6 +131,18 @@ collections:
           - label: "Info Email"
             name: "email"
             widget: "string"
+          - label: "Custom Contact Information"
+            name: "custom_contact"
+            widget: "list"
+            required: false
+            fields:
+              - label: "Type"
+                name: "custom_contact_type"
+                widget: "string"
+              - label: "Information"
+                name: "custom_contact_information"
+                widget: "string"
+
       - label: "Project Filter Tags"
         name: "filter_tags"
         editor:
@@ -141,21 +153,18 @@ collections:
             label_singular: "Material Tag"
             name: "material_tag"
             widget: "list"
-            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'material_string', widget: 'string'}
           - label: "Process Tags"
             label_singular: "Process Tag"
             name: "process_tag"
             widget: "list"
-            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'process_string', widget: 'string'}
           - label: "Year Tags"
             label_singular: "Year Tag"
             name: "year_tag"
             widget: "list"
-            hint: "WARNING - Tags should be one word only."
             fields:
               - {label: 'Tag', name: 'year_string', widget: 'string'}
   - label: "Pages"
