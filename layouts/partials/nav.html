@@ -1,6 +1,6 @@
-<nav {{if .IsHome }} class="home" {{end}}>
+<nav {{ if or (.IsHome) (eq .Title "About") }} class="home" {{end}}>
 		<!--LOGO SVG -->
-		<a id="wwf_logo" {{if .IsHome }} class="fill_change" {{end}} href="/">
+		<a id="wwf_logo" {{ if or (.IsHome) (eq .Title "About") }} class="fill_change" {{end}} href="/">
 			{{ .Site.Data.logo.svgEditor.code | safeHTML}}
 		</a>
 		<div id="menu">
@@ -25,7 +25,7 @@ viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="pres
 					<div class="bar" id="bar3"></div>
 				</button>
 			</div>
-			<div id="menu_wrapper" class="{{if .IsHome}}fill_change{{end}}">
+			<div id="menu_wrapper" class='{{ if or (.IsHome) (eq .Title "About") }}fill_change{{end}}'>
 			{{partial "menu_base" .}}
 			</div>
 		</div>

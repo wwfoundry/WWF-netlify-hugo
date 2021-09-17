@@ -843,6 +843,10 @@ nav.home>#menu>#controls>#hamburger>.bar{
 .page_section{
 }
 
+.page_section.blackBG{
+  padding-top: 55px;
+}
+
 .loaded_inner{
 
 }
@@ -914,7 +918,6 @@ body.loadingImg{
 
 .hero{
   width: 100%;
-  z-index: -8;
   min-height: 150px;
 }
 
@@ -955,6 +958,10 @@ body.loadingImg{
 
 border-bottom:solid 1px white;
 
+}
+
+.white_over{
+  border-top: solid 1px #E4E5E6;
 }
 
 .black_under{
@@ -1711,7 +1718,7 @@ footer.innner_content{
   }
 
   nav.home{
-    background-color: rgba(0, 0, 0, .5);
+     background-color:rgba(21, 21, 21, 0.5);
   }
 
   nav.scroll{
@@ -2079,7 +2086,7 @@ footer.innner_content{
     }
 
     .hero{
-      width: 100%
+      width: 100%;
       margin-top: unset;
       display: block;
       max-width: 1400px;

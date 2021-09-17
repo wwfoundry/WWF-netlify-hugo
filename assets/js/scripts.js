@@ -213,10 +213,10 @@ callPageJS = {
 
 		function checkUrl(link){
 
-			if(link == '/'){
-				return 'home';
-			} else {
-				return false;
+			if(link == '/' || link == '/about/'){
+				return true;
+			} else{
+				return false
 			}
 
 		}
@@ -279,7 +279,9 @@ callPageJS = {
 
 			        } else {
 
-			        	if( page !== 'home' && mainWrapper.hasClass('fullHeight') ){
+			        	if( !page ){
+
+			        		// console.log(page)
 
 									mainWrapper.removeClass('fullHeight');
 
@@ -289,7 +291,9 @@ callPageJS = {
 
 									$('#menu_wrapper').removeClass('fill_change');
 
-								} else if (page == 'home') {
+								} else if (page) {
+
+									console.log(page)
 
 									mainWrapper.addClass('fullHeight');
 
