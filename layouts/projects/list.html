@@ -3,16 +3,14 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
-	<div class="page_header">
-		<h1 class="page_title">{{.Title}}</h1>
-	</div>
+	<div class="page_header projects">
+		<h1 class="page_title projects">{{.Title}}</h1>
 		<div id="filter_wrapper">
 			<div id="filter_menu">
 
 				{{ $projects := .Site.GetPage "projects_main"}}
 
 				{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
-				<div class="col_40">
 					<label>Filter Projects</label>
 					<div id="filter_menu_inner">
 						<button class="filter_option material"><h3>Material</h3></button>
@@ -20,9 +18,6 @@
 						<button class="filter_option year"><h3>Year</h3></button>
 						<button class="filter_option all"><h3>All</h3></button>
 					</div>
-				</div>
-				<div class="col_60">
-				</div>
 			</div>
 			<div class="filter overlay">
 				<button class="filter_xit" id="xit">
@@ -55,6 +50,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 		<div class="abs_wrapper abs_filter"></div>
 	<div id="index_container">
 		<div class="index">

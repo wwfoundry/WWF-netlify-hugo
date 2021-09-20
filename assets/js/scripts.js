@@ -1775,7 +1775,13 @@ about : {
 init : function(eh){
 
 var archiveElem = document.querySelectorAll('.archive_wrapper'),
-		archive_tag = $('.archive_tag');
+		archive_tag = $('.archive_tag'),
+		archive_nav_toggle = $('#archive_nav_toggle'),
+		archive_nav_inner = $('.archive_nav_inner'),
+		archive_nav_wrapper = $('#archive_nav_wrapper'),
+		archive_nav_arr = [archive_nav_inner, archive_nav_toggle, archive_nav_wrapper],
+		filter_anchor = $('.archive.inner_content').offset().top,
+		scrollDuration = 400;
 
 for( a = 0; a < archiveElem.length; a ++){
 
@@ -1795,13 +1801,22 @@ archive_tag.on('click', function(){
 	var scrollKey = $(this).attr('data-scroll'),
 			archiveWrapper = $('.archive_wrapper'),
 			archiveIndex = $(this).index()+1,
-			scrollDuration = archiveIndex*350,
 			scrollTarget = $("#" + scrollKey),
 			scrollTo = scrollTarget.offset().top;
 
+	scrollDuration = archiveIndex*350;
+
 			console.log(scrollDuration);
 
-		$(window).animate({scrollTop: scrollTo}, scrollDuration)
+		$(window).animate({scrollTop: scrollTo}, scrollDuration);
+
+	return scrollDuration;
+
+});
+
+archive_nav_toggle.on('click', function(){
+
+	$(window).animate({scrollTop: filter_anchor}, scrollDuration)
 
 });
 

@@ -640,6 +640,10 @@ nav.home{
   transition: fill ease-in-out .5s;
 }
 
+.fill_change.white_stroke{
+  stroke: #ffffff;
+}
+
 #wwf_logo.fill_change{
   stroke: #ffffff;
   stroke-width: .5px;
@@ -1444,6 +1448,32 @@ footer.innner_content{
   flex-wrap:wrap;
 }
 
+.page_header.projects{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(21, 21, 21, .5);
+  margin-bottom: 25px;
+}
+
+.page_title.projects{
+}
+
+/*.page_header.projects:after{
+  content: '';
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background-color: #000000;
+  z-index: 1;
+}*/
+
 .filter{
   position:relative;
 }
@@ -1506,9 +1536,10 @@ footer.innner_content{
 
 #filter_menu{
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   padding: 0 10px;
+  text-align: right;
 }
 
 #filter_menu_inner{
@@ -1516,12 +1547,12 @@ footer.innner_content{
 }
 
 .filter_option{
-  margin-right:25px;
+  margin-left:25px;
   border-bottom:2px solid transparent;
 }
 
 .filter_option.btnActive{
-  margin-right:25px;
+  margin-left:25px;
   border-bottom:2px solid black;
 }
 
@@ -1654,6 +1685,69 @@ footer.innner_content{
   height: 100%;
  /* min-height: 350px;*/
   object-fit: contain;
+}
+
+#archive_nav_wrapper{
+  position: sticky;
+  bottom: 25px;
+  right: 0px;
+  z-index: 4999;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.archive_nav#filter_inner{
+
+  width: 100%;
+
+}
+
+.archive_year_divider{
+  width: 100%;
+}
+
+#archive_nav_toggle{
+  stroke: #ffffff;
+  transform: rotate(90deg);
+  padding: 5px 10px;
+  background-color: rgba(21,21,21,0.72);
+}
+
+#archive_nav_toggle.active>svg{
+  display: none;
+}
+
+#archive_xit{
+    display: none;
+}
+
+#archive_nav_toggle.active>#archive_xit{
+  display: block;
+}
+
+.archive_slide_navigation{
+  display: flex;
+  flex-direction: column;
+}
+
+.archive_slide_navigation>.icon{
+}
+
+.archive_slide_navigation>.left{
+  transform: rotate(90deg);
+}
+
+.archive_slide_navigation>.right{
+  transform: rotate(-90deg);
+}
+
+#filter_inner.archive_nav_inner{
+  display: none;
+}
+
+#filter_inner.archive_nav_inner.active{
+  display: flex;
 }
 
 #timeline{
@@ -2159,6 +2253,11 @@ footer.innner_content{
       width: 5px;
       height: 35px;
       background-color: white;*/
+    }
+
+    #archive_nav_wrapper{
+      flex-direction: row;
+      justify-content: flex-end;
     }
 
 @media screen and (max-width: 800px){

@@ -32,50 +32,76 @@
         </div>
       </div>
   </div>
-  <div class="inner_content">
+  <div class="inner_content archive">
     <div class="flex_row">
       <div class="col_25 collapse">
         <h1 class="archive page_title">Historic Projects</h1>
       </div>
       <div class="col_75 collapse">
-        <div id="filter_inner" class="margin_negative">
-        {{range $index, $value := sort .Params.archive ".archive_obj.archive_year" }}
-            <button class="archive_tag gallery_tag invert margin padding" data-scroll="{{$index}}_archive"><label>{{.archive_obj.archive_title}}</label></button>
-        {{end}}
-      </div>
+          <div id="filter_inner" class="archive_nav margin_negative">
+          {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
+          {{ range $index, $value := $sorted_archive }}
+              <button class="archive_tag gallery_tag invert margin padding" data-scroll="{{$index}}_archive">
+                <label>{{.archive_obj.archive_title}}, {{.archive_obj.archive_year}}</label>
+              </button>
+          {{end}}
+          </div>
       </div>
     </div>
   </div>
 </div>
 <div class="page_section blackBG">
   <div class="inner_content">
-    {{range $index, $value := sort .Params.archive ".archive_obj.archive_year" }}
-    <div id="{{$index}}_archive" class="flex_row archive_wrapper blackBG" style="z-index: {{$index}}">
-      <div class="col_40">
-        <div class="archive_caption_inner">
-          <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
-          <h1 class="first">{{.archive_obj.archive_title}}</h1>
-          <p><label>{{.archive_obj.archive_artist}}</label></p>
+    {{range $index, $value := $sorted_archive }}
+        <div id="{{$index}}_archive" class="flex_row archive_wrapper blackBG" style="z-index: {{$index}}">
+          <div class="col_40">
+            <div class="archive_caption_inner">
+              <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
+              <h1 class="first">{{.archive_obj.archive_title}}</h1>
+              <p><label>{{.archive_obj.archive_artist}}</label></p>
+            </div>
+          </div>
+          <div class="col_60">
+
+            {{ $comparison := .archive_obj.archive_image }}
+
+            {{ $full_size := "700x" }}
+
+            {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+            {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+
+            <div class="loadingImg lazyTrueImg archive_image_inner">
+              <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+            </div>
+        
+          </div>
         </div>
-      </div>
-      <div class="col_60">
 
-        {{ $comparison := .archive_obj.archive_image }}
-
-        {{ $full_size := "700x" }}
-
-        {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
-
-        {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
-
-        <div class="loadingImg lazyTrueImg archive_image_inner">
-          <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
-        </div>
-    
-      </div>
-    </div>
     {{end}}
     <div id="timeline"></div>
+    <div id="archive_nav_wrapper">
+        <button id="archive_nav_toggle" class="icon fill_change">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+            <style type="text/css">
+              .st0{fill:none;}
+            </style>
+            <line class="st0" x1="29.7" y1="20.4" x2="0" y2="50"/>
+            <line class="st0" x1="98.7" y1="50" x2="0" y2="50"/>
+            <line class="st0" x1="29.7" y1="79.6" x2="0" y2="50"/>
+            </svg>
+            <img id="archive_xit" class="icon fill_change_invert" src="/images/resources/xit.svg">
+      </button>
+<!--       <div class="archive_slide_navigation">
+        <button class="left fill_change white_stroke icon">
+          {{partial "arrow" .}}
+        </button>
+         <button class="right fill_change white_stroke icon">
+          {{partial "arrow" .}}
+        </button>
+      </div> -->
+    </div>
   </div>
 </div>
 
