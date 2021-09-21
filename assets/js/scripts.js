@@ -140,7 +140,7 @@ callPageJS = {
 
 			pageOffset = window.pageYOffset;
 
-			if( !$('body').hasClass('locked') && !($('#filter_wrapper').hasClass('active')) && field < 1150 ){
+			if( !$('body').hasClass('locked') && !($('#filter_section').hasClass('active')) && field < 1150 ){
 
 				if (document.body.scrollTop > 50 | document.documentElement.scrollTop > 50) {
 
@@ -534,16 +534,18 @@ index : {
 			abs = $('.abs_filter'),
 			bodyWrapper = $('.inner_content'),
 			indexContainer = $('#index_container'),
-			filterContainer = $('#filter_wrapper'),
+			filterContainer = $('#filter_section'),
 			xit = $('.filter_xit'),
 			container = $('.tag'),
 			material_container = $('.material_tag'),
 			process_container = $('.process_tag'),
 			year_container = $('.year_tag'),
-			m = $('#filter_menu'),
+			m = $('.page_header.projects'),
 			all = $('.all'),
 			tagBtn = $('.filter_option'),
 			filterTag = $('.tag'),
+			activeTag = $('.active_tag'),
+			activeTagLabel = $('.active_tag>label'),
 			filterProjects = document.getElementsByClassName('project'),
 			filterLength = filterProjects.length,
 			navParent = $('nav'),
@@ -569,6 +571,8 @@ index : {
 
 				if( !o.hasClass('active') ){
 
+					m.addClass('grey_under');
+
 					gsap.to(indexContainer, {duration: .4, autoAlpha: '0'});
 
 					navParent.css('visibility', 'hidden');
@@ -584,8 +588,6 @@ index : {
 						abs.fadeIn(300).addClass('active');
 
 						o.fadeIn(300).addClass('active');
-
-						o.css('borderTop', 'solid 1px black');
 
 					});
 
@@ -617,7 +619,9 @@ index : {
 
 				openFilterMenu()
 
-			} else {
+			} else if ( $(this).hasClass('all') ) {
+
+				removeTag($('.project'));
 
 				all.fadeOut(300).removeClass('active');
 
@@ -633,9 +637,9 @@ index : {
 
 				o.fadeOut(300).removeClass('active');
 
-				navParent.css('visibility', 'visible');
+				m.removeClass('grey_under');
 
-				o.css('borderBottom', 'unset');
+				navParent.css('visibility', 'visible');
 
 				container.fadeOut(300);
 
@@ -651,6 +655,22 @@ index : {
 				lockBody(state);
 
 		}
+
+	function showActiveTag(tag, attribute){
+
+		tag.find('.active_tag').addClass('active').children('.active_tag_inner').find('label').text(attribute);
+
+	}
+
+	function removeTag(tag){
+
+		tag.each(function(){
+
+			$(this).find('.active_tag').removeClass('active').children('.active_tag_inner').find('label').text('');
+
+		});
+		
+	}
 
 		xit.on('click', function(){
 
@@ -670,13 +690,16 @@ index : {
 
 			all.fadeIn(300).addClass('active');
 
-			var filterAttr = $(this).attr('data-filter');
+			var filterAttr = $(this).attr('data-filter'),
+					filterText = $(this).text();
 
 			for (var i = 0; i < filterProjects.length; i ++ ){
 
 				var projectAttr = filterProjects[i].getAttribute('data-filter');
 
 				if( projectAttr.includes(filterAttr) ){
+
+					showActiveTag($(filterProjects[i]), filterText);
 
 					filterProjects[i].classList.add('filtered');
 

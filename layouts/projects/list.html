@@ -3,10 +3,11 @@
 {{end}}
 {{ define "main" }}
 <div class="inner_content">
-	<div class="page_header projects">
-		<h1 class="page_title projects">{{.Title}}</h1>
-		<div id="filter_wrapper">
-			<div id="filter_menu">
+	<div id="filter_section">
+		<div class="page_header projects">
+			<h1 class="page_title projects first">{{.Title}}</h1>
+			<div id="filter_wrapper">
+				<div id="filter_menu">
 
 				{{ $projects := .Site.GetPage "projects_main"}}
 
@@ -18,30 +19,32 @@
 						<button class="filter_option year"><h3>Year</h3></button>
 						<button class="filter_option all"><h3>All</h3></button>
 					</div>
+				</div>
 			</div>
+		</div>
 			<div class="filter overlay">
-				<button class="filter_xit" id="xit">
-						<img class="icon" src="/images/resources/xit.svg">
-				</button>
-				<div id="filter_inner">
-					{{ range sort .Site.Data.tags.material_tag }}
-						{{with .material_string}}
-							<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-								<h3>{{.}}</h3>
-							</button>
+					<button class="filter_xit" id="xit">
+								<img class="icon" src="/images/resources/xit.svg">
+					</button>
+					<div id="filter_inner">
+						{{ range sort .Site.Data.tags.material_tag }}
+							{{with .material_string}}
+								<button class="material_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+									<h3>{{.}}</h3>
+								</button>
+							{{end}}
 						{{end}}
-					{{end}}
 
-					{{range sort .Site.Data.tags.process_tag }}
-						{{with .process_string }}
-							<button class="process_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
-								<h3>{{.}}</h3>
-							</button>
+						{{range sort .Site.Data.tags.process_tag }}
+							{{with .process_string }}
+								<button class="process_tag tag margin {{replaceRE "(\\s)" "" . | lower}}" data-filter="{{replaceRE "(\\s)" "" . | lower}}">
+										<h3>{{.}}</h3>
+								</button>
+							{{end}}
 						{{end}}
-					{{end}}
 
-					{{range sort .Site.Data.tags.year_tag }}
-						{{with .year_string }}
+						{{range sort .Site.Data.tags.year_tag }}
+							{{with .year_string }}
 							<button class="year_tag tag margin " data-filter="{{ replaceRE "(\\s)" "" . | lower}}">
 								<h3>{{.}}</h3>
 							</button>
@@ -50,7 +53,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 		<div class="abs_wrapper abs_filter"></div>
 	<div id="index_container">
 		<div class="index">
@@ -87,6 +89,11 @@
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
 							</div>
+							<div class="active_tag grey_over break_section">
+								<div class="active_tag_inner gallery_tag break_section">
+									<label></label>
+								</div>
+							</div>
 						</div>
 					</a>
 					{{ end }}
@@ -99,6 +106,11 @@
 							<div class="project_info">
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
+							</div>
+							<div class="active_tag grey_over">
+								<div class="active_tag_inner gallery_tag break_section">
+									<label></label>
+								</div>
 							</div>
 						</div>
 					</a>
