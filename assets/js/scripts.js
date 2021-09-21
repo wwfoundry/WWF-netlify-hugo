@@ -571,7 +571,7 @@ index : {
 
 				if( !o.hasClass('active') ){
 
-					m.addClass('grey_under');
+					// m.addClass('grey_under');
 
 					gsap.to(indexContainer, {duration: .4, autoAlpha: '0'});
 
@@ -623,7 +623,7 @@ index : {
 
 				removeTag($('.project'));
 
-				all.fadeOut(300).removeClass('active');
+				all.removeClass('active');
 
 				$('.project').addClass('filtered');
 
@@ -637,7 +637,7 @@ index : {
 
 				o.fadeOut(300).removeClass('active');
 
-				m.removeClass('grey_under');
+				// m.removeClass('grey_under');
 
 				navParent.css('visibility', 'visible');
 
@@ -660,6 +660,8 @@ index : {
 
 		tag.find('.active_tag').addClass('active').children('.active_tag_inner').find('label').text(attribute);
 
+		all.children('label').text(attribute);
+
 	}
 
 	function removeTag(tag){
@@ -678,7 +680,7 @@ index : {
 
 				$('.project').addClass('filtered');
 
-				all.fadeOut(300).removeClass('active');
+				all.removeClass('active');
 
 				closeFilterWindow();
 
@@ -688,7 +690,7 @@ index : {
 
 		filterTag.on('click', function (e){
 
-			all.fadeIn(300).addClass('active');
+			all.addClass('active');
 
 			var filterAttr = $(this).attr('data-filter'),
 					filterText = $(this).text();

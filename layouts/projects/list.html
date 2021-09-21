@@ -6,7 +6,7 @@
 	<div id="filter_section">
 		<div class="page_header projects">
 			<div id="filter_wrapper">
-				<div id="filter_menu">
+				<div id="filter_menu" class="grey_under">
 
 				{{ $projects := .Site.GetPage "projects_main"}}
 
@@ -16,7 +16,7 @@
 						<button class="filter_option material"><h3>Material</h3></button>
 						<button class="filter_option process"><h3>Process</h3></button>
 						<button class="filter_option year"><h3>Year</h3></button>
-						<button class="filter_option all"><h3>All</h3></button>
+						<button class="filter_option gallery_tag all"><img class="icon" src="/images/resources/xit.svg"><label></label></button>
 					</div>
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
 							</div>
-							<div class="active_tag grey_over break_section">
+							<div class="active_tag break_section">
 								<div class="active_tag_inner gallery_tag break_section">
 									<label></label>
 								</div>
@@ -106,7 +106,7 @@
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
 							</div>
-							<div class="active_tag grey_over">
+							<div class="active_tag">
 								<div class="active_tag_inner gallery_tag break_section">
 									<label></label>
 								</div>
