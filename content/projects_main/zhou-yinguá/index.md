@@ -9,7 +9,8 @@ thumbnailImages:
   - image: /projects_main/mr-chow/images/4452_mr_chow_07.jpeg
   - image: /projects_main/mr-chow/images/4452.01_mr_chow_final_approval_15.jpg
 material_tag:
-  - Bronze
+  - Wax
+  - Stainless Steel
 process_tag:
   - Silicone Mold
   - Cast
