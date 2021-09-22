@@ -9,6 +9,7 @@ material_tag:
   - material_string: Brass
   - material_string: Copper
   - material_string: Zinc
+  - material_string: Wax
 process_tag:
   - process_string: 3D Print
   - process_string: Silicone Mold
