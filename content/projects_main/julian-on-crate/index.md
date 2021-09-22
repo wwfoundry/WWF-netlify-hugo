@@ -15,6 +15,7 @@ thumbnailImages:
   - image: /projects_main/julian-on-crate/images/4370.1_julian_schnabel_final400_edit.jpg
 material_tag:
   - Wax
+  - Mild Steel
 process_tag:
   - Silicone Mold
   - Cast
