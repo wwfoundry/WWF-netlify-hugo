@@ -14,7 +14,9 @@ thumbnailImages:
   - image: /projects_main/river-of-fundament/images/4191.1_zinc_car_grill_final_7.jpg
 material_tag:
   - Bronze
-  - Stainless Steel
+  - Brass
+  - Copper
+  - Zinc
 process_tag:
   - Silicone Mold
   - Cast
