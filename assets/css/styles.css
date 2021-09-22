@@ -1650,9 +1650,9 @@ footer.innner_content{
     content: '';
     position: absolute;
     right: 0;
-    width: 20px;
+    width: 35px;
     height: 100%;
-    background-image: linear-gradient(to left,#ffffff 40%,rgba(255, 255, 255, 0) 70%);
+    background-image: linear-gradient(to left,#ffffff 30%,rgba(255, 255, 255, 0) 80%);
 }
 
 #index_container{
