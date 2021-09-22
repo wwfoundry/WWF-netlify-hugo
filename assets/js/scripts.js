@@ -1135,10 +1135,6 @@ init : function(eh){
 
 		slideAreaContainer.setAttribute('data-project', slideID );
 
-		if (window.history.pushState){
-				window.history.pushState(null, null, '#' + slideID);
-		}
-
 		animateSlides(d, loadUrl, slideCount, swiper, range);
 
 		loadState = true;
