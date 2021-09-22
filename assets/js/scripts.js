@@ -635,18 +635,17 @@ index : {
 
 	function closeFilterWindow(){
 
-
-				gsap.to(indexContainer, {duration: .5, autoAlpha: '1', onComplete: resetFilterMenu});
-
 				container.fadeOut(300);
 
-				o.fadeOut(300).removeClass('active');
+				o.fadeOut(300).removeClass('active', resetFilterMenu);
 
 				function resetFilterMenu(){
 
 					abs.css('display', 'none').removeClass('active');
 
 					filterContainer.removeClass('active', function(){
+
+					gsap.to(indexContainer, {duration: .5, autoAlpha: '1'});
 
 					// m.removeClass('grey_under');
 
