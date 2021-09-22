@@ -1,12 +1,12 @@
 ---
-title: Test
-artist: test
-year_tag: "2020"
+title: Water Castings
+artist: Matthew Barney
+year_tag: "2015"
 material: test
-featured: /projects_main/test/images/haas_texture_sample.pdf
+featured: /projects_main/water-castings/images/ns_clientstorage_total.jpg
 thumbnailImages: []
 material_tag:
-  - Aluminum
+  - Bronze
 process_tag:
-  - Patina
+  - Cast
 ---
