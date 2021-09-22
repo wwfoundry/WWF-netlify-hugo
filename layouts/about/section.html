@@ -38,7 +38,7 @@
         <h1 class="archive page_title">Historic Projects</h1>
       </div>
       <div class="col_75 collapse">
-          <div id="filter_inner" class="archive_nav margin_negative">
+          <div id="filter_inner" class="archive_nav margin_negative carousel">
           {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
 
           {{ range $index, $value := $sorted_archive }}
@@ -79,7 +79,7 @@
               <p><label>{{.archive_obj.archive_artist}}</label></p>
             </div>
           </div>
-          <div class="col_60 flex_vertical_align_center">
+          <div class="col_60 flex_vertical_align_center carousel">
 
             {{ range .archive_obj.archive_images }}
 
@@ -93,8 +93,8 @@
 
               {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-              <div class="loadingImg lazyTrueImg archive_image_inner">
-                <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+              <div class="loadingImg lazyTrueImg archive_image_inner carousel_inner margin">
+                <img class="card lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
               </div>
 
             {{ end }}

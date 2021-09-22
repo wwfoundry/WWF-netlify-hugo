@@ -22,6 +22,9 @@ archive:
       archive_images:
         - image: /uploads/images/Mine_Camp.jpg
         - image: /uploads/images/kienholz-final-photos_0011-ed.jpeg
+        - image: /uploads/images/kienholz-final-photos_0011-ed.jpeg
+        - image: /uploads/images/kienholz-final-photos_0011-ed.jpeg
+        - image: /uploads/images/kienholz-final-photos_0011-ed.jpeg
       archive_title: Mine Camp
       archive_artist: Ed Kienholz
       archive_year: "1990"
