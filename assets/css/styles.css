@@ -1602,7 +1602,7 @@ footer.innner_content{
 .filter_option.all.active{
   position: relative;
   display: flex;
-  height: 15px;
+  height: 18px;
   flex-shrink: 1;
   text-transform: uppercase;
 }
