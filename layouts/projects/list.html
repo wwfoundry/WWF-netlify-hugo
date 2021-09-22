@@ -103,7 +103,7 @@
 
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
 						<div class="margin project_inner loadingImg lazyTrueImg">
-							<img class="index_thumbnail lazyload" src="{{$scratch_load_src.RelPermalink}}" data-src="{{$scratch_thumb_src.RelPermalink}}" alt="{{.Title}}">
+							<img class="index_thumbnail card lazyload" src="{{$scratch_load_src.RelPermalink}}" data-src="{{$scratch_thumb_src.RelPermalink}}" alt="{{.Title}}">
 							<div class="project_info">
 								<h3>{{.Title}}</h3>
 								<label>{{ .Params.artist }}</label>
@@ -119,7 +119,7 @@
 				{{else if eq $media_featured_ext ".mp4" }}
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
 						<div class="margin project_inner">
-								<video class="reel index_thumbnail lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
+								<video class="reel index_thumbnail card lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 										<source src="{{ .Params.featured }}" type="video/mp4" data-url="">
 								</video>
 							<div class="project_info">

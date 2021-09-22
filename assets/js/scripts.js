@@ -1838,11 +1838,13 @@ archive_tag.on('click', function(){
 			archiveWrapper = $('.archive_wrapper'),
 			archiveIndex = $(this).index()+1,
 			scrollTarget = $("#" + scrollKey),
-			scrollTo = scrollTarget.offset().top;
+			scrollTo = scrollTarget.offset().top - 65;
 
 	scrollDuration = archiveIndex*350;
 
-			console.log(scrollDuration);
+			console.log(scrollTarget.offset().top)
+
+			console.log(scrollTo);
 
 		$(window).animate({scrollTop: scrollTo}, scrollDuration);
 

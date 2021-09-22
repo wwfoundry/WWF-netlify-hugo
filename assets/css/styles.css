@@ -939,6 +939,12 @@ body.loadingImg{
   width: 100%;
 }
 
+.flex_vertical_align_center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .hero{
   width: 100%;
   min-height: 150px;
@@ -953,6 +959,11 @@ body.loadingImg{
   text-align: right;
   width: 100%;
   float: right;
+}
+
+.card{
+  object-fit: cover;
+  background-size: cover;
 }
 
 .whiteBG{
@@ -1682,7 +1693,6 @@ footer.innner_content{
 .index_thumbnail{
   width:100%;
   height:430px;
-  object-fit: cover;
 }
 
 /*11) Contact */
@@ -1724,6 +1734,28 @@ footer.innner_content{
 
 .archive.page_title{
   text-align:left;
+}
+
+.archive_tag{
+  min-height: 250px;
+  min-width: 200px;
+  position: relative;
+}
+
+.archive_tag_inner{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: rgba(21, 21, 21, .75);
+  width: 100%;
+  height: 100%;
 }
 
 .archive_wrapper{
@@ -1797,7 +1829,8 @@ footer.innner_content{
 }
 
 .archive_nav#filter_inner{
-
+  flex-wrap: nowrap;
+  overflow-x: scroll;
   width: 100%;
 
 }
@@ -2156,7 +2189,6 @@ footer.innner_content{
 
   .index_thumbnail{
     height:300px;
-    background-size:cover;
   }
 
   #filter_section.active{
@@ -2223,7 +2255,6 @@ footer.innner_content{
   .index_thumbnail{
     height:200px;
     width:100%;
-    background-size:cover;
   }
 
 }

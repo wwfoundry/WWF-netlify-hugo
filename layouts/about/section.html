@@ -41,8 +41,17 @@
           <div id="filter_inner" class="archive_nav margin_negative">
           {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
           {{ range $index, $value := $sorted_archive }}
-              <button class="archive_tag gallery_tag invert margin padding" data-scroll="{{$index}}_archive">
-                <label>{{.archive_obj.archive_title}}, {{.archive_obj.archive_year}}</label>
+
+              {{ $comparison := .archive_obj.archive_image }}
+
+              {{ $thumb_size := "300x" }}
+
+              {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+
+              <button class="card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
+                <div class="archive_tag_inner">
+                  <label>{{.archive_obj.archive_title}}, {{.archive_obj.archive_year}}</label>
+                </div>
               </button>
           {{end}}
           </div>
@@ -61,20 +70,26 @@
               <p><label>{{.archive_obj.archive_artist}}</label></p>
             </div>
           </div>
-          <div class="col_60">
+          <div class="col_60 flex_vertical_align_center">
 
-            {{ $comparison := .archive_obj.archive_image }}
+            {{ range .archive_obj.archive_images.image }}
 
-            {{ $full_size := "700x" }}
+              {{ $comparison := . }}
 
-            {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+              {{ $thumb_size := "50x" }}
 
-            {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+              {{ $full_size := "700x" }}
 
-            <div class="loadingImg lazyTrueImg archive_image_inner">
-              <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
-            </div>
-        
+              {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+              {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+
+              <div class="loadingImg lazyTrueImg archive_image_inner">
+                <img class="lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+              </div>
+
+            {{ end }}
+
           </div>
         </div>
 

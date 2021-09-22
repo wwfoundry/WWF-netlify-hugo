@@ -219,9 +219,14 @@ collections:
                 name: 'archive_obj'
                 widget: 'object'
                 fields:
-                  - label: 'Archive Image'
-                    name: 'archive_image'
-                    widget: 'image'
+                  - label: 'Archive Images'
+                    label_singular: 'Archive Image'
+                    name: 'archive_images'
+                    widget: 'list'
+                    fields:
+                        - label: "Image"
+                          name: "image"
+                          widget: "image"
                   - label: 'Title'
                     name: 'archive_title'
                     widget: 'string'
