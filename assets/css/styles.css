@@ -968,7 +968,6 @@ body.loadingImg{
 .card{
   object-fit: cover;
   background-size: cover;
-  box-shadow: 0 0 9px rgb(0 0 0);
 }
 
 .whiteBG{
@@ -1745,6 +1744,7 @@ footer.innner_content{
   min-height: 250px;
   min-width: 200px;
   position: relative;
+  box-shadow: 0 0 9px rgb(0 0 0);
 }
 
 .archive_tag_inner{
