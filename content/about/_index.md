@@ -15,15 +15,8 @@ statement: >-
   facilisis finibus. Praesent et elementum quam. Suspendisse potenti. Nullam
   mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
 
-  
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
-  condimentum turpis, id dignissim orci. Suspendisse potenti. Donec consectetur,
-  est facilisis consectetur pretium, magna risus dictum elit, sit amet dictum
-  est libero vel nunc. Phasellus pretium dui at aliquet imperdiet. Nulla mauris
-  tellus, rhoncus et varius vitae, sagittis a nunc. Curabitur luctus ligula leo,
-  a ornare mi dignissim tempus. Aliquam erat volutpat. Duis nec ligula vitae mi
-  facilisis finibus. Praesent et elementum quam. Suspendisse potenti. Nullam
-  mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac condimentum turpis, id dignissim orci. Suspendisse potenti. Donec consectetur, est facilisis consectetur pretium, magna risus dictum elit, sit amet dictum est libero vel nunc. Phasellus pretium dui at aliquet imperdiet. Nulla mauris tellus, rhoncus et varius vitae, sagittis a nunc. Curabitur luctus ligula leo, a ornare mi dignissim tempus. Aliquam erat volutpat. Duis nec ligula vitae mi facilisis finibus. Praesent et elementum quam. Suspendisse potenti. Nullam mauris nunc, mollis vitae lacus ut, iaculis convallis erat.
 archive:
   - archive_obj:
       archive_image: /uploads/images/Mine_Camp.jpg
@@ -115,5 +108,11 @@ archive:
       archive_title: Striding Figure
       archive_artist: Thomas Houseago
       archive_year: "2012"
+  - archive_obj:
+      archive_images:
+        - image: /uploads/images/132-3204_img.jpeg
+      archive_title: test
+      archive_artist: test
+      archive_year: "1920"
 intro: Test...
 ---
