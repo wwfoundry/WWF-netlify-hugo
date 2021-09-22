@@ -53,7 +53,7 @@
 <div class="page_section blackBG">
   <div class="inner_content">
     {{range $index, $value := $sorted_archive }}
-        <div id="{{$index}}_archive" class="flex_row archive_wrapper" style="z-index: {{$index}}">
+        <div id="{{$index}}_archive" class="flex_row archive_wrapper" style="z-index: {{$index}}" data-slide="{{ add 1 $index }}">
           <div class="col_40">
             <div class="archive_caption_inner">
               <h3 class="archive_year">{{.archive_obj.archive_year}}</h3>
@@ -81,7 +81,7 @@
     {{end}}
     <div id="timeline"></div>
     <div id="archive_nav_wrapper">
-        <button id="archive_nav_toggle" class="icon fill_change">
+        <button id="archive_nav_toggle" class="icon fill_change archive_overlay">
           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
             <style type="text/css">
@@ -93,14 +93,9 @@
             </svg>
             <img id="archive_xit" class="icon fill_change_invert" src="/images/resources/xit.svg">
       </button>
-<!--       <div class="archive_slide_navigation">
-        <button class="left fill_change white_stroke icon">
-          {{partial "arrow" .}}
-        </button>
-         <button class="right fill_change white_stroke icon">
-          {{partial "arrow" .}}
-        </button>
-      </div> -->
+      <div class="archive_slide_navigation archive_overlay">
+      	<label><span id="archive_current_slide"></span>/{{ len $sorted_archive }}</label>
+      </div>
     </div>
   </div>
 </div>

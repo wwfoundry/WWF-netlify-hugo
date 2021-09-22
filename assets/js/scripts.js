@@ -635,19 +635,22 @@ index : {
 
 	function closeFilterWindow(){
 
-				o.fadeOut(300).removeClass('active');
-
-				// m.removeClass('grey_under');
-
-				navParent.css('visibility', 'visible');
-
-				container.fadeOut(300);
 
 				gsap.to(indexContainer, {duration: .5, autoAlpha: '1', onComplete: resetFilterMenu});
 
 				function resetFilterMenu(){
 					filterContainer.removeClass('active', function(){
 					abs.css('display', 'none').removeClass('active');
+
+					o.fadeOut(300).removeClass('active');
+
+					// m.removeClass('grey_under');
+
+					navParent.css('visibility', 'visible');
+
+					container.fadeOut(300);
+
+
 				}).attr('style', '');
 				}
 
@@ -699,9 +702,9 @@ index : {
 
 				var projectAttr = filterProjects[i].getAttribute('data-filter');
 
-				if( projectAttr.includes(filterAttr) ){
+				showActiveTag($(filterProjects[i]), filterText);
 
-					showActiveTag($(filterProjects[i]), filterText);
+				if( projectAttr.includes(filterAttr) ){
 
 					filterProjects[i].classList.add('filtered');
 
@@ -1806,14 +1809,23 @@ var archiveElem = document.querySelectorAll('.archive_wrapper'),
 		archive_nav_wrapper = $('#archive_nav_wrapper'),
 		archive_nav_arr = [archive_nav_inner, archive_nav_toggle, archive_nav_wrapper],
 		filter_anchor = $('.archive.inner_content').offset().top,
-		scrollDuration = 400;
+		scrollDuration = 400,
+		currentSlideCount = $('#archive_current_slide');
 
 for( a = 0; a < archiveElem.length; a ++){
 
 	var slideScroller = new IntersectionObserver(
 
-	  ([e]) => e.target.classList.toggle("slide_fade", e.intersectionRatio < 1),
-	  { threshold: [1] },
+	  function ([e]) { 
+
+	  	var currentSlide = e.target.getAttribute('data-slide');
+
+	  	e.target.classList.toggle("slide_fade", e.intersectionRatio < 1);
+
+	  	currentSlideCount.text(currentSlide);
+
+	   },
+	  { threshold: [1] }
 
 	);
 
