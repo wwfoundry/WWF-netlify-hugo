@@ -3,7 +3,7 @@ title: Water Castings
 artist: Matthew Barney
 year_tag: "2015"
 material: test
-featured: /projects_main/water-castings/images/ns_clientstorage_total.jpg
+featured: /projects_main/water-castings/images/water_castings.mp4
 thumbnailImages: []
 material_tag:
   - Bronze
