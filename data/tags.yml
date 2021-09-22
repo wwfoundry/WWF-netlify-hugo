@@ -15,6 +15,7 @@ process_tag:
   - process_string: Patina
   - process_string: Paint
   - process_string: On Site Installation
+  - process_string: Mirror Polish
 year_tag:
   - year_string: "2021"
   - year_string: "2020"
