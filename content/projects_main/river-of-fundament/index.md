@@ -2,7 +2,7 @@
 title: River of Fundament
 artist: Matthew Barney
 year_tag: "2014"
-material: Bronze
+material: Brass, Bronze, Copper, Zinc
 featured: /projects_main/river-of-fundament/images/4095.1_throne_room_approval_28.jpg
 thumbnailImages:
   - image: /projects_main/river-of-fundament/images/4095.1_throne_room_approval_11.jpg
@@ -18,4 +18,5 @@ material_tag:
 process_tag:
   - Silicone Mold
   - Cast
+  - Mirror Polish
 ---
