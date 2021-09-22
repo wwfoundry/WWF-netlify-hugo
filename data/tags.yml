@@ -6,6 +6,9 @@ material_tag:
   - material_string: Wood
   - material_string: Glass
   - material_string: Stainless Steel Armature
+  - material_string: Brass
+  - material_string: Copper
+  - material_string: Zinc
 process_tag:
   - process_string: 3D Print
   - process_string: Silicone Mold
