@@ -1472,8 +1472,8 @@ footer.innner_content{
 }
 
 #filter_section.active{
-    position: fixed;
-  top:50px;
+  position: fixed;
+  top:70px;
   left: 0;
   right: 0;
   padding: 0 25px;
@@ -1596,11 +1596,15 @@ footer.innner_content{
   align-items: center;
   flex-direction: row;
   height: fit-content;
-  margin-right: 0px;
+  margin-right: 25px;
 }
 
 .filter_option.all.active{
+  position: relative;
   display: flex;
+  height: 15px;
+  flex-shrink: 1;
+  text-transform: uppercase;
 }
 
 .all>.icon{
@@ -1635,6 +1639,20 @@ footer.innner_content{
   justify-content: flex-end;
   padding: unset;
   font-size: .75rem;
+}
+
+.gallery_tag.active_tag_inner{
+  border: unset;
+  border-left: 1px solid black;
+}
+
+.filter_option.all.active:after{
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background-image: linear-gradient(to left,#ffffff 40%,rgba(255, 255, 255, 0) 70%);
 }
 
 #index_container{
@@ -1757,6 +1775,7 @@ footer.innner_content{
 
 .archive_image_inner{
   height:100%;
+  max-height: 50vh;
 }
 
 .archive_image{
@@ -2140,6 +2159,14 @@ footer.innner_content{
     background-size:cover;
   }
 
+  #filter_section.active{
+    top: 20px;
+  }
+
+  .page_header.projects{
+    margin-top: 50px;
+  }
+
   }
 
   @media screen and (max-width:900px){
@@ -2151,7 +2178,10 @@ footer.innner_content{
   .page_header.projects{
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 50px;
+  }
+
+  #filter_menu_inner{
+    flex-direction: row-reverse;
   }
 
   #index_container{
@@ -2168,8 +2198,22 @@ footer.innner_content{
     position:relative;
   }
 
+
+  .filter_option,
+  .filter_option.btnActive{
+    margin-right: 15px;
+  }
+
+  .filter_option.all.active{
+    margin-right: unset;
+  }
+
   .filter_option>h3{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .filter_option>label{
+    font-size: .65rem;
   }
 
   .project{
@@ -2177,7 +2221,7 @@ footer.innner_content{
   }
 
   .index_thumbnail{
-    height:250px;
+    height:200px;
     width:100%;
     background-size:cover;
   }
@@ -2194,8 +2238,11 @@ footer.innner_content{
     display: ;
   }
 
+  #filter_menu_inner{
+    flex-direction: row-reverse;
+  }
+
   #filter_section.active{
-    top: 0px;
     padding: 0 10px;
   }
 

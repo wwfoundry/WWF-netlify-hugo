@@ -567,7 +567,7 @@ index : {
 
 			function openFilterMenu(){
 
-				var fromTop = filterContainer.offset().top - 50;
+				var fromTop = filterContainer.offset().top - 70;
 
 				if( !o.hasClass('active') ){
 
@@ -638,17 +638,19 @@ index : {
 
 				gsap.to(indexContainer, {duration: .5, autoAlpha: '1', onComplete: resetFilterMenu});
 
+				container.fadeOut(300);
+
+				o.fadeOut(300).removeClass('active');
+
 				function resetFilterMenu(){
-					filterContainer.removeClass('active', function(){
+
 					abs.css('display', 'none').removeClass('active');
 
-					o.fadeOut(300).removeClass('active');
+					filterContainer.removeClass('active', function(){
 
 					// m.removeClass('grey_under');
 
 					navParent.css('visibility', 'visible');
-
-					container.fadeOut(300);
 
 
 				}).attr('style', '');
@@ -663,7 +665,7 @@ index : {
 
 		tag.find('.active_tag').addClass('active').children('.active_tag_inner').find('label').text(attribute);
 
-		all.children('label').text(attribute);
+		all.children('svg').find('text').text(attribute);
 
 	}
 
@@ -671,7 +673,7 @@ index : {
 
 		tag.each(function(){
 
-			$(this).find('.active_tag').removeClass('active').children('.active_tag_inner').find('label').text('');
+			$(this).find('.active_tag').removeClass('active').children('.active_tag_inner').find('label').text();
 
 		});
 		
@@ -1822,7 +1824,9 @@ for( a = 0; a < archiveElem.length; a ++){
 
 	  	e.target.classList.toggle("slide_fade", e.intersectionRatio < 1);
 
-	  	currentSlideCount.text(currentSlide);
+	  	var intSlide = parseInt(currentSlide);
+
+	  	currentSlideCount.text(intSlide);
 
 	   },
 	  { threshold: [1] }

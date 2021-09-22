@@ -13,10 +13,30 @@
 				{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 					<label>Filter Projects</label>
 					<div id="filter_menu_inner">
+						<button class="filter_option gallery_tag all"><img class="icon" src="/images/resources/xit.svg">
+
+							 <svg
+							 	class="active_tag_inner"
+							    width="100%"
+							    height="100%"
+							    viewBox="0 0 50 15"
+							    preserveAspectRatio="xMinYMid meet"
+							    xmlns="http://www.w3.org/2000/svg"
+							    xmlns:xlink="http://www.w3.org/1999/xlink"
+							  >
+							        <text
+							          x="0"
+							          y="11"
+							          font-family = "Supria Sans, sans-serif"
+							          font-size="10"
+							          fill="black"
+							        ></text>
+							     </svg>
+
+						</button>
 						<button class="filter_option material"><h3>Material</h3></button>
 						<button class="filter_option process"><h3>Process</h3></button>
 						<button class="filter_option year"><h3>Year</h3></button>
-						<button class="filter_option gallery_tag all"><img class="icon" src="/images/resources/xit.svg"><label></label></button>
 					</div>
 				</div>
 			</div>
