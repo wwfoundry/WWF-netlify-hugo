@@ -941,7 +941,7 @@ body.loadingImg{
 
 .flex_vertical_align_center{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -959,6 +959,13 @@ body.loadingImg{
   text-align: right;
   width: 100%;
   float: right;
+}
+
+#filter_inner.carousel,
+.carousel{
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
 }
 
 .carousel_inner{
@@ -1744,7 +1751,7 @@ footer.innner_content{
   min-height: 250px;
   min-width: 200px;
   position: relative;
-  box-shadow: 0 0 9px rgb(0 0 0);
+  box-shadow: 0 0 9px rgba(0, 0, 0, .25);
 }
 
 .archive_tag_inner{
@@ -1790,6 +1797,11 @@ footer.innner_content{
   position: absolute;
 }
 
+.slide_fade>.carousel{
+  position: relative;
+  z-index: 4999;
+}
+
 .archive_caption_inner{
   display: flex;
   text-align: left;
@@ -1830,14 +1842,6 @@ footer.innner_content{
   flex-direction: row;
   align-items:center;
   justify-content: space-between;
-}
-
-#filter_inner.carousel,
-.carousel{
-  flex-wrap: nowrap;
-  overflow-x: scroll;
-  width: 100%;
-
 }
 
 .archive_year_divider{
@@ -2069,6 +2073,7 @@ footer.innner_content{
   .flex_row{
   /*  border-top:1px solid black;*/
     flex-wrap: wrap;
+    flex-direction: column;
   }
 
 }
