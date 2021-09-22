@@ -40,19 +40,28 @@
       <div class="col_75 collapse">
           <div id="filter_inner" class="archive_nav margin_negative">
           {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
+
           {{ range $index, $value := $sorted_archive }}
 
-              {{ $comparison := .archive_obj.archive_image }}
+            {{ range $index_inner, $value_inner := $value.archive_obj.archive_images }}
 
-              {{ $thumb_size := "300x" }}
+              {{ if eq $index_inner 0 }}
 
-              {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+                {{ $comparison := .image }}
 
-              <button class="card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
-                <div class="archive_tag_inner">
-                  <label>{{.archive_obj.archive_title}}, {{.archive_obj.archive_year}}</label>
-                </div>
-              </button>
+                {{ $thumb_size := "300x" }}
+
+                {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+
+                <button class="card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
+                  <div class="archive_tag_inner">
+                    <label>{{$value.archive_obj.archive_title}}, {{$value.archive_obj.archive_year}}</label>
+                  </div>
+                </button>
+                {{end}}
+
+              {{end}}
+
           {{end}}
           </div>
       </div>
@@ -72,9 +81,9 @@
           </div>
           <div class="col_60 flex_vertical_align_center">
 
-            {{ range .archive_obj.archive_images.image }}
+            {{ range .archive_obj.archive_images }}
 
-              {{ $comparison := . }}
+              {{ $comparison := .image }}
 
               {{ $thumb_size := "50x" }}
 
