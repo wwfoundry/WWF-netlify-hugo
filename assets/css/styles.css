@@ -978,6 +978,7 @@ body.loadingImg{
   display:flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
   overflow-y: hidden;
   width: 100%;
 }
