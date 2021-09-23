@@ -990,6 +990,8 @@ body.loadingImg{
 .carousel_scroller{
   display:flex;
   flex-wrap: nowrap;
+  align-items: center;
+
 }
 
 .carousel_inner{
@@ -999,7 +1001,7 @@ body.loadingImg{
 
 .featured_card{
   min-height: 350px;
-  min-width: 300px;
+  min-width: 350px;
   position: relative;
   text-align: left;
 }
@@ -1471,7 +1473,7 @@ footer.innner_content{
 .arrow_left,
 #arrow_left{
   position:absolute;
-  left:0;
+  left:10px;
   bottom:45%;
 }
 
@@ -1479,8 +1481,16 @@ footer.innner_content{
 #arrow_right{
   position:absolute;
   transform:rotate(180deg);
-  right:0;
+  right:10px;
   bottom:45%;
+}
+
+.arrow_left.flush{
+  left: 0;
+}
+
+.arrow_right.flush{
+  right: 0;
 }
 
 .arrow>label{
@@ -1538,7 +1548,12 @@ footer.innner_content{
   align-items: flex-start;
 }
 
+.page_header{
+  padding: 50px 0;
+}
+
 .page_header.projects{
+  padding: unset;
   position: relative;
   display: flex;
   flex-direction: row;

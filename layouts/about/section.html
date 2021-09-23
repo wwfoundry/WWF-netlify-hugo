@@ -40,7 +40,7 @@
       <div class="col_75 collapse">
           <div id="filter_inner" class="archive_nav carousel swiper">
 
-          <button class="arrow_left arrow icon fill_change white_stroke">
+          <button class="arrow_left arrow icon fill_change white_stroke flush">
                   {{partial "arrow" .}}
           </button>
 
@@ -70,7 +70,7 @@
 
           {{end}}
         </div>
-          <button class="arrow_right arrow icon fill_change white_stroke">
+          <button class="arrow_right arrow icon fill_change white_stroke flush">
                   {{partial "arrow" .}}
           </button>
           </div>
@@ -107,7 +107,7 @@
 
                 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-                <div class="archive_image_inner carousel_inner loadingImg lazyTrueImg swiper-slide">
+                <div class="archive_image_inner carousel_inner loadingImg lazyTrueImg swiper-slide flex_vertical_align_center">
                     <img class="card lazyload archive_image abs_target margin" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
                 </div>
 

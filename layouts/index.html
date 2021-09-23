@@ -26,11 +26,12 @@
 		<div class="inner_content">
 			{{ $index := .Site.GetPage "projects" }}
 
-			<div class="page_header">
 				<div class="flex_row flex_vertical_align_center">
 					<div class="col_25 collapse">
-						<h1>Latest Projects</h1>
-						<label><a href="{{$index.RelPermalink}}">View All</a></label>
+						<div class="page_header">
+							<h1>Latest Projects</h1>
+							<label><a href="{{$index.RelPermalink}}">View All</a></label>
+						</div>
 					</div>
 					<div class="col_75 collapse page_title">
 
@@ -39,9 +40,9 @@
 
 			{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
 
-							<div class="carousel swiper">
+							<div class="carousel swiper margin_negative">
 
-								<button class="arrow_left arrow icon">
+								<button class="arrow_left arrow icon fill_change white_stroke">
 									{{partial "arrow" .}}
 								</button>
 
@@ -105,14 +106,13 @@
 
 							</div>
 
-							<button class="arrow_right arrow icon">
+							<button class="arrow_right arrow icon fill_change white_stroke">
 								{{partial "arrow" .}}
 							</button>
 
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 
 	</div>

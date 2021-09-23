@@ -396,190 +396,51 @@ callPageJS = {
 
 		function initializeSwiper(swiper_arr){
 
-			if(swiper_arr){
-
-					var swiper = new Swiper(swiper_arr, {
-
-						  direction: 'horizontal',
-						  loop: false,
-						  navigation: {
-						    nextEl: '.arrow_right',
-						    prevEl: '.arrow_left',
-
-				  }
-
-
-				});
-
+			if(!swiper_arr){
+				return;
 			}
 
-		}
+			var swiper = new Swiper(swiper_arr, {
 
+				direction: 'horizontal',
+				loop: false,
+				navigation: {
+				nextEl: '.arrow_right',
+				prevEl: '.arrow_left'
+				},
+				cssMode: false,
+				slidesPerView: 'auto'
 
-	// var parent = $('.carousel'),
-	// 		swiperTarget = parent.find('.carousel_scroller')[0],
-	// 		touchTimeout,
-	// 		swipedSlide,
-	// 		longTouch;
+			});
 
-	// parent.each(function(){
+			$('.arrow_left').hide();
 
-	// 	$(this)[0].ontouchstart = swipeSlide;
-	// 	$(this)[0].onmousedown = swipeSlide;
+			swiper.on('slideChange', function(){
 
-	// });	
+				if (swiper.activeIndex > 0) {
 
-	// 	parent.ontouchstart = swipeSlide;
-	// 	parent.onmousedown = swipeSlide;
+						$('.arrow_left').show();
+						$('.arrow_right').show();
 
-	// function swipeSlide(e){
+				} else if (swiper.activeIndex = 0) {
 
-	// 	// if (e.touches && e.touches.length > 1 || swipeCount > 0){
-	// 	// 	endSwipe();
-	// 	// 	return;
-	// 	// }
+						$('.arrow_left').hide();
+						$('.arrow_right').show();
 
-	// 	// swipeCount++
+				} 
 
-	// 	var swipeArea = e.target;
+			});
 
-	// 	swipeArea.moving = true;
+			swiper.on('reachEnd', function(){
 
-	// 	if (e.clientX){
+				console.log($('.arrow_right'))
 
-	// 		swipeArea.oldX = e.clientX;
+				$('.arrow_left').show();
+				$('.arrow_right').css('display', 'none');
 
-	// 	} else {
+			});
 
-	// 		swipeArea.oldX = e.touches[0].clientX;
-
-	// 	}
-
-	// 	swipeArea.onmousemove = swipeDrag;
-	// 	swipeArea.ontouchmove = swipeDrag;
-	
-	// 	function swipeDrag(d){
-
-	// 		if(!swipeArea.moving){
-	// 			return;
-	// 		}
-
-	// 		longTouch = false;
-
-	// 		touchTimeout = setTimeout( function(){
-	// 			longTouch = true;
-	// 		}, 550)
-
-	// 		if (d.clientX){
-
-	// 			swipeArea.distX = d.clientX - swipeArea.oldX;
-
-	// 		} else {
-
-	// 			swipeArea.distX = d.touches[0].clientX - swipeArea.oldX;
-
-	// 		}
-
-	// 		console.log(swipeArea.distX)
-
-	// 		swiperTarget.style.transform = 'translate(' + swipeArea.distX + 'px, 0px)';
- 
-	// 	}
-
-	// 	swipeArea.onmouseup = function(end){
-	// 		var touchEvent = 'false'
-	// 		// endSwipe(end, longTouch);
-	// 		return swipeArea.moving = false;
-	// 	};
-
-	// 	swipeArea.ontouchend = function(end){
-	// 		var touchEvent = 'true'
-	// 		// endSwipe(end, longTouch)
-	// 		return swipeArea.moving = false;
-	// 	};
-
-	// 	parent.addEventListener("mouseleave", event => {
-
-	// 		if (swipeArea.moving == false){
-	// 			return;
-	// 		}
-
-	// 		event.stopPropagation();
-	// 		gsap.to(swiperTarget, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});
-
-	// 		swipeArea.moving = false;
-
-	// 	});
-
-
-	// 	function endSwipe(end, longTouch){
-
-	// 		swipeCount = 0;
-
-	// 		window.clearTimeout(touchTimeout);
-
-	// 		if( (swipeArea.distX > 0 && swipeArea.distX > parent.offsetWidth/4 && longTouch) || (swipeArea.distX > 0  && swipeArea.distX > parent.offsetWidth/15 && longTouch == false)){
-
-	// 				trans_slide('prev', swipeArea.distX);
-
-	// 				return longTouch = false;
-
-	// 		} else if ( (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/4 && longTouch) || (-swipeArea.distX > 0 && -swipeArea.distX > parent.offsetWidth/15 && longTouch == false)) {
-
-	// 				trans_slide('next', swipeArea.distX);
-
-	// 				return longTouch = false;
-
-	// 		}
-
-
-
-	// 		currentSlide.prop.click();
-
-	// 		gsap.fromTo(currentSlide.prop, {transform: 'translate(' + swipeArea.distX + 'px)'}, {duration: .65, ease: "power2.in", transform: 'translate(0%)'});		
-
-	// 	}
-
-	// }
-
-	// function trans_slide(d, swiper){
-
-	// 	if ( info.classList.contains('loadingImg') ) {
-	// 		return;
-	// 	}
-
-	// 	loadState = false;
-
-	// 	if ( d == 'prev'){
-
-	// 		range = [];
-
-	// 		loadUrl = $('#arrow_left').prop('href');
-
-	// 		slideCount--
-
-	// 	} else {
-
-	// 		if ((slideCount+1) == projectSlideArr.length){
-
-	// 			range.push(projectSlideArr[slideCount]);
-
-	// 			slideCount = projectSlideArr.length;
-
-	// 		} else {
-
-	// 			slideCount++
-
-	// 		}
-
-	// 	}
-
-	// 	animateSlides(d, loadUrl, slideCount, swiper, range);
-
-	// 	arrowPrev = document.querySelector('#arrow_left');
-	// 	arrowNext = document.querySelector('#arrow_right');
-
-	// }
+}
 
 
 		//Accents
