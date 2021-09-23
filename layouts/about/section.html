@@ -38,7 +38,13 @@
         <h1 class="archive page_title">Historic Projects</h1>
       </div>
       <div class="col_75 collapse">
-          <div id="filter_inner" class="archive_nav margin_negative carousel">
+          <div id="filter_inner" class="archive_nav carousel swiper">
+
+          <button class="arrow_left arrow icon fill_change white_stroke">
+                  {{partial "arrow" .}}
+          </button>
+
+          <div class="carousel_scroller swiper-wrapper">
           {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
 
           {{ range $index, $value := $sorted_archive }}
@@ -53,7 +59,7 @@
 
                 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-                <button class="card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
+                <button class="swiper-slide card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
                   <div class="archive_tag_inner">
                     <label>{{$value.archive_obj.archive_title}}, {{$value.archive_obj.archive_year}}</label>
                   </div>
@@ -63,6 +69,10 @@
               {{end}}
 
           {{end}}
+        </div>
+          <button class="arrow_right arrow icon fill_change white_stroke">
+                  {{partial "arrow" .}}
+          </button>
           </div>
       </div>
     </div>
@@ -79,26 +89,34 @@
               <p><label>{{.archive_obj.archive_artist}}</label></p>
             </div>
           </div>
-          <div class="col_60 flex_vertical_align_center carousel">
+          <div class="col_60 flex_vertical_align_center carousel swiper">
+          <button class="arrow_left arrow icon fill_change white_stroke">
+                  {{partial "arrow" .}}
+          </button>
+            <div class="carousel_scroller swiper-wrapper">
 
-            {{ range .archive_obj.archive_images }}
+              {{ range .archive_obj.archive_images }}
 
-              {{ $comparison := .image }}
+                {{ $comparison := .image }}
 
-              {{ $thumb_size := "50x" }}
+                {{ $thumb_size := "50x" }}
 
-              {{ $full_size := "700x" }}
+                {{ $full_size := "700x" }}
 
-              {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+                {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
 
-              {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+                {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-              <div class="loadingImg lazyTrueImg archive_image_inner carousel_inner margin">
-                <img class="card lazyload archive_image abs_target" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
-              </div>
+                <div class="archive_image_inner carousel_inner loadingImg lazyTrueImg swiper-slide">
+                    <img class="card lazyload archive_image abs_target margin" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+                </div>
 
-            {{ end }}
+              {{ end }}
 
+            </div>
+             <button class="arrow_right arrow icon fill_change white_stroke">
+                  {{partial "arrow" .}}
+            </button>
           </div>
         </div>
 
