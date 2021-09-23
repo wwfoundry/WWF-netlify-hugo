@@ -1,0 +1,45 @@
+<footer class="whiteBG {{if .IsHome}}hide{{end}}">
+	<div class="inner_content">
+		<div class="footer_section grey_under">
+			<div class="col_40">
+				<!--LOGO SVG -->
+				<a id="wwf_logo" class="footer" href="/">
+					{{ .Site.Data.logo.svgEditor.code | safeHTML}}
+				</a>
+			</div>
+			<div class="col_60 last fill_change_dark">
+				<div class="margin">
+					<div class="footer">
+							{{partial "menu_base" .}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer_section last">
+			<div class="col_40">
+				<div class="footer margin_negative">
+					{{partial "social_base" .}}
+				</div>
+				<div class="footer">
+					<label>© 2021 Walla Walla Foundry.</label>
+				</div>
+			</div>
+			<div class="col_60 footer flex_row">
+				<div class="col_33 collapse">
+					
+					<p><a href="mailto:{{.Site.Data.contact.email}}" class="black_under">{{.Site.Data.contact.email}}</a></p>
+				</div>
+				<div class="col_33 collapse">
+					
+					<p><a href="tel:{{.Site.Data.contact.phone}}">{{.Site.Data.contact.phone}} x {{.Site.Data.contact.ext}}</a></p>
+				</div>
+				<div class="col_33 collapse">
+					
+					<p>{{.Site.Data.contact.data_street}}<br>
+						{{.Site.Data.contact.data_city}}
+						{{.Site.Data.contact.data_zip}}
+					</p>
+				</div>
+			</div>
+		</div>
+</footer>

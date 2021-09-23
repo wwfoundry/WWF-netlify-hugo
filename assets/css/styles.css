@@ -562,6 +562,18 @@ h3{
   width: 100%;
 }
 
+.center_justified{
+  text-align:center;
+}
+
+.right_justified{
+  text-align:right;
+}
+
+.left_justified{
+  text-align:left;
+}
+
 
 /*4) Header*/
 /*---------------*/
@@ -963,13 +975,23 @@ body.loadingImg{
 
 #filter_inner.carousel,
 .carousel{
+  display:flex;
   flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
   width: 100%;
 }
 
 .carousel_inner{
   width: 100%;
+  position:relative;
+}
+
+.featured_card{
+  min-height: 350px;
+  min-width: 300px;
+  position: relative;
+  text-align: left;
 }
 
 .card{
@@ -1002,6 +1024,10 @@ body.loadingImg{
   padding: unset;
   margin:unset;
   max-width:unset;
+}
+
+.full_viewport{
+  min-height: 100vh;
 }
 
 .white_under{
@@ -1314,7 +1340,6 @@ footer.innner_content{
   display: flex;
   flex-direction: column;
   width: 100%;
-
 }
 
 .thumbnails{
@@ -1674,7 +1699,7 @@ footer.innner_content{
     right: 0;
     width: 35px;
     height: 100%;
-    background-image: linear-gradient(to left,#ffffff 30%,rgba(255, 255, 255, 0) 80%);
+    background-image: linear-gradient(to left,#ffffff 10%, rgba(255,255,255,.80) 30%,rgba(255,255,255,0) 80%);
 }
 
 #index_container{
@@ -1751,7 +1776,7 @@ footer.innner_content{
   min-height: 250px;
   min-width: 200px;
   position: relative;
-  box-shadow: 0 0 9px rgba(0, 0, 0, .25);
+/*  box-shadow: 0 0 9px rgba(0, 0, 0, .25);*/
 }
 
 .archive_tag_inner{
@@ -1901,7 +1926,7 @@ footer.innner_content{
   width: 1px;
   height: calc(100% - 200px);
   background-color: #ffffff;
-  opacity: .25;
+  opacity: .15;
 }
 
 /*13) Lightbox */

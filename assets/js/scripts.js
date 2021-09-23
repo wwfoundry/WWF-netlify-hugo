@@ -1813,18 +1813,30 @@ for( a = 0; a < archiveElem.length; a ++){
 
 	var slideScroller = new IntersectionObserver(
 
-	  function ([e]) { 
+	  function ([e]) {
 
-	  	var currentSlide = e.target.getAttribute('data-slide');
+	  	console.log(e.target)
 
-	  	e.target.classList.toggle("slide_fade", e.intersectionRatio < 1);
+	  	var currentSlide = e.target.getAttribute('data-slide'),
+	  		prevSlide = e.target.previousElmentSibling,
+	  		nextSlide = e.target.nextElmentSibling;
+
+	  	if (prevSlide){
+
+	  		prevSlide.classList.toggle("slide_fade", e.intersectionRatio < 1);
+
+	  	} else if (nextSlide){
+
+	  		nextSlide.classList.toggle("slide_fade", e.intersectionRatio < 1);
+
+	  	}
 
 	  	var intSlide = parseInt(currentSlide);
 
 	  	currentSlideCount.text(intSlide);
 
 	   },
-	  { threshold: [1] }
+	  { threshold: [0.3] }
 
 	);
 
@@ -1838,7 +1850,7 @@ archive_tag.on('click', function(){
 			archiveWrapper = $('.archive_wrapper'),
 			archiveIndex = $(this).index()+1,
 			scrollTarget = $("#" + scrollKey),
-			scrollTo = scrollTarget.offset().top - 65;
+			scrollTo = scrollTarget.offset().top;
 
 	scrollDuration = archiveIndex*350;
 

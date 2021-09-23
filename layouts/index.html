@@ -21,4 +21,90 @@
 
 	</div>
 
+	<div class="page_section whiteBG">
+
+		<div class="inner_content">
+			{{ $index := .Site.GetPage "projects" }}
+
+			<div class="page_header">
+				<div class="flex_row flex_vertical_align_center">
+					<div class="col_25 collapse">
+						<h1>Latest Projects</h1>
+						<label><a href="{{$index.RelPermalink}}">View All</a></label>
+					</div>
+					<div class="col_75 collapse page_title">
+
+
+									{{ $projects := .Site.GetPage "projects_main"}}
+
+			{{ $sortedProjects := ($projects.Pages.ByParam "year_tag").Reverse}}
+
+			<div class="carousel margin_negative">
+
+				{{ range $index, $value := $sortedProjects }}
+
+					{{if lt $index  5}}
+
+						{{ $media_featured_ext := path.Ext .Params.featured }}
+
+						{{if (eq $media_featured_ext ".jpeg") | or (eq $media_featured_ext ".jpg") | or (eq $media_featured_ext ".JPG") }}
+
+							{{$context  := .}}
+
+							{{ $comparison := .Params.Featured }}
+
+			                {{ $thumb_size := "50x" }}
+
+			                {{ $full_size := "700x" }}
+
+			                {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
+
+			                {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+							<a class="carousel_inner featured_card" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
+								<div class="padding project_inner loadingImg">
+									<img class="index_thumbnail card lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}">
+									<div class="project_info">
+										<h3>{{.Title}}</h3>
+										<label>{{ .Params.artist }}</label>
+									</div>
+								</div>
+							</a>
+
+						{{else if eq $media_featured_ext ".mp4" }}
+
+							<a class="carousel_inner featured_card" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
+								<div class="padding project_inner loadingImg">
+									<video class="reel index_thumbnail card lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
+										<source src="{{ .Params.featured }}" type="video/mp4" data-url="">
+									</video>
+									<div class="project_info">
+										<h3>{{.Title}}</h3>
+										<label>{{ .Params.artist }}</label>
+									</div>
+								</div>
+							</a>
+
+						{{end}}
+
+					{{end}}
+
+				{{end}}
+
+				<a class="carousel_inner featured_card flex_vertical_align_center" href="{{$index.RelPermalink}}">
+					<div class="padding project_inner card center_justified">
+		                <label>View All</label>
+					</div>
+				</a>
+
+			</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
 {{end}}
