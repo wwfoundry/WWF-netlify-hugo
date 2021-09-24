@@ -55,13 +55,22 @@
 
                 {{ $comparison := .image }}
 
-                {{ $thumb_size := "300x" }}
+                {{ $full_size := "300x" }}
+
+                {{ $thumb_size := "50x" }}
 
                 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-                <button class="swiper-slide card archive_tag invert margin padding" data-scroll="{{$index}}_archive" style="background-image:url({{ $thumb_result.RelPermalink }});">
-                  <div class="archive_tag_inner">
-                    <label>{{$value.archive_obj.archive_title}}, {{$value.archive_obj.archive_year}}</label>
+                {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
+
+                <button class="swiper-slide card archive_tag project filtered invert margin padding" data-scroll="{{$index}}_archive">
+                  <div class="project_wrapper">
+                    <div class="project_inner archive_inner loadingImg">
+                      <div class="archive_tag_inner">
+                        <label>{{$value.archive_obj.archive_title}}, {{$value.archive_obj.archive_year}}</label>
+                      </div>
+                        <img class="index_thumbnail lazyload card" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{$value.archive_obj.archive_title}}">
+                    </div>
                   </div>
                 </button>
                 {{end}}
