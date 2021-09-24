@@ -22,7 +22,7 @@
         <img class="hero_banner lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.Params.hero_obj.alt}}">
         <label class="hero_caption">{{.Params.hero_obj.alt}}</label>
     </div>
-      <div class="flex_row">
+      <div class="flex_row collapse">
         <div class="col_25 collapse">
           <h1>{{.Title}}</h1>
           <label>{{.Params.subtitle}}</label>
@@ -33,16 +33,25 @@
       </div>
   </div>
   <div class="inner_content archive">
-    <div class="flex_row">
-      <div class="col_25 collapse">
+    <div class="flex_row collapse page_header flex_vertical_align_center flex_justify_end">
+      <div class="col_60 collapse">
         <h1 class="archive page_title">Historic Projects</h1>
       </div>
-      <div class="col_75 collapse">
-          <div id="filter_inner" class="archive_nav carousel swiper">
+      <div class="col_40 right_justified collapse flex_row">
+          <div class="top_abs_carousel_controls flex_align_start flex_vertical_align_center">
+            <button class="arrow_left arrow icon fill_change white_stroke top_abs">
+              {{partial "arrow" .}}
+            </button>
 
-          <button class="arrow_left arrow icon fill_change white_stroke flush">
-                  {{partial "arrow" .}}
-          </button>
+            <button class="arrow_right arrow icon fill_change white_stroke top_abs">
+              {{partial "arrow" .}}
+            </button>
+          </div>
+      </div>
+      </div>
+      <div class="flex_row collapse margin_negative">
+
+          <div id="filter_inner" class="archive_nav carousel swiper">
 
           <div class="carousel_scroller swiper-wrapper">
           {{ $sorted_archive := sort .Params.archive ".archive_obj.archive_year"}}
@@ -63,7 +72,7 @@
 
                 {{ $full_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $full_size ) }}
 
-                <button class="swiper-slide card archive_tag project filtered invert margin padding" data-scroll="{{$index}}_archive">
+                <button class="swiper-slide card archive_tag project filtered invert margin" data-scroll="{{$index}}_archive">
                   <div class="project_wrapper">
                     <div class="project_inner archive_inner loadingImg">
                       <div class="archive_tag_inner">
@@ -79,14 +88,11 @@
 
           {{end}}
         </div>
-          <button class="arrow_right arrow icon fill_change white_stroke flush">
-                  {{partial "arrow" .}}
-          </button>
+
           </div>
       </div>
     </div>
   </div>
-</div>
 <div class="page_section blackBG">
   <div class="inner_content">
     {{range $index, $value := $sorted_archive }}
@@ -116,8 +122,9 @@
 
                 {{ $thumb_result := partial "thumbnail_generator" (dict "context" $context "comparison" $comparison "size" $thumb_size ) }}
 
-                <div class="archive_image_inner carousel_inner loadingImg lazyTrueImg swiper-slide flex_vertical_align_center">
-                    <img class="card lazyload archive_image abs_target margin" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+                <div class="archive_image_inner carousel_inner swiper-slide flex_vertical_align_center">
+                    <img class="card swiper-lazy archive_image abs_target margin" data-src="{{$full_result.RelPermalink}}" alt="{{.archive_obj.archive_title}}">
+                    <div class="loadingImg swiper-lazy-preloader"></div>
                 </div>
 
               {{ end }}

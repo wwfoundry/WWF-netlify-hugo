@@ -407,7 +407,10 @@ callPageJS = {
 				prevEl: '.arrow_left'
 				},
 				cssMode: false,
-				slidesPerView: 'auto'
+				slidesPerView: 'auto',
+				watchSlidesProgress: true,
+				preloadImages: false,
+				lazy: true
 
 			});
 
@@ -1881,8 +1884,6 @@ for( a = 0; a < archiveElem.length; a ++){
 	  		prevSlide = e.target.previousElmentSibling,
 	  		nextSlide = e.target.nextElmentSibling,
 	  		intSlide = parseInt(currentSlide);
-
-	  	e.target.classList.toggle("slide_fade", e.intersectionRatio < 1);
 
 	  	currentSlideCount.text(intSlide);
 
