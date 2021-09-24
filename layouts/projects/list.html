@@ -120,8 +120,8 @@
 					{{ end }}
 				{{else if eq $media_featured_ext ".mp4" }}
 					<a class="project filtered" data-filter="{{range .Params.material_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{range .Params.process_tag}}{{replaceRE "(\\s)" "" . | lower}} {{end}}{{replaceRE "(\\s)" "" .Params.year_tag }}" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
-						<div class="project_wrapper">
-							<div class="margin project_inner loadingImg">
+						<div class="project_wrapper margin">
+							<div class=" project_inner loadingImg">
 									<video class="reel index_thumbnail card lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 											<source src="{{ .Params.featured }}" type="video/mp4" data-url="">
 									</video>

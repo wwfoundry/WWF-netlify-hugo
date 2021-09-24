@@ -70,7 +70,7 @@
 
 											<a class="swiper-slide carousel_inner project filtered featured_card" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
 												<div class="project_wrapper margin">
-													<div class="padding project_inner loadingImg">
+													<div class="project_inner loadingImg">
 														<img class="index_thumbnail card lazyload" src="{{$thumb_result.RelPermalink}}" data-src="{{$full_result.RelPermalink}}">
 													</div>
 														<div class="project_info">
@@ -83,8 +83,8 @@
 										{{else if eq $media_featured_ext ".mp4" }}
 
 											<a class="swiper-slide carousel_inner project filtered featured_card" href="{{if (eq $index 0) }}/gallery/{{else}}/gallery/page/{{add $index 1}}/{{end}}">
-												<div class="project_wrapper">
-													<div class="padding project_inner loadingImg">
+												<div class="project_wrapper margin">
+													<div class="project_inner loadingImg">
 														<video class="reel index_thumbnail card lazyload " data-setup="{}" playsinline="playsinline" autoplay="autoplay" preload="metadata" loop="loop" muted="muted">
 															<source src="{{ .Params.featured }}" type="video/mp4" data-url="">
 														</video>

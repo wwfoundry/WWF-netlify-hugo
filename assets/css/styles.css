@@ -873,6 +873,7 @@ nav.home>#menu>#controls>#hamburger>.bar{
   mask-repat: no-repeat;
   will-change: -webkit-mask-position, opacity, visibility;
   transition: height .25s ease-in;
+  overflow-x:hidden;
 }
 
 .main_content.fullHeight{
@@ -971,6 +972,11 @@ body.loadingImg{
   text-align: right;
   width: 100%;
   float: right;
+}
+
+.card{
+  object-fit: cover;
+  background-size: cover;
 }
 
 .whiteBG{
@@ -1977,9 +1983,8 @@ footer.innner_content{
 #filter_inner.carousel,
 .carousel{
   position: relative;
-  overflow-x: hidden;
+  overflow:visible;
   -webkit-overflow-scrolling: touch;
-  overflow-y: hidden;
   width: 100%;
   touch-action: pan-right pinch-zoom;
 }
@@ -2001,12 +2006,6 @@ footer.innner_content{
   position: relative;
   text-align: left;
 }
-
-.card{
-  object-fit: cover;
-  background-size: cover;
-}
-
 
 /*14) Media Queries */
 /*---------------*/
