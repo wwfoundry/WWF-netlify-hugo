@@ -21,7 +21,7 @@
 
 	</div>
 
-	<div class="page_section whiteBG">
+	<div class="page_section whiteBG overflow_hidden">
 
 		<div class="inner_content">
 			{{ $index := .Site.GetPage "projects" }}
@@ -102,8 +102,8 @@
 
 								{{end}}
 
-								<a class="swiper-slide carousel_inner featured_card flex_vertical_align_center" href="{{$index.RelPermalink}}">
-									<div class="padding project_inner card center_justified">
+								<a class="thumbnail_wrapper swiper-slide carousel_inner featured_card flex_vertical_align_center" href="{{$index.RelPermalink}}">
+									<div class="padding card center_justified">
 						                <label>View All</label>
 									</div>
 								</a>

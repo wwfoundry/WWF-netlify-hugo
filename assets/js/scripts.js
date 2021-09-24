@@ -319,8 +319,6 @@ callPageJS = {
 
 									$('#menu_wrapper').addClass('fill_change');
 
-									
-
 								}
 
 								//Remove delegated event handlers
@@ -413,32 +411,32 @@ callPageJS = {
 
 			});
 
-			$('.arrow_left').hide();
+			// $('.arrow_left').hide();
 
-			swiper.on('slideChange', function(){
+			// swiper.on('slideChange', function(){
 
-				if (swiper.activeIndex > 0) {
+			// 	if (swiper.activeIndex > 0) {
 
-						$('.arrow_left').show();
-						$('.arrow_right').show();
+			// 			$('.arrow_left').show();
+			// 			$('.arrow_right').show();
 
-				} else if (swiper.activeIndex = 0) {
+			// 	} else if (swiper.activeIndex = 0) {
 
-						$('.arrow_left').hide();
-						$('.arrow_right').show();
+			// 			$('.arrow_left').hide();
+			// 			$('.arrow_right').show();
 
-				} 
+			// 	} 
 
-			});
+			// });
 
-			swiper.on('reachEnd', function(){
+			// swiper.on('reachEnd', function(){
 
-				console.log($('.arrow_right'))
+			// 	console.log($('.arrow_right'))
 
-				$('.arrow_left').show();
-				$('.arrow_right').css('display', 'none');
+			// 	$('.arrow_left').show();
+			// 	$('.arrow_right').css('display', 'none');
 
-			});
+			// });
 
 }
 
