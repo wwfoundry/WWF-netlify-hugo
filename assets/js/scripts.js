@@ -1931,16 +1931,14 @@ init : function(eh){
 		    zoomControl: true
 		  });   
 
-		L.tileLayer('https://api.maptiler.com/maps/toner/{z}/{x}/{y}.png?key=UqsRtrg9BcWIXlx6LquC', {
+		L.tileLayer.provider('Stamen.TonerLite', {
 			maxZoom: 20,
-		//    mapbox://styles/mapbox/satellite-streets-v11
-			accessToken: 'UqsRtrg9BcWIXlx6LquC'
 		}).addTo(map);
 
 		var markerIcon = L.icon({
 			iconUrl: '/images/resources/location.svg',
 			iconSize: [38, 95],
-			iconAnchor: [0,5]
+			iconAnchor: [0,0]
 		});
 
 	// var mapDataContainer = document.getElementsByClassName('mapData'),
