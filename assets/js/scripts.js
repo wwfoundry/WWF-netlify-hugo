@@ -1881,19 +1881,10 @@ for( a = 0; a < archiveElem.length; a ++){
 
 	  	var currentSlide = e.target.getAttribute('data-slide'),
 	  		prevSlide = e.target.previousElmentSibling,
-	  		nextSlide = e.target.nextElmentSibling;
+	  		nextSlide = e.target.nextElmentSibling,
+	  		intSlide = parseInt(currentSlide);
 
-	  	if (prevSlide){
-
-	  		prevSlide.classList.toggle("slide_fade", e.intersectionRatio < 1);
-
-	  	} else if (nextSlide){
-
-	  		nextSlide.classList.toggle("slide_fade", e.intersectionRatio < 1);
-
-	  	}
-
-	  	var intSlide = parseInt(currentSlide);
+	  	e.target.classList.toggle("slide_fade", e.intersectionRatio < 1);
 
 	  	currentSlideCount.text(intSlide);
 

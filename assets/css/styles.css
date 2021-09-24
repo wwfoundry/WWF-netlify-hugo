@@ -378,6 +378,7 @@ body{
 	font-size:.9em;
   position:relative;
   font-weight:normal;
+  overflow-x:hidden;
 }
 
 .locked{
@@ -873,7 +874,6 @@ nav.home>#menu>#controls>#hamburger>.bar{
   mask-repat: no-repeat;
   will-change: -webkit-mask-position, opacity, visibility;
   transition: height .25s ease-in;
-  overflow-x:hidden;
 }
 
 .main_content.fullHeight{
@@ -1800,7 +1800,7 @@ footer.innner_content{
   height: 100vh;
   height: -moz-available, -webkit-fill-available;
   position: sticky;
-  -webkit-position: sticky;
+  position: -webkit-sticky;
   top: 0px;
   background-color: #131313;
 }
@@ -1987,6 +1987,10 @@ footer.innner_content{
   -webkit-overflow-scrolling: touch;
   width: 100%;
   touch-action: pan-right pinch-zoom;
+}
+
+.carousel.overflow_hidden{
+  overflow: hidden;
 }
 
 .carousel_scroller{
