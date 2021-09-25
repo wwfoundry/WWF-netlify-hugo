@@ -44,23 +44,4 @@
 		</div>
 </footer>
 
-{{ $scrollToJS := resources.Get "js/scrollto.js" }}
-
-{{ $gsapJS := resources.Get "js/gsap.js" }}
-
-{{ $lazyJS := resources.Get "js/lazysizes.js" }}
-
-{{ $swiperJS := resources.Get "js/swiper_bundle.js" }}
-
-{{ $leafletJS := resources.Get "js/leaflet.js" }}
-
-{{ $leafletProvidersJS := resources.Get "js/leaflet_providers.js" }}
-
-{{ $js := resources.Get "js/scripts.js" }}
-
-{{ $js_bundle := slice $lazyJS $scrollToJS $gsapJS $swiperJS $leafletJS $leafletProvidersJS $js | resources.Concat "bundle.js"}}
-
-{{ $js_minified := $js_bundle | resources.Minify }}
-
-<!--Main Scripts-->
-<script src="{{$js_minified.RelPermalink}}"></script>
+{{ partial "scripts" .}}
