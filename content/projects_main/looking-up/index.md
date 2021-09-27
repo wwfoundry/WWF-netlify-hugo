@@ -5,7 +5,6 @@ year_tag: "2016"
 material: Electropolished Stainless Steel
 featured: /projects_main/looking-up/images/4366.2_lookingup_install_03.jpg
 thumbnailImages:
-  - image: /projects_main/looking-up/images/tom-friedman-looking-up.mp4
   - image: /projects_main/looking-up/images/4366.2_lookingup_install_04.jpg
   - image: /projects_main/looking-up/images/4366.2_looking_up_process_photos_025.jpeg
   - image: /projects_main/looking-up/images/4366.2_looking_up_process_photos_032.jpeg
