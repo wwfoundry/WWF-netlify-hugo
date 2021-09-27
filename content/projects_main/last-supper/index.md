@@ -1,5 +1,5 @@
 ---
-title: "Last Supper "
+title: "The Last Supper "
 artist: Urs Fischer
 year_tag: "2014"
 material: Bronze, Stainless Steel
