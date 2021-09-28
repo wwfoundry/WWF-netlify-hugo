@@ -183,6 +183,13 @@ collections:
               - label: 'Video'
                 name: 'video'
                 widget: 'file'
+           - label: "Select Page"
+                name: "selectPage"
+                widget: "relation"
+                collection: "projects_main"
+                search_fields: ["title"]
+                value_field: "title"
+                display_fields: ["title"]
       - label: "Projects"
         name: "projects"
         file: "/content/projects/_index.md"
